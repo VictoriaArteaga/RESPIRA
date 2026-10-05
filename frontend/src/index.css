@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme {
+  --color-respira-yellow: #F4C430;
+  --color-respira-yellow-dark: #D9A400;
+  --color-respira-background: #F8FAFC;
+  --color-respira-text: #1F2937;
+  --color-respira-muted: #64748B;
+  --color-respira-border: #E2E8F0;
+  --shadow-card: 0 2px 10px rgba(15, 23, 42, 0.04);
+}
+
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #1F2937;
+  background: #F8FAFC;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 360px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+::selection {
+  background: #F4C430;
+  color: #1F2937;
+}
