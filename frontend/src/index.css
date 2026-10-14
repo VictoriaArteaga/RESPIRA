@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  --color-respira-yellow: #F4C430;
-  --color-respira-yellow-dark: #D9A400;
-  --color-respira-background: #F8FAFC;
-  --color-respira-text: #1F2937;
-  --color-respira-muted: #64748B;
-  --color-respira-border: #E2E8F0;
-  --shadow-card: 0 2px 10px rgba(15, 23, 42, 0.04);
+  --color-respira-blue: #315F7D;
+  --color-respira-blue-dark: #234A65;
+  --color-respira-background: #F7F4EB;
+  --color-respira-text: #243B4A;
+  --color-respira-muted: #687B86;
+  --color-respira-border: #E5E0D4;
+  --shadow-card: 0 3px 14px rgba(36, 59, 74, 0.06);
 }
 
 :root {
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #1F2937;
-  background: #F8FAFC;
+  color: #243B4A;
+  background: #F7F4EB;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -30,11 +30,29 @@ body {
   margin: 0;
 }
 
+.app-shell {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  background-color: #F7F4EB;
+}
+
+.app-shell::before {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='176' height='176' viewBox='0 0 176 176' fill='none'%3E%3Cg stroke='%23315F7D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' opacity='.52'%3E%3Cpath d='M29 18v22M18 29h22'/%3E%3Cpath d='M111 103h12l7-12 10 25 8-13h13'/%3E%3Cpath d='M43 123v15m-7.5-7.5h15'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+  content: "";
+  opacity: 0.11;
+  pointer-events: none;
+}
+
 button:disabled {
   cursor: not-allowed;
 }
 
 ::selection {
-  background: #F4C430;
-  color: #1F2937;
+  background: #C9DDE8;
+  color: #243B4A;
 }

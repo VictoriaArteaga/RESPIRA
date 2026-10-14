@@ -7,7 +7,7 @@ interface HeaderProps {
 
 export function Header({ onMenuClick }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-10 flex h-[76px] items-center justify-between border-b border-respira-border bg-white/95 px-5 backdrop-blur sm:px-8">
+    <header className="sticky top-0 z-10 flex h-[76px] items-center justify-between border-b border-respira-border bg-[#FBF9F3]/95 px-5 backdrop-blur sm:px-8">
       <div className="flex items-center gap-3">
         <button
           className="rounded-lg p-2 text-respira-muted hover:bg-slate-100 lg:hidden"
@@ -26,7 +26,7 @@ export function Header({ onMenuClick }: HeaderProps) {
       <div className="flex items-center gap-3 sm:gap-5">
         <span className="hidden text-sm text-respira-muted md:block">Seguimiento semanal</span>
         <Badge>
-          <span className="h-1.5 w-1.5 rounded-full bg-amber-600" />
+          <span className="h-1.5 w-1.5 rounded-full bg-sky-700" />
           Datos de prueba
         </Badge>
         <button

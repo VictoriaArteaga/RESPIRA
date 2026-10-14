@@ -37,7 +37,7 @@ export function CaseTrendChart({ cases }: CaseTrendChartProps) {
           </p>
         </div>
         <span className="inline-flex items-center gap-2 text-xs text-respira-muted">
-          <span className="h-2.5 w-2.5 rounded-full bg-amber-500" />
+          <span className="h-2.5 w-2.5 rounded-full bg-sky-700" />
           Casos registrados
         </span>
       </div>
@@ -47,12 +47,12 @@ export function CaseTrendChart({ cases }: CaseTrendChartProps) {
         <div className="h-[280px] w-full" role="img" aria-label="Gráfica de casos IRA por semana epidemiológica">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={chartData} margin={{ top: 8, right: 12, left: -16, bottom: 4 }}>
-              <CartesianGrid stroke="#E2E8F0" strokeDasharray="4 4" vertical={false} />
+              <CartesianGrid stroke="#E5E0D4" strokeDasharray="4 4" vertical={false} />
               <XAxis
                 dataKey="week"
                 tickLine={false}
                 axisLine={false}
-                tick={{ fill: '#64748B', fontSize: 11 }}
+                tick={{ fill: '#687B86', fontSize: 11 }}
                 tickFormatter={(week: number) => `S${week}`}
                 minTickGap={22}
               />
@@ -60,13 +60,13 @@ export function CaseTrendChart({ cases }: CaseTrendChartProps) {
                 allowDecimals={false}
                 tickLine={false}
                 axisLine={false}
-                tick={{ fill: '#64748B', fontSize: 11 }}
+                tick={{ fill: '#687B86', fontSize: 11 }}
               />
               <Tooltip
                 labelFormatter={(week) => `Semana epidemiológica ${week}`}
                 formatter={(value) => [Number(value).toLocaleString('es-CO'), 'Casos']}
                 contentStyle={{
-                  border: '1px solid #E2E8F0',
+                  border: '1px solid #E5E0D4',
                   borderRadius: '12px',
                   boxShadow: '0 8px 24px rgba(15, 23, 42, 0.08)',
                   fontSize: '12px',
@@ -76,10 +76,10 @@ export function CaseTrendChart({ cases }: CaseTrendChartProps) {
                 type="monotone"
                 dataKey="cases"
                 name="Casos"
-                stroke="#D9A400"
+                stroke="#315F7D"
                 strokeWidth={2.5}
                 dot={false}
-                activeDot={{ r: 5, fill: '#D9A400', stroke: '#FFFFFF', strokeWidth: 2 }}
+                activeDot={{ r: 5, fill: '#315F7D', stroke: '#FFFEFA', strokeWidth: 2 }}
               />
             </LineChart>
           </ResponsiveContainer>

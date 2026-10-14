@@ -41,8 +41,8 @@ export function RecentData({ summary, period }: RecentDataProps) {
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
         {items.map(({ label, value, icon: Icon }) => (
-          <div key={label} className="flex items-start gap-3 rounded-xl bg-slate-50 p-4">
-            <Icon size={18} className="mt-0.5 shrink-0 text-amber-800" aria-hidden="true" />
+          <div key={label} className="flex items-start gap-3 rounded-xl bg-[#F2F5F5] p-4">
+            <Icon size={18} className="mt-0.5 shrink-0 text-sky-800" aria-hidden="true" />
             <div className="min-w-0">
               <p className="text-xs text-respira-muted">{label}</p>
               <p className="mt-1 truncate text-sm font-semibold text-respira-text">{value}</p>

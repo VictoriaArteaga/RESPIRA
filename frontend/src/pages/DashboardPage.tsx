@@ -47,7 +47,7 @@ export function DashboardPage() {
     <div className="space-y-7">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <p className="text-sm font-medium text-amber-800">Panel de seguimiento</p>
+          <p className="text-sm font-medium text-sky-800">Panel de seguimiento</p>
           <h1 className="mt-1 text-2xl font-bold tracking-tight text-respira-text sm:text-3xl">
             Dashboard
           </h1>
@@ -55,8 +55,8 @@ export function DashboardPage() {
             Resumen de los registros de infecciones respiratorias agudas en los municipios de Nariño.
           </p>
         </div>
-        <Badge className="border border-amber-200 bg-white">
-          <span className="h-1.5 w-1.5 rounded-full bg-amber-600" />
+        <Badge className="border border-sky-200 bg-[#FFFEFA]">
+          <span className="h-1.5 w-1.5 rounded-full bg-sky-700" />
           Datos sintéticos — versión de desarrollo
         </Badge>
       </div>

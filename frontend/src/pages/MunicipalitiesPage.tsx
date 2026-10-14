@@ -52,7 +52,7 @@ export function MunicipalitiesPage() {
   return (
     <div className="space-y-6">
       <div>
-        <p className="text-sm font-medium text-amber-800">Cobertura territorial</p>
+        <p className="text-sm font-medium text-sky-800">Cobertura territorial</p>
         <h1 className="mt-1 text-2xl font-bold tracking-tight">Municipios</h1>
         <p className="mt-2 text-sm text-respira-muted">Municipios disponibles y sus registros históricos de IRA.</p>
       </div>
@@ -66,7 +66,7 @@ export function MunicipalitiesPage() {
         <Card className="overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[640px] text-left text-sm">
-              <thead className="bg-slate-50 text-xs uppercase tracking-wide text-respira-muted">
+              <thead className="bg-[#F2F5F5] text-xs uppercase tracking-wide text-respira-muted">
                 <tr>
                   <th scope="col" className="px-6 py-4 font-semibold">Municipio</th>
                   <th scope="col" className="px-6 py-4 font-semibold">Departamento</th>
@@ -74,11 +74,11 @@ export function MunicipalitiesPage() {
                   <th scope="col" className="px-6 py-4 text-right font-semibold">Última semana</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-respira-border">
                 {municipalities.map((municipality) => {
                   const summary = totals.get(municipality.id)
                   return (
-                    <tr key={municipality.id} className="hover:bg-slate-50/80">
+                    <tr key={municipality.id} className="hover:bg-sky-50/70">
                       <th scope="row" className="px-6 py-4 font-semibold text-respira-text">{municipality.name}</th>
                       <td className="px-6 py-4 text-respira-muted">{municipality.department}</td>
                       <td className="px-6 py-4 text-right tabular-nums">{(summary?.cases ?? 0).toLocaleString('es-CO')}</td>

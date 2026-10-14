@@ -28,7 +28,7 @@ export function CasesPage() {
   return (
     <div className="space-y-6">
       <div>
-        <p className="text-sm font-medium text-amber-800">Registros epidemiológicos</p>
+        <p className="text-sm font-medium text-sky-800">Registros epidemiológicos</p>
         <h1 className="mt-1 text-2xl font-bold tracking-tight">Casos IRA</h1>
         <p className="mt-2 text-sm text-respira-muted">Consulta de casos por municipio y semana epidemiológica.</p>
       </div>
@@ -42,7 +42,7 @@ export function CasesPage() {
         <Card className="overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[700px] text-left text-sm">
-              <thead className="bg-slate-50 text-xs uppercase tracking-wide text-respira-muted">
+              <thead className="bg-[#F2F5F5] text-xs uppercase tracking-wide text-respira-muted">
                 <tr>
                   <th scope="col" className="px-6 py-4 font-semibold">Año</th>
                   <th scope="col" className="px-6 py-4 font-semibold">Semana epidemiológica</th>
@@ -50,9 +50,9 @@ export function CasesPage() {
                   <th scope="col" className="px-6 py-4 text-right font-semibold">Casos</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-respira-border">
                 {cases.map((record) => (
-                  <tr key={record.id} className="hover:bg-slate-50/80">
+                  <tr key={record.id} className="hover:bg-sky-50/70">
                     <td className="px-6 py-3.5">{record.year}</td>
                     <td className="px-6 py-3.5">Semana {record.epidemiological_week}</td>
                     <td className="px-6 py-3.5 text-respira-muted">{record.municipality_id}</td>

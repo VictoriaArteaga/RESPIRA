@@ -8,7 +8,7 @@ export function MainLayout({ children }: PropsWithChildren) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-respira-background text-respira-text">
+    <div className="app-shell min-h-screen text-respira-text">
       <Sidebar />
       <div className="min-h-screen lg:pl-64">
         <Header onMenuClick={() => setMobileMenuOpen(true)} />
@@ -49,7 +49,7 @@ export function MainLayout({ children }: PropsWithChildren) {
                   onClick={() => setMobileMenuOpen(false)}
                   className={({ isActive }) =>
                     `block rounded-xl px-3 py-3 text-sm font-medium ${
-                      isActive ? 'bg-amber-50 text-respira-text' : 'text-respira-muted hover:bg-slate-50'
+                      isActive ? 'bg-sky-100/70 text-respira-text' : 'text-respira-muted hover:bg-sky-50'
                     }`
                   }
                 >
