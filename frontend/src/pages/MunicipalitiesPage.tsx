@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Card } from '../components/common/Card'
 import { EmptyState, ErrorState } from '../components/common/Feedback'
 import { Loading } from '../components/common/Loading'
@@ -65,13 +66,14 @@ export function MunicipalitiesPage() {
       ) : (
         <Card className="overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[640px] text-left text-sm">
+            <table className="w-full min-w-[760px] text-left text-sm">
               <thead className="bg-[#F2F5F5] text-xs uppercase tracking-wide text-respira-muted">
                 <tr>
                   <th scope="col" className="px-6 py-4 font-semibold">Municipio</th>
                   <th scope="col" className="px-6 py-4 font-semibold">Departamento</th>
                   <th scope="col" className="px-6 py-4 text-right font-semibold">Casos registrados</th>
                   <th scope="col" className="px-6 py-4 text-right font-semibold">Última semana</th>
+                  <th scope="col" className="px-6 py-4 text-right font-semibold">Detalle</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-respira-border">
@@ -85,6 +87,7 @@ export function MunicipalitiesPage() {
                       <td className="px-6 py-4 text-right text-respira-muted">
                         {summary?.year ? `${summary.year} · S${summary.week}` : 'Sin registros'}
                       </td>
+                      <td className="px-6 py-4 text-right"><Link to={`/municipalities/${municipality.id}`} className="font-semibold text-sky-800 hover:underline">Ver detalle</Link></td>
                     </tr>
                   )
                 })}

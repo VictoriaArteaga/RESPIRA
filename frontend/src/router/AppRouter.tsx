@@ -7,6 +7,7 @@ import { MunicipalitiesPage } from '../pages/MunicipalitiesPage'
 import { SettingsPage } from '../pages/SettingsPage'
 import { RiskMapPage } from '../pages/RiskMapPage'
 import { EndemicPage } from '../pages/EndemicPage'
+import { MunicipalityDetailPage } from '../pages/MunicipalityDetailPage'
 
 export function AppRouter() {
   return (
@@ -15,6 +16,7 @@ export function AppRouter() {
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/municipalities" element={<MunicipalitiesPage />} />
+        <Route path="/municipalities/:id" element={<MunicipalityDetailPage />} />
         <Route path="/risk-map" element={<RiskMapPage />} />
         <Route path="/endemic" element={<EndemicPage />} />
         <Route path="/cases" element={<CasesPage />} />
