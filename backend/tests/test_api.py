@@ -133,6 +133,7 @@ def test_alerts_use_explainable_risk_thresholds_and_filters(client: TestClient) 
 ALERT_PERIODS = [
     (2023, 1),
     (2023, 2),
+    (2023, 3),
     # PERIODS_END
 ]
 
