@@ -16,7 +16,8 @@ RESPIRA es un proyecto académico que busca apoyar el monitoreo de infecciones r
 ## Requisitos
 
 - Python 3.10+
-- PostgreSQL 14+ ejecutándose localmente
+- No se necesita PostgreSQL para el modo académico local.
+- PostgreSQL 14+ es opcional si se configura una instancia propia.
 - Git (opcional, para clonar el repositorio)
 
 ## Instalación
@@ -32,22 +33,16 @@ python -m pip install -r requirements.txt
 
 En Linux, activa el entorno con `source .venv/bin/activate`.
 
-## Configuración de PostgreSQL y entorno
+## Configuración local y PostgreSQL opcional
 
-Crea una base de datos vacía para el proyecto:
-
-```sql
-CREATE DATABASE respira;
-```
-
-Copia `.env.example` como `.env` y actualiza la URL con el usuario y contraseña locales de PostgreSQL:
+El valor predeterminado usa SQLite en `backend/data/respira.db` y no requiere un servidor. Copia `.env.example` como `.env` para personalizar la configuración. Para usar PostgreSQL, crea una base vacía y coloca la URL y las credenciales locales únicamente en `.env`:
 
 ```env
 DATABASE_URL=postgresql+psycopg://username:password@localhost:5432/respira
 CORS_ORIGINS=["http://localhost:5173"]
 ```
 
-No agregues el archivo `.env` al control de versiones. Al iniciar, la API crea las tablas y carga el CSV sintético si la tabla de casos está vacía. La siembra se ejecuta dentro de una transacción; si falla la carga, el error impide que el inicio se reporte como exitoso. Para regenerar el archivo de prueba de forma reproducible:
+No agregues el archivo `.env` al control de versiones. El archivo está ignorado por Git. Al iniciar, la API crea las tablas y carga el CSV sintético si la tabla de casos está vacía. La siembra se ejecuta dentro de una transacción; si falla la carga, el error impide que el inicio se reporte como exitoso. Para regenerar el archivo de prueba de forma reproducible:
 
 ```powershell
 python scripts/generate_synthetic_data.py
@@ -75,6 +70,7 @@ La API estará disponible en `http://localhost:8000` y Swagger UI en `http://loc
 | GET | `/api/cases` | Casos, filtrables por `municipality_id`, `year` y `epidemiological_week` |
 | GET | `/api/dashboard` | Resumen calculado desde los registros de la base de datos |
 | GET | `/api/risk-map?year=2025&week=40` | Comparación estadística de riesgo por municipio |
+| GET | `/api/alerts?year=2025&week=40` | Alertas moderadas y altas basadas en los umbrales del mapa |
 | GET | `/api/municipalities/{id}/risk` | Detalle de riesgo para un municipio y periodo |
 | GET | `/api/municipalities/{id}/endemic-channel?year=2025` | Casos observados y percentiles históricos por semana |
 
@@ -91,3 +87,5 @@ python -m pytest
 ```
 
 Las pruebas usan SQLite local y no requieren una instancia de PostgreSQL.
+
+Las alertas clasifican como vigilancia una variación de 20% a menos de 50% y como riesgo alto una variación de 50% o más frente a la media histórica de la misma semana. Los niveles reutilizan los umbrales del mapa y no son predicciones.

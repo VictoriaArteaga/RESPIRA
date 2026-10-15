@@ -44,12 +44,12 @@ Los comandos `dist:*` preparan instaladores con electron-builder para Windows (N
 
 ## Rutas
 
-- `/dashboard`: resumen, indicadores y tendencia semanal histórica.
-- `/municipalities`: municipios, casos acumulados y última semana registrada.
-- `/cases`: tabla de registros de casos.
+- `/dashboard`: resumen, indicadores, última semana disponible, recuento de alertas y tendencia semanal histórica.
+- `/municipalities`: municipios, casos acumulados y última semana registrada. Cada fila abre un detalle con historial semanal, riesgo del periodo más reciente, canal endémico y variables sintéticas disponibles.
+- `/cases`: tabla de registros de casos con filtros por año, semana epidemiológica y municipio.
 - `/risk-map`: mapa de marcadores municipales, nivel estadístico de riesgo y filtros por año y semana.
 - `/endemic`: canal endémico por municipio y año con percentiles históricos y estadísticas descriptivas.
-- `/alerts`: placeholder informativo de una etapa posterior.
+- `/alerts`: listado filtrable de alertas estadísticas moderadas y altas, con periodo, valores observados, referencia histórica y explicación de la regla.
 - `/settings`: URL configurada del backend y etiqueta del entorno.
 
 La aplicación consume `/api/dashboard`, `/api/municipalities`, `/api/cases`, `/api/risk-map` y los endpoints municipales de riesgo y canal endémico. Leaflet usa mosaicos de OpenStreetMap con conexión a internet. Los datos siguen siendo sintéticos; no hay IA ni predicción futura. La configuración HTTP está centralizada en `src/services/api.ts`. La navegación usa rutas hash para funcionar correctamente al cargar la aplicación empaquetada desde archivos locales de Electron. En la aplicación de escritorio, las consultas GET pasan por un puente IPC limitado a los endpoints de lectura utilizados por esta interfaz, de modo que no requieren relajar CORS en la API.

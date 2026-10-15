@@ -11,3 +11,5 @@ Aplicación de escritorio académica para apoyar el monitoreo de infecciones res
 El mapa presenta ubicaciones municipales; el dataset no contiene polígonos de límites municipales. Los registros son **sintéticos de desarrollo**, no son datos oficiales de SIVIGILA. El proyecto no implementa IA, aprendizaje automático ni predicciones futuras. Los niveles son referencias estadísticas para apoyo al monitoreo y no constituyen diagnóstico médico.
 
 Consulta [backend/README.md](backend/README.md) y [frontend/README.md](frontend/README.md) para instalación y ejecución.
+
+El backend usa SQLite local de forma predeterminada; PostgreSQL puede configurarse mediante `DATABASE_URL`. Las alertas actuales usan reglas deterministas. La integración oficial SIVIGILA y cualquier IA están pendientes y no se simulan. Consulta [docs/architecture.md](docs/architecture.md) para los límites de arquitectura y fases futuras.
