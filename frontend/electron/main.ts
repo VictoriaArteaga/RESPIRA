@@ -3,8 +3,10 @@ import { join } from 'node:path'
 
 const apiBaseUrl = __RESPIRA_API_URL__.replace(/\/+$/, '')
 const municipalityDetailPath = /^\/api\/municipalities\/\d+$/
-const allowedPaths = new Set(['/api/dashboard', '/api/municipalities', '/api/cases'])
+const allowedPaths = new Set(['/api/dashboard', '/api/municipalities', '/api/cases', '/api/risk-map'])
 const allowedCaseFilters = new Set(['municipality_id', 'year', 'epidemiological_week'])
+const allowedRiskFilters = new Set(['year', 'week'])
+const municipalityAnalysisPath = /^\/api\/municipalities\/\d+\/(?:risk|endemic-channel)$/
 
 function isAllowedApiPath(path: string): boolean {
   let url: URL
@@ -15,12 +17,12 @@ function isAllowedApiPath(path: string): boolean {
   }
 
   if (url.origin !== new URL(apiBaseUrl).origin) return false
-  if (!allowedPaths.has(url.pathname) && !municipalityDetailPath.test(url.pathname)) return false
+  if (!allowedPaths.has(url.pathname) && !municipalityDetailPath.test(url.pathname) && !municipalityAnalysisPath.test(url.pathname)) return false
+  if (url.pathname === '/api/risk-map') return [...url.searchParams].every(([key, value]) => allowedRiskFilters.has(key) && /^\d+$/.test(value))
+  if (municipalityAnalysisPath.test(url.pathname)) return [...url.searchParams].every(([key, value]) => key === 'year' && /^\d+$/.test(value))
   if (url.pathname !== '/api/cases') return url.search.length === 0
 
-  return [...url.searchParams].every(
-    ([key, value]) => allowedCaseFilters.has(key) && /^\d+$/.test(value),
-  )
+  return [...url.searchParams].every(([key, value]) => allowedCaseFilters.has(key) && /^\d+$/.test(value))
 }
 
 ipcMain.handle('respira:api-get', async (_event, path: unknown) => {

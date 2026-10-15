@@ -3,6 +3,8 @@ import {
   Bell,
   ChartNoAxesCombined,
   ClipboardList,
+  Map,
+  ChartLine,
   Settings,
 } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
@@ -10,6 +12,8 @@ import { NavLink } from 'react-router-dom'
 const navigation = [
   { label: 'Dashboard', path: '/dashboard', icon: ChartNoAxesCombined },
   { label: 'Municipios', path: '/municipalities', icon: Activity },
+  { label: 'Mapa de riesgo', path: '/risk-map', icon: Map },
+  { label: 'Canal endémico', path: '/endemic', icon: ChartLine },
   { label: 'Casos IRA', path: '/cases', icon: ClipboardList },
   { label: 'Alertas', path: '/alerts', icon: Bell },
   { label: 'Configuración', path: '/settings', icon: Settings },

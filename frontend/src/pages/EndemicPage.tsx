@@ -1,0 +1,26 @@
+import { useEffect, useState } from 'react'
+import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Card } from '../components/common/Card'
+import { EmptyState, ErrorState } from '../components/common/Feedback'
+import { Loading } from '../components/common/Loading'
+import { fetchMunicipalities } from '../services/municipalityService'
+import { fetchEndemicChannel } from '../services/riskService'
+import type { Municipality } from '../types/municipality'
+import type { EndemicChannel } from '../types/risk'
+
+export function EndemicPage() {
+  const [municipalities, setMunicipalities] = useState<Municipality[]>([])
+  const [municipalityId, setMunicipalityId] = useState<number | undefined>()
+  const [year, setYear] = useState<number | undefined>()
+  const [data, setData] = useState<EndemicChannel | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  useEffect(() => { const c = new AbortController(); fetchMunicipalities(c.signal).then((values) => { setMunicipalities(values); setMunicipalityId((current) => current ?? values[0]?.id) }).catch((e: unknown) => { if (!c.signal.aborted) setError(e instanceof Error ? e.message : 'No fue posible obtener la información.') }); return () => c.abort() }, [])
+  useEffect(() => { if (!municipalityId) return; const c = new AbortController(); setLoading(true); setError(null); fetchEndemicChannel(municipalityId, year, c.signal).then(setData).catch((e: unknown) => { if (!c.signal.aborted) setError(e instanceof Error ? e.message : 'No fue posible obtener la información.') }).finally(() => { if (!c.signal.aborted) setLoading(false) }); return () => c.abort() }, [municipalityId, year])
+  const stats = data?.statistics
+  return <div className="space-y-6">
+    <header><p className="text-sm font-medium text-sky-800">Análisis epidemiológico</p><h1 className="mt-1 text-2xl font-bold tracking-tight">Canal endémico</h1><p className="mt-2 text-sm text-respira-muted">Casos observados frente a percentiles históricos de la misma semana. Sin predicción futura.</p></header>
+    <Card className="flex flex-wrap items-end gap-4 p-4"><label className="grid gap-1 text-sm font-medium">Municipio<select className="min-w-52 rounded-lg border border-respira-border bg-white px-3 py-2" value={municipalityId ?? ''} onChange={(e) => setMunicipalityId(Number(e.target.value))}>{municipalities.map((m) => <option key={m.id} value={m.id}>{m.name}</option>)}</select></label><label className="grid gap-1 text-sm font-medium">Año<select className="rounded-lg border border-respira-border bg-white px-3 py-2" value={year ?? ''} onChange={(e) => setYear(e.target.value ? Number(e.target.value) : undefined)}><option value="">Más reciente</option>{(data?.available_years ?? []).map((value) => <option key={value}>{value}</option>)}</select></label><span className="ml-auto text-xs text-respira-muted">Datos sintéticos de desarrollo</span></Card>
+    {loading ? <Card><Loading/></Card> : error ? <Card><ErrorState message={error}/></Card> : !data?.weeks.length ? <Card><EmptyState>No hay datos disponibles para los filtros seleccionados.</EmptyState></Card> : <><div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">{[['Casos del periodo',stats?.total_cases],['Promedio semanal',stats?.average],['Mediana',stats?.median],['Máximo semanal',stats?.maximum],['Riesgo actual',stats?.risk_level === 'high' ? 'Alto' : stats?.risk_level === 'moderate' ? 'Moderado' : 'Bajo']].map(([label,value]) => <Card key={String(label)} className="p-4"><p className="text-xs text-respira-muted">{label}</p><p className="mt-2 text-xl font-bold">{value ?? '—'}</p></Card>)}</div><Card className="p-5"><h2 className="font-semibold">{data.municipality} · {data.year}</h2><p className="mt-1 text-xs text-respira-muted">Casos por semana epidemiológica · registros</p><div className="mt-4 h-[420px] w-full"><ResponsiveContainer width="100%" height="100%"><LineChart data={data.weeks} margin={{top:12,right:20,bottom:8,left:0}}><CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0"/><XAxis dataKey="week" label={{value:'Semana epidemiológica',position:'insideBottom',offset:-2}}/><YAxis allowDecimals={false} label={{value:'Casos',angle:-90,position:'insideLeft'}}/><Tooltip labelFormatter={(value) => `Semana ${value}`} formatter={(value, name) => [value ?? 'Sin histórico', name]}/><Line type="monotone" dataKey="upper_alert_limit" name="Percentil 90 (alerta)" stroke="#d9a400" strokeDasharray="5 4" dot={false}/><Line type="monotone" dataKey="upper_limit" name="Percentil 75" stroke="#94a3b8" strokeDasharray="4 4" dot={false}/><Line type="monotone" dataKey="historical_median" name="Mediana histórica" stroke="#315F7D" strokeWidth={2} dot={false}/><Line type="monotone" dataKey="lower_limit" name="Percentil 25" stroke="#94a3b8" strokeDasharray="4 4" dot={false}/><Line type="monotone" dataKey="observed_cases" name="Casos observados" stroke="#c83d3d" strokeWidth={2.5} activeDot={{r:5}}/></LineChart></ResponsiveContainer></div><p className="mt-3 text-xs text-respira-muted">Zona esperada: percentiles 25–75. El percentil 90 se muestra como referencia superior. Las semanas sin valor histórico aparecen sin límites de comparación.</p></Card></>}
+  </div>
+}

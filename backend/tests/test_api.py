@@ -73,3 +73,44 @@ def test_dashboard_is_calculated_from_database(client: TestClient) -> None:
     assert summary["average_cases"] == pytest.approx(summary["total_cases"] / 10)
     assert summary["municipality_with_most_cases"] is not None
     assert summary["last_epidemiological_week"] == 52
+
+
+def test_risk_map_returns_municipality_comparisons(client: TestClient) -> None:
+    response = client.get("/api/risk-map?year=2025&week=40")
+
+    assert response.status_code == 200
+    result = response.json()
+    assert result["year"] == 2025
+    assert result["week"] == 40
+    assert len(result["municipalities"]) == 10
+    pasto = next(item for item in result["municipalities"] if item["municipality"] == "Pasto")
+    assert pasto["current_cases"] is not None
+    assert pasto["historical_average"] is not None
+    assert pasto["risk_level"] in {"low", "moderate", "high"}
+
+
+def test_municipality_risk_and_unknown_id(client: TestClient) -> None:
+    response = client.get("/api/municipalities/1/risk?year=2025&week=40")
+    assert response.status_code == 200
+    assert response.json()["risk_level"] in {"low", "moderate", "high"}
+    assert client.get("/api/municipalities/99999/risk").status_code == 404
+
+
+def test_endemic_channel_has_observed_and_historical_percentiles(client: TestClient) -> None:
+    response = client.get("/api/municipalities/1/endemic-channel?year=2025")
+
+    assert response.status_code == 200
+    result = response.json()
+    assert result["year"] == 2025
+    assert len(result["weeks"]) == 52
+    assert result["weeks"][0]["observed_cases"] >= 0
+    assert result["weeks"][0]["lower_limit"] <= result["weeks"][0]["upper_limit"]
+    assert result["statistics"]["total_cases"] > 0
+    assert client.get("/api/municipalities/99999/endemic-channel").status_code == 404
+
+
+def test_risk_endpoints_reject_invalid_filters_and_return_empty_for_missing_year(client: TestClient) -> None:
+    assert client.get("/api/risk-map?week=54").status_code == 422
+    assert client.get("/api/municipalities/1/endemic-channel?year=1900").status_code == 422
+    assert client.get("/api/risk-map?year=2099").json()["municipalities"] == []
+    assert client.get("/api/municipalities/1/risk?year=2099").json()["risk_level"] == "no_data"
