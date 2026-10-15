@@ -129,3 +129,36 @@ def test_alerts_use_explainable_risk_thresholds_and_filters(client: TestClient) 
     assert high_only.status_code == 200
     assert all(item["risk_level"] == "high" for item in high_only.json()["alerts"])
     assert client.get("/api/alerts?risk_level=critical").status_code == 422
+
+ALERT_PERIODS = [
+    (2023, 1),
+    # PERIODS_END
+]
+
+
+@pytest.mark.parametrize(
+    "year, week",
+    ALERT_PERIODS,
+    ids=[f"{year}-week-{week:02d}" for year, week in ALERT_PERIODS],
+)
+def test_alerts_match_risk_classification_for_each_selected_period(
+    client: TestClient, year: int, week: int
+) -> None:
+    risk_rows = client.get(f"/api/risk-map?year={year}&week={week}").json()["municipalities"]
+    alerts = client.get(f"/api/alerts?year={year}&week={week}").json()
+    expected = {
+        row["municipality_id"]: row
+        for row in risk_rows
+        if row["risk_level"] in {"moderate", "high"}
+    }
+    actual = {item["municipality_id"]: item for item in alerts["alerts"]}
+
+    assert alerts["year"] == year
+    assert alerts["week"] == week
+    assert actual.keys() == expected.keys()
+    for municipality_id, alert in actual.items():
+        risk = expected[municipality_id]
+        assert alert["risk_level"] == risk["risk_level"]
+        assert alert["observed_cases"] == risk["current_cases"]
+        assert alert["historical_average"] == risk["historical_average"]
+        assert alert["variation_percent"] == risk["variation_percent"]
