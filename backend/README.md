@@ -1,6 +1,6 @@
 # RESPIRA — Backend
 
-RESPIRA es un proyecto académico que busca apoyar el monitoreo de infecciones respiratorias agudas (IRA) en menores de cinco años en el departamento de Nariño. Este backend implementa exclusivamente la configuración y los endpoints iniciales de las semanas 1 y 2.
+RESPIRA es un proyecto académico que busca apoyar el monitoreo de infecciones respiratorias agudas (IRA) en menores de cinco años en el departamento de Nariño. El backend incluye los endpoints iniciales, el mapa estadístico de riesgo municipal y el canal endémico de las semanas 3 y 4.
 
 > **Aviso:** Los registros que incluye el proyecto son sintéticos y se usan únicamente para pruebas. No son datos de SIVIGILA ni información epidemiológica real.
 
@@ -74,10 +74,13 @@ La API estará disponible en `http://localhost:8000` y Swagger UI en `http://loc
 | GET | `/api/municipalities/{municipality_id}` | Detalle de un municipio |
 | GET | `/api/cases` | Casos, filtrables por `municipality_id`, `year` y `epidemiological_week` |
 | GET | `/api/dashboard` | Resumen calculado desde los registros de la base de datos |
+| GET | `/api/risk-map?year=2025&week=40` | Comparación estadística de riesgo por municipio |
+| GET | `/api/municipalities/{id}/risk` | Detalle de riesgo para un municipio y periodo |
+| GET | `/api/municipalities/{id}/endemic-channel?year=2025` | Casos observados y percentiles históricos por semana |
 
 Los filtros de casos se pueden combinar, por ejemplo: `/api/cases?municipality_id=1&year=2025`.
 
-El resumen del dashboard informa el total de municipios, suma de casos, promedio de casos por municipio a lo largo de los registros, municipio con más casos acumulados, última semana epidemiológica y total de registros. No genera predicciones, niveles de riesgo ni alertas.
+El resumen del dashboard informa el total de municipios, suma de casos, promedio de casos por municipio a lo largo de los registros, municipio con más casos acumulados, última semana epidemiológica y total de registros. El riesgo compara los casos de una semana con la media de esa misma semana en años anteriores (bajo <20%, moderado 20–<50%, alto ≥50%). El canal calcula mediana y percentiles 25, 75 y 90 por semana a partir de registros de años previos. Son estadísticas descriptivas; no se generan predicciones ni se utiliza IA.
 
 ## Pruebas
 
