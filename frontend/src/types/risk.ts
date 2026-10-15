@@ -46,3 +46,22 @@ export interface EndemicChannel {
   } | null
   weeks: EndemicPoint[]
 }
+
+export interface EpidemiologicalAlert {
+  municipality_id: number
+  municipality: string
+  year: number
+  week: number
+  observed_cases: number
+  historical_average: number
+  variation_percent: number
+  risk_level: 'moderate' | 'high'
+  reason: string
+}
+
+export interface AlertResponse {
+  year: number | null
+  week: number | null
+  available_years: number[]
+  alerts: EpidemiologicalAlert[]
+}

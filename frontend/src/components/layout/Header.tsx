@@ -1,5 +1,6 @@
 import { Bell, Menu } from 'lucide-react'
 import { Badge } from '../common/Badge'
+import { Link } from 'react-router-dom'
 
 interface HeaderProps {
   onMenuClick: () => void
@@ -29,15 +30,14 @@ export function Header({ onMenuClick }: HeaderProps) {
           <span className="h-1.5 w-1.5 rounded-full bg-sky-700" />
           Datos de prueba
         </Badge>
-        <button
-          type="button"
+        <Link
+          to="/alerts"
           className="relative rounded-xl p-2.5 text-respira-muted hover:bg-slate-100"
-          aria-label="Notificaciones (próximamente)"
-          title="Notificaciones disponibles próximamente"
-          disabled
+          aria-label="Consultar alertas epidemiológicas"
+          title="Consultar alertas epidemiológicas"
         >
           <Bell size={19} aria-hidden="true" />
-        </button>
+        </Link>
       </div>
     </header>
   )

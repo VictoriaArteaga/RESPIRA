@@ -13,6 +13,14 @@ def get_risk_service(db: Session = Depends(get_db)) -> RiskService:
     return RiskService(MunicipalityRepository(db), IraCaseRepository(db))
 
 
+@router.get("/alerts")
+def get_alerts(year: int | None = Query(default=None, ge=2000), week: int | None = Query(default=None, ge=1, le=53),
+               risk_level: str | None = Query(default=None, pattern="^(moderate|high)$"),
+               service: RiskService = Depends(get_risk_service)) -> dict:
+    """List statistical deviations using the same thresholds as the risk map."""
+    return service.alerts(year, week, risk_level)
+
+
 @router.get("/risk-map")
 def get_risk_map(year: int | None = Query(default=None, ge=2000), week: int | None = Query(default=None, ge=1, le=53),
                  service: RiskService = Depends(get_risk_service)) -> dict:

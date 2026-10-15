@@ -114,3 +114,18 @@ def test_risk_endpoints_reject_invalid_filters_and_return_empty_for_missing_year
     assert client.get("/api/municipalities/1/endemic-channel?year=1900").status_code == 422
     assert client.get("/api/risk-map?year=2099").json()["municipalities"] == []
     assert client.get("/api/municipalities/1/risk?year=2099").json()["risk_level"] == "no_data"
+
+
+def test_alerts_use_explainable_risk_thresholds_and_filters(client: TestClient) -> None:
+    response = client.get("/api/alerts?year=2025&week=40")
+    assert response.status_code == 200
+    result = response.json()
+    assert result["year"] == 2025
+    assert result["week"] == 40
+    assert all(item["risk_level"] in {"moderate", "high"} for item in result["alerts"])
+    assert all(item["observed_cases"] is not None and item["historical_average"] is not None for item in result["alerts"])
+    assert all(item["reason"] for item in result["alerts"])
+    high_only = client.get("/api/alerts?year=2025&week=40&risk_level=high")
+    assert high_only.status_code == 200
+    assert all(item["risk_level"] == "high" for item in high_only.json()["alerts"])
+    assert client.get("/api/alerts?risk_level=critical").status_code == 422

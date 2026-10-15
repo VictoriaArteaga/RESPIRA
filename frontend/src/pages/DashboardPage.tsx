@@ -1,5 +1,6 @@
-import { Activity, MapPinned, UsersRound, Wind } from 'lucide-react'
-import { useMemo } from 'react'
+import { Activity, AlertTriangle, Bell, MapPinned, UsersRound, Wind } from 'lucide-react'
+import { useEffect, useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Badge } from '../components/common/Badge'
 import { Card } from '../components/common/Card'
 import { EmptyState, ErrorState } from '../components/common/Feedback'
@@ -9,10 +10,22 @@ import { RecentData } from '../components/dashboard/RecentData'
 import { StatCard } from '../components/dashboard/StatCard'
 import { CaseTrendChart } from '../components/dashboard/CaseTrendChart'
 import { useDashboard } from '../hooks/useDashboard'
+import { fetchAlerts } from '../services/riskService'
+import type { AlertResponse } from '../types/risk'
 import type { MunicipalitySummary as MunicipalitySummaryData } from '../types/municipality'
 
 export function DashboardPage() {
   const { data, loading, error } = useDashboard()
+  const [alertData, setAlertData] = useState<AlertResponse | null>(null)
+  const [alertsUnavailable, setAlertsUnavailable] = useState(false)
+
+  useEffect(() => {
+    const controller = new AbortController()
+    fetchAlerts(undefined, undefined, controller.signal)
+      .then(setAlertData)
+      .catch(() => { if (!controller.signal.aborted) setAlertsUnavailable(true) })
+    return () => controller.abort()
+  }, [])
   const municipalitySummaries = useMemo<MunicipalitySummaryData[]>(() => {
     if (!data) return []
 
@@ -99,6 +112,12 @@ export function DashboardPage() {
               icon={Wind}
             />
           </div>
+
+          <section aria-label="Resumen de alertas" className="grid gap-4 sm:grid-cols-3">
+            <Card className="p-4"><div className="flex items-center gap-2 text-sm text-respira-muted"><Bell size={17} aria-hidden="true"/> Municipios en vigilancia o alerta</div><p className="mt-2 text-2xl font-bold">{alertsUnavailable ? 'No disponible' : alertData?.alerts.length ?? '—'}</p></Card>
+            <Card className="p-4"><div className="flex items-center gap-2 text-sm text-respira-muted"><AlertTriangle size={17} aria-hidden="true"/> Municipios con riesgo alto</div><p className="mt-2 text-2xl font-bold">{alertsUnavailable ? 'No disponible' : alertData?.alerts.filter((alert) => alert.risk_level === 'high').length ?? '—'}</p></Card>
+            <Card className="flex items-center justify-between gap-3 p-4"><div><p className="text-sm text-respira-muted">Última semana del conjunto</p><p className="mt-2 text-2xl font-bold">{data.summary.last_epidemiological_week ? `Semana ${data.summary.last_epidemiological_week}` : 'Sin registros'}</p></div><Link to="/alerts" className="text-sm font-semibold text-sky-800 hover:underline">Ver alertas</Link></Card>
+          </section>
 
           {data.summary.total_records === 0 ? (
             <Card>

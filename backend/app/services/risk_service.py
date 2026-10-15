@@ -92,6 +92,31 @@ class RiskService:
                 "variation_percent": round(variation, 1) if variation is not None else None,
                 "risk_level": level}
 
+    def alerts(self, year: int | None = None, week: int | None = None, risk_level: str | None = None) -> dict:
+        """Return deterministic alerts for moderate/high deviations from historical averages."""
+        result = self.risk_map(year, week)
+        alerts = []
+        explanations = {
+            "moderate": "Los casos observados están entre 20% y menos de 50% por encima del promedio histórico de la misma semana.",
+            "high": "Los casos observados están al menos 50% por encima del promedio histórico de la misma semana.",
+        }
+        for item in result["municipalities"]:
+            level = item["risk_level"]
+            if level not in explanations or (risk_level is not None and level != risk_level):
+                continue
+            alerts.append({
+                "municipality_id": item["municipality_id"],
+                "municipality": item["municipality"],
+                "year": item["year"],
+                "week": item["week"],
+                "observed_cases": item["current_cases"],
+                "historical_average": item["historical_average"],
+                "variation_percent": item["variation_percent"],
+                "risk_level": level,
+                "reason": explanations[level],
+            })
+        return {"year": result["year"], "week": result["week"], "available_years": result["available_years"], "alerts": alerts}
+
     def endemic_channel(self, municipality_id: int, year: int | None = None) -> dict | None:
         municipality = self.municipalities.get_by_id(municipality_id)
         if municipality is None:
