@@ -130,6 +130,7 @@ def test_alerts_use_explainable_risk_thresholds_and_filters(client: TestClient) 
     assert all(item["risk_level"] == "high" for item in high_only.json()["alerts"])
     assert client.get("/api/alerts?risk_level=critical").status_code == 422
 
+# Regression coverage ensures alerts and risk levels stay aligned by epidemiological period.
 ALERT_PERIODS = [
     (2023, 1),
     (2023, 2),
@@ -177,7 +178,6 @@ ALERT_PERIODS = [
     (2025, 13),
     (2025, 14),
     (2025, 15),
-    # PERIODS_END
 ]
 
 
