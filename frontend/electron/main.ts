@@ -1,4 +1,5 @@
-import { app, BrowserWindow, ipcMain, shell } from 'electron'
+import { app, BrowserWindow, ipcMain, safeStorage, shell } from 'electron'
+import { existsSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 
 const apiBaseUrl = __RESPIRA_API_URL__.replace(/\/+$/, '')
@@ -25,15 +26,46 @@ function isAllowedApiPath(path: string): boolean {
   return [...url.searchParams].every(([key, value]) => allowedCaseFilters.has(key) && /^\d+$/.test(value))
 }
 
-ipcMain.handle('respira:api-get', async (_event, path: unknown) => {
-  if (typeof path !== 'string' || !isAllowedApiPath(path)) {
-    return { status: 400, body: { detail: 'API route is not allowed.' } }
+interface ApiResult {
+  status: number
+  body: unknown
+}
+
+// El token vive solo en el proceso principal: el renderer nunca lo recibe ni puede leerlo.
+let accessToken: string | null = null
+const sessionFile = () => join(app.getPath('userData'), 'session.bin')
+
+function persistToken(token: string): void {
+  // Si el sistema no ofrece cifrado (p. ej. Linux sin keyring), la sesión solo se mantiene en memoria.
+  if (!safeStorage.isEncryptionAvailable()) return
+  writeFileSync(sessionFile(), safeStorage.encryptString(token), { mode: 0o600 })
+}
+
+function clearToken(): void {
+  accessToken = null
+  if (existsSync(sessionFile())) rmSync(sessionFile())
+}
+
+function restoreToken(): void {
+  if (!safeStorage.isEncryptionAvailable() || !existsSync(sessionFile())) return
+  try {
+    accessToken = safeStorage.decryptString(readFileSync(sessionFile()))
+  } catch {
+    clearToken()
   }
+}
+
+async function apiRequest(method: 'GET' | 'POST', path: string, payload?: unknown): Promise<ApiResult> {
+  const headers: Record<string, string> = { Accept: 'application/json' }
+  if (payload !== undefined) headers['Content-Type'] = 'application/json'
+  if (accessToken) headers.Authorization = `Bearer ${accessToken}`
 
   let response: Response
   try {
     response = await fetch(new URL(path, apiBaseUrl), {
-      headers: { Accept: 'application/json' },
+      method,
+      headers,
+      body: payload === undefined ? undefined : JSON.stringify(payload),
     })
   } catch (error) {
     if (error instanceof TypeError) {
@@ -42,7 +74,62 @@ ipcMain.handle('respira:api-get', async (_event, path: unknown) => {
     throw error
   }
 
-  return { status: response.status, body: await response.json() as unknown }
+  // Un 401 con token enviado significa sesión caducada o revocada: se descarta el token local.
+  if (response.status === 401 && accessToken) clearToken()
+  const text = await response.text()
+  let body: unknown = null
+  try {
+    body = text ? (JSON.parse(text) as unknown) : null
+  } catch {
+    body = null
+  }
+  return { status: response.status, body }
+}
+
+ipcMain.handle('respira:api-get', async (_event, path: unknown) => {
+  if (typeof path !== 'string' || !isAllowedApiPath(path)) {
+    return { status: 400, body: { detail: 'API route is not allowed.' } }
+  }
+  return apiRequest('GET', path)
+})
+
+function readCredentials(value: unknown): { email: string; password: string } | null {
+  if (typeof value !== 'object' || value === null) return null
+  const { email, password } = value as Record<string, unknown>
+  if (typeof email !== 'string' || typeof password !== 'string') return null
+  if (email.length === 0 || email.length > 254 || password.length === 0 || password.length > 128) return null
+  return { email, password }
+}
+
+ipcMain.handle('respira:auth-register', async (_event, value: unknown): Promise<ApiResult> => {
+  const credentials = readCredentials(value)
+  if (!credentials) return { status: 400, body: { detail: 'Datos de registro no válidos.' } }
+  return apiRequest('POST', '/api/auth/register', credentials)
+})
+
+ipcMain.handle('respira:auth-login', async (_event, value: unknown): Promise<ApiResult> => {
+  const credentials = readCredentials(value)
+  if (!credentials) return { status: 400, body: { detail: 'Datos de inicio de sesión no válidos.' } }
+
+  const login = await apiRequest('POST', '/api/auth/login', credentials)
+  const token = (login.body as { access_token?: unknown } | null)?.access_token
+  if (login.status !== 200 || typeof token !== 'string') return { status: login.status, body: login.body }
+
+  accessToken = token
+  persistToken(token)
+  return apiRequest('GET', '/api/auth/me')
+})
+
+ipcMain.handle('respira:auth-session', async (): Promise<ApiResult> => {
+  if (!accessToken) return { status: 401, body: null }
+  return apiRequest('GET', '/api/auth/me')
+})
+
+ipcMain.handle('respira:auth-logout', async (): Promise<ApiResult> => {
+  // La revocación en el servidor es lo que invalida el token; el borrado local se hace aunque falle la red.
+  const result = accessToken ? await apiRequest('POST', '/api/auth/logout') : { status: 204, body: null }
+  clearToken()
+  return result
 })
 
 function createWindow(): void {
@@ -75,6 +162,7 @@ function createWindow(): void {
 }
 
 app.whenReady().then(() => {
+  restoreToken()
   createWindow()
 
   app.on('activate', () => {

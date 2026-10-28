@@ -3,12 +3,21 @@ from collections.abc import Iterator
 import pytest
 from fastapi.testclient import TestClient
 
+from app.core.database import SessionLocal
 from app.main import app
+from app.repositories.user_repository import UserRepository
 
 
 @pytest.fixture(scope="module")
 def client() -> Iterator[TestClient]:
     with TestClient(app) as test_client:
+        # Los endpoints epidemiológicos exigen sesión; las pruebas existentes usan un analista autenticado.
+        credentials = {"email": "regression@example.com", "password": "Regresion-2025-ok"}
+        test_client.post("/api/auth/register", json=credentials)
+        with SessionLocal.begin() as db:  # las cuentas nuevas requieren aprobación: se activa directamente
+            UserRepository(db).get_by_email(credentials["email"]).is_active = True
+        token = test_client.post("/api/auth/login", json=credentials).json()["access_token"]
+        test_client.headers["Authorization"] = f"Bearer {token}"
         yield test_client
 
 

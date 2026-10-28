@@ -7,11 +7,15 @@ os.environ.update(
         "DB_NAME": "test",
         "DB_USER": "test",
         "DB_PASSWORD": "test",
+        "JWT_SECRET_KEY": "test-only-secret-key-not-for-production-0123456789",
+        "JWT_ALGORITHM": "HS256",
+        "ACCESS_TOKEN_EXPIRE_MINUTES": "30",
         "DB_CREATE_TABLES": "true",
         "DB_SEED_SIMULATED": "true",
     }
 )
 
+import pytest  # noqa: E402
 from sqlalchemy import create_engine  # noqa: E402
 from sqlalchemy.pool import StaticPool  # noqa: E402
 
@@ -25,3 +29,12 @@ database.engine = create_engine(
     poolclass=StaticPool,
 )
 database.SessionLocal.configure(bind=database.engine)
+
+
+@pytest.fixture(autouse=True)
+def _reset_rate_limiters():
+    from app.core import rate_limit
+
+    rate_limit.reset_all()
+    yield
+    rate_limit.reset_all()

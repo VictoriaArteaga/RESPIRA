@@ -10,6 +10,15 @@ export class ApiError extends Error {
   }
 }
 
+export const UNAUTHORIZED_EVENT = 'respira:unauthorized'
+
+// Solo para ejecución en navegador (desarrollo). En Electron el token permanece en el proceso principal.
+let browserToken: string | null = null
+
+export function setBrowserToken(token: string | null): void {
+  browserToken = token
+}
+
 export async function get<T>(path: string, signal?: AbortSignal): Promise<T> {
   let status: number
   let body: unknown
@@ -21,7 +30,10 @@ export async function get<T>(path: string, signal?: AbortSignal): Promise<T> {
       body = response.body
     } else {
       const response = await fetch(`${apiBaseUrl}${path}`, {
-        headers: { Accept: 'application/json' },
+        headers: {
+          Accept: 'application/json',
+          ...(browserToken ? { Authorization: `Bearer ${browserToken}` } : {}),
+        },
         signal,
       })
       status = response.status
@@ -33,6 +45,7 @@ export async function get<T>(path: string, signal?: AbortSignal): Promise<T> {
   }
 
   if (status === 0) throw new ApiError('No fue posible conectar con el servidor.', 0)
+  if (status === 401) window.dispatchEvent(new Event(UNAUTHORIZED_EVENT))
   if (status < 200 || status >= 300) {
     throw new ApiError(`El servidor respondió con el estado ${status}.`, status)
   }
