@@ -567,6 +567,74 @@ def test_alembic_has_a_single_head_after_user_migration() -> None:
     assert script.get_revision("0002").down_revision == "0001"
 
 
+# --- Estado derivado de cuentas (administración) ----------------------------------------------
+
+
+def status_of(client: TestClient, admin: str, email: str) -> str:
+    return next(u["status"] for u in client.get("/api/admin/users", headers=auth(admin)).json() if u["email"] == email)
+
+
+def test_user_status_is_pending_active_or_disabled(client: TestClient) -> None:
+    email = new_email()
+    register(client, email)
+    _, admin = admin_token(client)
+
+    def status_of() -> str:
+        return next(u["status"] for u in client.get("/api/admin/users", headers=auth(admin)).json() if u["email"] == email)
+
+    user_id = next(u["id"] for u in client.get("/api/admin/users", headers=auth(admin)).json() if u["email"] == email)
+    assert status_of() == "pending"
+    client.patch(f"/api/admin/users/{user_id}", json={"is_active": True}, headers=auth(admin))
+    assert status_of() == "active"
+    client.patch(f"/api/admin/users/{user_id}", json={"is_active": False}, headers=auth(admin))
+    assert status_of() == "disabled"
+    client.patch(f"/api/admin/users/{user_id}", json={"is_active": True}, headers=auth(admin))
+    assert status_of() == "active"  # la reactivación está soportada
+
+
+def test_admin_endpoints_reject_missing_token_and_expose_no_secrets(client: TestClient) -> None:
+    assert client.get("/api/admin/users").status_code == 401
+    assert client.patch("/api/admin/users/1", json={"is_active": True}).status_code == 401
+    _, admin = admin_token(client)
+    body = client.get("/api/admin/users", headers=auth(admin)).text
+    assert "password" not in body and "token" not in body and "$argon2" not in body
+
+
+def test_status_pending_survives_noop_and_role_updates(client: TestClient) -> None:
+    email = new_email()
+    register(client, email)
+    _, admin = admin_token(client)
+    user_id = get_user_id(client, admin, email)
+
+    client.patch(f"/api/admin/users/{user_id}", json={}, headers=auth(admin))
+    assert status_of(client, admin, email) == "pending"
+    client.patch(f"/api/admin/users/{user_id}", json={"role": "admin"}, headers=auth(admin))
+    assert status_of(client, admin, email) == "pending"
+
+
+def test_status_of_explicitly_rejected_pending_account_stays_pending(client: TestClient) -> None:
+    # Limitación conocida de no tener un campo explícito de aprobación: no existe el estado "rechazada".
+    email = new_email()
+    register(client, email)
+    _, admin = admin_token(client)
+    user_id = get_user_id(client, admin, email)
+
+    client.patch(f"/api/admin/users/{user_id}", json={"is_active": False}, headers=auth(admin))
+
+    assert status_of(client, admin, email) == "pending"
+
+
+def test_status_of_disabled_account_survives_role_updates(client: TestClient) -> None:
+    email, token = analyst_token(client)
+    _, admin = admin_token(client)
+    user_id = client.get("/api/auth/me", headers=auth(token)).json()["id"]
+
+    client.patch(f"/api/admin/users/{user_id}", json={"is_active": False}, headers=auth(admin))
+    client.patch(f"/api/admin/users/{user_id}", json={"role": "admin"}, headers=auth(admin))
+
+    assert status_of(client, admin, email) == "disabled"
+
+
 # --- Script del primer administrador y configuración -------------------------------------------
 
 

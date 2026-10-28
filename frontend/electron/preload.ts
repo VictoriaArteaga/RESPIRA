@@ -37,4 +37,8 @@ contextBridge.exposeInMainWorld('respiraDesktop', {
     session: () => invoke('respira:auth-session'),
     logout: () => invoke('respira:auth-logout'),
   },
+  admin: {
+    listUsers: () => invoke('respira:admin-users-list'),
+    setUserActive: (userId: number, isActive: boolean) => invoke('respira:admin-users-set-active', userId, isActive),
+  },
 })

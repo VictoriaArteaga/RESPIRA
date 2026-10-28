@@ -29,3 +29,19 @@ class User(Base):
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
     )
+
+    @property
+    def status(self) -> str:
+        """Estado derivado para la administración: pending, active o disabled.
+
+        No hay un campo explícito de aprobación: una cuenta inactiva con token_version == 0 nunca fue activada
+        (AuthService.update_user solo incrementa el contador si la cuenta estaba o queda activa), así que sigue
+        pendiente; si no, fue desactivada.
+
+        Limitaciones: (1) una cuenta activa devuelta a inactiva por SQL directo o restaurada con token_version = 0
+        se vería como pendiente; (2) no existe el estado "rechazada": desactivar una cuenta pendiente la deja
+        pendiente. Resolverlo exige un campo explícito (p. ej. approved_at) con migración.
+        """
+        if self.is_active:
+            return "active"
+        return "pending" if self.token_version == 0 else "disabled"

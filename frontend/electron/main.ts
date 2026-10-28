@@ -1,6 +1,16 @@
-import { app, BrowserWindow, ipcMain, safeStorage, shell } from 'electron'
+import { app, BrowserWindow, ipcMain, safeStorage, shell, type IpcMainInvokeEvent } from 'electron'
 import { existsSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
+import { pathToFileURL } from 'node:url'
+import {
+  isSafeExternalUrl,
+  isTrustedRendererUrl,
+  parseSetActiveArgs,
+  readCredentials,
+  sanitizeApiResult,
+  type ApiResult,
+  type TrustedRenderer,
+} from './security'
 
 const apiBaseUrl = __RESPIRA_API_URL__.replace(/\/+$/, '')
 const municipalityDetailPath = /^\/api\/municipalities\/\d+$/
@@ -26,9 +36,23 @@ function isAllowedApiPath(path: string): boolean {
   return [...url.searchParams].every(([key, value]) => allowedCaseFilters.has(key) && /^\d+$/.test(value))
 }
 
-interface ApiResult {
-  status: number
-  body: unknown
+const getTrustedRenderer = (): TrustedRenderer => ({
+  devServerUrl: process.env.ELECTRON_RENDERER_URL,
+  fileUrl: pathToFileURL(join(__dirname, '../renderer/index.html')).href,
+})
+
+// Todos los canales IPC exigen que el emisor sea el marco principal de la interfaz de RESPIRA.
+function secureHandle(
+  channel: string,
+  handler: (event: IpcMainInvokeEvent, ...args: unknown[]) => Promise<ApiResult> | ApiResult,
+): void {
+  ipcMain.handle(channel, (event, ...args: unknown[]): Promise<ApiResult> | ApiResult => {
+    const frame = event.senderFrame
+    if (!frame || frame.parent !== null || !isTrustedRendererUrl(frame.url, getTrustedRenderer())) {
+      return { status: 403, body: { detail: 'Remitente no autorizado.' } }
+    }
+    return handler(event, ...args)
+  })
 }
 
 // El token vive solo en el proceso principal: el renderer nunca lo recibe ni puede leerlo.
@@ -55,7 +79,7 @@ function restoreToken(): void {
   }
 }
 
-async function apiRequest(method: 'GET' | 'POST', path: string, payload?: unknown): Promise<ApiResult> {
+async function apiRequest(method: 'GET' | 'POST' | 'PATCH', path: string, payload?: unknown): Promise<ApiResult> {
   const headers: Record<string, string> = { Accept: 'application/json' }
   if (payload !== undefined) headers['Content-Type'] = 'application/json'
   if (accessToken) headers.Authorization = `Bearer ${accessToken}`
@@ -83,31 +107,23 @@ async function apiRequest(method: 'GET' | 'POST', path: string, payload?: unknow
   } catch {
     body = null
   }
-  return { status: response.status, body }
+  return sanitizeApiResult({ status: response.status, body })
 }
 
-ipcMain.handle('respira:api-get', async (_event, path: unknown) => {
+secureHandle('respira:api-get', async (_event, path: unknown) => {
   if (typeof path !== 'string' || !isAllowedApiPath(path)) {
     return { status: 400, body: { detail: 'API route is not allowed.' } }
   }
   return apiRequest('GET', path)
 })
 
-function readCredentials(value: unknown): { email: string; password: string } | null {
-  if (typeof value !== 'object' || value === null) return null
-  const { email, password } = value as Record<string, unknown>
-  if (typeof email !== 'string' || typeof password !== 'string') return null
-  if (email.length === 0 || email.length > 254 || password.length === 0 || password.length > 128) return null
-  return { email, password }
-}
-
-ipcMain.handle('respira:auth-register', async (_event, value: unknown): Promise<ApiResult> => {
+secureHandle('respira:auth-register', async (_event, value: unknown): Promise<ApiResult> => {
   const credentials = readCredentials(value)
   if (!credentials) return { status: 400, body: { detail: 'Datos de registro no válidos.' } }
   return apiRequest('POST', '/api/auth/register', credentials)
 })
 
-ipcMain.handle('respira:auth-login', async (_event, value: unknown): Promise<ApiResult> => {
+secureHandle('respira:auth-login', async (_event, value: unknown): Promise<ApiResult> => {
   const credentials = readCredentials(value)
   if (!credentials) return { status: 400, body: { detail: 'Datos de inicio de sesión no válidos.' } }
 
@@ -120,16 +136,25 @@ ipcMain.handle('respira:auth-login', async (_event, value: unknown): Promise<Api
   return apiRequest('GET', '/api/auth/me')
 })
 
-ipcMain.handle('respira:auth-session', async (): Promise<ApiResult> => {
+secureHandle('respira:auth-session', async (): Promise<ApiResult> => {
   if (!accessToken) return { status: 401, body: null }
   return apiRequest('GET', '/api/auth/me')
 })
 
-ipcMain.handle('respira:auth-logout', async (): Promise<ApiResult> => {
+secureHandle('respira:auth-logout', async (): Promise<ApiResult> => {
   // La revocación en el servidor es lo que invalida el token; el borrado local se hace aunque falle la red.
   const result = accessToken ? await apiRequest('POST', '/api/auth/logout') : { status: 204, body: null }
   clearToken()
   return result
+})
+
+// Administración de usuarios: el renderer solo puede listar y activar/desactivar; roles y creación no se exponen.
+secureHandle('respira:admin-users-list', (): Promise<ApiResult> => apiRequest('GET', '/api/admin/users'))
+
+secureHandle('respira:admin-users-set-active', (_event, userId: unknown, isActive: unknown): Promise<ApiResult> | ApiResult => {
+  const args = parseSetActiveArgs(userId, isActive)
+  if (!args) return { status: 400, body: { detail: 'Datos de administración no válidos.' } }
+  return apiRequest('PATCH', `/api/admin/users/${args.userId}`, { is_active: args.isActive })
 })
 
 function createWindow(): void {
@@ -150,9 +175,17 @@ function createWindow(): void {
 
   window.once('ready-to-show', () => window.show())
   window.webContents.setWindowOpenHandler(({ url }) => {
-    void shell.openExternal(url)
+    if (isSafeExternalUrl(url)) void shell.openExternal(url)
     return { action: 'deny' }
   })
+  // La ventana nunca sale de la interfaz de RESPIRA: otras navegaciones se bloquean y los enlaces web se abren fuera.
+  const guardNavigation = (event: { preventDefault: () => void }, url: string): void => {
+    if (isTrustedRendererUrl(url, getTrustedRenderer())) return
+    event.preventDefault()
+    if (isSafeExternalUrl(url)) void shell.openExternal(url)
+  }
+  window.webContents.on('will-navigate', guardNavigation)
+  window.webContents.on('will-redirect', guardNavigation)
 
   if (process.env.ELECTRON_RENDERER_URL) {
     void window.loadURL(process.env.ELECTRON_RENDERER_URL)

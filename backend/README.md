@@ -131,7 +131,7 @@ python -m scripts.create_admin
 
 Migración: `python -m alembic upgrade head` crea la tabla `users` (no modifica `municipalities` ni `ira_cases`); `python -m alembic downgrade 0001` la elimina.
 
-**Aprobación de cuentas:** las solicitudes de registro quedan con `is_active=false` (también es el valor por defecto en la base). Un administrador las activa con `PATCH /api/admin/users/{id}` enviando `{"is_active": true}`; el listado `GET /api/admin/users` muestra el estado.
+**Aprobación de cuentas:** las solicitudes de registro quedan con `is_active=false` (también es el valor por defecto en la base). Un administrador las activa con `PATCH /api/admin/users/{id}` enviando `{"is_active": true}`; el listado `GET /api/admin/users` muestra el estado. Cada usuario incluye `status` (`pending` = inactiva y nunca tocada por un administrador, `active`, `disabled`), derivado de `is_active` y `token_version` (`update_user` solo incrementa el contador si la cuenta estaba o queda activa; no hay campo explícito de aprobación). Limitaciones: una cuenta activa pasada a inactiva por SQL directo con `token_version = 0` se vería como pendiente, y no existe el estado "rechazada". La app de escritorio ofrece esta gestión (aprobar, desactivar, reactivar) en *Administración de usuarios*, visible solo para `admin`; no permite cambiar roles, crear ni eliminar cuentas.
 
 **Enumeración de correos:** el registro responde 202 con el mismo cuerpo exista o no el correo, y un correo existente no se modifica ni se notifica. Los errores de validación (422) no dependen del correo. Quedan dos señales residuales: el 403 de inicio de sesión (solo se obtiene con la contraseña correcta) y diferencias de tiempo mínimas (se iguala el coste del hash).
 

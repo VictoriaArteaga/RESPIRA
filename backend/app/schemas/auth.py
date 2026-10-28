@@ -65,6 +65,7 @@ class UserRead(BaseModel):
     email: str
     role: str
     is_active: bool
+    status: Literal["pending", "active", "disabled"]
     created_at: datetime
 
     model_config = ConfigDict(from_attributes=True)

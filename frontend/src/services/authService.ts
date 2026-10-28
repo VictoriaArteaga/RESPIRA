@@ -1,7 +1,7 @@
 import type { AuthUser, Credentials } from '../types/auth'
 import { ApiError, getApiBaseUrl, setBrowserToken } from './api'
 
-interface RawResponse {
+export interface RawResponse {
   status: number
   body: unknown
 }
@@ -18,15 +18,19 @@ function detailOf(body: unknown, fallback: string): string {
   return typeof detail === 'string' ? detail : fallback
 }
 
-async function browserRequest(method: 'GET' | 'POST', path: string, payload?: Credentials): Promise<RawResponse> {
+export async function browserRequest(
+  method: 'GET' | 'POST' | 'PATCH',
+  path: string,
+  payload?: unknown,
+): Promise<RawResponse> {
   const headers: Record<string, string> = { Accept: 'application/json' }
-  if (payload) headers['Content-Type'] = 'application/json'
+  if (payload !== undefined) headers['Content-Type'] = 'application/json'
   if (browserToken) headers.Authorization = `Bearer ${browserToken}`
 
   const response = await fetch(`${getApiBaseUrl()}${path}`, {
     method,
     headers,
-    body: payload ? JSON.stringify(payload) : undefined,
+    body: payload === undefined ? undefined : JSON.stringify(payload),
   })
   const text = await response.text()
   return { status: response.status, body: text ? (JSON.parse(text) as unknown) : null }

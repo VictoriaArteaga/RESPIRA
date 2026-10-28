@@ -13,5 +13,9 @@ interface Window {
       session: () => Promise<DesktopApiResponse>
       logout: () => Promise<DesktopApiResponse>
     }
+    admin: {
+      listUsers: () => Promise<DesktopApiResponse>
+      setUserActive: (userId: number, isActive: boolean) => Promise<DesktopApiResponse>
+    }
   }
 }
