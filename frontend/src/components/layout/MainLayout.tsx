@@ -1,11 +1,13 @@
 import { X } from 'lucide-react'
 import { useState, type PropsWithChildren } from 'react'
 import { NavLink } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext'
 import { Header } from './Header'
 import { Sidebar } from './Sidebar'
 
 export function MainLayout({ children }: PropsWithChildren) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { user } = useAuth()
 
   return (
     <div className="app-shell min-h-screen text-respira-text">
@@ -42,6 +44,7 @@ export function MainLayout({ children }: PropsWithChildren) {
                 ['Casos IRA', '/cases'],
                 ['Alertas', '/alerts'],
                 ['Configuración', '/settings'],
+                ...(user?.role === 'admin' ? [['Administración de usuarios', '/admin/users']] : []),
               ].map(([label, path]) => (
                 <NavLink
                   key={path}

@@ -6,8 +6,10 @@ import {
   Map,
   ChartLine,
   Settings,
+  Users,
 } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext'
 
 const navigation = [
   { label: 'Dashboard', path: '/dashboard', icon: ChartNoAxesCombined },
@@ -19,7 +21,13 @@ const navigation = [
   { label: 'Configuración', path: '/settings', icon: Settings },
 ]
 
+const adminNavigation = [{ label: 'Administración de usuarios', path: '/admin/users', icon: Users }]
+
 export function Sidebar() {
+  const { user } = useAuth()
+  // Ocultar el enlace es solo comodidad: el backend y la ruta verifican el rol admin.
+  const items = user?.role === 'admin' ? [...navigation, ...adminNavigation] : navigation
+
   return (
     <aside className="fixed inset-y-0 left-0 z-20 hidden w-64 flex-col border-r border-respira-border bg-[#FBF9F3] lg:flex">
       <div className="flex h-24 items-center gap-3 border-b border-respira-border px-6">
@@ -36,7 +44,7 @@ export function Sidebar() {
         <p className="mb-3 px-3 text-[11px] font-bold uppercase tracking-[0.16em] text-slate-500">
           Menú principal
         </p>
-        {navigation.map(({ label, path, icon: Icon }) => (
+        {items.map(({ label, path, icon: Icon }) => (
           <NavLink
             key={path}
             to={path}

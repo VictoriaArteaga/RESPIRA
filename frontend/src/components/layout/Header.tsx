@@ -1,12 +1,15 @@
-import { Bell, Menu } from 'lucide-react'
+import { Bell, LogOut, Menu } from 'lucide-react'
 import { Badge } from '../common/Badge'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext'
 
 interface HeaderProps {
   onMenuClick: () => void
 }
 
 export function Header({ onMenuClick }: HeaderProps) {
+  const { user, logout } = useAuth()
+
   return (
     <header className="sticky top-0 z-10 flex h-[76px] items-center justify-between border-b border-respira-border bg-[#FBF9F3]/95 px-5 backdrop-blur sm:px-8">
       <div className="flex items-center gap-3">
@@ -30,6 +33,22 @@ export function Header({ onMenuClick }: HeaderProps) {
           <span className="h-1.5 w-1.5 rounded-full bg-sky-700" />
           Datos de prueba
         </Badge>
+        {user && (
+          <div className="flex items-center gap-2">
+            <span className="hidden max-w-[200px] truncate text-sm text-respira-muted md:block" title={user.email}>
+              {user.email}
+            </span>
+            <button
+              className="rounded-xl p-2.5 text-respira-muted hover:bg-slate-100"
+              type="button"
+              aria-label="Cerrar sesión"
+              title="Cerrar sesión"
+              onClick={() => void logout()}
+            >
+              <LogOut size={19} aria-hidden="true" />
+            </button>
+          </div>
+        )}
         <Link
           to="/alerts"
           className="relative rounded-xl p-2.5 text-respira-muted hover:bg-slate-100"
