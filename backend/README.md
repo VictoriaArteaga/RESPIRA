@@ -33,16 +33,21 @@ python -m pip install -r requirements.txt
 
 En Linux, activa el entorno con `source .venv/bin/activate`.
 
-## Configuración local y PostgreSQL opcional
+## Configuración de PostgreSQL (Supabase)
 
-El valor predeterminado usa SQLite en `backend/data/respira.db` y no requiere un servidor. Copia `.env.example` como `.env` para personalizar la configuración. Para usar PostgreSQL, crea una base vacía y coloca la URL y las credenciales locales únicamente en `.env`:
+El backend usa exclusivamente PostgreSQL (Supabase, Session Pooler). Copia `.env.example` como `.env` y completa `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER` y `DB_PASSWORD`; la aplicación no arranca si falta alguna. La contraseña se escapa automáticamente al construir la URL y no aparece en logs.
 
-```env
-DATABASE_URL=postgresql+psycopg://username:password@localhost:5432/respira
-CORS_ORIGINS=["http://localhost:5173"]
+El esquema se gestiona con Alembic (`migrations/`). Con el entorno virtual activo y `.env` configurado:
+
+```powershell
+python -m alembic upgrade head      # crea/actualiza tablas
+python -m alembic current           # revisión aplicada
+python -m alembic downgrade base    # revierte (elimina las tablas: usar solo con aprobación)
 ```
 
-No agregues el archivo `.env` al control de versiones. El archivo está ignorado por Git. Al iniciar, la API crea las tablas y carga el CSV sintético si la tabla de casos está vacía. La siembra se ejecuta dentro de una transacción; si falla la carga, el error impide que el inicio se reporte como exitoso. Para regenerar el archivo de prueba de forma reproducible:
+La migración `0001` crea `municipalities` e `ira_cases` con clave foránea, índices, `UNIQUE (municipality_id, year, epidemiological_week)` y `CHECK` de semana 1–53 y casos ≥ 0. Al iniciar, la API **no** crea tablas ni carga datos. `DB_CREATE_TABLES` y `DB_SEED_SIMULATED` existen solo para desarrollo controlado y no deben activarse contra Supabase.
+
+No agregues el archivo `.env` al control de versiones. El archivo está ignorado por Git. La siembra se ejecuta dentro de una transacción; si falla la carga, el error impide que el inicio se reporte como exitoso. Para regenerar el archivo de prueba de forma reproducible:
 
 ```powershell
 python scripts/generate_synthetic_data.py
@@ -86,6 +91,6 @@ Desde `backend` y con las dependencias instaladas:
 python -m pytest
 ```
 
-Las pruebas usan SQLite local y no requieren una instancia de PostgreSQL.
+Las pruebas usan SQLite en memoria, configurado solo en `tests/conftest.py`, y no requieren conexión a PostgreSQL. SQLite no se usa en ejecución real.
 
 Las alertas clasifican como vigilancia una variación de 20% a menos de 50% y como riesgo alto una variación de 50% o más frente a la media histórica de la misma semana. Los niveles reutilizan los umbrales del mapa y no son predicciones.

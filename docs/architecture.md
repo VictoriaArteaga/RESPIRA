@@ -2,13 +2,13 @@
 
 ## Operación actual
 
-La API FastAPI organiza rutas, servicios de dominio, repositorios SQLAlchemy y modelos. El frontend consume la API a través de `src/services/api.ts`; Electron limita el acceso del renderer a solicitudes GET autorizadas mediante IPC. SQLite es el modo local predeterminado y las variables `DATABASE_URL` permiten configurar PostgreSQL sin cambiar los servicios.
+La API FastAPI organiza rutas, servicios de dominio, repositorios SQLAlchemy y modelos. El frontend consume la API a través de `src/services/api.ts`; Electron limita el acceso del renderer a solicitudes GET autorizadas mediante IPC. La persistencia es PostgreSQL (Supabase, Session Pooler) configurado con variables `DB_*`.
 
 El conjunto cargado desde `backend/data/simulated/ira_cases.csv` se valida para exigir la etiqueta `DATOS SINTÉTICOS DE PRUEBA`. No se debe mezclar con información oficial sin identificar y validar su origen.
 
 ## PostgreSQL
 
-Para usar PostgreSQL, configurar `DATABASE_URL` en un `.env` local con el controlador `postgresql+psycopg`. Los modelos y repositorios SQLAlchemy son la capa de persistencia. La conexión productiva, migraciones, credenciales gestionadas y carga oficial de datos no están habilitadas en esta versión académica.
+La conexión usa el controlador `postgresql+psycopg` y se configura en `backend/.env`. Los modelos y repositorios SQLAlchemy son la capa de persistencia. La conexión productiva, migraciones, credenciales gestionadas y carga oficial de datos no están habilitadas en esta versión académica.
 
 ## SIVIGILA
 

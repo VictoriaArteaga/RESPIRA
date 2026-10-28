@@ -12,9 +12,12 @@ from app.models import IraCase, Municipality
 
 
 def initialize_database() -> None:
-    Base.metadata.create_all(bind=engine)
-    with SessionLocal.begin() as db:
-        seed_simulated_data(db)
+    # Ambas operaciones son opt-in (DB_CREATE_TABLES / DB_SEED_SIMULATED) para no tocar Supabase al arrancar.
+    if settings.db_create_tables:
+        Base.metadata.create_all(bind=engine)
+    if settings.db_seed_simulated:
+        with SessionLocal.begin() as db:
+            seed_simulated_data(db)
 
 
 @asynccontextmanager
