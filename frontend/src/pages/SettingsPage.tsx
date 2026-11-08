@@ -1,10 +1,9 @@
-import { Database, Languages, MonitorCog, Moon, ShieldCheck, Sun } from 'lucide-react'
+import { Languages, MonitorCog, Moon, ShieldCheck, Sun } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { Card } from '../components/common/Card'
-import { DataBadge } from '../components/common/DataBadge'
 import { PageHeader } from '../components/common/PageHeader'
 import { useI18n, type Language } from '../i18n/I18nContext'
-import { getApiBaseUrl, isDemoData } from '../services/api'
+import { getApiBaseUrl } from '../services/api'
 import { useTheme, type Theme } from '../theme/ThemeContext'
 
 interface Option<T extends string> {
@@ -64,7 +63,6 @@ export function SettingsPage() {
         title={t('settings.title')}
         icon={MonitorCog}
         description={t('settings.description')}
-        actions={<DataBadge />}
       />
       <div className="grid gap-5 lg:grid-cols-2">
         <Card className="p-6">
@@ -118,19 +116,6 @@ export function SettingsPage() {
               <code className="mt-4 block break-all rounded-xl border border-respira-border bg-respira-surface-alt px-4 py-3 text-sm text-respira-body">
                 {getApiBaseUrl()}
               </code>
-            </div>
-          </div>
-        </Card>
-        <Card className="p-6">
-          <div className="flex items-start gap-4">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-800">
-              <Database aria-hidden="true" />
-            </span>
-            <div className="min-w-0 flex-1">
-              <h2 className="font-bold">{t('settings.dataOrigin')}</h2>
-              <p className="mt-1 text-sm leading-6 text-respira-muted">
-                {isDemoData ? t('settings.dataOriginDemo') : t('settings.dataOriginServer')}
-              </p>
             </div>
           </div>
         </Card>

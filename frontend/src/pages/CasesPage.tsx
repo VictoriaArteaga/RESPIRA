@@ -1,7 +1,6 @@
 import { ChevronLeft, ChevronRight, ClipboardList } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { Card } from '../components/common/Card'
-import { DataBadge } from '../components/common/DataBadge'
 import { EmptyState, ErrorState } from '../components/common/Feedback'
 import { FilterBar, FilterField } from '../components/common/Filters'
 import { Loading } from '../components/common/Loading'
@@ -92,7 +91,6 @@ export function CasesPage() {
         title={t('cases.title')}
         icon={ClipboardList}
         description={t('cases.description')}
-        actions={<DataBadge />}
       />
       <FilterBar>
         <FilterField label={t('common.year')}>

@@ -2,7 +2,6 @@ import { Map as MapIcon, MousePointerClick } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { CircleMarker, MapContainer, TileLayer, Tooltip, useMap } from 'react-leaflet'
 import { Card } from '../components/common/Card'
-import { DataBadge } from '../components/common/DataBadge'
 import { EmptyState, ErrorState } from '../components/common/Feedback'
 import { FilterBar, FilterField } from '../components/common/Filters'
 import { Loading } from '../components/common/Loading'
@@ -70,13 +69,7 @@ export function RiskMapPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader
-        eyebrow={t('map.eyebrow')}
-        title={t('map.title')}
-        icon={MapIcon}
-        description={t('map.description')}
-        actions={<DataBadge />}
-      />
+      <PageHeader eyebrow={t('map.eyebrow')} title={t('map.title')} icon={MapIcon} description={t('map.description')} />
       <FilterBar
         note={
           data?.year

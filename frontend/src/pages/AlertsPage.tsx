@@ -2,7 +2,6 @@ import { AlertTriangle, Bell, ChevronRight, Eye } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Card } from '../components/common/Card'
-import { DataBadge } from '../components/common/DataBadge'
 import { EmptyState, ErrorState } from '../components/common/Feedback'
 import { FilterBar, FilterField } from '../components/common/Filters'
 import { Loading } from '../components/common/Loading'
@@ -99,7 +98,6 @@ export function AlertsPage() {
         title={t('alerts.title')}
         icon={Bell}
         description={t('alerts.description')}
-        actions={<DataBadge />}
       />
       <FilterBar
         note={t('common.period', {

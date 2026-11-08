@@ -2,7 +2,6 @@ import { Activity, ArrowLeft, CalendarDays, CloudRain, Droplets, Gauge, Thermome
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Card } from '../components/common/Card'
-import { DataBadge } from '../components/common/DataBadge'
 import { EmptyState, ErrorState } from '../components/common/Feedback'
 import { Loading } from '../components/common/Loading'
 import { PageHeader } from '../components/common/PageHeader'
@@ -96,7 +95,6 @@ export function MunicipalityDetailPage() {
             eyebrow={t('det.eyebrow', { department: municipality.department })}
             title={municipality.name}
             description={t('det.description')}
-            actions={<DataBadge />}
           />
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             <StatCard
