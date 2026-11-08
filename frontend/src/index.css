@@ -49,6 +49,46 @@ body {
   pointer-events: none;
 }
 
+/* Fondo de inicio de sesión y registro: mismo patrón médico que .app-shell, con trazo azul más intenso. */
+.auth-shell {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  background-color: #F7F4EB;
+}
+
+.auth-shell::before {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='176' height='176' viewBox='0 0 176 176' fill='none'%3E%3Cg stroke='%231D5C8F' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round' opacity='.8'%3E%3Cpath d='M29 18v22M18 29h22'/%3E%3Cpath d='M43 123v15m-7.5-7.5h15'/%3E%3C/g%3E%3Cg stroke='%231D5C8F' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round' opacity='.8'%3E%3Cpath d='M111 103h12l7-12 10 25 8-13h13'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+  content: "";
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+/* La tarjeta de inicio de sesión crece de forma proporcional (tamaño, texto e iconos) al ampliarse la ventana. */
+.auth-scale {
+  zoom: 1;
+}
+
+@media (min-width: 1280px) and (min-height: 760px) {
+  .auth-scale { zoom: 1.15; }
+}
+
+@media (min-width: 1536px) and (min-height: 880px) {
+  .auth-scale { zoom: 1.3; }
+}
+
+@media (min-width: 1920px) and (min-height: 1000px) {
+  .auth-scale { zoom: 1.5; }
+}
+
+@media (min-width: 2560px) and (min-height: 1300px) {
+  .auth-scale { zoom: 2; }
+}
+
 button:disabled {
   cursor: not-allowed;
 }

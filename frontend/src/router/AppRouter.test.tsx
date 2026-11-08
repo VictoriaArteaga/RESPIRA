@@ -67,7 +67,7 @@ describe('control de acceso a la administración de usuarios', () => {
 
     renderAt('/admin/users')
 
-    expect(await screen.findByRole('heading', { name: 'Iniciar sesión' })).toBeInTheDocument()
+    expect(await screen.findByRole('heading', { name: 'Bienvenido' })).toBeInTheDocument()
     expect(screen.queryByRole('heading', { name: 'Vista de administración' })).not.toBeInTheDocument()
   })
 })
