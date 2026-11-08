@@ -11,7 +11,6 @@ import {
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Card } from '../components/common/Card'
-import { DataBadge } from '../components/common/DataBadge'
 import { EmptyState, ErrorState } from '../components/common/Feedback'
 import { Loading } from '../components/common/Loading'
 import { PageHeader } from '../components/common/PageHeader'
@@ -74,7 +73,6 @@ export function DashboardPage() {
         title={t('dash.title')}
         icon={ChartNoAxesCombined}
         description={t('dash.description')}
-        actions={<DataBadge />}
       />
 
       {loading ? (

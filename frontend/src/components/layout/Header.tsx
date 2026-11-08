@@ -1,9 +1,7 @@
 import { Bell, LogOut, Menu } from 'lucide-react'
-import { Badge } from '../common/Badge'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import { useI18n } from '../../i18n/I18nContext'
-import { isDemoData } from '../../services/api'
 
 interface HeaderProps {
   onMenuClick: () => void
@@ -28,10 +26,6 @@ export function Header({ onMenuClick }: HeaderProps) {
 
       <div className="flex items-center gap-3 sm:gap-5">
         <span className="hidden text-sm text-respira-muted md:block">{t('header.weekly')}</span>
-        <Badge>
-          <span className="h-1.5 w-1.5 rounded-full bg-sky-700" />
-          {isDemoData ? t('data.demo') : t('data.test')}
-        </Badge>
         {user && (
           <div className="flex items-center gap-2">
             <span

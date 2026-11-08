@@ -2,7 +2,6 @@ import { ChevronRight, MapPinned, Search } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Card } from '../components/common/Card'
-import { DataBadge } from '../components/common/DataBadge'
 import { EmptyState, ErrorState } from '../components/common/Feedback'
 import { Loading } from '../components/common/Loading'
 import { PageHeader } from '../components/common/PageHeader'
@@ -65,7 +64,6 @@ export function MunicipalitiesPage() {
         title={t('mun.title')}
         icon={MapPinned}
         description={t('mun.description')}
-        actions={<DataBadge />}
       />
       {loading ? (
         <Card>
