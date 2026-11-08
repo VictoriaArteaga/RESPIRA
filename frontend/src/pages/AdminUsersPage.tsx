@@ -6,13 +6,15 @@ import { Card } from '../components/common/Card'
 import { EmptyState, ErrorState } from '../components/common/Feedback'
 import { Loading } from '../components/common/Loading'
 import { useAuth } from '../context/AuthContext'
+import { useI18n } from '../i18n/I18nContext'
+import type { TranslationKey } from '../i18n/translations'
 import { listUsers, setUserActive } from '../services/adminService'
 import type { AccountStatus, AuthUser, UserRole } from '../types/auth'
 
-const STATUS_LABELS: Record<AccountStatus, string> = {
-  pending: 'Pendiente de aprobación',
-  active: 'Activa',
-  disabled: 'Desactivada',
+const STATUS_LABELS: Record<AccountStatus, TranslationKey> = {
+  pending: 'admin.statusPending',
+  active: 'admin.statusActive',
+  disabled: 'admin.statusDisabled',
 }
 
 const STATUS_STYLES: Record<AccountStatus, string> = {
@@ -21,14 +23,15 @@ const STATUS_STYLES: Record<AccountStatus, string> = {
   disabled: 'bg-slate-200 text-slate-800',
 }
 
-const ROLE_LABELS: Record<UserRole, string> = { admin: 'Administrador', analyst: 'Analista' }
+const ROLE_LABELS: Record<UserRole, TranslationKey> = { admin: 'admin.roleAdmin', analyst: 'admin.roleAnalyst' }
 
-function errorMessage(reason: unknown): string {
-  return reason instanceof Error ? reason.message : 'Ocurrió un error inesperado.'
+function errorMessage(reason: unknown, fallback: string): string {
+  return reason instanceof Error ? reason.message : fallback
 }
 
 export function AdminUsersPage() {
   const { user: currentUser } = useAuth()
+  const { t, locale } = useI18n()
   const [users, setUsers] = useState<AuthUser[]>([])
   const [loading, setLoading] = useState(true)
   const [loadError, setLoadError] = useState<string | null>(null)
@@ -45,7 +48,7 @@ export function AdminUsersPage() {
     try {
       setUsers(await listUsers())
     } catch (reason) {
-      setLoadError(errorMessage(reason))
+      setLoadError(errorMessage(reason, t('common.unexpected')))
     } finally {
       setLoading(false)
     }
@@ -66,7 +69,7 @@ export function AdminUsersPage() {
       setNotice(successMessage)
       await load()
     } catch (reason) {
-      setActionError(errorMessage(reason))
+      setActionError(errorMessage(reason, t('common.unexpected')))
     } finally {
       inFlight.current = false
       setBusyId(null)
@@ -76,7 +79,7 @@ export function AdminUsersPage() {
   async function confirmDeactivation() {
     const target = confirming
     setConfirming(null)
-    if (target) await changeActive(target, false, `Se desactivó la cuenta de ${target.email}.`)
+    if (target) await changeActive(target, false, t('admin.deactivated', { email: target.email }))
   }
 
   const busy = busyId !== null
@@ -85,15 +88,13 @@ export function AdminUsersPage() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="text-sm font-medium text-sky-800">Administración</p>
-          <h1 className="mt-1 text-2xl font-bold tracking-tight">Administración de usuarios</h1>
-          <p className="mt-2 text-sm text-respira-muted">
-            Aprueba solicitudes de cuenta y desactiva o reactiva el acceso. Desactivar no elimina la cuenta.
-          </p>
+          <p className="text-sm font-medium text-sky-800">{t('admin.eyebrow')}</p>
+          <h1 className="mt-1 text-2xl font-bold tracking-tight">{t('admin.title')}</h1>
+          <p className="mt-2 text-sm text-respira-muted">{t('admin.description')}</p>
         </div>
         <Button variant="secondary" type="button" onClick={() => void load()} disabled={loading || busy}>
           <RefreshCw size={16} aria-hidden="true" />
-          Actualizar
+          {t('common.refresh')}
         </Button>
       </div>
 
@@ -110,7 +111,7 @@ export function AdminUsersPage() {
 
       {loading && users.length === 0 ? (
         <Card>
-          <Loading label="Cargando usuarios..." />
+          <Loading label={t('admin.loadingUsers')} />
         </Card>
       ) : loadError ? (
         <Card>
@@ -118,19 +119,29 @@ export function AdminUsersPage() {
         </Card>
       ) : users.length === 0 ? (
         <Card>
-          <EmptyState>No hay usuarios registrados.</EmptyState>
+          <EmptyState>{t('admin.empty')}</EmptyState>
         </Card>
       ) : (
         <Card className="overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[760px] text-left text-sm">
-              <thead className="bg-[#F2F5F5] text-xs uppercase tracking-wide text-respira-muted">
+              <thead className="bg-respira-subtle text-xs uppercase tracking-wide text-respira-muted">
                 <tr>
-                  <th scope="col" className="px-6 py-4 font-semibold">Correo electrónico</th>
-                  <th scope="col" className="px-6 py-4 font-semibold">Rol</th>
-                  <th scope="col" className="px-6 py-4 font-semibold">Estado</th>
-                  <th scope="col" className="px-6 py-4 font-semibold">Creada</th>
-                  <th scope="col" className="px-6 py-4 text-right font-semibold">Acciones</th>
+                  <th scope="col" className="px-6 py-4 font-semibold">
+                    {t('admin.colEmail')}
+                  </th>
+                  <th scope="col" className="px-6 py-4 font-semibold">
+                    {t('admin.colRole')}
+                  </th>
+                  <th scope="col" className="px-6 py-4 font-semibold">
+                    {t('admin.colStatus')}
+                  </th>
+                  <th scope="col" className="px-6 py-4 font-semibold">
+                    {t('admin.colCreated')}
+                  </th>
+                  <th scope="col" className="px-6 py-4 text-right font-semibold">
+                    {t('admin.colActions')}
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-respira-border">
@@ -140,44 +151,46 @@ export function AdminUsersPage() {
                   return (
                     <tr key={item.id} className="hover:bg-sky-50/70">
                       <td className="px-6 py-3.5 font-medium">{item.email}</td>
-                      <td className="px-6 py-3.5 text-respira-muted">{ROLE_LABELS[item.role] ?? item.role}</td>
+                      <td className="px-6 py-3.5 text-respira-muted">
+                        {ROLE_LABELS[item.role] ? t(ROLE_LABELS[item.role]) : item.role}
+                      </td>
                       <td className="px-6 py-3.5">
-                        <Badge className={STATUS_STYLES[item.status]}>{STATUS_LABELS[item.status]}</Badge>
+                        <Badge className={STATUS_STYLES[item.status]}>{t(STATUS_LABELS[item.status])}</Badge>
                       </td>
                       <td className="px-6 py-3.5 text-respira-muted">
-                        {new Date(item.created_at).toLocaleDateString('es-CO')}
+                        {new Date(item.created_at).toLocaleDateString(locale)}
                       </td>
                       <td className="px-6 py-3.5 text-right">
                         {isSelf ? (
-                          <span className="text-xs text-respira-muted">Tu cuenta</span>
+                          <span className="text-xs text-respira-muted">{t('admin.yourAccount')}</span>
                         ) : item.status === 'pending' ? (
                           <Button
                             type="button"
                             disabled={busy}
-                            aria-label={`Aprobar cuenta de ${item.email}`}
-                            onClick={() => void changeActive(item, true, `Se aprobó la cuenta de ${item.email}.`)}
+                            aria-label={t('admin.approveLabel', { email: item.email })}
+                            onClick={() => void changeActive(item, true, t('admin.approved', { email: item.email }))}
                           >
-                            {rowBusy ? 'Procesando...' : 'Aprobar'}
+                            {rowBusy ? t('common.processing') : t('admin.approve')}
                           </Button>
                         ) : item.status === 'active' ? (
                           <Button
                             variant="secondary"
                             type="button"
                             disabled={busy}
-                            aria-label={`Desactivar cuenta de ${item.email}`}
+                            aria-label={t('admin.deactivateLabel', { email: item.email })}
                             onClick={() => setConfirming(item)}
                           >
-                            {rowBusy ? 'Procesando...' : 'Desactivar'}
+                            {rowBusy ? t('common.processing') : t('admin.deactivate')}
                           </Button>
                         ) : (
                           <Button
                             variant="secondary"
                             type="button"
                             disabled={busy}
-                            aria-label={`Reactivar cuenta de ${item.email}`}
-                            onClick={() => void changeActive(item, true, `Se reactivó la cuenta de ${item.email}.`)}
+                            aria-label={t('admin.reactivateLabel', { email: item.email })}
+                            onClick={() => void changeActive(item, true, t('admin.reactivated', { email: item.email }))}
                           >
-                            {rowBusy ? 'Procesando...' : 'Reactivar'}
+                            {rowBusy ? t('common.processing') : t('admin.reactivate')}
                           </Button>
                         )}
                       </td>
@@ -197,22 +210,23 @@ export function AdminUsersPage() {
             aria-modal="true"
             aria-labelledby="deactivate-title"
             aria-describedby="deactivate-description"
-            className="w-full max-w-md rounded-2xl border border-respira-border bg-[#FFFEFA] p-6 shadow-card"
+            className="w-full max-w-md rounded-2xl border border-respira-border bg-respira-surface p-6 shadow-card"
             onKeyDown={(event) => {
               if (event.key === 'Escape') setConfirming(null)
             }}
           >
-            <h2 id="deactivate-title" className="text-lg font-bold">¿Desactivar esta cuenta?</h2>
+            <h2 id="deactivate-title" className="text-lg font-bold">
+              {t('admin.confirmTitle')}
+            </h2>
             <p id="deactivate-description" className="mt-2 text-sm text-respira-muted">
-              {confirming.email} perderá el acceso de inmediato y su sesión actual se cerrará. La cuenta no se
-              elimina y puede reactivarse después.
+              {t('admin.confirmText', { email: confirming.email })}
             </p>
             <div className="mt-6 flex justify-end gap-3">
               <Button variant="secondary" type="button" autoFocus onClick={() => setConfirming(null)}>
-                Cancelar
+                {t('common.cancel')}
               </Button>
               <Button type="button" onClick={() => void confirmDeactivation()}>
-                Desactivar cuenta
+                {t('admin.confirmButton')}
               </Button>
             </div>
           </div>

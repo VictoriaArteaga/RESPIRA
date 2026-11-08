@@ -2,12 +2,14 @@ import { X } from 'lucide-react'
 import { useState, type PropsWithChildren } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
+import { useI18n } from '../../i18n/I18nContext'
 import { Header } from './Header'
 import { Sidebar } from './Sidebar'
 
 export function MainLayout({ children }: PropsWithChildren) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { user } = useAuth()
+  const { t } = useI18n()
 
   return (
     <div className="app-shell min-h-screen text-respira-text">
@@ -22,29 +24,31 @@ export function MainLayout({ children }: PropsWithChildren) {
           <button
             className="absolute inset-0 bg-slate-950/40"
             type="button"
-            aria-label="Cerrar menú"
+            aria-label={t('layout.closeMenu')}
             onClick={() => setMobileMenuOpen(false)}
           />
-          <aside className="relative flex h-full w-72 flex-col bg-white shadow-xl">
+          <aside className="relative flex h-full w-72 flex-col bg-respira-surface shadow-xl">
             <div className="flex items-center justify-between border-b border-respira-border px-5 py-5">
               <span className="font-extrabold tracking-tight">RESPIRA</span>
               <button
                 className="rounded-lg p-2 text-respira-muted hover:bg-slate-100"
                 type="button"
-                aria-label="Cerrar menú"
+                aria-label={t('layout.closeMenu')}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <X size={20} />
               </button>
             </div>
-            <nav className="space-y-1 p-4" aria-label="Navegación principal">
+            <nav className="space-y-1 p-4" aria-label={t('layout.navAria')}>
               {[
-                ['Dashboard', '/dashboard'],
-                ['Municipios', '/municipalities'],
-                ['Casos IRA', '/cases'],
-                ['Alertas', '/alerts'],
-                ['Configuración', '/settings'],
-                ...(user?.role === 'admin' ? [['Administración de usuarios', '/admin/users']] : []),
+                [t('nav.dashboard'), '/dashboard'],
+                [t('nav.municipalities'), '/municipalities'],
+                [t('nav.riskMap'), '/risk-map'],
+                [t('nav.endemic'), '/endemic'],
+                [t('nav.cases'), '/cases'],
+                [t('nav.alerts'), '/alerts'],
+                [t('nav.settings'), '/settings'],
+                ...(user?.role === 'admin' ? [[t('nav.admin'), '/admin/users']] : []),
               ].map(([label, path]) => (
                 <NavLink
                   key={path}

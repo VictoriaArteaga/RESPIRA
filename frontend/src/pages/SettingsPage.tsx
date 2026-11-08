@@ -1,33 +1,151 @@
-import { MonitorCog } from 'lucide-react'
-import { Badge } from '../components/common/Badge'
+import { Database, Languages, MonitorCog, Moon, ShieldCheck, Sun } from 'lucide-react'
+import type { ReactNode } from 'react'
 import { Card } from '../components/common/Card'
-import { getApiBaseUrl } from '../services/api'
+import { DataBadge } from '../components/common/DataBadge'
+import { PageHeader } from '../components/common/PageHeader'
+import { useI18n, type Language } from '../i18n/I18nContext'
+import { getApiBaseUrl, isDemoData } from '../services/api'
+import { useTheme, type Theme } from '../theme/ThemeContext'
+
+interface Option<T extends string> {
+  value: T
+  label: string
+  icon?: ReactNode
+}
+
+/** Selector de dos o más opciones excluyentes (idioma, tema), accesible como grupo de botones de radio. */
+function Segmented<T extends string>({
+  label,
+  value,
+  options,
+  onChange,
+}: {
+  label: string
+  value: T
+  options: Option<T>[]
+  onChange: (value: T) => void
+}) {
+  return (
+    <div
+      role="radiogroup"
+      aria-label={label}
+      className="mt-4 inline-flex rounded-xl border border-respira-border bg-respira-surface-alt p-1"
+    >
+      {options.map((option) => {
+        const active = option.value === value
+        return (
+          <button
+            key={option.value}
+            type="button"
+            role="radio"
+            aria-checked={active}
+            onClick={() => onChange(option.value)}
+            className={`inline-flex min-h-10 items-center gap-2 rounded-lg px-4 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-respira-blue-dark ${
+              active ? 'bg-respira-blue text-white shadow-sm' : 'text-respira-body hover:bg-sky-100'
+            }`}
+          >
+            {option.icon}
+            {option.label}
+          </button>
+        )
+      })}
+    </div>
+  )
+}
 
 export function SettingsPage() {
+  const { t, language, setLanguage } = useI18n()
+  const { theme, setTheme } = useTheme()
+
   return (
     <div className="space-y-6">
-      <div>
-        <p className="text-sm font-medium text-sky-800">Preferencias</p>
-        <h1 className="mt-1 text-2xl font-bold tracking-tight">Configuración</h1>
-        <p className="mt-2 text-sm text-respira-muted">Información de conexión y entorno de la aplicación.</p>
-      </div>
-      <Card className="max-w-2xl p-6">
-        <div className="flex items-start gap-4">
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-sky-100 text-sky-800">
-            <MonitorCog aria-hidden="true" />
-          </span>
-          <div className="min-w-0 flex-1">
-            <h2 className="font-semibold">Conexión con el servicio</h2>
-            <p className="mt-1 text-sm text-respira-muted">Dirección configurada para la API RESPIRA.</p>
-            <code className="mt-4 block break-all rounded-xl bg-[#F2F5F5] px-4 py-3 text-sm text-slate-700">
-              {getApiBaseUrl()}
-            </code>
-            <div className="mt-4">
-              <Badge>Datos sintéticos — versión de desarrollo</Badge>
+      <PageHeader
+        eyebrow={t('settings.eyebrow')}
+        title={t('settings.title')}
+        icon={MonitorCog}
+        description={t('settings.description')}
+        actions={<DataBadge />}
+      />
+      <div className="grid gap-5 lg:grid-cols-2">
+        <Card className="p-6">
+          <div className="flex items-start gap-4">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-sky-100 text-sky-800">
+              <Languages aria-hidden="true" />
+            </span>
+            <div className="min-w-0 flex-1">
+              <h2 className="font-bold">{t('settings.language')}</h2>
+              <p className="mt-1 text-sm leading-6 text-respira-muted">{t('settings.languageNote')}</p>
+              <Segmented<Language>
+                label={t('settings.language')}
+                value={language}
+                onChange={setLanguage}
+                options={[
+                  { value: 'es', label: 'Español' },
+                  { value: 'en', label: 'English' },
+                ]}
+              />
             </div>
           </div>
-        </div>
-      </Card>
+        </Card>
+        <Card className="p-6">
+          <div className="flex items-start gap-4">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-800">
+              {theme === 'dark' ? <Moon aria-hidden="true" /> : <Sun aria-hidden="true" />}
+            </span>
+            <div className="min-w-0 flex-1">
+              <h2 className="font-bold">{t('settings.appearance')}</h2>
+              <p className="mt-1 text-sm leading-6 text-respira-muted">{t('settings.appearanceNote')}</p>
+              <Segmented<Theme>
+                label={t('settings.appearance')}
+                value={theme}
+                onChange={setTheme}
+                options={[
+                  { value: 'light', label: t('settings.light'), icon: <Sun size={16} aria-hidden="true" /> },
+                  { value: 'dark', label: t('settings.dark'), icon: <Moon size={16} aria-hidden="true" /> },
+                ]}
+              />
+            </div>
+          </div>
+        </Card>
+        <Card className="p-6">
+          <div className="flex items-start gap-4">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-sky-100 text-sky-800">
+              <MonitorCog aria-hidden="true" />
+            </span>
+            <div className="min-w-0 flex-1">
+              <h2 className="font-bold">{t('settings.connection')}</h2>
+              <p className="mt-1 text-sm text-respira-muted">{t('settings.connectionNote')}</p>
+              <code className="mt-4 block break-all rounded-xl border border-respira-border bg-respira-surface-alt px-4 py-3 text-sm text-respira-body">
+                {getApiBaseUrl()}
+              </code>
+            </div>
+          </div>
+        </Card>
+        <Card className="p-6">
+          <div className="flex items-start gap-4">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-800">
+              <Database aria-hidden="true" />
+            </span>
+            <div className="min-w-0 flex-1">
+              <h2 className="font-bold">{t('settings.dataOrigin')}</h2>
+              <p className="mt-1 text-sm leading-6 text-respira-muted">
+                {isDemoData ? t('settings.dataOriginDemo') : t('settings.dataOriginServer')}
+              </p>
+            </div>
+          </div>
+        </Card>
+        <Card className="p-6 lg:col-span-2">
+          <div className="flex items-start gap-4">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-800">
+              <ShieldCheck aria-hidden="true" />
+            </span>
+            <div>
+              <h2 className="font-bold">{t('settings.scope')}</h2>
+              <p className="mt-1 max-w-3xl text-sm leading-6 text-respira-muted">{t('settings.scopeNote')}</p>
+            </div>
+          </div>
+        </Card>
+      </div>
     </div>
   )
 }
