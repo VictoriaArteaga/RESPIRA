@@ -6,6 +6,7 @@ import {
   LogOut,
   Map,
   ChartLine,
+  CircleUser,
   Settings,
   Users,
 } from 'lucide-react'
@@ -21,6 +22,7 @@ const navigation: Array<{ labelKey: TranslationKey; path: string; icon: typeof A
   { labelKey: 'nav.endemic', path: '/endemic', icon: ChartLine },
   { labelKey: 'nav.cases', path: '/cases', icon: ClipboardList },
   { labelKey: 'nav.alerts', path: '/alerts', icon: Bell },
+  { labelKey: 'nav.profile', path: '/profile', icon: CircleUser },
   { labelKey: 'nav.settings', path: '/settings', icon: Settings },
 ]
 
@@ -73,7 +75,7 @@ export function Sidebar() {
         <button
           type="button"
           onClick={() => void logout()}
-          className="flex w-full items-center justify-center gap-2 rounded-xl border border-white/30 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+          className="flex w-full items-center justify-center gap-2 rounded-xl border border-white bg-white px-4 py-3 text-sm font-semibold text-respira-sidebar transition-colors hover:bg-white/90 active:bg-respira-sidebar active:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
           <LogOut size={18} aria-hidden="true" />
           {t('header.logout')}
