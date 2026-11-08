@@ -1,50 +1,44 @@
-import {
-  Activity,
-  Bell,
-  ChartNoAxesCombined,
-  ClipboardList,
-  Map,
-  ChartLine,
-  Settings,
-  Users,
-} from 'lucide-react'
+import { Activity, Bell, ChartNoAxesCombined, ClipboardList, Map, ChartLine, Settings, Users } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
+import { useI18n } from '../../i18n/I18nContext'
+import type { TranslationKey } from '../../i18n/translations'
 
-const navigation = [
-  { label: 'Dashboard', path: '/dashboard', icon: ChartNoAxesCombined },
-  { label: 'Municipios', path: '/municipalities', icon: Activity },
-  { label: 'Mapa de riesgo', path: '/risk-map', icon: Map },
-  { label: 'Canal endémico', path: '/endemic', icon: ChartLine },
-  { label: 'Casos IRA', path: '/cases', icon: ClipboardList },
-  { label: 'Alertas', path: '/alerts', icon: Bell },
-  { label: 'Configuración', path: '/settings', icon: Settings },
+const navigation: Array<{ labelKey: TranslationKey; path: string; icon: typeof Activity }> = [
+  { labelKey: 'nav.dashboard', path: '/dashboard', icon: ChartNoAxesCombined },
+  { labelKey: 'nav.municipalities', path: '/municipalities', icon: Activity },
+  { labelKey: 'nav.riskMap', path: '/risk-map', icon: Map },
+  { labelKey: 'nav.endemic', path: '/endemic', icon: ChartLine },
+  { labelKey: 'nav.cases', path: '/cases', icon: ClipboardList },
+  { labelKey: 'nav.alerts', path: '/alerts', icon: Bell },
+  { labelKey: 'nav.settings', path: '/settings', icon: Settings },
 ]
 
-const adminNavigation = [{ label: 'Administración de usuarios', path: '/admin/users', icon: Users }]
+const adminNavigation: typeof navigation = [{ labelKey: 'nav.admin', path: '/admin/users', icon: Users }]
 
 export function Sidebar() {
   const { user } = useAuth()
+  const { t } = useI18n()
   // Ocultar el enlace es solo comodidad: el backend y la ruta verifican el rol admin.
   const items = user?.role === 'admin' ? [...navigation, ...adminNavigation] : navigation
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-20 hidden w-64 flex-col border-r border-respira-border bg-[#FBF9F3] lg:flex">
-      <div className="flex h-24 items-center gap-3 border-b border-respira-border px-6">
+    <aside className="fixed inset-y-0 left-0 z-20 hidden w-64 flex-col border-r border-respira-border bg-respira-chrome lg:flex">
+      <div className="flex h-[76px] flex-none items-center gap-3 border-b border-respira-border px-6">
         <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-respira-blue text-xl font-black text-white">
           R
         </span>
         <div>
           <p className="text-xl font-extrabold tracking-tight text-respira-text">RESPIRA</p>
-          <p className="text-xs text-respira-muted">Sistema de alerta temprana IRA</p>
+          <p className="text-xs text-respira-muted">{t('layout.tagline')}</p>
         </div>
       </div>
 
-      <nav aria-label="Navegación principal" className="flex-1 space-y-1 px-4 py-6">
+      <nav aria-label={t('layout.navAria')} className="flex-1 space-y-1 px-4 py-6">
         <p className="mb-3 px-3 text-[11px] font-bold uppercase tracking-[0.16em] text-slate-500">
-          Menú principal
+          {t('layout.mainMenu')}
         </p>
-        {items.map(({ label, path, icon: Icon }) => (
+        {items.map(({ labelKey, path, icon: Icon }) => (
           <NavLink
             key={path}
             to={path}
@@ -64,7 +58,7 @@ export function Sidebar() {
                   className={isActive ? 'text-respira-blue-dark' : ''}
                   aria-hidden="true"
                 />
-                <span>{label}</span>
+                <span>{t(labelKey)}</span>
                 {isActive && <span className="ml-auto h-2 w-2 rounded-full bg-respira-blue-dark" />}
               </>
             )}
@@ -73,10 +67,8 @@ export function Sidebar() {
       </nav>
 
       <div className="m-4 rounded-2xl border border-sky-200 bg-sky-50/80 p-4">
-        <p className="text-xs font-semibold text-sky-950">Versión académica</p>
-        <p className="mt-1 text-xs leading-5 text-sky-900/75">
-          Información de prueba para el monitoreo de IRA en Nariño.
-        </p>
+        <p className="text-xs font-semibold text-sky-950">{t('layout.academic')}</p>
+        <p className="mt-1 text-xs leading-5 text-sky-900/75">{t('layout.academicNote')}</p>
       </div>
     </aside>
   )

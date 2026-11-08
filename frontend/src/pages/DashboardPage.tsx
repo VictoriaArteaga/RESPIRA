@@ -1,20 +1,32 @@
-import { Activity, AlertTriangle, Bell, MapPinned, UsersRound, Wind } from 'lucide-react'
+import {
+  Activity,
+  AlertTriangle,
+  ArrowUpRight,
+  Bell,
+  ChartNoAxesCombined,
+  MapPinned,
+  UsersRound,
+  Wind,
+} from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Badge } from '../components/common/Badge'
 import { Card } from '../components/common/Card'
+import { DataBadge } from '../components/common/DataBadge'
 import { EmptyState, ErrorState } from '../components/common/Feedback'
 import { Loading } from '../components/common/Loading'
+import { PageHeader } from '../components/common/PageHeader'
+import { CaseTrendChart } from '../components/dashboard/CaseTrendChart'
 import { MunicipalitySummary } from '../components/dashboard/MunicipalitySummary'
 import { RecentData } from '../components/dashboard/RecentData'
 import { StatCard } from '../components/dashboard/StatCard'
-import { CaseTrendChart } from '../components/dashboard/CaseTrendChart'
 import { useDashboard } from '../hooks/useDashboard'
+import { useI18n } from '../i18n/I18nContext'
 import { fetchAlerts } from '../services/riskService'
-import type { AlertResponse } from '../types/risk'
 import type { MunicipalitySummary as MunicipalitySummaryData } from '../types/municipality'
+import type { AlertResponse } from '../types/risk'
 
 export function DashboardPage() {
+  const { t, locale } = useI18n()
   const { data, loading, error } = useDashboard()
   const [alertData, setAlertData] = useState<AlertResponse | null>(null)
   const [alertsUnavailable, setAlertsUnavailable] = useState(false)
@@ -23,20 +35,18 @@ export function DashboardPage() {
     const controller = new AbortController()
     fetchAlerts(undefined, undefined, controller.signal)
       .then(setAlertData)
-      .catch(() => { if (!controller.signal.aborted) setAlertsUnavailable(true) })
+      .catch(() => {
+        if (!controller.signal.aborted) setAlertsUnavailable(true)
+      })
     return () => controller.abort()
   }, [])
+
   const municipalitySummaries = useMemo<MunicipalitySummaryData[]>(() => {
     if (!data) return []
 
     const summaries = new Map<number, MunicipalitySummaryData>()
     for (const municipality of data.municipalities) {
-      summaries.set(municipality.id, {
-        ...municipality,
-        cases: 0,
-        latestYear: null,
-        latestWeek: null,
-      })
+      summaries.set(municipality.id, { ...municipality, cases: 0, latestYear: null, latestWeek: null })
     }
     for (const record of data.cases) {
       const municipality = summaries.get(record.municipality_id)
@@ -45,8 +55,7 @@ export function DashboardPage() {
       if (
         municipality.latestYear === null ||
         record.year > municipality.latestYear ||
-        (record.year === municipality.latestYear &&
-          record.epidemiological_week > (municipality.latestWeek ?? 0))
+        (record.year === municipality.latestYear && record.epidemiological_week > (municipality.latestWeek ?? 0))
       ) {
         municipality.latestYear = record.year
         municipality.latestWeek = record.epidemiological_week
@@ -56,23 +65,17 @@ export function DashboardPage() {
     return [...summaries.values()].sort((left, right) => right.cases - left.cases)
   }, [data])
 
+  const highAlerts = alertData?.alerts.filter((alert) => alert.risk_level === 'high').length
+
   return (
     <div className="space-y-7">
-      <div className="flex flex-wrap items-start justify-between gap-4">
-        <div>
-          <p className="text-sm font-medium text-sky-800">Panel de seguimiento</p>
-          <h1 className="mt-1 text-2xl font-bold tracking-tight text-respira-text sm:text-3xl">
-            Dashboard
-          </h1>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-respira-muted">
-            Resumen de los registros de infecciones respiratorias agudas en los municipios de Nariño.
-          </p>
-        </div>
-        <Badge className="border border-sky-200 bg-[#FFFEFA]">
-          <span className="h-1.5 w-1.5 rounded-full bg-sky-700" />
-          Datos sintéticos — versión de desarrollo
-        </Badge>
-      </div>
+      <PageHeader
+        eyebrow={t('dash.eyebrow')}
+        title={t('dash.title')}
+        icon={ChartNoAxesCombined}
+        description={t('dash.description')}
+        actions={<DataBadge />}
+      />
 
       {loading ? (
         <Card className="p-4">
@@ -80,43 +83,72 @@ export function DashboardPage() {
         </Card>
       ) : error ? (
         <Card>
-          <ErrorState message={error || 'No fue posible obtener la información del servidor.'} />
+          <ErrorState message={error} />
         </Card>
       ) : data ? (
         <>
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             <StatCard
-              label="Total de casos IRA"
-              value={data.summary.total_cases.toLocaleString('es-CO')}
-              supportingText="Casos registrados en el periodo"
+              label={t('dash.totalCases')}
+              value={data.summary.total_cases.toLocaleString(locale)}
+              supportingText={t('dash.totalCasesNote')}
               icon={Activity}
+              tone="blue"
             />
             <StatCard
-              label="Municipios monitoreados"
-              value={data.summary.total_municipalities.toLocaleString('es-CO')}
-              supportingText="Municipios disponibles en Nariño"
+              label={t('dash.municipalities')}
+              value={data.summary.total_municipalities.toLocaleString(locale)}
+              supportingText={t('dash.municipalitiesNote')}
               icon={MapPinned}
+              tone="green"
             />
             <StatCard
-              label="Promedio de casos"
-              value={data.summary.average_cases.toLocaleString('es-CO', {
-                maximumFractionDigits: 1,
-              })}
-              supportingText="Promedio acumulado por municipio"
+              label={t('dash.average')}
+              value={data.summary.average_cases.toLocaleString(locale, { maximumFractionDigits: 1 })}
+              supportingText={t('dash.averageNote')}
               icon={UsersRound}
+              tone="blue"
             />
             <StatCard
-              label="Mayor número de casos"
-              value={data.summary.municipality_with_most_cases ?? 'Sin registros'}
-              supportingText="Municipio con más casos acumulados"
+              label={t('dash.mostCases')}
+              value={data.summary.municipality_with_most_cases ?? t('common.noRecords')}
+              supportingText={t('dash.mostCasesNote')}
               icon={Wind}
+              tone="amber"
             />
           </div>
 
-          <section aria-label="Resumen de alertas" className="grid gap-4 sm:grid-cols-3">
-            <Card className="p-4"><div className="flex items-center gap-2 text-sm text-respira-muted"><Bell size={17} aria-hidden="true"/> Municipios en vigilancia o alerta</div><p className="mt-2 text-2xl font-bold">{alertsUnavailable ? 'No disponible' : alertData?.alerts.length ?? '—'}</p></Card>
-            <Card className="p-4"><div className="flex items-center gap-2 text-sm text-respira-muted"><AlertTriangle size={17} aria-hidden="true"/> Municipios con riesgo alto</div><p className="mt-2 text-2xl font-bold">{alertsUnavailable ? 'No disponible' : alertData?.alerts.filter((alert) => alert.risk_level === 'high').length ?? '—'}</p></Card>
-            <Card className="flex items-center justify-between gap-3 p-4"><div><p className="text-sm text-respira-muted">Última semana del conjunto</p><p className="mt-2 text-2xl font-bold">{data.summary.last_epidemiological_week ? `Semana ${data.summary.last_epidemiological_week}` : 'Sin registros'}</p></div><Link to="/alerts" className="text-sm font-semibold text-sky-800 hover:underline">Ver alertas</Link></Card>
+          <section aria-label={t('dash.alertsSection')} className="grid gap-4 sm:grid-cols-3">
+            <StatCard
+              label={t('dash.inWatch')}
+              value={alertsUnavailable ? t('dash.unavailable') : String(alertData?.alerts.length ?? '—')}
+              supportingText={t('dash.inWatchNote')}
+              icon={Bell}
+              tone="amber"
+            />
+            <StatCard
+              label={t('dash.highRisk')}
+              value={alertsUnavailable ? t('dash.unavailable') : String(highAlerts ?? '—')}
+              supportingText={t('dash.highRiskNote')}
+              icon={AlertTriangle}
+              tone="rose"
+            />
+            <Card className="flex items-center justify-between gap-3 p-5 sm:p-6">
+              <div>
+                <p className="text-sm font-medium text-respira-muted">{t('dash.lastWeekSet')}</p>
+                <p className="mt-3 text-3xl font-extrabold tracking-tight">
+                  {data.summary.last_epidemiological_week
+                    ? t('common.weekN', { n: data.summary.last_epidemiological_week })
+                    : t('common.noRecords')}
+                </p>
+              </div>
+              <Link
+                to="/alerts"
+                className="inline-flex items-center gap-1 rounded-xl bg-sky-100/80 px-3 py-2 text-sm font-semibold text-sky-900 hover:bg-sky-100"
+              >
+                {t('dash.viewAlerts')} <ArrowUpRight size={15} aria-hidden="true" />
+              </Link>
+            </Card>
           </section>
 
           {data.summary.total_records === 0 ? (
@@ -125,7 +157,7 @@ export function DashboardPage() {
             </Card>
           ) : (
             <>
-              <section aria-label="Gráfica de tendencia y municipios">
+              <section aria-label={t('dash.chartSection')}>
                 <div className="grid gap-5 xl:grid-cols-[minmax(0,1.65fr)_minmax(300px,1fr)]">
                   <CaseTrendChart cases={data.cases} />
                   <MunicipalitySummary municipalities={municipalitySummaries} />

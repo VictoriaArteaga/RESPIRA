@@ -1,26 +1,260 @@
+import { Activity, ChartLine, Gauge, TrendingUp, Waves } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { Card } from '../components/common/Card'
+import { DataBadge } from '../components/common/DataBadge'
 import { EmptyState, ErrorState } from '../components/common/Feedback'
+import { FilterBar, FilterField } from '../components/common/Filters'
 import { Loading } from '../components/common/Loading'
+import { PageHeader } from '../components/common/PageHeader'
+import { RiskBadge } from '../components/common/RiskBadge'
+import { StatCard } from '../components/dashboard/StatCard'
+import { useI18n } from '../i18n/I18nContext'
 import { fetchMunicipalities } from '../services/municipalityService'
 import { fetchEndemicChannel } from '../services/riskService'
 import type { Municipality } from '../types/municipality'
 import type { EndemicChannel } from '../types/risk'
 
 export function EndemicPage() {
+  const { t, locale } = useI18n()
   const [municipalities, setMunicipalities] = useState<Municipality[]>([])
   const [municipalityId, setMunicipalityId] = useState<number | undefined>()
   const [year, setYear] = useState<number | undefined>()
   const [data, setData] = useState<EndemicChannel | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  useEffect(() => { const c = new AbortController(); fetchMunicipalities(c.signal).then((values) => { setMunicipalities(values); setMunicipalityId((current) => current ?? values[0]?.id) }).catch((e: unknown) => { if (!c.signal.aborted) setError(e instanceof Error ? e.message : 'No fue posible obtener la información.') }); return () => c.abort() }, [])
-  useEffect(() => { if (!municipalityId) return; const c = new AbortController(); setLoading(true); setError(null); fetchEndemicChannel(municipalityId, year, c.signal).then(setData).catch((e: unknown) => { if (!c.signal.aborted) setError(e instanceof Error ? e.message : 'No fue posible obtener la información.') }).finally(() => { if (!c.signal.aborted) setLoading(false) }); return () => c.abort() }, [municipalityId, year])
+
+  const fail = (reason: unknown) => (reason instanceof Error ? reason.message : t('map.loadError'))
+  const number = (value: number | undefined) => (value === undefined ? '—' : value.toLocaleString(locale))
+
+  useEffect(() => {
+    const controller = new AbortController()
+    fetchMunicipalities(controller.signal)
+      .then((values) => {
+        setMunicipalities(values)
+        setMunicipalityId((current) => current ?? values[0]?.id)
+      })
+      .catch((reason: unknown) => {
+        if (!controller.signal.aborted) setError(fail(reason))
+      })
+    return () => controller.abort()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    if (!municipalityId) return
+    const controller = new AbortController()
+    setLoading(true)
+    setError(null)
+    fetchEndemicChannel(municipalityId, year, controller.signal)
+      .then(setData)
+      .catch((reason: unknown) => {
+        if (!controller.signal.aborted) setError(fail(reason))
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setLoading(false)
+      })
+    return () => controller.abort()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [municipalityId, year])
+
   const stats = data?.statistics
-  return <div className="space-y-6">
-    <header><p className="text-sm font-medium text-sky-800">Análisis epidemiológico</p><h1 className="mt-1 text-2xl font-bold tracking-tight">Canal endémico</h1><p className="mt-2 text-sm text-respira-muted">Casos observados frente a percentiles históricos de la misma semana. Sin predicción futura.</p></header>
-    <Card className="flex flex-wrap items-end gap-4 p-4"><label className="grid gap-1 text-sm font-medium">Municipio<select className="min-w-52 rounded-lg border border-respira-border bg-white px-3 py-2" value={municipalityId ?? ''} onChange={(e) => setMunicipalityId(Number(e.target.value))}>{municipalities.map((m) => <option key={m.id} value={m.id}>{m.name}</option>)}</select></label><label className="grid gap-1 text-sm font-medium">Año<select className="rounded-lg border border-respira-border bg-white px-3 py-2" value={year ?? ''} onChange={(e) => setYear(e.target.value ? Number(e.target.value) : undefined)}><option value="">Más reciente</option>{(data?.available_years ?? []).map((value) => <option key={value}>{value}</option>)}</select></label><span className="ml-auto text-xs text-respira-muted">Datos sintéticos de desarrollo</span></Card>
-    {loading ? <Card><Loading/></Card> : error ? <Card><ErrorState message={error}/></Card> : !data?.weeks.length ? <Card><EmptyState>No hay datos disponibles para los filtros seleccionados.</EmptyState></Card> : <><div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">{[['Casos del periodo',stats?.total_cases],['Promedio semanal',stats?.average],['Mediana',stats?.median],['Máximo semanal',stats?.maximum],['Riesgo actual',stats?.risk_level === 'high' ? 'Alto' : stats?.risk_level === 'moderate' ? 'Moderado' : 'Bajo']].map(([label,value]) => <Card key={String(label)} className="p-4"><p className="text-xs text-respira-muted">{label}</p><p className="mt-2 text-xl font-bold">{value ?? '—'}</p></Card>)}</div><Card className="p-5"><h2 className="font-semibold">{data.municipality} · {data.year}</h2><p className="mt-1 text-xs text-respira-muted">Casos por semana epidemiológica · registros</p><div className="mt-4 h-[420px] w-full"><ResponsiveContainer width="100%" height="100%"><LineChart data={data.weeks} margin={{top:12,right:20,bottom:8,left:0}}><CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0"/><XAxis dataKey="week" label={{value:'Semana epidemiológica',position:'insideBottom',offset:-2}}/><YAxis allowDecimals={false} label={{value:'Casos',angle:-90,position:'insideLeft'}}/><Tooltip labelFormatter={(value) => `Semana ${value}`} formatter={(value, name) => [value ?? 'Sin histórico', name]}/><Line type="monotone" dataKey="upper_alert_limit" name="Percentil 90 (alerta)" stroke="#d9a400" strokeDasharray="5 4" dot={false}/><Line type="monotone" dataKey="upper_limit" name="Percentil 75" stroke="#94a3b8" strokeDasharray="4 4" dot={false}/><Line type="monotone" dataKey="historical_median" name="Mediana histórica" stroke="#315F7D" strokeWidth={2} dot={false}/><Line type="monotone" dataKey="lower_limit" name="Percentil 25" stroke="#94a3b8" strokeDasharray="4 4" dot={false}/><Line type="monotone" dataKey="observed_cases" name="Casos observados" stroke="#c83d3d" strokeWidth={2.5} activeDot={{r:5}}/></LineChart></ResponsiveContainer></div><p className="mt-3 text-xs text-respira-muted">Zona esperada: percentiles 25–75. El percentil 90 se muestra como referencia superior. Las semanas sin valor histórico aparecen sin límites de comparación.</p></Card></>}
-  </div>
+
+  const legend = [
+    [t('endemic.observed'), '#c83d3d'],
+    [t('endemic.medianHist'), 'var(--color-respira-blue)'],
+    [t('endemic.p2575'), '#94a3b8'],
+    [t('endemic.p90'), '#d9a400'],
+  ]
+
+  return (
+    <div className="space-y-6">
+      <PageHeader
+        eyebrow={t('endemic.eyebrow')}
+        title={t('endemic.title')}
+        icon={ChartLine}
+        description={t('endemic.description')}
+        actions={<DataBadge />}
+      />
+      <FilterBar>
+        <FilterField label={t('common.municipality')}>
+          <select
+            className="field-control min-w-52"
+            value={municipalityId ?? ''}
+            onChange={(event) => setMunicipalityId(Number(event.target.value))}
+          >
+            {municipalities.map((municipality) => (
+              <option key={municipality.id} value={municipality.id}>
+                {municipality.name}
+              </option>
+            ))}
+          </select>
+        </FilterField>
+        <FilterField label={t('common.year')}>
+          <select
+            className="field-control"
+            value={year ?? ''}
+            onChange={(event) => setYear(event.target.value ? Number(event.target.value) : undefined)}
+          >
+            <option value="">{t('common.latest')}</option>
+            {(data?.available_years ?? []).map((value) => (
+              <option key={value}>{value}</option>
+            ))}
+          </select>
+        </FilterField>
+      </FilterBar>
+
+      {loading ? (
+        <Card>
+          <Loading />
+        </Card>
+      ) : error ? (
+        <Card>
+          <ErrorState message={error} />
+        </Card>
+      ) : !data?.weeks.length ? (
+        <Card>
+          <EmptyState>{t('common.noFilterData')}</EmptyState>
+        </Card>
+      ) : (
+        <>
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <StatCard
+              label={t('endemic.periodCases')}
+              value={number(stats?.total_cases)}
+              supportingText={t('endemic.periodCasesNote')}
+              icon={Activity}
+              tone="blue"
+            />
+            <StatCard
+              label={t('endemic.weeklyAvg')}
+              value={number(stats?.average)}
+              supportingText={t('endemic.median', { value: number(stats?.median) })}
+              icon={Waves}
+              tone="green"
+            />
+            <StatCard
+              label={t('endemic.weeklyMax')}
+              value={number(stats?.maximum)}
+              supportingText={t('endemic.min', { value: number(stats?.minimum) })}
+              icon={TrendingUp}
+              tone="amber"
+            />
+            <Card className="relative overflow-hidden p-5 sm:p-6">
+              <span className="absolute inset-x-0 top-0 h-1 bg-respira-blue" aria-hidden="true" />
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-sm font-medium text-respira-muted">{t('endemic.currentRisk')}</p>
+                  <div className="mt-3">
+                    <RiskBadge level={stats?.risk_level ?? 'no_data'} />
+                  </div>
+                  <p className="mt-3 text-xs text-respira-muted">
+                    {t('common.weekN', { n: stats?.latest_week ?? '—' })}
+                  </p>
+                </div>
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-sky-100 text-sky-800">
+                  <Gauge size={20} aria-hidden="true" />
+                </span>
+              </div>
+            </Card>
+          </div>
+
+          <Card className="p-5 sm:p-6">
+            <div className="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <h2 className="font-bold">
+                  {data.municipality} · {data.year}
+                </h2>
+                <p className="mt-1 text-xs text-respira-muted">{t('endemic.chartNote')}</p>
+              </div>
+              <ul className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-respira-muted">
+                {legend.map(([label, color]) => (
+                  <li key={label} className="inline-flex items-center gap-2">
+                    <i className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: color }} />
+                    {label}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="mt-5 h-[420px] w-full" role="img" aria-label={t('endemic.chartAria')}>
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={data.weeks} margin={{ top: 12, right: 20, bottom: 8, left: -8 }}>
+                  <CartesianGrid strokeDasharray="4 4" stroke="var(--color-respira-border)" vertical={false} />
+                  <XAxis
+                    dataKey="week"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fill: 'var(--color-respira-muted)', fontSize: 11 }}
+                    tickFormatter={(week: number) => `S${week}`}
+                    minTickGap={20}
+                  />
+                  <YAxis
+                    allowDecimals={false}
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fill: 'var(--color-respira-muted)', fontSize: 11 }}
+                  />
+                  <Tooltip
+                    cursor={{ stroke: 'var(--color-respira-muted)', strokeOpacity: 0.45, strokeWidth: 1 }}
+                    labelFormatter={(value) => t('common.weekN', { n: String(value) })}
+                    formatter={(value, name) => [value ?? t('endemic.noHistory'), name]}
+                    contentStyle={{
+                      border: '1px solid var(--color-respira-border)',
+                      background: 'var(--color-respira-surface)',
+                      color: 'var(--color-respira-text)',
+                      borderRadius: '12px',
+                      boxShadow: '0 8px 24px rgba(36,59,74,0.10)',
+                      fontSize: '12px',
+                    }}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="upper_alert_limit"
+                    name={t('endemic.p90')}
+                    stroke="#d9a400"
+                    strokeDasharray="5 4"
+                    dot={false}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="upper_limit"
+                    name={t('endemic.p75')}
+                    stroke="#94a3b8"
+                    strokeDasharray="4 4"
+                    dot={false}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="historical_median"
+                    name={t('endemic.medianHist')}
+                    stroke="var(--color-respira-blue)"
+                    strokeWidth={2}
+                    dot={false}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="lower_limit"
+                    name={t('endemic.p25')}
+                    stroke="#94a3b8"
+                    strokeDasharray="4 4"
+                    dot={false}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="observed_cases"
+                    name={t('endemic.observed')}
+                    stroke="#c83d3d"
+                    strokeWidth={2.5}
+                    dot={false}
+                    activeDot={{ r: 5 }}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+            <p className="mt-3 text-xs text-respira-muted">{t('endemic.footnote')}</p>
+          </Card>
+        </>
+      )}
+    </div>
+  )
 }

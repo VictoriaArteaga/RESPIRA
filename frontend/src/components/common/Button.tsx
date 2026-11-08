@@ -8,7 +8,7 @@ export function Button({ children, className = '', variant = 'primary', ...props
   const styles =
     variant === 'primary'
       ? 'bg-respira-blue text-white hover:bg-respira-blue-dark'
-      : 'border border-respira-border bg-[#FFFEFA] text-respira-text hover:bg-sky-50'
+      : 'border border-respira-border bg-respira-surface text-respira-text hover:bg-sky-50'
 
   return (
     <button

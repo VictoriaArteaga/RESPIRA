@@ -8,13 +8,69 @@
   --color-respira-text: #243B4A;
   --color-respira-muted: #687B86;
   --color-respira-border: #E5E0D4;
+  --color-respira-link: #315F7D;
+  --color-respira-body: #4F626D;
+  --color-respira-surface: #FFFEFA;
+  --color-respira-surface-alt: #F7F9F9;
+  --color-respira-chrome: #FBF9F3;
+  --color-respira-subtle: #F2F5F5;
+  --color-respira-field: #F4F8FA;
+  --color-respira-field-border: #D5E2EA;
   --shadow-card: 0 3px 14px rgba(36, 59, 74, 0.06);
+}
+
+/* Modo oscuro: se activa con la clase "dark" en <html> y redefine los tokens (y los tonos de Tailwind usados). */
+.dark {
+  color-scheme: dark;
+  --color-respira-blue: #3F7BA3;
+  --color-respira-blue-dark: #6FA9CE;
+  --color-respira-background: #0E1A22;
+  --color-respira-text: #E4EDF2;
+  --color-respira-muted: #9AAEBA;
+  --color-respira-border: #26394A;
+  --color-respira-link: #8DBBDA;
+  --color-respira-body: #B7C6CF;
+  --color-respira-surface: #15242E;
+  --color-respira-surface-alt: #182833;
+  --color-respira-chrome: #111F28;
+  --color-respira-subtle: #1A2B36;
+  --color-respira-field: #1A2B36;
+  --color-respira-field-border: #2B4050;
+  --shadow-card: 0 3px 14px rgba(0, 0, 0, 0.35);
+  --color-sky-50: #172A36;
+  --color-sky-100: #1D3646;
+  --color-sky-200: #2D5068;
+  --color-sky-700: #7FB4D6;
+  --color-sky-800: #9CC9E6;
+  --color-sky-900: #BBDDF1;
+  --color-sky-950: #D9ECF8;
+  --color-emerald-50: #12302A;
+  --color-emerald-100: #14382F;
+  --color-emerald-600: #34B27E;
+  --color-emerald-800: #7FD8B2;
+  --color-emerald-900: #A3E6C8;
+  --color-amber-100: #3A2E12;
+  --color-amber-500: #E0A820;
+  --color-amber-800: #F0C766;
+  --color-amber-900: #F5D582;
+  --color-amber-950: #F7D98C;
+  --color-rose-50: #3A1D22;
+  --color-rose-100: #442228;
+  --color-rose-600: #E05A5A;
+  --color-rose-700: #F08A8A;
+  --color-rose-800: #F4A3A3;
+  --color-rose-900: #F8B8B8;
+  --color-slate-100: #1F3340;
+  --color-slate-200: #2B4050;
+  --color-slate-500: #8FA4B0;
+  --color-slate-700: #C5D3DB;
+  --color-slate-800: #DCE6EB;
 }
 
 :root {
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #243B4A;
-  background: #F7F4EB;
+  color: var(--color-respira-text);
+  background: var(--color-respira-background);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -35,7 +91,7 @@ body {
   position: relative;
   isolation: isolate;
   min-height: 100vh;
-  background-color: #F7F4EB;
+  background-color: var(--color-respira-background);
 }
 
 .app-shell::before {
@@ -54,7 +110,7 @@ body {
   position: relative;
   isolation: isolate;
   min-height: 100vh;
-  background-color: #F7F4EB;
+  background-color: var(--color-respira-background);
 }
 
 .auth-shell::before {
@@ -89,6 +145,36 @@ body {
   .auth-scale { zoom: 2; }
 }
 
+/* Controles de formulario de las vistas internas (filtros, búsqueda). */
+.field-control {
+  min-height: 42px;
+  border: 1px solid var(--color-respira-field-border);
+  border-radius: 12px;
+  background-color: var(--color-respira-surface);
+  padding: 0 14px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-respira-text);
+}
+
+select.field-control {
+  appearance: none;
+  padding-right: 36px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23687B86' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+}
+
+.field-control:hover {
+  border-color: var(--color-respira-blue);
+}
+
+.field-control:focus-visible {
+  border-color: var(--color-respira-blue-dark);
+  outline: 2px solid var(--color-respira-blue-dark);
+  outline-offset: 1px;
+}
+
 button:disabled {
   cursor: not-allowed;
 }
@@ -96,4 +182,14 @@ button:disabled {
 ::selection {
   background: #C9DDE8;
   color: #243B4A;
+}
+
+/* Mapa en modo oscuro: se invierten las teselas y se atenúa el color para que no compita con los marcadores de riesgo. */
+.dark .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(195deg) grayscale(0.55) brightness(0.82) contrast(0.95);
+}
+
+.dark .app-shell::before,
+.dark .auth-shell::before {
+  filter: brightness(1.6);
 }
