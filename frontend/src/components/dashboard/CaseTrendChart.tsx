@@ -14,6 +14,7 @@ import {
   type TooltipProps,
 } from 'recharts'
 import { useI18n } from '../../i18n/I18nContext'
+import { usePreferences } from '../../preferences/PreferencesContext'
 import type { IraCase } from '../../types/case'
 import { Card } from '../common/Card'
 import { EmptyState } from '../common/Feedback'
@@ -93,6 +94,7 @@ function Stat({ label, value }: { label: string; value: string }) {
 
 export function CaseTrendChart({ cases }: CaseTrendChartProps) {
   const { t, locale } = useI18n()
+  const { reduceMotion } = usePreferences()
   const years = useMemo(() => [...new Set(cases.map((record) => record.year))].sort((a, b) => b - a), [cases])
   const [selectedYear, setSelectedYear] = useState<number | null>(null)
   const [hidden, setHidden] = useState<Set<Series>>(new Set())
@@ -303,6 +305,7 @@ export function CaseTrendChart({ cases }: CaseTrendChartProps) {
                 stroke="var(--color-respira-blue)"
                 strokeWidth={2.5}
                 fill="url(#trend-fill)"
+                isAnimationActive={!reduceMotion}
                 activeDot={{
                   r: 5,
                   fill: 'var(--color-respira-blue)',

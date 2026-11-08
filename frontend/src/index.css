@@ -190,3 +190,22 @@ button:disabled {
 .dark .auth-shell::before {
   filter: brightness(1.6);
 }
+
+/* Preferencias de lectura (Configuración): tamaño de texto, densidad de tablas y animaciones. */
+html[data-text='large'] {
+  font-size: 18px;
+}
+
+html[data-density='compact'] table :is(th, td) {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+html[data-motion='reduced'] *,
+html[data-motion='reduced'] *::before,
+html[data-motion='reduced'] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}

@@ -16,6 +16,7 @@ import {
 } from 'recharts'
 import { useI18n } from '../../i18n/I18nContext'
 import type { TranslationKey } from '../../i18n/translations'
+import { usePreferences } from '../../preferences/PreferencesContext'
 import type { EndemicChannel } from '../../types/risk'
 import { Card } from '../common/Card'
 
@@ -90,6 +91,7 @@ function ChannelTooltip({ active, payload }: TooltipProps<number, string>) {
 
 export function EndemicChart({ data }: { data: EndemicChannel }) {
   const { t, locale } = useI18n()
+  const { reduceMotion } = usePreferences()
   const [hidden, setHidden] = useState<Set<Layer>>(new Set())
 
   const rows: Row[] = data.weeks.map((point) => {
@@ -288,6 +290,7 @@ export function EndemicChart({ data }: { data: EndemicChannel }) {
             <Line
               type="monotone"
               dataKey="observed"
+              isAnimationActive={!reduceMotion}
               stroke={COLORS.observed}
               strokeWidth={2.75}
               dot={(props: { cx?: number; cy?: number; index?: number; payload?: Row }) =>

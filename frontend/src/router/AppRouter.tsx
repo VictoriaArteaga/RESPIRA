@@ -7,6 +7,7 @@ import { AuthPage } from '../pages/AuthPage'
 import { CasesPage } from '../pages/CasesPage'
 import { DashboardPage } from '../pages/DashboardPage'
 import { MunicipalitiesPage } from '../pages/MunicipalitiesPage'
+import { usePreferences } from '../preferences/PreferencesContext'
 import { ProfilePage } from '../pages/ProfilePage'
 import { SettingsPage } from '../pages/SettingsPage'
 import { RiskMapPage } from '../pages/RiskMapPage'
@@ -14,6 +15,7 @@ import { EndemicPage } from '../pages/EndemicPage'
 import { MunicipalityDetailPage } from '../pages/MunicipalityDetailPage'
 
 export function AppRouter() {
+  const { startPage } = usePreferences()
   return (
     <Routes>
       <Route path="/login" element={<AuthPage mode="login" />} />
@@ -24,7 +26,7 @@ export function AppRouter() {
           <ProtectedRoute roles={['analyst', 'admin']}>
             <MainLayout>
               <Routes>
-                <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                <Route path="/" element={<Navigate to={startPage} replace />} />
                 <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/municipalities" element={<MunicipalitiesPage />} />
                 <Route path="/municipalities/:id" element={<MunicipalityDetailPage />} />
