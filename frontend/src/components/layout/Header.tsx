@@ -24,10 +24,6 @@ export function Header({ onMenuClick }: HeaderProps) {
         >
           <Menu size={21} aria-hidden="true" />
         </button>
-        <div>
-          <p className="text-sm font-semibold text-respira-text">RESPIRA</p>
-          <p className="hidden text-xs text-respira-muted sm:block">{t('header.subtitle')}</p>
-        </div>
       </div>
 
       <div className="flex items-center gap-3 sm:gap-5">
@@ -51,7 +47,7 @@ export function Header({ onMenuClick }: HeaderProps) {
               {user.email}
             </span>
             <button
-              className="rounded-xl p-2.5 text-respira-muted hover:bg-slate-100"
+              className="rounded-xl p-2.5 text-respira-muted hover:bg-slate-100 lg:hidden"
               type="button"
               aria-label={t('header.logout')}
               title={t('header.logout')}
