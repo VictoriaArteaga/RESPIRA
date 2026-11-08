@@ -19,7 +19,15 @@ export function setBrowserToken(token: string | null): void {
   browserToken = token
 }
 
+/** True cuando la interfaz usa datos de demostración locales en lugar del servidor (VITE_DEMO_DATA=true). */
+export const isDemoData = import.meta.env.VITE_DEMO_DATA === 'true'
+
 export async function get<T>(path: string, signal?: AbortSignal): Promise<T> {
+  if (isDemoData) {
+    const { resolveDemo } = await import('../mocks/demoApi')
+    const demo = resolveDemo(path)
+    if (demo !== undefined) return demo as T
+  }
   let status: number
   let body: unknown
   try {
