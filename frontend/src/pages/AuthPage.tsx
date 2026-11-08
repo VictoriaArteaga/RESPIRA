@@ -50,7 +50,7 @@ export function AuthPage({ mode }: { mode: Mode }) {
   const [notice, setNotice] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
 
-  if (status === 'authenticated') return <Navigate to="/dashboard" replace />
+  if (status === 'authenticated') return <Navigate to="/" replace />
 
   const isLogin = mode === 'login'
   const passwordType = showPassword ? 'text' : 'password'
@@ -75,7 +75,7 @@ export function AuthPage({ mode }: { mode: Mode }) {
     try {
       if (isLogin) {
         await login({ email: email.trim(), password })
-        navigate('/dashboard', { replace: true })
+        navigate('/', { replace: true })
       } else {
         await register({ email: email.trim(), password })
         setNotice(t('auth.requestSent'))
