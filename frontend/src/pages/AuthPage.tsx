@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react'
+import { Activity, Eye, EyeOff, Lock, Mail, UserPlus } from 'lucide-react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { Button } from '../components/common/Button'
-import { Card } from '../components/common/Card'
 import { useAuth } from '../context/AuthContext'
 import { ApiError } from '../services/api'
 
@@ -19,12 +19,19 @@ function validate(mode: Mode, email: string, password: string, confirmation: str
   return null
 }
 
+const fieldClass =
+  'flex h-12 items-center gap-2.5 rounded-xl border border-[#D5E2EA] bg-[#F4F8FA] pl-3.5 text-[#5B6E79] focus-within:border-respira-blue-dark focus-within:outline focus-within:outline-2 focus-within:outline-respira-blue-dark'
+const inputClass =
+  'h-full min-w-0 flex-1 bg-transparent text-sm text-respira-text outline-none placeholder:text-[#6B7C86]'
+const helpClass = 'text-xs text-[#5B6E79]'
+
 export function AuthPage({ mode }: { mode: Mode }) {
   const { status, login, register } = useAuth()
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmation, setConfirmation] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [notice, setNotice] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
@@ -32,6 +39,8 @@ export function AuthPage({ mode }: { mode: Mode }) {
   if (status === 'authenticated') return <Navigate to="/dashboard" replace />
 
   const isLogin = mode === 'login'
+  const passwordType = showPassword ? 'text' : 'password'
+  const EyeIcon = showPassword ? EyeOff : Eye
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -63,84 +72,219 @@ export function AuthPage({ mode }: { mode: Mode }) {
     }
   }
 
-  const inputClass =
-    'mt-1 w-full rounded-xl border border-respira-border bg-white px-3 py-2.5 text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-respira-blue-dark'
+  const visibilityToggle = (
+    <button
+      type="button"
+      onClick={() => setShowPassword((current) => !current)}
+      aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+      className="flex h-11 w-11 flex-none items-center justify-center rounded-[10px] text-[#5B6E79] hover:text-respira-blue-dark"
+    >
+      <EyeIcon size={20} aria-hidden="true" />
+    </button>
+  )
+
+  const feedback = (
+    <>
+      {error && (
+        <p className="rounded-xl bg-rose-50 px-3 py-2 text-sm text-rose-700" role="alert">
+          {error}
+        </p>
+      )}
+      {notice && (
+        <p className="rounded-xl bg-emerald-50 px-3 py-2 text-sm text-emerald-800" role="status">
+          {notice}
+        </p>
+      )}
+    </>
+  )
+
+  const submitClass = 'mt-1.5 h-[50px] w-full rounded-xl text-base font-bold shadow-[0_4px_14px_rgba(49,95,125,0.25)]'
+
+  if (isLogin) {
+    return (
+      <div className="auth-shell flex min-h-screen items-center justify-center px-5 py-8 text-respira-text">
+        <main className="auth-scale w-full max-w-md overflow-hidden rounded-[20px] border border-respira-border bg-white shadow-[0_12px_36px_rgba(36,59,74,0.10)]">
+          <div className="h-[5px] bg-gradient-to-r from-respira-blue to-[#6F9BB5]" />
+          <div className="flex flex-col items-center px-10 pb-9 pt-9">
+            <div
+              role="img"
+              aria-label="Logo de RESPIRA"
+              className="flex h-[68px] w-[68px] items-center justify-center rounded-[20px] bg-respira-blue text-[34px] font-black text-white shadow-[0_6px_16px_rgba(49,95,125,0.25)]"
+            >
+              R
+            </div>
+            <p className="mt-[18px] text-[13px] font-bold tracking-[0.16em] text-respira-blue">RESPIRA</p>
+            <h1 className="mt-1.5 text-[30px] font-extrabold tracking-tight">Bienvenido</h1>
+            <p className="mt-2 text-center text-sm leading-6 text-[#4F626D]">
+              Ingresa tus credenciales para acceder al sistema de monitoreo de infecciones respiratorias agudas en Nariño.
+            </p>
+
+            <form className="mt-7 flex w-full flex-col gap-[18px]" onSubmit={(event) => void handleSubmit(event)} noValidate>
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="email" className="text-sm font-semibold">
+                  Correo electrónico
+                </label>
+                <div className={`${fieldClass} pr-3.5`}>
+                  <Mail size={19} aria-hidden="true" className="flex-none" />
+                  <input
+                    id="email"
+                    className={inputClass}
+                    type="email"
+                    autoComplete="email"
+                    maxLength={254}
+                    placeholder="tu@correo.com"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="password" className="text-sm font-semibold">
+                  Contraseña
+                </label>
+                <div className={`${fieldClass} pr-1.5`}>
+                  <Lock size={19} aria-hidden="true" className="flex-none" />
+                  <input
+                    id="password"
+                    className={inputClass}
+                    type={passwordType}
+                    autoComplete="current-password"
+                    maxLength={128}
+                    placeholder="••••••••••••"
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
+                    required
+                  />
+                  {visibilityToggle}
+                </div>
+              </div>
+
+              {feedback}
+
+              <Button className={submitClass} type="submit" disabled={submitting}>
+                {submitting ? 'Procesando...' : 'Iniciar sesión'}
+              </Button>
+            </form>
+
+            <p className="mt-[22px] text-center text-sm text-[#4F626D]">
+              ¿No tienes cuenta?{' '}
+              <Link className="font-bold text-respira-blue hover:text-respira-blue-dark" to="/register">
+                Regístrate
+              </Link>
+            </p>
+          </div>
+        </main>
+      </div>
+    )
+  }
 
   return (
-    <div className="app-shell flex min-h-screen items-center justify-center p-5 text-respira-text">
-      <Card className="w-full max-w-md p-8">
-        <p className="text-sm font-semibold text-sky-800">RESPIRA</p>
-        <h1 className="mt-1 text-2xl font-bold tracking-tight">{isLogin ? 'Iniciar sesión' : 'Crear cuenta'}</h1>
-        <p className="mt-2 text-sm text-respira-muted">
-          Monitoreo epidemiológico de infecciones respiratorias agudas en Nariño.
-        </p>
-
-        <form className="mt-6 space-y-4" onSubmit={(event) => void handleSubmit(event)} noValidate>
-          <label className="block text-sm font-medium">
-            Correo electrónico
-            <input
-              className={inputClass}
-              type="email"
-              autoComplete="email"
-              maxLength={254}
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              required
-            />
-          </label>
-          <label className="block text-sm font-medium">
-            Contraseña
-            <input
-              className={inputClass}
-              type="password"
-              autoComplete={isLogin ? 'current-password' : 'new-password'}
-              maxLength={128}
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              required
-            />
-          </label>
-          {!isLogin && (
-            <label className="block text-sm font-medium">
-              Confirmar contraseña
-              <input
-                className={inputClass}
-                type="password"
-                autoComplete="new-password"
-                maxLength={128}
-                value={confirmation}
-                onChange={(event) => setConfirmation(event.target.value)}
-                required
-              />
-              <span className="mt-1 block text-xs font-normal text-respira-muted">
-                Mínimo 12 caracteres, con al menos una letra y un número.
-              </span>
-            </label>
-          )}
-
-          {error && (
-            <p className="rounded-xl bg-rose-50 px-3 py-2 text-sm text-rose-700" role="alert">
-              {error}
+    <div className="auth-shell flex min-h-screen items-center justify-center px-5 py-8 text-respira-text">
+      <main className="auth-scale flex w-full max-w-[960px] flex-wrap overflow-hidden rounded-[20px] border border-respira-border bg-white shadow-[0_12px_36px_rgba(36,59,74,0.10)]">
+        <aside className="flex min-w-0 flex-[1_1_300px] flex-col justify-between gap-5 bg-gradient-to-br from-respira-blue to-respira-blue-dark px-11 py-12 text-white">
+          <div className="flex flex-col gap-5">
+            <UserPlus size={40} aria-hidden="true" />
+            <h2 className="text-[28px] font-extrabold leading-tight tracking-tight">Únete a RESPIRA</h2>
+            <p className="hyphens-auto text-justify text-[15px] leading-relaxed text-[#E6EFF5]" lang="es">
+              Solicita tu cuenta para consultar el monitoreo epidemiológico de infecciones respiratorias agudas en Nariño.
+              Un administrador revisará y aprobará tu solicitud antes de que puedas iniciar sesión.
             </p>
-          )}
-          {notice && (
-            <p className="rounded-xl bg-emerald-50 px-3 py-2 text-sm text-emerald-800" role="status">
-              {notice}
-            </p>
-          )}
+          </div>
+          <div className="flex items-center gap-2.5 text-sm font-semibold">
+            <Activity size={20} aria-hidden="true" className="flex-none" />
+            <span>Sistema de alerta temprana IRA</span>
+          </div>
+        </aside>
 
-          <Button className="w-full" type="submit" disabled={submitting}>
-            {submitting ? 'Procesando...' : isLogin ? 'Iniciar sesión' : 'Solicitar cuenta'}
-          </Button>
-        </form>
+        <section className="flex min-w-0 flex-[999_1_420px] flex-col px-12 pb-10 pt-12">
+          <h1 className="text-[30px] font-extrabold tracking-tight">Crear cuenta</h1>
+          <p className="mt-2 text-sm text-[#4F626D]">Completa los campos para enviar tu solicitud.</p>
 
-        <p className="mt-5 text-center text-sm text-respira-muted">
-          {isLogin ? '¿No tienes cuenta? ' : '¿Ya tienes cuenta? '}
-          <Link className="font-semibold text-respira-blue hover:underline" to={isLogin ? '/register' : '/login'}>
-            {isLogin ? 'Regístrate' : 'Inicia sesión'}
-          </Link>
-        </p>
-      </Card>
+          <form className="mt-7 flex flex-col gap-[18px]" onSubmit={(event) => void handleSubmit(event)} noValidate>
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="email" className="text-sm font-semibold">
+                Correo electrónico
+              </label>
+              <div className={`${fieldClass} pr-3.5`}>
+                <Mail size={19} aria-hidden="true" className="flex-none" />
+                <input
+                  id="email"
+                  className={inputClass}
+                  type="email"
+                  autoComplete="email"
+                  maxLength={254}
+                  placeholder="tu@correo.com"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  required
+                />
+              </div>
+              <span className={helpClass}>Usaremos este correo para notificarte cuando tu cuenta sea aprobada.</span>
+            </div>
+
+            <div className="flex flex-wrap gap-[18px]">
+              <div className="flex min-w-0 flex-[1_1_220px] flex-col gap-1.5">
+                <label htmlFor="password" className="text-sm font-semibold">
+                  Contraseña
+                </label>
+                <div className={`${fieldClass} pr-1.5`}>
+                  <Lock size={19} aria-hidden="true" className="flex-none" />
+                  <input
+                    id="password"
+                    className={inputClass}
+                    type={passwordType}
+                    autoComplete="new-password"
+                    maxLength={128}
+                    placeholder="••••••••••••"
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
+                    required
+                  />
+                  {visibilityToggle}
+                </div>
+                <span className={helpClass}>Mínimo 12 caracteres, con al menos una letra y un número.</span>
+              </div>
+
+              <div className="flex min-w-0 flex-[1_1_220px] flex-col gap-1.5">
+                <label htmlFor="confirmation" className="text-sm font-semibold">
+                  Confirmar contraseña
+                </label>
+                <div className={`${fieldClass} pr-1.5`}>
+                  <Lock size={19} aria-hidden="true" className="flex-none" />
+                  <input
+                    id="confirmation"
+                    className={inputClass}
+                    type={passwordType}
+                    autoComplete="new-password"
+                    maxLength={128}
+                    placeholder="••••••••••••"
+                    value={confirmation}
+                    onChange={(event) => setConfirmation(event.target.value)}
+                    required
+                  />
+                  {visibilityToggle}
+                </div>
+                <span className={helpClass}>Debe coincidir con la contraseña anterior.</span>
+              </div>
+            </div>
+
+            {feedback}
+
+            <Button className={submitClass} type="submit" disabled={submitting}>
+              {submitting ? 'Procesando...' : 'Solicitar cuenta'}
+            </Button>
+          </form>
+
+          <p className="mt-[22px] text-center text-sm text-[#4F626D]">
+            ¿Ya tienes cuenta?{' '}
+            <Link className="font-bold text-respira-blue hover:text-respira-blue-dark" to="/login">
+              Inicia sesión
+            </Link>
+          </p>
+        </section>
+      </main>
     </div>
   )
 }
