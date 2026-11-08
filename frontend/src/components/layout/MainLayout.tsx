@@ -47,6 +47,7 @@ export function MainLayout({ children }: PropsWithChildren) {
                 [t('nav.endemic'), '/endemic'],
                 [t('nav.cases'), '/cases'],
                 [t('nav.alerts'), '/alerts'],
+                [t('nav.profile'), '/profile'],
                 [t('nav.settings'), '/settings'],
                 ...(user?.role === 'admin' ? [[t('nav.admin'), '/admin/users']] : []),
               ].map(([label, path]) => (
