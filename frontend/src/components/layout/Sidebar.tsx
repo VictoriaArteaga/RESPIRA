@@ -36,13 +36,13 @@ export function Sidebar() {
 
   return (
     <aside className="fixed inset-y-0 left-0 z-20 hidden w-64 flex-col bg-respira-sidebar text-white lg:flex">
-      <div className="flex h-[76px] flex-none items-center gap-3 border-b border-respira-border bg-respira-chrome px-6">
-        <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-respira-blue text-xl font-black text-white">
+      <div className="flex h-[76px] flex-none items-center gap-2.5 border-b border-respira-border bg-respira-chrome px-4">
+        <span className="flex h-10 w-10 flex-none items-center justify-center rounded-2xl bg-respira-blue text-xl font-black text-white">
           R
         </span>
         <div>
           <p className="text-xl font-extrabold tracking-tight text-respira-text">RESPIRA</p>
-          <p className="text-xs text-respira-muted">{t('layout.tagline')}</p>
+          <p className="whitespace-nowrap text-xs tracking-tight text-respira-muted">{t('layout.tagline')}</p>
         </div>
       </div>
 
