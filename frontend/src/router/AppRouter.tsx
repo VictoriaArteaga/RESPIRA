@@ -7,6 +7,7 @@ import { AuthPage } from '../pages/AuthPage'
 import { CasesPage } from '../pages/CasesPage'
 import { DashboardPage } from '../pages/DashboardPage'
 import { MunicipalitiesPage } from '../pages/MunicipalitiesPage'
+import { ProfilePage } from '../pages/ProfilePage'
 import { SettingsPage } from '../pages/SettingsPage'
 import { RiskMapPage } from '../pages/RiskMapPage'
 import { EndemicPage } from '../pages/EndemicPage'
@@ -31,6 +32,7 @@ export function AppRouter() {
                 <Route path="/endemic" element={<EndemicPage />} />
                 <Route path="/cases" element={<CasesPage />} />
                 <Route path="/alerts" element={<AlertsPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/settings" element={<SettingsPage />} />
                 <Route
                   path="/admin/users"
