@@ -186,11 +186,6 @@ button:disabled {
   color: #243B4A;
 }
 
-/* Mapa en modo oscuro: se invierten las teselas y se atenúa el color para que no compita con los marcadores de riesgo. */
-.dark .leaflet-tile-pane {
-  filter: invert(1) hue-rotate(195deg) grayscale(0.55) brightness(0.82) contrast(0.95);
-}
-
 .dark .app-shell::before,
 .dark .auth-shell::before {
   filter: brightness(1.6);
