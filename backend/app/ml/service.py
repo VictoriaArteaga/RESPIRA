@@ -124,3 +124,16 @@ class ForecastService:
                     "rate_by_level": {k: v["tasa_aumento_observada"] for k, v in r["por_nivel"].items()},
                     "share_by_level": {k: v["proporcion_semanas"] for k, v in r["por_nivel"].items()}}
         return {"validation_2019": pack("validacion_2019"), "test_2022": pack("prueba_2022"), "pandemic_2020_2021": pack("pandemia_2020_2021")}
+
+    def _channel_block(self, h: int) -> dict | None:
+        rep = self.metrics.get("canal_endemico", {}).get("horizontes", {}).get(str(h))
+        if not rep:
+            return None
+
+        def pack(kind: str, key: str) -> dict:
+            r = rep[kind][key]
+            return {"n": r["n"], "exceed_prevalence": r["prevalencia_aumento"], "auc": r["auc"], "auc_simple_rule": r.get("auc_regla_simple"),
+                    "high_precision": r["alerta_alta"]["precision"], "high_recall": r["alerta_alta"]["recall"],
+                    "rate_by_level": {k: v["tasa_aumento_observada"] for k, v in r["por_nivel"].items()}}
+        return {kind: {"validation_2019": pack(kind, "validacion_2019"), "test_2022": pack(kind, "prueba_2022"),
+                       "pandemic_2020_2021": pack(kind, "pandemia_2020_2021")} for kind in ("p75", "p90")}
