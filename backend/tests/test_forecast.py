@@ -48,3 +48,11 @@ def test_trend_classification() -> None:
     assert classify_trend(2.5, 1) == "estable"        # cambio absoluto menor a 2: ruido
     assert classify_trend(3, 1) == "aumento"          # cambio de 2 atenciones o más y ≥20%
     assert classify_trend(5, None) == "sin_referencia"
+
+
+def test_status_and_models(client: TestClient) -> None:
+    assert client.get("/api/forecast/status").json()["available"] is True
+    body = client.get("/api/forecast/models").json()
+    assert {m["id"] for m in body["models"]} == {"base_global", "modelo_a", "modelo_b"}
+    assert body["models"][0]["horizons"]["2"]["test_2022"]["n"] > 0
+    assert "No es un diagnóstico" in body["disclaimer"] or "no es un diagnóstico" in body["disclaimer"].lower()
