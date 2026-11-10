@@ -67,3 +67,12 @@ def classify_trend(prediction: float, reference: float | None) -> str:
         return "estable"
     rel = diff / reference if reference > 0 else np.inf
     return "aumento" if rel >= TREND_REL else "disminucion" if rel <= -TREND_REL else "estable"
+
+
+def reference_level(df: pd.DataFrame) -> pd.Series:
+    """Nivel reciente (media de 4 semanas; si falta, el valor actual). Solo usa información hasta t."""
+    return df["ira_media_4s"].fillna(df["ira_0_4"])
+
+
+def scale_ref(df: pd.DataFrame) -> pd.Series:
+    return reference_level(df) + 1.0
