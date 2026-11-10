@@ -63,3 +63,17 @@ def _trend_scores(y: np.ndarray, p: np.ndarray, ref: np.ndarray) -> dict:
             "aumento_precision": tp / up_pred.sum() if up_pred.sum() else None,
             "aumento_recall": tp / up_obs.sum() if up_obs.sum() else None,
             "n_aumentos_observados": int(up_obs.sum())}
+
+
+def _split_report(frame: pd.DataFrame, target: str, model_pred: np.ndarray, interval: tuple[float, float]) -> dict:
+    y = frame[target].to_numpy(dtype=float)
+    persist = frame["ira_0_4"].to_numpy(dtype=float)
+    media4 = reference_level(frame).to_numpy(dtype=float)
+    out = {"n": int(len(frame)), "modelo": _errors(y, model_pred), "persistencia": _errors(y, persist),
+           "media_4_semanas": _errors(y, media4)}
+    out["mejora_mae_vs_persistencia_pct"] = 100 * (1 - out["modelo"]["mae"] / out["persistencia"]["mae"])
+    out.update(_trend_scores(y, model_pred, media4))
+    lo = np.clip(model_pred + interval[0] * np.sqrt(model_pred + 1), 0, None)
+    hi = model_pred + interval[1] * np.sqrt(model_pred + 1)
+    out["cobertura_intervalo_80"] = float(((y >= lo) & (y <= hi)).mean())
+    return out
