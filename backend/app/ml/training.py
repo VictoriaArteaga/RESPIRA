@@ -190,3 +190,85 @@ def train_channel_signals(df: pd.DataFrame, artifact_dir, verbose: bool = True) 
                 print(f"canal_{kind} h{h}: AUC val={val_auc:.3f} prueba={t['auc']:.3f} (regla simple {t['auc_regla_simple']:.3f}) | "
                       f"alta: precisión={t['alerta_alta']['precision']:.2f} recall={t['alerta_alta']['recall']:.2f} (prevalencia {t['prevalencia_aumento']:.2f})", flush=True)
     return out
+
+
+def train_all(dataset_path=DATASET_PATH, artifact_dir=ARTIFACT_DIR, verbose: bool = True) -> dict:
+    df = load_dataset(dataset_path)
+    sets = municipality_sets(df)
+    artifact_dir.mkdir(parents=True, exist_ok=True)
+    metrics: dict = {"generado_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                     "dataset": {"archivo": str(dataset_path.name), "sha256": _sha256(dataset_path), "filas": int(len(df))},
+                     "entorno": {"python": platform.python_version(), "scikit_learn": sklearn.__version__,
+                                 "semilla": SEED, "algoritmo": "HistGradientBoostingRegressor (razón al nivel reciente)"},
+                     "protocolo": "ajuste 2012-2018 -> selección en 2019 -> reajuste 2012-2019 -> prueba 2022; pandemia 2020-2021 aparte",
+                     "modelos": {}}
+    by_mun_rows: list[dict] = []
+    for model_id, spec in MODEL_SPECS.items():
+        muni = sets[spec["municipios"]]
+        features = spec["features"]
+        entry = {"etiqueta": spec["etiqueta"], "grupo": spec["grupo"], "referencia": spec["referencia"],
+                 "n_municipios": len(muni), "variables": features, "horizontes": {}}
+        for h in HORIZONS:
+            target = f"objetivo_ira_t_mas_{h}"
+            data = df[df["codigo_divipola"].isin(muni) & df["ira_0_4"].notna() & df[target].notna()]
+            train, val = data[data["split_sugerido"] == "TRAIN"], data[data["split_sugerido"] == "VALIDACION"]
+            # 1) selección de configuración en 2019
+            scored = []
+            for params in PARAM_GRID:
+                m = _fit(train, features, target, params)
+                scored.append((float(np.mean(np.abs(predict(m, val, features) - val[target].to_numpy()))), params, m))
+            val_mae, best_params, m_train = min(scored, key=lambda s: s[0])
+            # intervalo empírico 80% con los residuos estandarizados de 2019 (modelo ajustado solo hasta 2018)
+            p_val = predict(m_train, val, features)
+            resid = (val[target].to_numpy() - p_val) / np.sqrt(p_val + 1)
+            interval = (float(np.quantile(resid, 0.10)), float(np.quantile(resid, 0.90)))
+            # 2) reajuste con 2012-2019 (modelo que se sirve)
+            final = _fit(data[data["split_sugerido"].isin(["TRAIN", "VALIDACION"])], features, target, best_params)
+            report = {"parametros": best_params, "filas_entrenamiento_final": int(data["split_sugerido"].isin(["TRAIN", "VALIDACION"]).sum()),
+                      "mae_validacion_candidatas": [round(s[0], 4) for s in scored], "intervalo_residual_q10_q90": interval}
+            for name, split in SPLITS.items():
+                part = data[data["split_sugerido"] == split]
+                if part.empty:
+                    report[name] = None
+                    continue
+                model_for_split = m_train if split == "VALIDACION" else final   # validación: modelo ajustado hasta 2018
+                p = predict(model_for_split, part, features)
+                report[name] = _split_report(part, target, p, interval)
+                if split in ("VALIDACION", "TEST"):
+                    persist_p = part["ira_0_4"].to_numpy(dtype=float)
+                    for code, g in part.assign(p=p).groupby("codigo_divipola"):
+                        y = g[target].to_numpy(dtype=float)
+                        by_mun_rows.append({"modelo": model_id, "horizonte": h, "periodo": name, "codigo_divipola": code,
+                                            "municipio": g["municipio"].iloc[0], "n": len(g), "promedio_observado": round(float(y.mean()), 2),
+                                            "mae_modelo": round(float(np.abs(g["p"] - y).mean()), 3),
+                                            "mae_persistencia": round(float(np.abs(g["ira_0_4"] - y).mean()), 3)})
+            entry["horizontes"][str(h)] = report
+            joblib.dump({"model": final, "features": features, "horizon": h, "model_id": model_id, "parametros": best_params,
+                         "interval": interval, "municipios": sorted(muni), "entrenado_hasta": "2019",
+                         "scikit_learn": sklearn.__version__}, artifact_dir / f"{model_id}_h{h}.joblib", compress=3)
+            if verbose:
+                t = report["prueba_2022"]
+                print(f"{model_id:12s} h{h}: n_mun={len(muni):2d} val_MAE={val_mae:.3f} | prueba 2022 n={t['n']} "
+                      f"MAE modelo={t['modelo']['mae']:.3f} persistencia={t['persistencia']['mae']:.3f} "
+                      f"mejora={t['mejora_mae_vs_persistencia_pct']:.1f}%", flush=True)
+        metrics["modelos"][model_id] = entry
+    # aporte de las variables climáticas frente al modelo base entrenado sobre los mismos municipios
+    comp = []
+    for model_id, spec in MODEL_SPECS.items():
+        if not spec["referencia"]:
+            continue
+        for h in HORIZONS:
+            for period in ("validacion_2019", "prueba_2022", "pandemia_2020_2021"):
+                a = metrics["modelos"][model_id]["horizontes"][str(h)][period]
+                b = metrics["modelos"][spec["referencia"]]["horizontes"][str(h)][period]
+                if a and b:
+                    comp.append({"modelo": model_id, "base": spec["referencia"], "horizonte": h, "periodo": period, "n": a["n"],
+                                 "mae_con_clima": a["modelo"]["mae"], "mae_base": b["modelo"]["mae"],
+                                 "rmse_con_clima": a["modelo"]["rmse"], "rmse_base": b["modelo"]["rmse"],
+                                 "mejora_mae_pct": 100 * (1 - a["modelo"]["mae"] / b["modelo"]["mae"])})
+    metrics["aporte_variables_climaticas"] = comp
+    metrics["senal_aumento"] = train_increase_signal(df, artifact_dir, verbose)
+    metrics["canal_endemico"] = train_channel_signals(df, artifact_dir, verbose)
+    (artifact_dir / "metrics.json").write_text(json.dumps(metrics, ensure_ascii=False, indent=2), encoding="utf-8")
+    pd.DataFrame(by_mun_rows).to_csv(artifact_dir / "metrics_by_municipality.csv", index=False, encoding="utf-8-sig")
+    return metrics
