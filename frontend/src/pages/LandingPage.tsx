@@ -98,13 +98,22 @@ function EndemicIllustration() {
 
 export function LandingPage() {
   const { status } = useAuth()
-  const { startPage } = usePreferences()
+  const { startPage, reduceMotion } = usePreferences()
   const { t } = useI18n()
 
   // Con sesión activa la pantalla informativa no aporta: se entra directo a la página de inicio elegida.
   if (status === 'authenticated') return <Navigate to={startPage} replace />
 
-  const navLink = `px-2.5 py-3 text-sm font-semibold text-respira-body hover:text-respira-blue-dark ${focusRing}`
+  const navLink = `cursor-pointer px-2.5 py-3 text-sm font-semibold text-respira-body hover:text-respira-blue-dark ${focusRing}`
+
+  // La aplicación usa HashRouter: un enlace "#apartado" se interpretaría como una ruta y llevaría al inicio de sesión.
+  // Por eso el menú desplaza la página hasta el apartado sin tocar la dirección, y mueve el foco allí para teclado y lectores.
+  const goTo = (id: string) => {
+    const section = document.getElementById(id)
+    if (!section) return
+    section.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' })
+    section.focus({ preventScroll: true })
+  }
 
   return (
     <div className="app-shell text-respira-text">
@@ -120,9 +129,9 @@ export function LandingPage() {
             <span className="text-xl font-extrabold tracking-tight">RESPIRA</span>
           </Link>
           <nav aria-label={t('landing.navAria')} className="flex flex-wrap items-center gap-2">
-            <a href="#que-es" className={navLink}>{t('landing.navWhat')}</a>
-            <a href="#funciones" className={navLink}>{t('landing.navFeatures')}</a>
-            <a href="#niveles" className={navLink}>{t('landing.navLevels')}</a>
+            <button type="button" onClick={() => goTo('que-es')} className={navLink}>{t('landing.navWhat')}</button>
+            <button type="button" onClick={() => goTo('funciones')} className={navLink}>{t('landing.navFeatures')}</button>
+            <button type="button" onClick={() => goTo('niveles')} className={navLink}>{t('landing.navLevels')}</button>
             <Link to="/login" className={`${secondaryLink} min-h-11 px-4 text-sm font-semibold`}>
               {t('auth.login')}
             </Link>
@@ -188,7 +197,7 @@ export function LandingPage() {
           </div>
         </section>
 
-        <section id="que-es" className={`${sectionWidth} pb-[72px]`}>
+        <section id="que-es" tabIndex={-1} className={`${sectionWidth} pb-[72px] outline-none`}>
           <div className="flex flex-wrap overflow-hidden rounded-[20px] border border-respira-border bg-respira-surface shadow-[0_12px_36px_rgba(36,59,74,0.10)]">
             <div className="flex min-w-0 flex-[1_1_340px] flex-col justify-between gap-5 bg-gradient-to-br from-[#315F7D] to-[#234A65] px-10 py-12 text-white">
               <div className="flex flex-col gap-5">
@@ -229,7 +238,7 @@ export function LandingPage() {
           </ol>
         </section>
 
-        <section id="funciones" className={`${sectionWidth} flex flex-col gap-7 pb-[72px]`}>
+        <section id="funciones" tabIndex={-1} className={`${sectionWidth} flex flex-col gap-7 pb-[72px] outline-none`}>
           <div className="flex flex-col gap-1.5">
             <h2 className="text-[30px] font-extrabold tracking-tight">{t('landing.featuresTitle')}</h2>
             <p className="text-sm text-respira-body">{t('landing.featuresSubtitle')}</p>
@@ -247,7 +256,7 @@ export function LandingPage() {
           </div>
         </section>
 
-        <section id="niveles" className={`${sectionWidth} pb-[72px]`}>
+        <section id="niveles" tabIndex={-1} className={`${sectionWidth} pb-[72px] outline-none`}>
           <div className={`${card} flex flex-col gap-5 p-8`}>
             <div className="flex flex-col gap-1.5">
               <h2 className="text-2xl font-extrabold tracking-tight">{t('landing.levelsTitle')}</h2>
