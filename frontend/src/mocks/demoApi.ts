@@ -1,6 +1,6 @@
 // Datos de demostración para visualizar la interfaz sin depender del servidor.
 // Se activan con VITE_DEMO_DATA=true (ver .env.example). Conviven dos conjuntos: 10 municipios SIMULADOS (2021-2025,
-// sintéticos, marcados "(simulado)") y los 64 municipios REALES de Nariño con las atenciones por IRA de SIVIGILA 2012-2022.
+// sintéticos, con la marca interna `simulated`) y los 64 municipios REALES de Nariño con las atenciones por IRA de SIVIGILA 2012-2022.
 import realData from './real-data.json'
 import type { DashboardSummary } from '../types/dashboard'
 import type { IraCase } from '../types/case'
@@ -131,10 +131,10 @@ const realCases: IraCase[] = (() => {
   return records
 })()
 
-// Los municipios simulados llevan "(simulado)" para distinguirlos de los reales con el mismo nombre (p. ej. Pasto).
+// Las series de prueba conservan el nombre del municipio al que corresponden (p. ej. Pasto); se distinguen por id y por la marca interna.
 const municipalities: Municipality[] = [
   ...realMunicipalities,
-  ...simulatedMunicipalities.map((m) => ({ ...m, name: `${m.name} (simulado)`, simulated: true })),
+  ...simulatedMunicipalities.map((m) => ({ ...m, simulated: true })),
 ]
 // Nariño tiene 64 municipios. Los simulados son copias de municipios que ya están entre esos 64 (con datos de prueba),
 // por eso no cuentan como municipios adicionales en los totales.
