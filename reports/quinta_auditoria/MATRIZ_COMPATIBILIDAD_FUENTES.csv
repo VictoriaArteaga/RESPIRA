@@ -1,0 +1,33 @@
+﻿relacion,criterio,evaluacion,evidencia
+SIVIGILA + IDEAM,Identificador territorial,"SIVIGILA usa DIVIPOLA (cod_mun) del municipio notificador; IDEAM usa código de estación (8 dígitos) y el catálogo trae el municipio solo como texto. No hay clave directa: se requiere una tabla estación→DIVIPOLA. Con coincidencia de nombre normalizado (3 excepciones manuales: Tumaco, El Tablón de Gómez, Santacruz) las 99 estaciones candidatas se asignan a 44 municipios.",Cruce 5.ª auditoría entre estaciones_candidatas_ideam.csv y nombres DANE
+SIVIGILA + IDEAM,Identificador temporal,SIVIGILA: año + semana epidemiológica (domingo–sábado). IDEAM: fecha diaria con sello 07:00:00. El puente es un calendario epidemiológico anual que debe construirse y validarse por año.,Archivos *.data (Fecha|Valor)
+SIVIGILA + IDEAM,Cobertura temporal común,2012–2022 en ambos (574 semanas epidemiológicas con 53 semanas en 2014 y 2020). Los .data de IDEAM llegan hasta 2026.,Escaneo SIVIGILA y archivos IDEAM
+SIVIGILA + IDEAM,Cobertura geográfica,"SIVIGILA: 64 municipios. Con estación de temperatura con ≥80% de semanas con ≥6/7 días: 12 municipios (Pasto, Aldana, Chachagüí, Funes, Puerres, Pupiales, Samaniego, San Bernardo, Taminango, Tumaco, Túquerres, Tangua). Con estación de precipitación ≥80%: 38 municipios. Sin ninguna estación candidata: 20 municipios.",EVALUACION_ESTACIONES_IDEAM.csv; joint_counts (5.ª auditoría)
+SIVIGILA + IDEAM,Granularidad,SIVIGILA semanal por municipio; IDEAM diaria por estación. Se debe agregar IDEAM a semana (sin interpolar).,Ver sección de agregación en INFORME_GENERAL.md
+SIVIGILA + IDEAM,Variables compatibles,"Temperatura mínima, máxima y media (TSSM_MN_D, TSSM_MX_D, TSSM_MEDIA_D) con significado documentado en el manual IDEAM GDI-M005. Precipitación PTPM_CON_INTER: sufijo no confirmado. Humedad, punto de rocío y tensión de vapor: no confirmadas.",reports/metadatos_variables_ideam.csv
+SIVIGILA + IDEAM,Limitaciones,"Estación puntual ≠ municipio (las estaciones con temperatura van de 1 m a 3,141 m de altitud). Estación asignada por nombre de municipio, no por distancia/altitud. Sin flags de calidad. Estación de Aldana con TSSM_MN_D idéntica a TSSM_MX_D en 4,016/4,016 días (no usable). 52 municipios sin estación de temperatura ≥80%.",EVALUACION_ESTACIONES_IDEAM.csv
+SIVIGILA + IDEAM,Viabilidad,Viable con restricciones (12 municipios en temperatura; 38 en precipitación si se confirma la etiqueta),Resumen
+SIVIGILA + DANE,Identificador territorial,Ambos usan DIVIPOLA de 5 dígitos: los 64 municipios coinciden. Excepciones en SIVIGILA: 1 fila 2012 con código 52000 y 9 filas con código 52xxx pero departamento notificador distinto.,Escaneo SIVIGILA (nmun_notif/ndep_notif) vs DANE MPIO
+SIVIGILA + DANE,Identificador temporal,DANE: año calendario (proyección a mitad de año). SIVIGILA: año/semana epidemiológica. El año epidemiológico no coincide exactamente con el año calendario (p. ej. SE1 2018 empieza el 31/12/2017).,Calendario recalculado
+SIVIGILA + DANE,Cobertura temporal común,2012–2022 completa: 704/704 municipio-año con área Total (2012–2017 del libro 2005–2017; 2018–2022 del libro 2018–2042).,Escaneo DANE 5.ª auditoría
+SIVIGILA + DANE,Cobertura geográfica,64/64 municipios de Nariño.,Escaneo DANE
+SIVIGILA + DANE,Granularidad,Anual (DANE) vs semanal (SIVIGILA). La población anual se asigna constante a las semanas del año; no es estimación semanal.,—
+SIVIGILA + DANE,Variables compatibles,"Población 0–4 años (suma de edades simples 0,1,2,3,4; total = hombres+mujeres en 100% de las filas) frente a IRA consulta externa/urgencias <1, 1 y 2–4 años.",Escaneo DANE
+SIVIGILA + DANE,Limitaciones,"El numerador es un conteo de consultas notificadas por UPGD reportantes; el denominador es población del municipio (no de residencia de los atendidos; incluye cobertura de aseguramiento, migración y atención en otro municipio). Salto de serie 2017→2018 (mediana +8.2%; 53 de 64 municipios >+5%). 13 municipios con <500 menores de 5 años en 2022 (tasas inestables).",dane_a/dane_b (5.ª auditoría)
+SIVIGILA + DANE,Viabilidad,Viable con restricciones (denominador anual utilizable; tasa cruda no es incidencia),Resumen
+IDEAM + DANE,Identificador territorial,"Sin clave común directa: solo comparten el municipio (texto en IDEAM, DIVIPOLA en DANE) a través de la tabla estación→municipio.",Cruce 5.ª auditoría
+IDEAM + DANE,Identificador temporal,Diario (IDEAM) vs anual (DANE).,—
+IDEAM + DANE,Cobertura temporal común,2012–2022.,—
+IDEAM + DANE,Cobertura geográfica,La que haya estación asignada (44 municipios con alguna estación; 12 con temperatura útil).,EVALUACION_ESTACIONES_IDEAM.csv
+IDEAM + DANE,Granularidad,Diaria vs anual; no se relacionan directamente.,—
+IDEAM + DANE,Variables compatibles,Ninguna relación analítica propia; la población solo serviría para describir el municipio al que se asigna una estación o ponderar.,—
+IDEAM + DANE,Limitaciones,La relación es indirecta y solo existe a través de SIVIGILA.,—
+IDEAM + DANE,Viabilidad,No viable como relación independiente (solo indirecta),Resumen
+SIVIGILA + IDEAM + DANE,Identificador territorial,DIVIPOLA como columna vertebral; estación como atributo asignado al municipio.,—
+SIVIGILA + IDEAM + DANE,Identificador temporal,Semana epidemiológica como unidad; DANE anual por año epidemiológico/calendario (a decidir); IDEAM agregado por semana.,—
+SIVIGILA + IDEAM + DANE,Cobertura temporal común,2012–2022 (2020–2021 con quiebre estructural del conteo IRA).,Escaneo SIVIGILA
+SIVIGILA + IDEAM + DANE,Cobertura geográfica,"12 municipios con temperatura (6,282 municipio-semanas con IRA completa y temperatura mín/máx/media ≥6/7 días); 38 con precipitación (19,934 municipio-semanas, sujeto a confirmar etiqueta). Con temperatura Y precipitación: 12 municipios, 6,273 municipio-semanas.",joint_counts (5.ª auditoría)
+SIVIGILA + IDEAM + DANE,Granularidad,Semanal por municipio.,—
+SIVIGILA + IDEAM + DANE,Variables compatibles,IRA (iracext_1..3); temperatura (3 variables); población 0–4 (denominador); opcionalmente totcext_1..3 (denominador de consultas).,—
+SIVIGILA + IDEAM + DANE,Limitaciones,Todas las anteriores. Piloto actual: 3 municipios y 2 años (312 municipio-semanas).,EVALUACION_DATASET_PILOTO.csv
+SIVIGILA + IDEAM + DANE,Viabilidad,"Viable con restricciones, para un subconjunto de municipios; no para los 64",Resumen
