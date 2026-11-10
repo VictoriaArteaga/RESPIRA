@@ -8,6 +8,7 @@ import {
   parseSetActiveArgs,
   readCredentials,
   sanitizeApiResult,
+  isAllowedForecastRoute,
   type ApiResult,
   type TrustedRenderer,
 } from './security'
@@ -28,6 +29,7 @@ function isAllowedApiPath(path: string): boolean {
   }
 
   if (url.origin !== new URL(apiBaseUrl).origin) return false
+  if (url.pathname.startsWith('/api/forecast/')) return isAllowedForecastRoute(url)
   if (!allowedPaths.has(url.pathname) && !municipalityDetailPath.test(url.pathname) && !municipalityAnalysisPath.test(url.pathname)) return false
   if (url.pathname === '/api/risk-map') return [...url.searchParams].every(([key, value]) => allowedRiskFilters.has(key) && /^\d+$/.test(value))
   if (municipalityAnalysisPath.test(url.pathname)) return [...url.searchParams].every(([key, value]) => key === 'year' && /^\d+$/.test(value))
