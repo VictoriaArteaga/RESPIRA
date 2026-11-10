@@ -65,3 +65,11 @@ def test_models_endpoint_reports_attached_public_data_without_using_it_for_train
     assert ext["used_for_training"] is False and ext["ira_public_2023_2025"] is False
     assert ext["ira_last_week"] == {"year": 2022, "week": 52} and ext["population_through_year"] == 2025
     assert ext["calendar_weeks"]["2025"] == 53
+
+
+def test_municipalities_cover_all_64_with_model_availability(client: TestClient) -> None:
+    items = client.get("/api/forecast/municipalities").json()["municipalities"]
+    assert len(items) == 64
+    by_code = {m["divipola_code"]: m for m in items}
+    assert by_code[PASTO]["available_models"] == ["base_global", "modelo_a", "modelo_b"]
+    assert by_code[ALBAN]["available_models"] == ["base_global"]
