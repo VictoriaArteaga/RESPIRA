@@ -305,3 +305,50 @@ class ForecastService:
             "warnings": warnings,
             "disclaimer": DISCLAIMER,
         }
+
+    # ------------------------------------------------------------------ piezas
+    def _history(self, g: pd.DataFrame, idx: int) -> list[dict]:
+        part = g.loc[max(0, idx - HISTORY_WEEKS + 1): idx]
+        return [{"year": int(r.anio), "week": int(r.semana_epidemiologica), "week_end": r.semana_fin.date().isoformat(),
+                 "cases": _num(r.ira_0_4), "status": r.estado_dato_ira} for r in part.itertuples()]
+
+    def _variables(self, code: str, g: pd.DataFrame, idx: int, row: pd.Series, spec: dict) -> list[dict]:
+        groups = [("ira_history", "Historial de IRA (valor actual, rezagos 1-4, medias de 4 y 8 semanas, estacionalidad)", "ira_0_4"),
+                  ("precipitation", "Precipitación semanal (actual, rezagos 1-2, media de 4 semanas)", "precipitacion"),
+                  ("temperature", "Temperatura semanal media/mín/máx (actual, rezagos, media de 4 semanas)", "temp_media")]
+        used_features = set(spec["features"])
+        out = []
+        for key, desc, probe in groups:
+            used = probe in used_features
+            out.append({"key": key, "description": desc, "used": used,
+                        "available_for_municipality": bool(g[probe].notna().any()),
+                        "available_at_origin": bool(pd.notna(row[probe])),
+                        "historical_coverage_pct": round(100 * float(g[probe].notna().mean()), 1)})
+        return out
+
+    def _warnings(self, code: str, g: pd.DataFrame, idx: int, row: pd.Series, model_id: str) -> list[dict]:
+        w: list[dict] = []
+        missing_lags = int(row[["ira_lag1", "ira_lag2", "ira_lag3", "ira_lag4"]].isna().sum())
+        if missing_lags:
+            w.append({"code": "missing_lags", "params": {"count": missing_lags},
+                      "message": f"Faltan {missing_lags} de las 4 semanas previas; el modelo las trata como datos faltantes (no se asumen en cero)."})
+        feats = set(MODEL_SPECS[model_id]["features"])
+        if "precipitacion" in feats and pd.isna(row["precipitacion"]):
+            w.append({"code": "missing_precipitation", "params": {}, "message": "No hay precipitación válida en la semana de referencia; el modelo la trata como faltante."})
+        if "temp_media" in feats and pd.isna(row["temp_media"]):
+            w.append({"code": "missing_temperature", "params": {}, "message": "No hay temperatura válida en la semana de referencia; el modelo la trata como faltante."})
+        if self.signal and pd.isna(row.get("cons")):
+            w.append({"code": "missing_consultations", "params": {},
+                      "message": "No hay total de consultas válido en la semana de referencia; la señal de aumento lo trata como faltante."})
+        median = _num(self._median.get(code))
+        if median is not None and median < LOW_VOLUME_MEDIAN:
+            w.append({"code": "low_volume", "params": {"median": median},
+                      "message": f"Volumen bajo (mediana de {median:.0f} atenciones por semana): con pocas atenciones las predicciones son poco estables."})
+        if int(row["anio"]) in (2020, 2021):
+            w.append({"code": "pandemic", "params": {}, "message": "Semana de referencia en la pandemia (2020-2021): la notificación cambió y el modelo no se evaluó bien en ese periodo."})
+        if row["estado_calendario"] != "VERIFICADO_OFICIAL":
+            w.append({"code": "calendar_unverified", "params": {"year": int(row["anio"])},
+                      "message": f"El calendario epidemiológico de {int(row['anio'])} se derivó por regla y está pendiente de confirmación del INS."})
+        if bool(row.get("tiene_reportes_repetidos", False)):
+            w.append({"code": "repeated_reports", "params": {}, "message": "Hubo reportes repetidos de una misma institución en esta semana; se usó el último reporte."})
+        return w
