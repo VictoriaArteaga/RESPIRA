@@ -4,6 +4,7 @@ import {
   ChartNoAxesCombined,
   ClipboardList,
   LogOut,
+  Power,
   Map,
   ChartLine,
   CircleUser,
@@ -15,6 +16,7 @@ import { NavLink } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import { useI18n } from '../../i18n/I18nContext'
 import type { TranslationKey } from '../../i18n/translations'
+import { quitApp } from '../../services/appService'
 
 const navigation: Array<{ labelKey: TranslationKey; path: string; icon: typeof Activity }> = [
   { labelKey: 'nav.dashboard', path: '/dashboard', icon: ChartNoAxesCombined },
@@ -73,7 +75,7 @@ export function Sidebar() {
         ))}
       </nav>
 
-      <div className="flex-none border-t border-white/15 p-4">
+      <div className="flex-none space-y-2 border-t border-white/15 p-4">
         <button
           type="button"
           onClick={() => void logout()}
@@ -81,6 +83,14 @@ export function Sidebar() {
         >
           <LogOut size={18} aria-hidden="true" />
           {t('header.logout')}
+        </button>
+        <button
+          type="button"
+          onClick={() => void quitApp()}
+          className="flex w-full items-center justify-center gap-2 rounded-xl border border-white/40 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10 active:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        >
+          <Power size={18} aria-hidden="true" />
+          {t('layout.quit')}
         </button>
       </div>
     </aside>

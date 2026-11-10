@@ -55,6 +55,7 @@ export const es = {
   'header.subtitle': 'Monitoreo epidemiológico · Nariño',
   'header.weekly': 'Seguimiento semanal',
   'header.logout': 'Cerrar sesión',
+  'layout.quit': 'Salir de la aplicación',
   'header.alerts': 'Consultar alertas epidemiológicas',
   // Dashboard
   'dash.eyebrow': 'Panel de seguimiento',
@@ -605,6 +606,7 @@ export const en: Record<TranslationKey, string> = {
   'header.subtitle': 'Epidemiological monitoring · Nariño',
   'header.weekly': 'Weekly follow-up',
   'header.logout': 'Sign out',
+  'layout.quit': 'Quit the app',
   'header.alerts': 'View epidemiological alerts',
   'dash.eyebrow': 'Monitoring panel',
   'dash.title': 'Dashboard',

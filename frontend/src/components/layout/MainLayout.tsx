@@ -1,8 +1,9 @@
-import { X } from 'lucide-react'
+import { Power, X } from 'lucide-react'
 import { useState, type PropsWithChildren } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import { useI18n } from '../../i18n/I18nContext'
+import { quitApp } from '../../services/appService'
 import { Header } from './Header'
 import { Sidebar } from './Sidebar'
 
@@ -65,6 +66,16 @@ export function MainLayout({ children }: PropsWithChildren) {
                 </NavLink>
               ))}
             </nav>
+            <div className="mt-auto border-t border-respira-border p-4">
+              <button
+                type="button"
+                onClick={() => void quitApp()}
+                className="flex w-full items-center justify-center gap-2 rounded-xl border border-respira-border px-4 py-3 text-sm font-semibold text-respira-text hover:bg-sky-50"
+              >
+                <Power size={18} aria-hidden="true" />
+                {t('layout.quit')}
+              </button>
+            </div>
           </aside>
         </div>
       )}
