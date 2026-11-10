@@ -88,3 +88,15 @@ def test_forecast_default_returns_both_horizons_from_latest_week(client: TestCli
         assert p["observed_cases"] is None          # el futuro no se conoce
     assert len(body["history"]) == 104 and body["disclaimer"]
     assert {m["model"] for m in body["comparison"]} == {"modelo_a", "modelo_b"}
+
+
+def test_increase_signal_is_returned_for_both_horizons_with_honest_context(client: TestClient) -> None:
+    body = client.get(f"/api/forecast/municipalities/{PASTO}").json()
+    signals = body["increase_signal"]
+    assert [s["horizon_weeks"] for s in signals] == [2, 3]
+    for s in signals:
+        assert 0 <= s["probability"] <= 1 and s["level"] in {"baja", "media", "alta"}
+        assert 0 < s["base_increase_rate"] < 1 and s["observed_increase"] is None
+    ev = body["signal_evaluation"]["2"]["test_2022"]
+    assert ev["auc"] > 0.5 and ev["rate_by_level"]["baja"] < ev["rate_by_level"]["media"] < ev["rate_by_level"]["alta"]
+    assert client.get("/api/forecast/models").json()["increase_signal"]["horizons"]["3"]["test_2022"]["n"] > 0
