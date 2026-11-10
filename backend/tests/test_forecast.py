@@ -136,3 +136,11 @@ def test_backtest_includes_observed_value_and_no_leakage(client: TestClient) -> 
     assert p2["observed_cases"] is not None and p2["absolute_error"] is not None
     # el historial devuelto termina en la semana de referencia: no contiene semanas posteriores
     assert (body["history"][-1]["year"], body["history"][-1]["week"]) == (2022, 30)
+
+
+def test_municipality_without_climate_coverage_rejects_climate_model_but_serves_base(client: TestClient) -> None:
+    ok = client.get(f"/api/forecast/municipalities/{ALBAN}")
+    assert ok.status_code == 200 and ok.json()["model"]["id"] == "base_global"
+    assert all(v["available_for_municipality"] is False for v in ok.json()["variables"] if v["key"] != "ira_history")
+    refused = client.get(f"/api/forecast/municipalities/{ALBAN}?model=modelo_a")
+    assert refused.status_code == 422 and "cobertura climática" in refused.json()["detail"]
