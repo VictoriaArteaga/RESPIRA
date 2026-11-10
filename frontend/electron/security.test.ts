@@ -94,7 +94,7 @@ describe('readCredentials', () => {
   it('valida tipo y longitud', () => {
     expect(readCredentials({ email: 'a@b.co', password: 'x' })).toEqual({ email: 'a@b.co', password: 'x' })
     expect(readCredentials({ email: '', password: 'x' })).toBeNull()
-    expect(readCredentials({ email: 'a@b.co', password: 'x'.repeat(129) })).toBeNull()
+    expect(readCredentials({ email: 'a@b.co', password: 'x'.repeat(65) })).toBeNull()
     expect(readCredentials({ email: 'a'.repeat(255), password: 'x' })).toBeNull()
     expect(readCredentials({ email: 1, password: 'x' })).toBeNull()
     expect(readCredentials(null)).toBeNull()

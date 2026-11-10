@@ -58,7 +58,7 @@ export function readCredentials(value: unknown): { email: string; password: stri
   if (typeof value !== 'object' || value === null) return null
   const { email, password } = value as Record<string, unknown>
   if (typeof email !== 'string' || typeof password !== 'string') return null
-  if (email.length === 0 || email.length > 254 || password.length === 0 || password.length > 128) return null
+  if (email.length === 0 || email.length > 254 || password.length === 0 || password.length > 64) return null
   return { email, password }
 }
 

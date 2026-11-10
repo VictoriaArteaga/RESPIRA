@@ -17,14 +17,14 @@ interface Problem {
   message: TranslationKey
 }
 
-// Misma política que el servidor (12–128 caracteres, al menos una letra y un número); el servidor valida de nuevo.
+// Misma política que el servidor (12–64 caracteres, al menos una letra y un número); el servidor valida de nuevo.
 function validate(mode: Mode, email: string, password: string, confirmation: string): Problem | null {
   if (!email.trim()) return { field: 'email', message: 'auth.errEmailEmpty' }
   if (!EMAIL_PATTERN.test(email.trim())) return { field: 'email', message: 'auth.errEmailInvalid' }
   if (!password) return { field: 'password', message: 'auth.errPasswordEmpty' }
   if (mode === 'login') return null
   if (!confirmation) return { field: 'confirmation', message: 'auth.errConfirmEmpty' }
-  if (password.length < 12 || password.length > 128) return { field: 'password', message: 'auth.errPasswordLength' }
+  if (password.length < 12 || password.length > 64) return { field: 'password', message: 'auth.errPasswordLength' }
   if (!/[A-Za-z]/.test(password) || !/\d/.test(password))
     return { field: 'password', message: 'auth.errPasswordFormat' }
   if (password !== confirmation) return { field: 'confirmation', message: 'auth.errMismatch' }
@@ -188,7 +188,7 @@ export function AuthPage({ mode }: { mode: Mode }) {
                     className={inputClass}
                     type={passwordType}
                     autoComplete="current-password"
-                    maxLength={128}
+                    maxLength={64}
                     placeholder="••••••••••••"
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
@@ -275,7 +275,7 @@ export function AuthPage({ mode }: { mode: Mode }) {
                     className={inputClass}
                     type={passwordType}
                     autoComplete="new-password"
-                    maxLength={128}
+                    maxLength={64}
                     placeholder="••••••••••••"
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
@@ -299,7 +299,7 @@ export function AuthPage({ mode }: { mode: Mode }) {
                     className={inputClass}
                     type={passwordType}
                     autoComplete="new-password"
-                    maxLength={128}
+                    maxLength={64}
                     placeholder="••••••••••••"
                     value={confirmation}
                     onChange={(event) => setConfirmation(event.target.value)}
