@@ -187,3 +187,32 @@ class ForecastService:
                 "historical_increase_rate_for_level": art["tasas_prueba_2022"][level],
                 "base_increase_rate": art["prevalencia_prueba_2022"],
                 "observed_increase": None if observed is None or reference is None else classify_trend(observed, reference) == "aumento"}
+
+    def models_summary(self) -> dict:
+        out = []
+        for model_id in SERVED_MODELS:
+            m = self.metrics["modelos"][model_id]
+            out.append({"id": model_id, "label": m["etiqueta"], "group": m["grupo"], "reference": m["referencia"],
+                        "n_municipalities": m["n_municipios"], "variables": m["variables"],
+                        "horizons": {str(h): self._eval_block(model_id, h) for h in HORIZONS}})
+        return {"models": out, "climate_contribution": self.metrics["aporte_variables_climaticas"],
+                "dataset": self.metrics["dataset"], "trained_at": self.metrics["generado_utc"],
+                "increase_signal": None if not self.signal else {
+                    "definition": self.metrics["senal_aumento"]["definicion"], "variables": self.metrics["senal_aumento"]["variables"],
+                    "horizons": {str(h): self._signal_block(h) for h in HORIZONS}},
+                "channel_outlook": None if not self.channel_models else {
+                    "definition": self.metrics["canal_endemico"]["definicion"], "variables": self.metrics["canal_endemico"]["variables"],
+                    "horizons": {str(h): self._channel_block(h) for h in HORIZONS}},
+                "data_extension": self.extension, "protocol": self.metrics["protocolo"], "algorithm": self.metrics["entorno"]["algoritmo"], "disclaimer": DISCLAIMER}
+
+    def _eval_block(self, model_id: str, h: int) -> dict:
+        rep = self.metrics["modelos"][model_id]["horizontes"][str(h)]
+        def pack(key):
+            r = rep.get(key)
+            if not r:
+                return None
+            return {"n": r["n"], "mae": r["modelo"]["mae"], "rmse": r["modelo"]["rmse"], "wape": r["modelo"]["wape"],
+                    "mae_persistence": r["persistencia"]["mae"], "improvement_vs_persistence_pct": r["mejora_mae_vs_persistencia_pct"],
+                    "trend_accuracy": r["exactitud_tendencia"], "increase_recall": r["aumento_recall"],
+                    "interval_coverage_80": r["cobertura_intervalo_80"]}
+        return {"validation_2019": pack("validacion_2019"), "test_2022": pack("prueba_2022"), "pandemic_2020_2021": pack("pandemia_2020_2021")}
