@@ -589,7 +589,7 @@ export function ForecastPage() {
         if (result.origin.is_latest_available) {
           setOriginOptions(
             result.history
-              .filter((point) => point.cases !== null && point.year === result.origin.year)
+              .filter((point) => point.cases !== null)
               .map((point) => ({ year: point.year, week: point.week }))
               .reverse(),
           )
@@ -683,10 +683,17 @@ export function ForecastPage() {
             }}
           >
             <option value="">{t('fc.latestWeek')}</option>
-            {originOptions.map((option) => (
-              <option key={`${option.year}-${option.week}`} value={`${option.year}-${option.week}`}>
-                {t('fc.weekOfYear', { week: option.week, year: option.year })}
-              </option>
+            {/* Todas las semanas con dato desde 2012, agrupadas por año (de la más reciente a la más antigua). */}
+            {[...new Set(originOptions.map((option) => option.year))].map((year) => (
+              <optgroup key={year} label={String(year)}>
+                {originOptions
+                  .filter((option) => option.year === year)
+                  .map((option) => (
+                    <option key={`${option.year}-${option.week}`} value={`${option.year}-${option.week}`}>
+                      {t('fc.weekOfYear', { week: option.week, year: option.year })}
+                    </option>
+                  ))}
+              </optgroup>
             ))}
           </select>
         </FilterField>
