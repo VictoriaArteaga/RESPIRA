@@ -73,3 +73,18 @@ def test_municipalities_cover_all_64_with_model_availability(client: TestClient)
     by_code = {m["divipola_code"]: m for m in items}
     assert by_code[PASTO]["available_models"] == ["base_global", "modelo_a", "modelo_b"]
     assert by_code[ALBAN]["available_models"] == ["base_global"]
+
+
+def test_forecast_default_returns_both_horizons_from_latest_week(client: TestClient) -> None:
+    body = client.get(f"/api/forecast/municipalities/{PASTO}").json()
+    assert body["model"]["id"] == "base_global" and body["model"]["is_default"] is True
+    assert body["origin"]["year"] == 2022 and body["origin"]["week"] == 52 and body["origin"]["is_latest_available"] is True
+    h2, h3 = body["predictions"]
+    assert (h2["horizon_weeks"], h2["target_year"], h2["target_week"]) == (2, 2023, 2)
+    assert (h3["horizon_weeks"], h3["target_year"], h3["target_week"]) == (3, 2023, 3)
+    for p in body["predictions"]:
+        assert p["interval_low"] <= p["predicted_cases"] <= p["interval_high"] and p["predicted_cases"] >= 0
+        assert p["trend"] in {"aumento", "estable", "disminucion"}
+        assert p["observed_cases"] is None          # el futuro no se conoce
+    assert len(body["history"]) == 104 and body["disclaimer"]
+    assert {m["model"] for m in body["comparison"]} == {"modelo_a", "modelo_b"}
