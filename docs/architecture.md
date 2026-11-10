@@ -8,7 +8,21 @@ El conjunto cargado desde `backend/data/simulated/ira_cases.csv` se valida para 
 
 ## PostgreSQL
 
-La conexión usa el controlador `postgresql+psycopg` y se configura en `backend/.env`. Los modelos y repositorios SQLAlchemy son la capa de persistencia. La conexión productiva, migraciones, credenciales gestionadas y carga oficial de datos no están habilitadas en esta versión académica.
+La conexión usa el controlador `postgresql+psycopg` y se configura en `backend/.env`. Los modelos y repositorios SQLAlchemy son la capa de persistencia. El esquema se gestiona solo con Alembic (nunca `create_all` en producción). La carga oficial de datos no está habilitada: requiere autorización explícita y una ejecución manual del cargador.
+
+## Capa de integración de datos (Fase 2.2)
+
+`ira_cases` es el **modelo inicial de la aplicación**: la app y sus pruebas dependen de él (clima obligatorio por municipio, sin procedencia ni estado de calidad) y por eso no se modifica (`municipalities` solo gana `divipola_code` opcional y coordenadas opcionales). Los datos reales entran por un modelo separado en el esquema `public`, migración `0003`:
+
+```
+FUENTE ORIGINAL (data/, solo lectura, fuera de Git)
+  -> LECTURA por fuente (app/importers/{sivigila,ideam,dane}.py)
+  -> VALIDACIÓN por fila (estado valid | pending | rejected | missing | derived + hallazgos)
+  -> CARGA con trazabilidad (data_source -> import_batch -> filas con hoja/fila de origen -> data_quality_issue)
+  -> [futuro] dataset analítico derivado, con versión de reglas
+```
+
+Tablas: `data_source`, `import_batch`, `weather_station`, `sivigila_report`, `climate_observation`, `annual_population`, `data_quality_issue`. Detalle, reglas y ejecución en [data-integration/README.md](data-integration/README.md). Los agregados (`weekly_ira_indicator`, resúmenes por estación) y cualquier tasa quedan fuera hasta cerrar D-01, D-02 y D-15; mientras tanto, la API y el dashboard siguen leyendo solo `ira_cases`.
 
 ## SIVIGILA
 
