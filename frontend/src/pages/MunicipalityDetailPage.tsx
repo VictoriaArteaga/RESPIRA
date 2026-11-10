@@ -181,9 +181,9 @@ export function MunicipalityDetailPage() {
                   </p>
                   <dl className="mt-5 grid gap-4 sm:grid-cols-3">
                     {[
-                      { label: t('det.temperature'), value: `${latest.temperature} °C`, icon: Thermometer },
-                      { label: t('det.precipitation'), value: `${latest.precipitation} mm`, icon: CloudRain },
-                      { label: t('det.humidity'), value: `${latest.humidity}%`, icon: Droplets },
+                      { label: t('det.temperature'), value: latest.temperature === null ? '—' : `${latest.temperature} °C`, icon: Thermometer },
+                      { label: t('det.precipitation'), value: latest.precipitation === null ? '—' : `${latest.precipitation} mm`, icon: CloudRain },
+                      { label: t('det.humidity'), value: latest.humidity === null ? '—' : `${latest.humidity}%`, icon: Droplets },
                     ].map(({ label, value, icon: Icon }) => (
                       <div
                         key={label}
