@@ -27,3 +27,8 @@ def client() -> Iterator[TestClient]:
             UserRepository(db).get_by_email(creds["email"]).is_active = True
         c.headers["Authorization"] = "Bearer " + c.post("/api/auth/login", json=creds).json()["access_token"]
         yield c
+
+
+def test_forecast_requires_authentication() -> None:
+    with TestClient(app) as anonymous:
+        assert anonymous.get("/api/forecast/models").status_code in (401, 403)
