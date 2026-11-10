@@ -11,17 +11,13 @@ const real = municipalities.filter((item) => item.id >= 10000)
 const simulated = municipalities.filter((item) => item.id < 10000)
 const casesOf = (id: number) => resolveDemo(`/api/cases?municipality_id=${id}`) as IraCase[]
 
-describe('datos de demostración: los reales (2012-2022) y los simulados conviven', () => {
-  it('incluye los 64 municipios reales y los 10 simulados, estos últimos marcados como tales', () => {
+describe('datos de demostración: los reales (2012-2022) y las series de prueba conviven', () => {
+  it('incluye los 64 municipios reales y las 10 series de prueba, sin la palabra "simulado" en ningún nombre', () => {
     expect(real).toHaveLength(64)
     expect(simulated).toHaveLength(10)
-    expect(simulated.every((item) => item.name.endsWith('(simulado)'))).toBe(true)
-    expect(real.some((item) => item.name.includes('simulado'))).toBe(false)
-    // Pasto existe dos veces, pero se distingue por el nombre.
-    expect(municipalities.filter((item) => item.name.startsWith('Pasto')).map((item) => item.name).sort()).toEqual([
-      'Pasto',
-      'Pasto (simulado)',
-    ])
+    expect(municipalities.some((item) => item.name.toLowerCase().includes('simulad'))).toBe(false)
+    // Pasto aparece dos veces con el mismo nombre; se distinguen por el id (código DIVIPOLA 52001 frente a 1).
+    expect(municipalities.filter((item) => item.name === 'Pasto').map((item) => item.id).sort((a, b) => a - b)).toEqual([1, 52001])
     expect(new Set(municipalities.map((item) => item.id)).size).toBe(74)
   })
 
@@ -65,7 +61,7 @@ describe('datos de demostración: los reales (2012-2022) y los simulados convive
     expect(pasto.current_cases).not.toBeNull()
     expect(pasto.risk_level).not.toBe('no_data')
     // En 2018 los simulados aún no tienen datos.
-    expect(map.municipalities.find((item) => item.municipality === 'Pasto (simulado)')!.risk_level).toBe('no_data')
+    expect(map.municipalities.find((item) => item.municipality_id === simulated[0].id)!.risk_level).toBe('no_data')
   })
 
   it('el canal endémico de un municipio real se calcula con sus años anteriores', () => {
@@ -80,7 +76,7 @@ describe('datos de demostración: los reales (2012-2022) y los simulados convive
     expect(simulated.every((item) => item.simulated === true)).toBe(true)
     expect(real.every((item) => !item.simulated)).toBe(true)
     for (const item of simulated) {
-      const base = item.name.replace(' (simulado)', '')
+      const base = item.name
       // "Tumaco" es "San Andrés de Tumaco" en la lista oficial de municipios.
       expect(real.some((candidate) => candidate.name.includes(base))).toBe(true)
     }
@@ -103,7 +99,7 @@ describe('datos de demostración: los reales (2012-2022) y los simulados convive
     expect(summary.total_cases).toBe(sum(realRecords))
     expect(summary.total_cases).not.toBe(sum(realRecords) + sum(simulatedRecords))
     expect(summary.municipality_with_most_cases).not.toBeNull()
-    expect(summary.municipality_with_most_cases).not.toContain('simulado')
+    expect(real.map((item) => item.name)).toContain(summary.municipality_with_most_cases)
     expect(summary.last_epidemiological_week).toBe(52)
   })
 })
