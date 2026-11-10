@@ -103,3 +103,44 @@ def _signal_report(y: np.ndarray, p: np.ndarray, t_mid: float, t_high: float) ->
             "precision_promedio": float(average_precision_score(y, p)), "brier": float(brier_score_loss(y, p)),
             "alerta_alta": {"precision": float(y[hi].mean()) if hi.any() else None, "recall": float((hi & (y == 1)).sum() / max((y == 1).sum(), 1))},
             "por_nivel": by_level}
+
+
+def train_increase_signal(df: pd.DataFrame, artifact_dir, verbose: bool = True) -> dict:
+    """Clasificador de 'aumento' (>=20% y >=2 atenciones sobre el promedio de las últimas 4 semanas) a t+2 y t+3.
+    Mismo protocolo temporal que los modelos de conteo. Niveles por cuantiles de la validación: alta = top (1 - prevalencia)."""
+    ref = reference_level(df)
+    out: dict = {"definicion": "aumento = predicción >=20% y >=2 atenciones sobre el promedio de las últimas 4 semanas",
+                 "variables": SIGNAL_FEATURES, "horizontes": {}}
+    for h in HORIZONS:
+        target = f"objetivo_ira_t_mas_{h}"
+        valid = df["ira_0_4"].notna() & df[target].notna() & ref.notna()
+        data = df[valid].copy()
+        data["y"] = [1 if classify_trend(a, b) == "aumento" else 0 for a, b in zip(data[target], reference_level(data))]
+        tr, va = data[data["split_sugerido"] == "TRAIN"], data[data["split_sugerido"] == "VALIDACION"]
+
+        def fit(frame, params):
+            return HistGradientBoostingClassifier(early_stopping=False, random_state=SEED, **params).fit(frame[SIGNAL_FEATURES], frame["y"])
+
+        scored = []
+        for params in PARAM_GRID:
+            m = fit(tr, params)
+            scored.append((float(roc_auc_score(va["y"], m.predict_proba(va[SIGNAL_FEATURES])[:, 1])), params, m))
+        val_auc, best, m_train = max(scored, key=lambda s: s[0])
+        pv = m_train.predict_proba(va[SIGNAL_FEATURES])[:, 1]
+        t_high, t_mid = float(np.quantile(pv, 1 - va["y"].mean())), float(np.quantile(pv, 0.5))
+        final = fit(data[data["split_sugerido"].isin(["TRAIN", "VALIDACION"])], best)
+        report = {"parametros": best, "umbral_medio": t_mid, "umbral_alto": t_high, "auc_validacion_candidatas": [round(s[0], 4) for s in scored],
+                  "validacion_2019": _signal_report(va["y"].to_numpy(), pv, t_mid, t_high)}
+        for name, split, model in (("prueba_2022", "TEST", final), ("pandemia_2020_2021", "PANDEMIA_ANALIZAR_APARTE", final)):
+            part = data[data["split_sugerido"] == split]
+            report[name] = _signal_report(part["y"].to_numpy(), model.predict_proba(part[SIGNAL_FEATURES])[:, 1], t_mid, t_high)
+        out["horizontes"][str(h)] = report
+        joblib.dump({"model": final, "features": SIGNAL_FEATURES, "horizon": h, "umbral_medio": t_mid, "umbral_alto": t_high,
+                     "tasas_prueba_2022": {k: v["tasa_aumento_observada"] for k, v in report["prueba_2022"]["por_nivel"].items()},
+                     "prevalencia_prueba_2022": report["prueba_2022"]["prevalencia_aumento"], "scikit_learn": sklearn.__version__},
+                    artifact_dir / SIGNAL_FILE.format(h=h), compress=3)
+        if verbose:
+            t = report["prueba_2022"]
+            print(f"senal_aumento h{h}: AUC val={val_auc:.3f} prueba={t['auc']:.3f} | alta: precisión={t['alerta_alta']['precision']:.2f} "
+                  f"recall={t['alerta_alta']['recall']:.2f} (prevalencia {t['prevalencia_aumento']:.2f})", flush=True)
+    return out
