@@ -1,4 +1,4 @@
-import { useId } from 'react'
+import { useId, useState } from 'react'
 import {
   Area,
   CartesianGrid,
@@ -26,8 +26,18 @@ const COLORS = {
   surface: 'var(--color-respira-surface)',
 }
 
-// Se muestran solo las semanas más recientes: con todo el historial la estimación quedaba aplastada a la derecha.
-const VISIBLE_HISTORY_WEEKS = 26
+// Periodos del historial. "Todo" muestra desde 2012; los demás acercan la gráfica para ver de cerca la estimación,
+// que en la vista completa queda al borde derecho.
+const RANGES = [
+  { id: 'all', weeks: Infinity, label: 'fc.rangeAll' },
+  { id: '5y', weeks: 260, label: 'fc.range5y' },
+  { id: '2y', weeks: 104, label: 'fc.range2y' },
+  { id: '1y', weeks: 52, label: 'fc.range1y' },
+  { id: '26w', weeks: 26, label: 'fc.range26w' },
+] as const
+type RangeId = (typeof RANGES)[number]['id']
+// Con más de esta cantidad de semanas el eje muestra un año por marca en vez de "S12", "S13"...
+const YEAR_TICKS_FROM_WEEKS = 80
 
 interface Row {
   key: string
@@ -43,8 +53,9 @@ interface Row {
   isGap: boolean
 }
 
-function buildRows(data: ForecastResult): Row[] {
-  const rows: Row[] = data.history.slice(-VISIBLE_HISTORY_WEEKS).map((point) => ({
+function buildRows(data: ForecastResult, visibleWeeks: number): Row[] {
+  const history = Number.isFinite(visibleWeeks) ? data.history.slice(-visibleWeeks) : data.history
+  const rows: Row[] = history.map((point) => ({
     key: `${point.year}-${point.week}`,
     label: `S${point.week}`,
     year: point.year,
@@ -161,11 +172,19 @@ export function ForecastChart({ data }: { data: ForecastResult }) {
   const { t } = useI18n()
   const { reduceMotion } = usePreferences()
   const gradientId = useId().replace(/:/g, '')
-  const rows = buildRows(data)
+  const [range, setRange] = useState<RangeId>('all')
+  const visibleWeeks = RANGES.find((item) => item.id === range)?.weeks ?? Infinity
+  const rows = buildRows(data, visibleWeeks)
   const originKey = `${data.origin.year}-${data.origin.week}`
   const lastKey = rows[rows.length - 1]?.key ?? originKey
   const domain = niceDomain(rows)
-  const labels = new Map(rows.map((row) => [row.key, row.label]))
+  const observedRows = rows.filter((row) => !row.isPrediction && !row.isGap)
+  const yearTicks = observedRows.length > YEAR_TICKS_FROM_WEEKS
+  // En vistas largas se marca solo el inicio de cada año (la primera semana con dato de cada año).
+  const tickKeys = yearTicks
+    ? observedRows.filter((row, index) => index === 0 || row.year !== observedRows[index - 1].year).map((row) => row.key)
+    : undefined
+  const labels = new Map(rows.map((row) => [row.key, yearTicks ? String(row.year) : row.label]))
   const predictionRows = rows.filter((row) => row.isPrediction && row.predicted !== null)
   const hasObserved = rows.some((row) => row.observedLater !== null)
 
@@ -208,6 +227,27 @@ export function ForecastChart({ data }: { data: ForecastResult }) {
           </li>
         ))}
       </ul>
+      <div className="mt-4 flex flex-wrap items-center gap-2 text-xs" role="group" aria-label={t('fc.rangeLabel')}>
+        <span className="font-semibold text-respira-muted">{t('fc.rangeLabel')}</span>
+        {RANGES.map((item) => {
+          const active = item.id === range
+          return (
+            <button
+              key={item.id}
+              type="button"
+              aria-pressed={active}
+              onClick={() => setRange(item.id)}
+              className={`rounded-full border px-3 py-1.5 font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-respira-blue-dark ${
+                active
+                  ? 'border-respira-blue bg-respira-blue text-white'
+                  : 'border-respira-border text-respira-text hover:bg-sky-50'
+              }`}
+            >
+              {t(item.label)}
+            </button>
+          )
+        })}
+      </div>
       <div className="mt-4 h-[340px] w-full" role="img" aria-label={t('fc.chartAria')}>
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart data={rows} margin={{ top: 28, right: 28, bottom: 8, left: -8 }}>
@@ -224,8 +264,9 @@ export function ForecastChart({ data }: { data: ForecastResult }) {
               axisLine={false}
               tick={{ fill: 'var(--color-respira-muted)', fontSize: 12 }}
               tickFormatter={(key: string) => labels.get(key) ?? key}
-              interval="preserveStartEnd"
-              minTickGap={18}
+              ticks={tickKeys}
+              interval={yearTicks ? 0 : 'preserveStartEnd'}
+              minTickGap={yearTicks ? 4 : 18}
             />
             <YAxis
               allowDecimals={false}
