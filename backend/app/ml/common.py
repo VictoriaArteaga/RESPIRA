@@ -24,3 +24,8 @@ BASE_FEATURES = ["ira_0_4", "ira_lag1", "ira_lag2", "ira_lag3", "ira_lag4", "ira
                  "ira_cambio_vs_lag1", "ira_52s_atras", "semana_sin", "semana_cos", "mes_aprox"]
 PRECIP_FEATURES = ["precipitacion", "precipitacion_lag1", "precipitacion_lag2", "precipitacion_media_4s"]
 TEMP_FEATURES = ["temp_media", "temp_min", "temp_max", "temp_media_lag1", "temp_media_lag2", "temp_media_media_4s"]
+
+# Señal de aumento: historial de IRA + consultas totales (única variable extra que mejoró de forma consistente en validación y prueba).
+CONSULT_FEATURES = ["cons", "cons_lag1", "cons_media_4s", "proporcion_ira_sobre_consultas", "proporcion_ira_lag1", "prop_media_4s"]
+SIGNAL_FEATURES = BASE_FEATURES + CONSULT_FEATURES
+SIGNAL_FILE = "senal_aumento_h{h}.joblib"
