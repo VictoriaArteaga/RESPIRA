@@ -174,3 +174,16 @@ class ForecastService:
                                           "base_rate": art["prevalencia_prueba_2022"]}
             out.append(item)
         return out
+
+    def _signal_for(self, row: pd.Series, h: int, reference: float | None) -> dict | None:
+        art = self.signal.get(h)
+        if art is None:
+            return None
+        X = pd.DataFrame([row[art["features"]].astype(float)])
+        p = float(art["model"].predict_proba(X)[0, 1])
+        level = "alta" if p >= art["umbral_alto"] else "media" if p >= art["umbral_medio"] else "baja"
+        observed = _num(row.get(f"objetivo_ira_t_mas_{h}"))
+        return {"horizon_weeks": h, "probability": round(p, 3), "level": level,
+                "historical_increase_rate_for_level": art["tasas_prueba_2022"][level],
+                "base_increase_rate": art["prevalencia_prueba_2022"],
+                "observed_increase": None if observed is None or reference is None else classify_trend(observed, reference) == "aumento"}
