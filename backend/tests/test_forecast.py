@@ -100,3 +100,18 @@ def test_increase_signal_is_returned_for_both_horizons_with_honest_context(clien
     ev = body["signal_evaluation"]["2"]["test_2022"]
     assert ev["auc"] > 0.5 and ev["rate_by_level"]["baja"] < ev["rate_by_level"]["media"] < ev["rate_by_level"]["alta"]
     assert client.get("/api/forecast/models").json()["increase_signal"]["horizons"]["3"]["test_2022"]["n"] > 0
+
+
+def test_channel_outlook_gives_zone_probabilities_and_beats_chance(client: TestClient) -> None:
+    body = client.get(f"/api/forecast/municipalities/{PASTO}").json()
+    out = body["channel_outlook"]
+    assert [o["horizon_weeks"] for o in out] == [2, 3] and all(o["available"] for o in out)
+    for o in out:
+        c = o["channel"]
+        assert c["p25"] <= c["p50"] <= c["p75"] <= c["p90"]
+        assert o["predicted_zone"] in {"dentro", "sobre", "alerta"} and o["observed_zone"] is None
+        for kind in ("exceed_p75", "exceed_p90"):
+            assert 0 <= o[kind]["probability"] <= 1 and o[kind]["level"] in {"baja", "media", "alta"}
+    ev = body["channel_evaluation"]["2"]["p75"]["test_2022"]
+    assert ev["auc"] > 0.8 and ev["auc"] > ev["auc_simple_rule"] - 0.001   # honesto: la regla simple ya es fuerte
+    assert ev["rate_by_level"]["baja"] < ev["rate_by_level"]["alta"]
