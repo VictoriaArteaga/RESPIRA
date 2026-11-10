@@ -121,3 +121,18 @@ def test_channel_unavailable_when_week_has_too_few_reference_years(client: TestC
     # origen 2013 SE10: solo 2012 es año anterior, hay menos de 3 años de referencia y no se inventa un canal
     body = client.get(f"/api/forecast/municipalities/{PASTO}?year=2013&week=10").json()
     assert all(o["available"] is False and "reason" in o for o in body["channel_outlook"])
+
+
+def test_backtest_signal_reports_what_happened(client: TestClient) -> None:
+    body = client.get(f"/api/forecast/municipalities/{PASTO}?year=2022&week=30").json()
+    assert all(isinstance(s["observed_increase"], bool) for s in body["increase_signal"])
+
+
+def test_backtest_includes_observed_value_and_no_leakage(client: TestClient) -> None:
+    body = client.get(f"/api/forecast/municipalities/{PASTO}?year=2022&week=30").json()
+    assert body["origin"]["is_backtest"] is True
+    p2 = body["predictions"][0]
+    assert (p2["target_year"], p2["target_week"]) == (2022, 32)
+    assert p2["observed_cases"] is not None and p2["absolute_error"] is not None
+    # el historial devuelto termina en la semana de referencia: no contiene semanas posteriores
+    assert (body["history"][-1]["year"], body["history"][-1]["week"]) == (2022, 30)
