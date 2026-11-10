@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import type { IraCase } from '../types/case'
 import type { DashboardSummary } from '../types/dashboard'
 import type { Municipality } from '../types/municipality'
-import type { EndemicChannel, RiskMap } from '../types/risk'
+import type { AlertResponse, EndemicChannel, RiskMap } from '../types/risk'
 import { resolveDemo } from './demoApi'
 
 const municipalities = resolveDemo('/api/municipalities') as Municipality[]
@@ -101,5 +101,31 @@ describe('datos de demostración: los reales (2012-2022) y las series de prueba 
     expect(summary.municipality_with_most_cases).not.toBeNull()
     expect(real.map((item) => item.name)).toContain(summary.municipality_with_most_cases)
     expect(summary.last_epidemiological_week).toBe(52)
+  })
+
+  it('las alertas se calculan solo con datos reales y, por defecto, en la última semana real', () => {
+    const response = resolveDemo('/api/alerts') as AlertResponse
+    expect({ year: response.year, week: response.week }).toEqual({ year: 2022, week: 52 })
+    expect(response.available_years[0]).toBe(2022)
+    expect(response.available_years).toContain(2012)
+    expect(response.available_years).not.toContain(2025)
+    expect(response.alerts.length).toBeGreaterThan(0)
+    for (const alert of response.alerts) {
+      expect(alert.municipality_id).toBeGreaterThanOrEqual(10000) // ningún municipio de prueba
+      expect(['moderate', 'high']).toContain(alert.risk_level)
+      // La cifra observada de cada alerta es la del registro real de ese municipio y semana.
+      const record = casesOf(alert.municipality_id).find(
+        (item) => item.year === alert.year && item.epidemiological_week === alert.week,
+      )
+      expect(record?.cases).toBe(alert.observed_cases)
+    }
+    const variations = response.alerts.map((alert) => alert.variation_percent)
+    expect(variations).toEqual([...variations].sort((a, b) => b - a))
+  })
+
+  it('las alertas de un año anterior también son solo de municipios reales', () => {
+    const response = resolveDemo('/api/alerts?year=2019&week=30') as AlertResponse
+    expect({ year: response.year, week: response.week }).toEqual({ year: 2019, week: 30 })
+    expect(response.alerts.every((alert) => alert.municipality_id >= 10000)).toBe(true)
   })
 })
