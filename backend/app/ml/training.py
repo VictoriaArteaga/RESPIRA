@@ -85,3 +85,21 @@ def _sha256(path) -> str:
         for chunk in iter(lambda: fh.read(1 << 20), b""):
             h.update(chunk)
     return h.hexdigest()
+
+
+def _levels(p: np.ndarray, t_mid: float, t_high: float) -> np.ndarray:
+    return np.where(p >= t_high, "alta", np.where(p >= t_mid, "media", "baja"))
+
+
+def _signal_report(y: np.ndarray, p: np.ndarray, t_mid: float, t_high: float) -> dict:
+    lv = _levels(p, t_mid, t_high)
+    by_level = {}
+    for name in ("baja", "media", "alta"):
+        m = lv == name
+        by_level[name] = {"n": int(m.sum()), "proporcion_semanas": float(m.mean()),
+                          "tasa_aumento_observada": float(y[m].mean()) if m.any() else None}
+    hi = lv == "alta"
+    return {"n": int(len(y)), "prevalencia_aumento": float(y.mean()), "auc": float(roc_auc_score(y, p)),
+            "precision_promedio": float(average_precision_score(y, p)), "brier": float(brier_score_loss(y, p)),
+            "alerta_alta": {"precision": float(y[hi].mean()) if hi.any() else None, "recall": float((hi & (y == 1)).sum() / max((y == 1).sum(), 1))},
+            "por_nivel": by_level}
