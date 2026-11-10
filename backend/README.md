@@ -138,3 +138,10 @@ Migración: `python -m alembic upgrade head` crea la tabla `users` (no modifica 
 **Limitación de intentos** (en memoria, por proceso; se reinicia con el backend): 5 fallos por IP+correo y 20 por IP cada 15 minutos en el inicio de sesión (429 con `Retry-After`; un acceso correcto reinicia el contador del par), y 10 solicitudes de registro por IP por hora. Es un bloqueo temporal, nunca permanente. No usa `X-Forwarded-For`; tras un proxy habría que configurarlo. No se comparte entre varios workers.
 
 Limitaciones conocidas: no hay verificación de correo ni recuperación de contraseña.
+
+## IA: predicción experimental de IRA (t+2 y t+3)
+
+Predice las atenciones por IRA notificadas (<5 años) por municipio a 2 y 3 semanas, con los datos reales de `data/respira_v2/` (no usa `ira_cases` ni datos sintéticos, y no toca la base de datos). Es una predicción **experimental** de la demo: no es un diagnóstico ni una alerta oficial.
+
+- **Entrenar y evaluar** (≈2 min, determinista): `python scripts/train_forecast.py`. Escribe en `backend/ml_artifacts/` los modelos `*.joblib`, `metrics.json` y `metrics_by_municipality.csv`. Requiere `scikit-learn` y `joblib` (en `requirements.txt`).
+- **Modelos:** `base_global` (solo historial de IRA, 64 municipios), `modelo_a` (+ precipitación, 38) y `modelo_b` (+ temperatura, 11). Algoritmo: `HistGradientBoostingRegressor`, que admite faltantes (no se imputa). Un modelo por horizonte. Ajuste 2012–2018 → selección en 2019 → reajuste 2012–2019 → prueba 2022; pandemia 2020–2021 se evalúa aparte.
