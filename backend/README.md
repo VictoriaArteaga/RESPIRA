@@ -91,6 +91,12 @@ Los filtros de casos se pueden combinar, por ejemplo: `/api/cases?municipality_i
 
 El resumen del dashboard informa el total de municipios, suma de casos, promedio de casos por municipio a lo largo de los registros, municipio con más casos acumulados, última semana epidemiológica y total de registros. El riesgo compara los casos de una semana con la media de esa misma semana en años anteriores (bajo <20%, moderado 20–<50%, alto ≥50%). El canal calcula mediana y percentiles 25, 75 y 90 por semana a partir de registros de años previos. Son estadísticas descriptivas; no se generan predicciones ni se utiliza IA.
 
+## Integración de datos (Fase 2.2)
+
+La migración `0003` agrega siete tablas fuente (`data_source`, `import_batch`, `weather_station`, `sivigila_report`, `climate_observation`, `annual_population`, `data_quality_issue`) más dos cambios compatibles en `municipalities` (`divipola_code` opcional y coordenadas opcionales), sin eliminar nada ni cargar datos. `ira_cases` sigue siendo el modelo inicial de la app (datos sintéticos); los datos oficiales usarán las tablas nuevas. Diseño, reglas y flujo: [docs/data-integration/README.md](../docs/data-integration/README.md).
+
+Revisar el SQL antes de aplicarlo (no se conecta a la base): `python -m alembic upgrade 0002:0003 --sql`. Rollback: `python -m alembic downgrade 0002` (elimina solo las tablas de 0003; destructivo si ya contienen datos). Validar un archivo fuente sin base de datos: `python scripts/validate_source.py --help`.
+
 ## Pruebas
 
 Desde `backend` y con las dependencias instaladas:
@@ -100,6 +106,8 @@ python -m pytest
 ```
 
 Las pruebas usan SQLite en memoria, configurado solo en `tests/conftest.py`, y no requieren conexión a PostgreSQL. SQLite no se usa en ejecución real.
+
+Limitación: SQLite crea el esquema con `create_all`, de modo que **no prueba las migraciones ni las restricciones propias de PostgreSQL** (regex de DIVIPOLA/SHA-256, identidad BIGINT, índices parciales). Eso lo cubre `tests/test_postgres_schema.py`, que aplica `alembic upgrade head`/`downgrade` y verifica restricciones y deriva contra un PostgreSQL desechable si se define `RESPIRA_TEST_PG_URL` (ver [docs/data-integration](../docs/data-integration/README.md#implementación-fase-22)); sin ella se omite. Nunca la apunte a Supabase.
 
 Las alertas clasifican como vigilancia una variación de 20% a menos de 50% y como riesgo alto una variación de 50% o más frente a la media histórica de la misma semana. Los niveles reutilizan los umbrales del mapa y no son predicciones.
 
