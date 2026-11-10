@@ -552,6 +552,7 @@ export const es = {
   'fc.range2y': '2 años',
   'fc.range1y': '1 año',
   'fc.range26w': '26 semanas',
+  'mun.countSplit': '{shown} de {total} registros: {real} municipios de Nariño y {sim} simulados',
 } as const
 
 export type TranslationKey = keyof typeof es
@@ -1092,4 +1093,5 @@ export const en: Record<TranslationKey, string> = {
   'fc.range2y': '2 years',
   'fc.range1y': '1 year',
   'fc.range26w': '26 weeks',
+  'mun.countSplit': '{shown} of {total} records: {real} Nariño municipalities and {sim} simulated',
 }

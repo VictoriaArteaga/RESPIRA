@@ -52,6 +52,7 @@ export function MunicipalitiesPage() {
     return byMunicipality
   }, [cases])
 
+  const simulatedCount = municipalities.filter((municipality) => municipality.simulated).length
   const maximumCases = Math.max(...[...totals.values()].map((item) => item.cases), 1)
   const visible = municipalities.filter((municipality) =>
     municipality.name.toLowerCase().includes(query.trim().toLowerCase()),
@@ -81,7 +82,14 @@ export function MunicipalitiesPage() {
         <Card className="overflow-hidden">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-respira-border px-5 py-4">
             <p className="text-sm text-respira-muted">
-              {t('mun.count', { shown: visible.length, total: municipalities.length })}
+              {simulatedCount > 0
+                ? t('mun.countSplit', {
+                    shown: visible.length,
+                    total: municipalities.length,
+                    real: municipalities.length - simulatedCount,
+                    sim: simulatedCount,
+                  })
+                : t('mun.count', { shown: visible.length, total: municipalities.length })}
             </p>
             <label className="relative block w-full sm:w-72">
               <span className="sr-only">{t('mun.search')}</span>
