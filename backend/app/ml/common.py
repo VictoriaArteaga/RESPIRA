@@ -76,3 +76,16 @@ def reference_level(df: pd.DataFrame) -> pd.Series:
 
 def scale_ref(df: pd.DataFrame) -> pd.Series:
     return reference_level(df) + 1.0
+
+
+# ---- calendario epidemiológico (regla de la SE1: contiene el 4 de enero; igual a data/scripts/respira_v2/03_calendario.py)
+def _start_se1(year: int) -> date:
+    j4 = date(year, 1, 4)
+    return j4 - timedelta(days=(j4.weekday() + 1) % 7)
+
+
+def epi_week_of(day: date) -> tuple[int, int]:
+    for year in (day.year - 1, day.year, day.year + 1):
+        if _start_se1(year) <= day < _start_se1(year + 1):
+            return year, (day - _start_se1(year)).days // 7 + 1
+    raise ValueError(day)
