@@ -40,8 +40,10 @@ import type {
   ForecastModelsSummary,
   ForecastMunicipality,
   ForecastPrediction,
+  ChannelZone,
   ForecastResult,
   ForecastWarning,
+  SignalLevel,
   Trend,
 } from '../types/forecast'
 
@@ -56,6 +58,7 @@ const WARNING_KEYS: Record<string, TranslationKey> = {
   missing_lags: 'fc.warn.missing_lags',
   missing_precipitation: 'fc.warn.missing_precipitation',
   missing_temperature: 'fc.warn.missing_temperature',
+  missing_consultations: 'fc.warn.missing_consultations',
   low_volume: 'fc.warn.low_volume',
   pandemic: 'fc.warn.pandemic',
   calendar_unverified: 'fc.warn.calendar_unverified',
@@ -216,6 +219,137 @@ function ConfidenceCard({ data }: { data: ForecastResult }) {
         <p className="flex gap-2.5 border-t border-respira-border pt-4 text-sm leading-6">
           <Target size={20} className="mt-0.5 shrink-0 text-sky-800" aria-hidden="true" />
           <span>{t('fc.pastTests', { mae: num(test.mae, 1), hits: Math.round(test.trend_accuracy * 10) })}</span>
+        </p>
+      )}
+    </Card>
+  )
+}
+
+const SIGNAL_STYLE: Record<SignalLevel, string> = {
+  baja: 'bg-slate-100 text-slate-700',
+  media: 'bg-amber-100 text-amber-950',
+  alta: 'bg-rose-100 text-rose-900',
+}
+
+function IncreaseSignalCard({ data }: { data: ForecastResult }) {
+  const { t, locale } = useI18n()
+  if (!data.increase_signal?.length) return null
+  const pct = (value: number | null | undefined) =>
+    value === null || value === undefined ? '—' : Math.round(value * 100).toLocaleString(locale)
+  const test = data.signal_evaluation?.['2']?.test_2022
+  return (
+    <Card className="p-5 sm:p-6">
+      <h2 className="font-bold">{t('fc.sigTitle')}</h2>
+      <p className="mt-1 text-xs text-respira-muted">{t('fc.sigIntro')}</p>
+      <div className="mt-4 grid gap-4 md:grid-cols-2">
+        {data.increase_signal.map((signal) => (
+          <div key={signal.horizon_weeks} className="rounded-xl border border-respira-border px-4 py-3.5">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <span className="text-sm font-semibold text-respira-text">{t('fc.sigHorizon', { n: signal.horizon_weeks })}</span>
+              <span className={`rounded-full px-3 py-1 text-xs font-semibold ${SIGNAL_STYLE[signal.level]}`}>
+                {t(`fc.sigLevel.${signal.level}` as TranslationKey)}
+              </span>
+            </div>
+            <p className="mt-2 text-xs text-respira-muted">
+              {t('fc.sigHistory', {
+                level: t(`fc.sigWord.${signal.level}` as TranslationKey),
+                rate: pct(signal.historical_increase_rate_for_level),
+                base: pct(signal.base_increase_rate),
+              })}
+            </p>
+            {signal.observed_increase !== null && (
+              <p className="mt-2 rounded-lg bg-rose-50 px-3 py-2 text-xs font-semibold text-rose-900">
+                {signal.observed_increase ? t('fc.sigOutcomeYes') : t('fc.sigOutcomeNo')}
+              </p>
+            )}
+          </div>
+        ))}
+      </div>
+      {test && (
+        <p className="mt-4 rounded-xl bg-amber-50 px-3.5 py-2.5 text-xs text-amber-950">
+          {t('fc.sigCaveat', { precision: pct(test.high_precision), recall: pct(test.high_recall) })}
+        </p>
+      )}
+    </Card>
+  )
+}
+
+const ZONE_STYLE: Record<ChannelZone, string> = {
+  dentro: 'bg-emerald-100 text-emerald-900',
+  sobre: 'bg-amber-100 text-amber-950',
+  alerta: 'bg-rose-100 text-rose-900',
+}
+
+function ChannelOutlookCard({ data }: { data: ForecastResult }) {
+  const { t, locale } = useI18n()
+  if (!data.channel_outlook?.length) return null
+  const pct = (value: number | null | undefined) =>
+    value === null || value === undefined ? '—' : Math.round(value * 100).toLocaleString(locale)
+  const n = (value: number) => value.toLocaleString(locale, { maximumFractionDigits: 1 })
+  const zoneName = (zone: ChannelZone) => t(`fc.chZone.${zone}` as TranslationKey)
+  const test = data.channel_evaluation?.['2']?.p75.test_2022
+  return (
+    <Card className="p-5 sm:p-6">
+      <h2 className="font-bold">{t('fc.chTitle')}</h2>
+      <p className="mt-1 text-xs text-respira-muted">{t('fc.chIntro')}</p>
+      <div className="mt-4 grid gap-4 md:grid-cols-2">
+        {data.channel_outlook.map((item) => {
+          const predictions = data.predictions.find((p) => p.horizon_weeks === item.horizon_weeks)
+          return (
+            <div key={item.horizon_weeks} className="rounded-xl border border-respira-border px-4 py-3.5">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <span className="text-sm font-semibold text-respira-text">
+                  {t('fc.targetWeek', { week: item.target_week, year: item.target_year })}
+                </span>
+                {item.available && item.predicted_zone && (
+                  <span className={`rounded-full px-3 py-1 text-xs font-semibold ${ZONE_STYLE[item.predicted_zone]}`}>
+                    {zoneName(item.predicted_zone)}
+                  </span>
+                )}
+              </div>
+              {!item.available || !item.channel ? (
+                <p className="mt-2 text-xs text-respira-muted">{t('fc.chUnavailable')}</p>
+              ) : (
+                <>
+                  <p className="mt-2 text-xs tabular-nums text-respira-muted">
+                    {t('fc.chChannel', { p50: n(item.channel.p50), p75: n(item.channel.p75), p90: n(item.channel.p90) })}
+                    {predictions ? ` · ${t('fc.chPredicted', { value: n(predictions.predicted_cases) })}` : ''}
+                  </p>
+                  {item.exceed_p75 && (
+                    <p className="mt-2 text-xs text-respira-body">
+                      {t('fc.chExceed75', {
+                        level: t(`fc.sigWord.${item.exceed_p75.level}` as TranslationKey),
+                        rate: pct(item.exceed_p75.historical_rate_for_level),
+                        base: pct(item.exceed_p75.base_rate),
+                      })}
+                    </p>
+                  )}
+                  {item.exceed_p90 && (
+                    <p className="mt-1.5 text-xs text-respira-body">
+                      {t('fc.chExceed90', {
+                        level: t(`fc.sigWord.${item.exceed_p90.level}` as TranslationKey),
+                        rate: pct(item.exceed_p90.historical_rate_for_level),
+                        base: pct(item.exceed_p90.base_rate),
+                      })}
+                    </p>
+                  )}
+                  {item.observed_zone && (
+                    <p className="mt-2 rounded-lg bg-rose-50 px-3 py-2 text-xs font-semibold text-rose-900">
+                      {t('fc.chObserved', { zone: zoneName(item.observed_zone).toLowerCase() })}
+                    </p>
+                  )}
+                </>
+              )}
+            </div>
+          )
+        })}
+      </div>
+      {test && test.auc_simple_rule !== null && (
+        <p className="mt-4 rounded-xl bg-amber-50 px-3.5 py-2.5 text-xs text-amber-950">
+          {t('fc.chCaveat', {
+            auc: test.auc.toLocaleString(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+            simple: test.auc_simple_rule.toLocaleString(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+          })}
         </p>
       )}
     </Card>
@@ -628,6 +762,10 @@ export function ForecastPage() {
             ))}
             <TrendCard predictions={data.predictions} />
           </div>
+
+          <IncreaseSignalCard data={data} />
+
+          <ChannelOutlookCard data={data} />
 
           <ForecastChart data={data} />
 

@@ -68,3 +68,16 @@ export function parseSetActiveArgs(userId: unknown, isActive: unknown): { userId
   if (typeof isActive !== 'boolean') return null
   return { userId, isActive }
 }
+
+const FORECAST_MODELS = new Set(['base_global', 'modelo_a', 'modelo_b'])
+
+/** Rutas de solo lectura de la IA: listados y predicción por código DIVIPOLA (5 dígitos) con filtros year, week y model válidos. */
+export function isAllowedForecastRoute(url: URL): boolean {
+  if (url.pathname === '/api/forecast/models' || url.pathname === '/api/forecast/municipalities' || url.pathname === '/api/forecast/status') {
+    return url.search.length === 0
+  }
+  if (!/^\/api\/forecast\/municipalities\/\d{5}$/.test(url.pathname)) return false
+  return [...url.searchParams].every(([key, value]) =>
+    key === 'model' ? FORECAST_MODELS.has(value) : (key === 'year' || key === 'week') && /^\d{1,4}$/.test(value),
+  )
+}

@@ -146,3 +146,16 @@ Migración: `python -m alembic upgrade head` crea la tabla `users` (no modifica 
 **Limitación de intentos** (en memoria, por proceso; se reinicia con el backend): 5 fallos por IP+correo y 20 por IP cada 15 minutos en el inicio de sesión (429 con `Retry-After`; un acceso correcto reinicia el contador del par), y 10 solicitudes de registro por IP por hora. Es un bloqueo temporal, nunca permanente. No usa `X-Forwarded-For`; tras un proxy habría que configurarlo. No se comparte entre varios workers.
 
 Limitaciones conocidas: no hay verificación de correo ni recuperación de contraseña.
+
+## IA: predicción experimental de IRA (t+2 y t+3)
+
+Predice las atenciones por IRA notificadas (<5 años) por municipio a 2 y 3 semanas, con los datos reales de `data/respira_v2/` (no usa `ira_cases` ni datos sintéticos, y no toca la base de datos). Es una predicción **experimental** de la demo: no es un diagnóstico ni una alerta oficial.
+
+- **Entrenar y evaluar** (≈2 min, determinista): `python scripts/train_forecast.py`. Escribe en `backend/ml_artifacts/` los modelos `*.joblib`, `metrics.json` y `metrics_by_municipality.csv`. Requiere `scikit-learn` y `joblib` (en `requirements.txt`).
+- **Modelos:** `base_global` (solo historial de IRA, 64 municipios), `modelo_a` (+ precipitación, 38) y `modelo_b` (+ temperatura, 11). Algoritmo: `HistGradientBoostingRegressor`, que admite faltantes (no se imputa). Un modelo por horizonte. Ajuste 2012–2018 → selección en 2019 → reajuste 2012–2019 → prueba 2022; pandemia 2020–2021 se evalúa aparte.
+- **API** (rol analyst/admin, bajo `/api/forecast`): `GET /status`, `GET /models` (variables y métricas reales), `GET /municipalities`, `GET /municipalities/{divipola}?year=&week=&model=` (sin `year/week` predice desde la última semana con dato; con ellos se compara con lo observado después).
+- **Rutas de datos/modelos:** variables de entorno opcionales `RESPIRA_V2_DATA_DIR` y `RESPIRA_ML_DIR`.
+- **Pruebas:** `python -m pytest tests/test_forecast.py` (se omiten si faltan dataset o modelos).
+- **Interfaz:** menú *Predicción IA* (`/forecast`).
+- **Señal de aumento:** clasificador (`senal_aumento_h2/h3.joblib`) que estima si las atenciones subirán ≥20% y ≥2 sobre el promedio de las últimas 4 semanas. Usa el historial de IRA y las consultas totales; se entrena en el mismo comando. La API la devuelve en `increase_signal` (nivel baja/media/alta y la frecuencia histórica de aumento de 2022 para ese nivel) y su evaluación en `signal_evaluation`.
+- **Zona del canal endémico:** `canal_p75_h*.joblib` y `canal_p90_h*.joblib` estiman la probabilidad de superar el percentil 75 (sobre lo esperado) o el 90 (zona de alerta) de la semana objetivo. El canal usa la misma semana de años anteriores, sin 2020–2021, y exige al menos 3 años con dato. La API lo devuelve en `channel_outlook` (canal, zona del conteo predicho y probabilidades) y su evaluación en `channel_evaluation`, que incluye la regla simple (promedio reciente frente al canal) como comparación.

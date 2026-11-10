@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 
 from app.api.dependencies import require_analyst
-from app.api.routes import admin_users, auth, cases, dashboard, health, municipalities, risk
+from app.api.routes import admin_users, auth, cases, dashboard, forecast, health, municipalities, risk
 
 api_router = APIRouter(prefix="/api")
 api_router.include_router(health.router, tags=["health"])
@@ -14,3 +14,4 @@ api_router.include_router(municipalities.router, prefix="/municipalities", tags=
 api_router.include_router(risk.router, tags=["risk-analysis"], dependencies=protected)
 api_router.include_router(cases.router, prefix="/cases", tags=["cases"], dependencies=protected)
 api_router.include_router(dashboard.router, prefix="/dashboard", tags=["dashboard"], dependencies=protected)
+api_router.include_router(forecast.router, prefix="/forecast", tags=["forecast"], dependencies=protected)

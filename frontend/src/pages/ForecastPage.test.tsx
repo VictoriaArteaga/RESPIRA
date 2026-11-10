@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import * as forecastService from '../services/forecastService'
-import type { ForecastEvalBlock, ForecastModelsSummary, ForecastMunicipality, ForecastResult } from '../types/forecast'
+import type { ForecastEvalBlock, ForecastModelsSummary, ForecastMunicipality, ForecastResult, SignalEvalBlock, ChannelEvalBlock } from '../types/forecast'
 import { ForecastPage } from './ForecastPage'
 
 vi.mock('../services/forecastService')
@@ -12,6 +12,16 @@ vi.mock('../components/forecast/ForecastChart', () => ({ ForecastChart: () => <d
 const block: ForecastEvalBlock = {
   n: 100, mae: 4.2, rmse: 11.5, wape: 0.28, mae_persistence: 5, improvement_vs_persistence_pct: 15,
   trend_accuracy: 0.57, increase_recall: 0.07, interval_coverage_80: 0.82,
+}
+
+const sigBlock: SignalEvalBlock = {
+  n: 100, increase_prevalence: 0.21, auc: 0.68, average_precision: 0.36, high_precision: 0.4, high_recall: 0.3,
+  rate_by_level: { baja: 0.14, media: 0.25, alta: 0.44 }, share_by_level: { baja: 0.5, media: 0.3, alta: 0.2 },
+}
+
+const chBlock: ChannelEvalBlock = {
+  n: 100, exceed_prevalence: 0.12, auc: 0.88, auc_simple_rule: 0.85, high_precision: 0.5, high_recall: 0.47,
+  rate_by_level: { baja: 0.02, media: 0.18, alta: 0.5 },
 }
 
 const municipalities: ForecastMunicipality[] = [
@@ -30,6 +40,29 @@ const result: ForecastResult = {
     { horizon_weeks: 2, target_year: 2023, target_week: 2, target_week_start: '2023-01-08', target_week_end: '2023-01-14', predicted_cases: 195.9, interval_low: 173.6, interval_high: 219.5, reference_cases: 226.2, change_vs_reference_pct: -13.4, trend: 'estable', observed_cases: null, absolute_error: null },
     { horizon_weeks: 3, target_year: 2023, target_week: 3, target_week_start: '2023-01-15', target_week_end: '2023-01-21', predicted_cases: 260, interval_low: 230, interval_high: 290, reference_cases: 226.2, change_vs_reference_pct: 15, trend: 'aumento', observed_cases: null, absolute_error: null },
   ],
+  increase_signal: [
+    { horizon_weeks: 2, probability: 0.41, level: 'alta', historical_increase_rate_for_level: 0.44, base_increase_rate: 0.21, observed_increase: null },
+    { horizon_weeks: 3, probability: 0.1, level: 'baja', historical_increase_rate_for_level: 0.13, base_increase_rate: 0.21, observed_increase: null },
+  ],
+  signal_evaluation: {
+    '2': {
+      validation_2019: sigBlock,
+      pandemic_2020_2021: sigBlock,
+      test_2022: { ...sigBlock, high_precision: 0.44, high_recall: 0.26 },
+    },
+  },
+  channel_outlook: [
+    {
+      horizon_weeks: 2, target_year: 2023, target_week: 2, available: true, channel: { p25: 96, p50: 250, p75: 287, p90: 301.6 },
+      predicted_zone: 'dentro', observed_zone: null,
+      exceed_p75: { probability: 0.18, level: 'media', historical_rate_for_level: 0.18, base_rate: 0.12 },
+      exceed_p90: { probability: 0.12, level: 'media', historical_rate_for_level: 0.09, base_rate: 0.06 },
+    },
+    { horizon_weeks: 3, target_year: 2023, target_week: 3, available: false, reason: 'x' },
+  ],
+  channel_evaluation: {
+    '2': { p75: { validation_2019: chBlock, pandemic_2020_2021: chBlock, test_2022: { ...chBlock, auc: 0.88, auc_simple_rule: 0.85 } }, p90: { validation_2019: chBlock, test_2022: chBlock, pandemic_2020_2021: chBlock } },
+  },
   comparison: [],
   reference: { description: 'x', value: 226.2 },
   history: [{ year: 2022, week: 52, week_end: '2022-12-31', cases: 178, status: 'OBSERVADO' }],

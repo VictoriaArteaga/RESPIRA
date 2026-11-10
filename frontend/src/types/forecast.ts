@@ -71,6 +71,71 @@ export interface ForecastHistoryPoint {
   status: string
 }
 
+export type SignalLevel = 'baja' | 'media' | 'alta'
+
+export interface IncreaseSignal {
+  horizon_weeks: number
+  probability: number
+  level: SignalLevel
+  historical_increase_rate_for_level: number
+  base_increase_rate: number
+  observed_increase: boolean | null
+}
+
+export interface SignalEvalBlock {
+  n: number
+  increase_prevalence: number
+  auc: number
+  average_precision: number
+  high_precision: number | null
+  high_recall: number
+  rate_by_level: Record<SignalLevel, number | null>
+  share_by_level: Record<SignalLevel, number>
+}
+
+export interface SignalEvaluation {
+  validation_2019: SignalEvalBlock
+  test_2022: SignalEvalBlock
+  pandemic_2020_2021: SignalEvalBlock
+}
+
+export type ChannelZone = 'dentro' | 'sobre' | 'alerta'
+
+export interface ChannelExceed {
+  probability: number
+  level: SignalLevel
+  historical_rate_for_level: number
+  base_rate: number
+}
+
+export interface ChannelOutlookItem {
+  horizon_weeks: number
+  target_year: number
+  target_week: number
+  available: boolean
+  reason?: string
+  channel?: { p25: number; p50: number; p75: number; p90: number }
+  predicted_zone?: ChannelZone | null
+  observed_zone?: ChannelZone | null
+  exceed_p75?: ChannelExceed
+  exceed_p90?: ChannelExceed
+}
+
+export interface ChannelEvalBlock {
+  n: number
+  exceed_prevalence: number
+  auc: number
+  auc_simple_rule: number | null
+  high_precision: number | null
+  high_recall: number
+  rate_by_level: Record<SignalLevel, number | null>
+}
+
+export interface ChannelEvaluation {
+  p75: { validation_2019: ChannelEvalBlock; test_2022: ChannelEvalBlock; pandemic_2020_2021: ChannelEvalBlock }
+  p90: { validation_2019: ChannelEvalBlock; test_2022: ChannelEvalBlock; pandemic_2020_2021: ChannelEvalBlock }
+}
+
 export interface ForecastResult {
   municipality: { divipola_code: string; name: string }
   origin: {
@@ -84,6 +149,10 @@ export interface ForecastResult {
   }
   model: { id: ForecastModelId; label: string; is_default: boolean; available_models: ForecastModelId[]; algorithm: string; trained_through: string }
   predictions: ForecastPrediction[]
+  increase_signal: IncreaseSignal[]
+  signal_evaluation: Record<string, SignalEvaluation> | null
+  channel_outlook: ChannelOutlookItem[]
+  channel_evaluation: Record<string, ChannelEvaluation> | null
   comparison: Array<{ model: ForecastModelId; label: string; predictions: ForecastPrediction[] }>
   reference: { description: string; value: number | null }
   history: ForecastHistoryPoint[]
