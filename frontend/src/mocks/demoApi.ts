@@ -134,8 +134,11 @@ const realCases: IraCase[] = (() => {
 // Los municipios simulados llevan "(simulado)" para distinguirlos de los reales con el mismo nombre (p. ej. Pasto).
 const municipalities: Municipality[] = [
   ...realMunicipalities,
-  ...simulatedMunicipalities.map((m) => ({ ...m, name: `${m.name} (simulado)` })),
+  ...simulatedMunicipalities.map((m) => ({ ...m, name: `${m.name} (simulado)`, simulated: true })),
 ]
+// Nariño tiene 64 municipios. Los simulados son copias de municipios que ya están entre esos 64 (con datos de prueba),
+// por eso no cuentan como municipios adicionales en los totales.
+const NARINO_MUNICIPALITIES = municipalities.filter((item) => !item.simulated).length
 const cases: IraCase[] = [...realCases, ...simulatedCases]
 const AVAILABLE_YEARS = [...new Set([...REAL_YEARS, ...YEARS])].sort((a, b) => b - a)
 
@@ -289,9 +292,9 @@ function dashboard(): DashboardSummary {
   const [topId] = [...totals.entries()].sort((a, b) => b[1] - a[1])[0]
   const totalCases = cases.reduce((sum, record) => sum + record.cases, 0)
   return {
-    total_municipalities: municipalities.length,
+    total_municipalities: NARINO_MUNICIPALITIES,
     total_cases: totalCases,
-    average_cases: round1(totalCases / municipalities.length),
+    average_cases: round1(totalCases / NARINO_MUNICIPALITIES),
     municipality_with_most_cases: municipalities.find((item) => item.id === topId)?.name ?? null,
     last_epidemiological_week: latestWeek,
     total_records: cases.length,
