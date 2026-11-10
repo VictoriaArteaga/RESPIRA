@@ -35,3 +35,15 @@ def forecast_models() -> dict:
 @router.get("/municipalities")
 def forecast_municipalities() -> dict:
     return {"municipalities": _service().list_municipalities()}
+
+
+@router.get("/municipalities/{divipola_code}")
+def forecast_municipality(divipola_code: str,
+                          year: int | None = Query(default=None, ge=2012, le=2022),
+                          week: int | None = Query(default=None, ge=1, le=53),
+                          model: str | None = Query(default=None, pattern="^(base_global|modelo_a|modelo_b)$")) -> dict:
+    """Predicción a t+2 y t+3 desde la última semana con dato, o desde (year, week) para comparar con lo observado."""
+    try:
+        return _service().forecast(divipola_code, year, week, model)
+    except ForecastUnavailable as error:
+        raise HTTPException(status_code=error.status, detail=error.message) from error
