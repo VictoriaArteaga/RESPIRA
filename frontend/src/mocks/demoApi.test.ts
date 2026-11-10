@@ -76,9 +76,20 @@ describe('datos de demostración: los reales (2012-2022) y los simulados convive
     expect(channel.available_years).toContain(2012)
   })
 
-  it('el resumen general suma ambos conjuntos', () => {
+  it('los simulados son copias de municipios reales: no son municipios adicionales', () => {
+    expect(simulated.every((item) => item.simulated === true)).toBe(true)
+    expect(real.every((item) => !item.simulated)).toBe(true)
+    for (const item of simulated) {
+      const base = item.name.replace(' (simulado)', '')
+      // "Tumaco" es "San Andrés de Tumaco" en la lista oficial de municipios.
+      expect(real.some((candidate) => candidate.name.includes(base))).toBe(true)
+    }
+  })
+
+  it('el resumen general cuenta los 64 municipios de Nariño una sola vez y el promedio es coherente', () => {
     const summary = resolveDemo('/api/dashboard') as DashboardSummary
-    expect(summary.total_municipalities).toBe(74)
+    expect(summary.total_municipalities).toBe(64)
     expect(summary.total_records).toBeGreaterThan(34396 + 2600 - 1)
+    expect(summary.average_cases).toBeCloseTo(summary.total_cases / 64, 1)
   })
 })
