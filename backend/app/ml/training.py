@@ -52,3 +52,14 @@ def _errors(y: np.ndarray, p: np.ndarray) -> dict:
     err = p - y
     return {"mae": float(np.mean(np.abs(err))), "rmse": float(np.sqrt(np.mean(err ** 2))),
             "wape": float(np.abs(err).sum() / y.sum()) if y.sum() > 0 else None, "sesgo": float(err.mean())}
+
+
+def _trend_scores(y: np.ndarray, p: np.ndarray, ref: np.ndarray) -> dict:
+    obs = np.array([classify_trend(a, b) for a, b in zip(y, ref)])
+    pred = np.array([classify_trend(a, b) for a, b in zip(p, ref)])
+    up_obs, up_pred = obs == "aumento", pred == "aumento"
+    tp = int((up_obs & up_pred).sum())
+    return {"exactitud_tendencia": float((obs == pred).mean()),
+            "aumento_precision": tp / up_pred.sum() if up_pred.sum() else None,
+            "aumento_recall": tp / up_obs.sum() if up_obs.sum() else None,
+            "n_aumentos_observados": int(up_obs.sum())}
