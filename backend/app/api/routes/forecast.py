@@ -30,3 +30,8 @@ def forecast_status() -> dict:
 def forecast_models() -> dict:
     """Modelos servidos, variables y resultados reales de evaluación (validación 2019, prueba 2022, pandemia aparte)."""
     return _service().models_summary()
+
+
+@router.get("/municipalities")
+def forecast_municipalities() -> dict:
+    return {"municipalities": _service().list_municipalities()}
