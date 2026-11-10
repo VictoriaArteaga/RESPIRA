@@ -1,0 +1,1929 @@
+{
+  "generado_utc": "2026-11-10T13:37:46+00:00",
+  "dataset": {
+    "archivo": "dataset_entrenamiento.csv",
+    "sha256": "279292421a042b2864ef4c9b26a456d3a1bef98afab8f011004cc189c79a0586",
+    "filas": 36736
+  },
+  "entorno": {
+    "python": "3.12.10",
+    "scikit_learn": "1.9.1",
+    "semilla": 0,
+    "algoritmo": "HistGradientBoostingRegressor (razón al nivel reciente)"
+  },
+  "protocolo": "ajuste 2012-2018 -> selección en 2019 -> reajuste 2012-2019 -> prueba 2022; pandemia 2020-2021 aparte",
+  "modelos": {
+    "base_global": {
+      "etiqueta": "Base (solo historial de IRA) · todos los municipios",
+      "grupo": "base",
+      "referencia": null,
+      "n_municipios": 64,
+      "variables": [
+        "ira_0_4",
+        "ira_lag1",
+        "ira_lag2",
+        "ira_lag3",
+        "ira_lag4",
+        "ira_media_4s",
+        "ira_media_8s",
+        "ira_cambio_vs_lag1",
+        "ira_52s_atras",
+        "semana_sin",
+        "semana_cos",
+        "mes_aprox"
+      ],
+      "horizontes": {
+        "2": {
+          "parametros": {
+            "max_iter": 200,
+            "learning_rate": 0.05,
+            "max_depth": 4,
+            "min_samples_leaf": 40
+          },
+          "filas_entrenamiento_final": 23753,
+          "mae_validacion_candidatas": [
+            4.3729,
+            4.3966,
+            4.3755
+          ],
+          "intervalo_residual_q10_q90": [
+            -1.5929380202741785,
+            1.6835400350755112
+          ],
+          "validacion_2019": {
+            "n": 3173,
+            "modelo": {
+              "mae": 4.372879960617192,
+              "rmse": 9.719638078406744,
+              "wape": 0.2542027392235376,
+              "sesgo": 0.3574408925755697
+            },
+            "persistencia": {
+              "mae": 5.21840529467381,
+              "rmse": 12.756859818292819,
+              "wape": 0.3033545243024385,
+              "sesgo": -0.02017018594390167
+            },
+            "media_4_semanas": {
+              "mae": 5.128873831284799,
+              "rmse": 14.457235362369014,
+              "wape": 0.298149912365877,
+              "sesgo": 0.006854711629372824
+            },
+            "mejora_mae_vs_persistencia_pct": 16.202753261031823,
+            "exactitud_tendencia": 0.579892845887173,
+            "aumento_precision": 0.44976076555023925,
+            "aumento_recall": 0.13843888070692195,
+            "n_aumentos_observados": 679,
+            "cobertura_intervalo_80": 0.7995587771824771
+          },
+          "prueba_2022": {
+            "n": 3075,
+            "modelo": {
+              "mae": 4.244113526093379,
+              "rmse": 11.58115956114555,
+              "wape": 0.28052639810707064,
+              "sesgo": 0.11030786543813377
+            },
+            "persistencia": {
+              "mae": 4.991869918699187,
+              "rmse": 13.193913354024119,
+              "wape": 0.3299514208331542,
+              "sesgo": 0.13073170731707318
+            },
+            "media_4_semanas": {
+              "mae": 4.703387533875338,
+              "rmse": 14.796317735116347,
+              "wape": 0.3108833813392946,
+              "sesgo": 0.13092140921409212
+            },
+            "mejora_mae_vs_persistencia_pct": 14.979484737868798,
+            "exactitud_tendencia": 0.5655284552845529,
+            "aumento_precision": 0.42857142857142855,
+            "aumento_recall": 0.06572769953051644,
+            "n_aumentos_observados": 639,
+            "cobertura_intervalo_80": 0.8182113821138212
+          },
+          "pandemia_2020_2021": {
+            "n": 6127,
+            "modelo": {
+              "mae": 3.290841264763152,
+              "rmse": 12.721924968626938,
+              "wape": 0.4879951698824685,
+              "sesgo": 0.6001676297275768
+            },
+            "persistencia": {
+              "mae": 3.0558185082422065,
+              "rmse": 11.633030701278264,
+              "wape": 0.45314390822401857,
+              "sesgo": -0.02954137424514444
+            },
+            "media_4_semanas": {
+              "mae": 3.014865894129808,
+              "rmse": 12.327633886233496,
+              "wape": 0.4470710908885554,
+              "sesgo": -0.026617159022904083
+            },
+            "mejora_mae_vs_persistencia_pct": -7.6909919842110375,
+            "exactitud_tendencia": 0.7365758119797617,
+            "aumento_precision": 0.3261538461538461,
+            "aumento_recall": 0.13006134969325153,
+            "n_aumentos_observados": 815,
+            "cobertura_intervalo_80": 0.8529459768238943
+          }
+        },
+        "3": {
+          "parametros": {
+            "max_iter": 400,
+            "learning_rate": 0.03,
+            "max_depth": 6,
+            "min_samples_leaf": 20,
+            "l2_regularization": 1.0
+          },
+          "filas_entrenamiento_final": 23751,
+          "mae_validacion_candidatas": [
+            4.6712,
+            4.706,
+            4.612
+          ],
+          "intervalo_residual_q10_q90": [
+            -1.6903442949659861,
+            1.7950029266192598
+          ],
+          "validacion_2019": {
+            "n": 3168,
+            "modelo": {
+              "mae": 4.6120461785704725,
+              "rmse": 10.568649037227045,
+              "wape": 0.2659052612235433,
+              "sesgo": 0.33993666883502427
+            },
+            "persistencia": {
+              "mae": 5.901199494949495,
+              "rmse": 15.718974974292193,
+              "wape": 0.34023076363106936,
+              "sesgo": -0.15625
+            },
+            "media_4_semanas": {
+              "mae": 5.660195707070707,
+              "rmse": 16.81179435390964,
+              "wape": 0.3263358084006697,
+              "sesgo": -0.12394781144781146
+            },
+            "mejora_mae_vs_persistencia_pct": 21.845614903924805,
+            "exactitud_tendencia": 0.5688131313131313,
+            "aumento_precision": 0.4668769716088328,
+            "aumento_recall": 0.20413793103448277,
+            "n_aumentos_observados": 725,
+            "cobertura_intervalo_80": 0.7998737373737373
+          },
+          "prueba_2022": {
+            "n": 3016,
+            "modelo": {
+              "mae": 4.644978864417119,
+              "rmse": 13.69799303654824,
+              "wape": 0.306749644297833,
+              "sesgo": 0.20945757159641792
+            },
+            "persistencia": {
+              "mae": 5.44761273209549,
+              "rmse": 16.139026295327522,
+              "wape": 0.35975476242610027,
+              "sesgo": 0.16180371352785147
+            },
+            "media_4_semanas": {
+              "mae": 5.013013925729443,
+              "rmse": 16.739076444223866,
+              "wape": 0.3310543026056492,
+              "sesgo": 0.14420313881520777
+            },
+            "mejora_mae_vs_persistencia_pct": 14.73368073595841,
+            "exactitud_tendencia": 0.5686339522546419,
+            "aumento_precision": 0.40601503759398494,
+            "aumento_recall": 0.08490566037735849,
+            "n_aumentos_observados": 636,
+            "cobertura_intervalo_80": 0.8226127320954907
+          },
+          "pandemia_2020_2021": {
+            "n": 6120,
+            "modelo": {
+              "mae": 3.784291081535366,
+              "rmse": 15.371750613958955,
+              "wape": 0.5633358002285571,
+              "sesgo": 0.976172059601421
+            },
+            "persistencia": {
+              "mae": 3.3230392156862747,
+              "rmse": 13.279222307727181,
+              "wape": 0.49467308814944544,
+              "sesgo": 0.012908496732026143
+            },
+            "media_4_semanas": {
+              "mae": 3.2636982570806103,
+              "rmse": 13.720568703133269,
+              "wape": 0.4858394953622625,
+              "sesgo": 0.009558823529411774
+            },
+            "mejora_mae_vs_persistencia_pct": -13.880421984542647,
+            "exactitud_tendencia": 0.717483660130719,
+            "aumento_precision": 0.2781818181818182,
+            "aumento_recall": 0.18127962085308058,
+            "n_aumentos_observados": 844,
+            "cobertura_intervalo_80": 0.8398692810457516
+          }
+        }
+      }
+    },
+    "base_a": {
+      "etiqueta": "Base (solo historial de IRA) · municipios con precipitación",
+      "grupo": "base",
+      "referencia": null,
+      "n_municipios": 38,
+      "variables": [
+        "ira_0_4",
+        "ira_lag1",
+        "ira_lag2",
+        "ira_lag3",
+        "ira_lag4",
+        "ira_media_4s",
+        "ira_media_8s",
+        "ira_cambio_vs_lag1",
+        "ira_52s_atras",
+        "semana_sin",
+        "semana_cos",
+        "mes_aprox"
+      ],
+      "horizontes": {
+        "2": {
+          "parametros": {
+            "max_iter": 200,
+            "learning_rate": 0.05,
+            "max_depth": 4,
+            "min_samples_leaf": 40
+          },
+          "filas_entrenamiento_final": 14134,
+          "mae_validacion_candidatas": [
+            4.6037,
+            4.6527,
+            4.7057
+          ],
+          "intervalo_residual_q10_q90": [
+            -1.57162317270124,
+            1.7602985672590372
+          ],
+          "validacion_2019": {
+            "n": 1882,
+            "modelo": {
+              "mae": 4.603728354381694,
+              "rmse": 10.555628187475909,
+              "wape": 0.2246245142317315,
+              "sesgo": 0.49040015530508585
+            },
+            "persistencia": {
+              "mae": 5.420828905419766,
+              "rmse": 13.83879406022957,
+              "wape": 0.2644923778906979,
+              "sesgo": 0.012752391073326248
+            },
+            "media_4_semanas": {
+              "mae": 5.545386114063053,
+              "rmse": 16.687405070459413,
+              "wape": 0.27056975699125446,
+              "sesgo": 0.047422954303931994
+            },
+            "mejora_mae_vs_persistencia_pct": 15.073350686665865,
+            "exactitud_tendencia": 0.5908607863974495,
+            "aumento_precision": 0.4405594405594406,
+            "aumento_recall": 0.16030534351145037,
+            "n_aumentos_observados": 393,
+            "cobertura_intervalo_80": 0.7991498405951116
+          },
+          "prueba_2022": {
+            "n": 1820,
+            "modelo": {
+              "mae": 4.750898059548261,
+              "rmse": 13.746584940262546,
+              "wape": 0.26340008128607045,
+              "sesgo": 0.3395183811374259
+            },
+            "persistencia": {
+              "mae": 5.482967032967033,
+              "rmse": 15.159391242960346,
+              "wape": 0.30398757120662867,
+              "sesgo": 0.128021978021978
+            },
+            "media_4_semanas": {
+              "mae": 5.329670329670329,
+              "rmse": 17.808408131642487,
+              "wape": 0.2954884698571298,
+              "sesgo": 0.14065934065934066
+            },
+            "mejora_mae_vs_persistencia_pct": 13.351693873355696,
+            "exactitud_tendencia": 0.5483516483516484,
+            "aumento_precision": 0.3333333333333333,
+            "aumento_recall": 0.07571801566579635,
+            "n_aumentos_observados": 383,
+            "cobertura_intervalo_80": 0.810989010989011
+          },
+          "pandemia_2020_2021": {
+            "n": 3585,
+            "modelo": {
+              "mae": 3.5690578622986635,
+              "rmse": 15.589296479823453,
+              "wape": 0.44064718932192404,
+              "sesgo": 0.7838704921682595
+            },
+            "persistencia": {
+              "mae": 3.1665271966527198,
+              "rmse": 13.660967618079022,
+              "wape": 0.39094947825188553,
+              "sesgo": -0.04686192468619247
+            },
+            "media_4_semanas": {
+              "mae": 3.26487680148768,
+              "rmse": 14.80856672008182,
+              "wape": 0.4030920320051428,
+              "sesgo": -0.06120409112040912
+            },
+            "mejora_mae_vs_persistencia_pct": -12.712054583691934,
+            "exactitud_tendencia": 0.7271966527196653,
+            "aumento_precision": 0.27177700348432055,
+            "aumento_recall": 0.1670235546038544,
+            "n_aumentos_observados": 467,
+            "cobertura_intervalo_80": 0.8490934449093445
+          }
+        },
+        "3": {
+          "parametros": {
+            "max_iter": 400,
+            "learning_rate": 0.03,
+            "max_depth": 6,
+            "min_samples_leaf": 20,
+            "l2_regularization": 1.0
+          },
+          "filas_entrenamiento_final": 14131,
+          "mae_validacion_candidatas": [
+            5.099,
+            5.2329,
+            4.9656
+          ],
+          "intervalo_residual_q10_q90": [
+            -1.6963653836310018,
+            1.8947692128707303
+          ],
+          "validacion_2019": {
+            "n": 1880,
+            "modelo": {
+              "mae": 4.9656048335448775,
+              "rmse": 11.494015126450666,
+              "wape": 0.24018671590460725,
+              "sesgo": 0.5596343157961099
+            },
+            "persistencia": {
+              "mae": 6.365425531914894,
+              "rmse": 17.763292894845964,
+              "wape": 0.30789615869503695,
+              "sesgo": -0.16542553191489362
+            },
+            "media_4_semanas": {
+              "mae": 6.249113475177304,
+              "rmse": 19.6128958622039,
+              "wape": 0.3022701349045034,
+              "sesgo": -0.125531914893617
+            },
+            "mejora_mae_vs_persistencia_pct": 21.990999523152254,
+            "exactitud_tendencia": 0.5824468085106383,
+            "aumento_precision": 0.45226130653266333,
+            "aumento_recall": 0.2127659574468085,
+            "n_aumentos_observados": 423,
+            "cobertura_intervalo_80": 0.8
+          },
+          "prueba_2022": {
+            "n": 1786,
+            "modelo": {
+              "mae": 5.193090878087974,
+              "rmse": 15.590177456964277,
+              "wape": 0.2876371626070746,
+              "sesgo": 0.37027008482469587
+            },
+            "persistencia": {
+              "mae": 6.103023516237402,
+              "rmse": 19.07056501963099,
+              "wape": 0.33803690494650335,
+              "sesgo": 0.1713325867861142
+            },
+            "media_4_semanas": {
+              "mae": 5.772443075774543,
+              "rmse": 20.430514325612513,
+              "wape": 0.3197265725952344,
+              "sesgo": 0.15878126166480028
+            },
+            "mejora_mae_vs_persistencia_pct": 14.90953845628329,
+            "exactitud_tendencia": 0.5414333706606943,
+            "aumento_precision": 0.33064516129032256,
+            "aumento_recall": 0.10512820512820513,
+            "n_aumentos_observados": 390,
+            "cobertura_intervalo_80": 0.8157894736842105
+          },
+          "pandemia_2020_2021": {
+            "n": 3577,
+            "modelo": {
+              "mae": 4.184355020699502,
+              "rmse": 19.190458076480805,
+              "wape": 0.5199554613020954,
+              "sesgo": 1.2089796578088174
+            },
+            "persistencia": {
+              "mae": 3.5465473860777186,
+              "rmse": 15.751956270980246,
+              "wape": 0.44070034044327105,
+              "sesgo": 0.01789208834218619
+            },
+            "media_4_semanas": {
+              "mae": 3.5561923399496784,
+              "rmse": 16.526765711187647,
+              "wape": 0.4418988397137497,
+              "sesgo": 0.006709533128319813
+            },
+            "mejora_mae_vs_persistencia_pct": -17.983902798692398,
+            "exactitud_tendencia": 0.7092535644394744,
+            "aumento_precision": 0.2372448979591837,
+            "aumento_recall": 0.19096509240246407,
+            "n_aumentos_observados": 487,
+            "cobertura_intervalo_80": 0.838412077159631
+          }
+        }
+      }
+    },
+    "modelo_a": {
+      "etiqueta": "Modelo A · historial de IRA + precipitación",
+      "grupo": "clima",
+      "referencia": "base_a",
+      "n_municipios": 38,
+      "variables": [
+        "ira_0_4",
+        "ira_lag1",
+        "ira_lag2",
+        "ira_lag3",
+        "ira_lag4",
+        "ira_media_4s",
+        "ira_media_8s",
+        "ira_cambio_vs_lag1",
+        "ira_52s_atras",
+        "semana_sin",
+        "semana_cos",
+        "mes_aprox",
+        "precipitacion",
+        "precipitacion_lag1",
+        "precipitacion_lag2",
+        "precipitacion_media_4s"
+      ],
+      "horizontes": {
+        "2": {
+          "parametros": {
+            "max_iter": 300,
+            "learning_rate": 0.03,
+            "max_depth": 3,
+            "min_samples_leaf": 60,
+            "l2_regularization": 1.0
+          },
+          "filas_entrenamiento_final": 14134,
+          "mae_validacion_candidatas": [
+            4.7558,
+            4.6436,
+            4.9139
+          ],
+          "intervalo_residual_q10_q90": [
+            -1.613536183925702,
+            1.7339364035829574
+          ],
+          "validacion_2019": {
+            "n": 1882,
+            "modelo": {
+              "mae": 4.643559428795716,
+              "rmse": 10.555616553958478,
+              "wape": 0.22656794682654613,
+              "sesgo": 0.33687124667963525
+            },
+            "persistencia": {
+              "mae": 5.420828905419766,
+              "rmse": 13.83879406022957,
+              "wape": 0.2644923778906979,
+              "sesgo": 0.012752391073326248
+            },
+            "media_4_semanas": {
+              "mae": 5.545386114063053,
+              "rmse": 16.687405070459413,
+              "wape": 0.27056975699125446,
+              "sesgo": 0.047422954303931994
+            },
+            "mejora_mae_vs_persistencia_pct": 14.33857238783045,
+            "exactitud_tendencia": 0.5797024442082891,
+            "aumento_precision": 0.3741496598639456,
+            "aumento_recall": 0.13994910941475827,
+            "n_aumentos_observados": 393,
+            "cobertura_intervalo_80": 0.7991498405951116
+          },
+          "prueba_2022": {
+            "n": 1820,
+            "modelo": {
+              "mae": 4.758686922866498,
+              "rmse": 13.949070663157286,
+              "wape": 0.26383191274307816,
+              "sesgo": 0.34506702034792236
+            },
+            "persistencia": {
+              "mae": 5.482967032967033,
+              "rmse": 15.159391242960346,
+              "wape": 0.30398757120662867,
+              "sesgo": 0.128021978021978
+            },
+            "media_4_semanas": {
+              "mae": 5.329670329670329,
+              "rmse": 17.808408131642487,
+              "wape": 0.2954884698571298,
+              "sesgo": 0.14065934065934066
+            },
+            "mejora_mae_vs_persistencia_pct": 13.209638244142441,
+            "exactitud_tendencia": 0.5543956043956044,
+            "aumento_precision": 0.4050632911392405,
+            "aumento_recall": 0.0835509138381201,
+            "n_aumentos_observados": 383,
+            "cobertura_intervalo_80": 0.8186813186813187
+          },
+          "pandemia_2020_2021": {
+            "n": 3585,
+            "modelo": {
+              "mae": 3.5522124515833884,
+              "rmse": 15.229822780691192,
+              "wape": 0.43856740155410157,
+              "sesgo": 0.7692786466075323
+            },
+            "persistencia": {
+              "mae": 3.1665271966527198,
+              "rmse": 13.660967618079022,
+              "wape": 0.39094947825188553,
+              "sesgo": -0.04686192468619247
+            },
+            "media_4_semanas": {
+              "mae": 3.26487680148768,
+              "rmse": 14.80856672008182,
+              "wape": 0.4030920320051428,
+              "sesgo": -0.06120409112040912
+            },
+            "mejora_mae_vs_persistencia_pct": -12.180070815067356,
+            "exactitud_tendencia": 0.7397489539748954,
+            "aumento_precision": 0.3238095238095238,
+            "aumento_recall": 0.145610278372591,
+            "n_aumentos_observados": 467,
+            "cobertura_intervalo_80": 0.8638772663877267
+          }
+        },
+        "3": {
+          "parametros": {
+            "max_iter": 400,
+            "learning_rate": 0.03,
+            "max_depth": 6,
+            "min_samples_leaf": 20,
+            "l2_regularization": 1.0
+          },
+          "filas_entrenamiento_final": 14131,
+          "mae_validacion_candidatas": [
+            5.094,
+            5.2703,
+            5.0333
+          ],
+          "intervalo_residual_q10_q90": [
+            -1.7220636344466886,
+            1.9099312722309374
+          ],
+          "validacion_2019": {
+            "n": 1880,
+            "modelo": {
+              "mae": 5.0332542601753145,
+              "rmse": 11.969473611396467,
+              "wape": 0.24345892425784318,
+              "sesgo": 0.5268069262010046
+            },
+            "persistencia": {
+              "mae": 6.365425531914894,
+              "rmse": 17.763292894845964,
+              "wape": 0.30789615869503695,
+              "sesgo": -0.16542553191489362
+            },
+            "media_4_semanas": {
+              "mae": 6.249113475177304,
+              "rmse": 19.6128958622039,
+              "wape": 0.3022701349045034,
+              "sesgo": -0.125531914893617
+            },
+            "mejora_mae_vs_persistencia_pct": 20.928235905994896,
+            "exactitud_tendencia": 0.573404255319149,
+            "aumento_precision": 0.44206008583690987,
+            "aumento_recall": 0.24349881796690306,
+            "n_aumentos_observados": 423,
+            "cobertura_intervalo_80": 0.8
+          },
+          "prueba_2022": {
+            "n": 1786,
+            "modelo": {
+              "mae": 5.348461166988357,
+              "rmse": 16.424109648920545,
+              "wape": 0.2962428793376091,
+              "sesgo": 0.5629264605920683
+            },
+            "persistencia": {
+              "mae": 6.103023516237402,
+              "rmse": 19.07056501963099,
+              "wape": 0.33803690494650335,
+              "sesgo": 0.1713325867861142
+            },
+            "media_4_semanas": {
+              "mae": 5.772443075774543,
+              "rmse": 20.430514325612513,
+              "wape": 0.3197265725952344,
+              "sesgo": 0.15878126166480028
+            },
+            "mejora_mae_vs_persistencia_pct": 12.363746383108198,
+            "exactitud_tendencia": 0.5436730123180291,
+            "aumento_precision": 0.32666666666666666,
+            "aumento_recall": 0.12564102564102564,
+            "n_aumentos_observados": 390,
+            "cobertura_intervalo_80": 0.8101903695408734
+          },
+          "pandemia_2020_2021": {
+            "n": 3577,
+            "modelo": {
+              "mae": 4.246651798424533,
+              "rmse": 18.65786239551726,
+              "wape": 0.5276965706581169,
+              "sesgo": 1.2278299101145915
+            },
+            "persistencia": {
+              "mae": 3.5465473860777186,
+              "rmse": 15.751956270980246,
+              "wape": 0.44070034044327105,
+              "sesgo": 0.01789208834218619
+            },
+            "media_4_semanas": {
+              "mae": 3.5561923399496784,
+              "rmse": 16.526765711187647,
+              "wape": 0.4418988397137497,
+              "sesgo": 0.006709533128319813
+            },
+            "mejora_mae_vs_persistencia_pct": -19.74044996818978,
+            "exactitud_tendencia": 0.7109309477215544,
+            "aumento_precision": 0.25,
+            "aumento_recall": 0.20944558521560575,
+            "n_aumentos_observados": 487,
+            "cobertura_intervalo_80": 0.840928152082751
+          }
+        }
+      }
+    },
+    "base_b": {
+      "etiqueta": "Base (solo historial de IRA) · municipios con temperatura",
+      "grupo": "base",
+      "referencia": null,
+      "n_municipios": 11,
+      "variables": [
+        "ira_0_4",
+        "ira_lag1",
+        "ira_lag2",
+        "ira_lag3",
+        "ira_lag4",
+        "ira_media_4s",
+        "ira_media_8s",
+        "ira_cambio_vs_lag1",
+        "ira_52s_atras",
+        "semana_sin",
+        "semana_cos",
+        "mes_aprox"
+      ],
+      "horizontes": {
+        "2": {
+          "parametros": {
+            "max_iter": 400,
+            "learning_rate": 0.03,
+            "max_depth": 6,
+            "min_samples_leaf": 20,
+            "l2_regularization": 1.0
+          },
+          "filas_entrenamiento_final": 4197,
+          "mae_validacion_candidatas": [
+            8.9254,
+            9.1719,
+            8.757
+          ],
+          "intervalo_residual_q10_q90": [
+            -2.1602260601514844,
+            2.05022374153174
+          ],
+          "validacion_2019": {
+            "n": 559,
+            "modelo": {
+              "mae": 8.757046704442413,
+              "rmse": 20.082602044495292,
+              "wape": 0.16455523422695,
+              "sesgo": 2.150697830070738
+            },
+            "persistencia": {
+              "mae": 10.644007155635062,
+              "rmse": 23.592697696859183,
+              "wape": 0.200013446282103,
+              "sesgo": 0.2003577817531306
+            },
+            "media_4_semanas": {
+              "mae": 11.85226595110316,
+              "rmse": 29.457140123467983,
+              "wape": 0.22271805387477028,
+              "sesgo": 0.37760882528324385
+            },
+            "mejora_mae_vs_persistencia_pct": 17.72791415490237,
+            "exactitud_tendencia": 0.5223613595706619,
+            "aumento_precision": 0.43478260869565216,
+            "aumento_recall": 0.29850746268656714,
+            "n_aumentos_observados": 134,
+            "cobertura_intervalo_80": 0.7996422182468694
+          },
+          "prueba_2022": {
+            "n": 527,
+            "modelo": {
+              "mae": 10.20048967462625,
+              "rmse": 26.213249144709764,
+              "wape": 0.22130246010983629,
+              "sesgo": 1.5685039264123175
+            },
+            "persistencia": {
+              "mae": 10.71157495256167,
+              "rmse": 26.7384194372778,
+              "wape": 0.23239059734057882,
+              "sesgo": 0.301707779886148
+            },
+            "media_4_semanas": {
+              "mae": 11.24731182795699,
+              "rmse": 32.24156889009971,
+              "wape": 0.24401355783349116,
+              "sesgo": 0.338393421884883
+            },
+            "mejora_mae_vs_persistencia_pct": 4.771336429972828,
+            "exactitud_tendencia": 0.5180265654648957,
+            "aumento_precision": 0.32857142857142857,
+            "aumento_recall": 0.19008264462809918,
+            "n_aumentos_observados": 121,
+            "cobertura_intervalo_80": 0.7950664136622391
+          },
+          "pandemia_2020_2021": {
+            "n": 1104,
+            "modelo": {
+              "mae": 7.840367262320359,
+              "rmse": 28.086623832820905,
+              "wape": 0.38806390753650194,
+              "sesgo": 1.9422210155813913
+            },
+            "persistencia": {
+              "mae": 6.0978260869565215,
+              "rmse": 23.858618896578527,
+              "wape": 0.3018157363819771,
+              "sesgo": -0.17753623188405798
+            },
+            "media_4_semanas": {
+              "mae": 6.738677536231884,
+              "rmse": 26.088205516849413,
+              "wape": 0.3335350818202197,
+              "sesgo": -0.24033816425120766
+            },
+            "mejora_mae_vs_persistencia_pct": -28.576432822365973,
+            "exactitud_tendencia": 0.6711956521739131,
+            "aumento_precision": 0.21,
+            "aumento_recall": 0.27450980392156865,
+            "n_aumentos_observados": 153,
+            "cobertura_intervalo_80": 0.8233695652173914
+          }
+        },
+        "3": {
+          "parametros": {
+            "max_iter": 400,
+            "learning_rate": 0.03,
+            "max_depth": 6,
+            "min_samples_leaf": 20,
+            "l2_regularization": 1.0
+          },
+          "filas_entrenamiento_final": 4199,
+          "mae_validacion_candidatas": [
+            9.5836,
+            10.0644,
+            9.5303
+          ],
+          "intervalo_residual_q10_q90": [
+            -2.3223291870191507,
+            2.227800733960775
+          ],
+          "validacion_2019": {
+            "n": 560,
+            "modelo": {
+              "mae": 9.530255471144523,
+              "rmse": 20.43368770094366,
+              "wape": 0.17802271803065256,
+              "sesgo": 1.7562225172951669
+            },
+            "persistencia": {
+              "mae": 13.23392857142857,
+              "rmse": 30.964870648619126,
+              "wape": 0.24720637779779178,
+              "sesgo": -0.19464285714285715
+            },
+            "media_4_semanas": {
+              "mae": 13.53125,
+              "rmse": 34.778625656850856,
+              "wape": 0.2527602655191968,
+              "sesgo": -0.030654761904761876
+            },
+            "mejora_mae_vs_persistencia_pct": 27.986195333410702,
+            "exactitud_tendencia": 0.5214285714285715,
+            "aumento_precision": 0.4878048780487805,
+            "aumento_recall": 0.43795620437956206,
+            "n_aumentos_observados": 137,
+            "cobertura_intervalo_80": 0.8
+          },
+          "prueba_2022": {
+            "n": 517,
+            "modelo": {
+              "mae": 11.236425807487755,
+              "rmse": 29.613578927944506,
+              "wape": 0.24375764276901518,
+              "sesgo": 0.3884197590362831
+            },
+            "persistencia": {
+              "mae": 12.752417794970986,
+              "rmse": 34.318764005463095,
+              "wape": 0.2766448472641826,
+              "sesgo": 0.4622823984526112
+            },
+            "media_4_semanas": {
+              "mae": 12.43939393939394,
+              "rmse": 37.159112186995024,
+              "wape": 0.2698542575808437,
+              "sesgo": 0.4065119277885236
+            },
+            "mejora_mae_vs_persistencia_pct": 11.887878925054308,
+            "exactitud_tendencia": 0.504835589941973,
+            "aumento_precision": 0.3291139240506329,
+            "aumento_recall": 0.21138211382113822,
+            "n_aumentos_observados": 123,
+            "cobertura_intervalo_80": 0.781431334622824
+          },
+          "pandemia_2020_2021": {
+            "n": 1104,
+            "modelo": {
+              "mae": 9.075224036055936,
+              "rmse": 32.833587296934645,
+              "wape": 0.45232719349010175,
+              "sesgo": 2.975015187592314
+            },
+            "persistencia": {
+              "mae": 7.040760869565218,
+              "rmse": 27.56578100850211,
+              "wape": 0.3509255079006772,
+              "sesgo": -0.035326086956521736
+            },
+            "media_4_semanas": {
+              "mae": 7.533967391304348,
+              "rmse": 29.16771262789798,
+              "wape": 0.3755079006772009,
+              "sesgo": -0.09873188405797094
+            },
+            "mejora_mae_vs_persistencia_pct": -28.89550155417153,
+            "exactitud_tendencia": 0.634963768115942,
+            "aumento_precision": 0.196,
+            "aumento_recall": 0.29518072289156627,
+            "n_aumentos_observados": 166,
+            "cobertura_intervalo_80": 0.7880434782608695
+          }
+        }
+      }
+    },
+    "modelo_b": {
+      "etiqueta": "Modelo B · historial de IRA + precipitación + temperatura",
+      "grupo": "clima",
+      "referencia": "base_b",
+      "n_municipios": 11,
+      "variables": [
+        "ira_0_4",
+        "ira_lag1",
+        "ira_lag2",
+        "ira_lag3",
+        "ira_lag4",
+        "ira_media_4s",
+        "ira_media_8s",
+        "ira_cambio_vs_lag1",
+        "ira_52s_atras",
+        "semana_sin",
+        "semana_cos",
+        "mes_aprox",
+        "precipitacion",
+        "precipitacion_lag1",
+        "precipitacion_lag2",
+        "precipitacion_media_4s",
+        "temp_media",
+        "temp_min",
+        "temp_max",
+        "temp_media_lag1",
+        "temp_media_lag2",
+        "temp_media_media_4s"
+      ],
+      "horizontes": {
+        "2": {
+          "parametros": {
+            "max_iter": 300,
+            "learning_rate": 0.03,
+            "max_depth": 3,
+            "min_samples_leaf": 60,
+            "l2_regularization": 1.0
+          },
+          "filas_entrenamiento_final": 4197,
+          "mae_validacion_candidatas": [
+            9.3108,
+            9.2951,
+            10.2452
+          ],
+          "intervalo_residual_q10_q90": [
+            -2.0664912556132013,
+            1.986458790732191
+          ],
+          "validacion_2019": {
+            "n": 559,
+            "modelo": {
+              "mae": 9.29506508761139,
+              "rmse": 19.680406543931753,
+              "wape": 0.17466523409892318,
+              "sesgo": 1.029440231623767
+            },
+            "persistencia": {
+              "mae": 10.644007155635062,
+              "rmse": 23.592697696859183,
+              "wape": 0.200013446282103,
+              "sesgo": 0.2003577817531306
+            },
+            "media_4_semanas": {
+              "mae": 11.85226595110316,
+              "rmse": 29.457140123467983,
+              "wape": 0.22271805387477028,
+              "sesgo": 0.37760882528324385
+            },
+            "mejora_mae_vs_persistencia_pct": 12.673254050844251,
+            "exactitud_tendencia": 0.5026833631484794,
+            "aumento_precision": 0.44047619047619047,
+            "aumento_recall": 0.27611940298507465,
+            "n_aumentos_observados": 134,
+            "cobertura_intervalo_80": 0.7996422182468694
+          },
+          "prueba_2022": {
+            "n": 527,
+            "modelo": {
+              "mae": 9.872609690536864,
+              "rmse": 25.627574445975686,
+              "wape": 0.21418901267600868,
+              "sesgo": 2.2844984408818014
+            },
+            "persistencia": {
+              "mae": 10.71157495256167,
+              "rmse": 26.7384194372778,
+              "wape": 0.23239059734057882,
+              "sesgo": 0.301707779886148
+            },
+            "media_4_semanas": {
+              "mae": 11.24731182795699,
+              "rmse": 32.24156889009971,
+              "wape": 0.24401355783349116,
+              "sesgo": 0.338393421884883
+            },
+            "mejora_mae_vs_persistencia_pct": 7.8323240582298,
+            "exactitud_tendencia": 0.5218216318785579,
+            "aumento_precision": 0.3626373626373626,
+            "aumento_recall": 0.2727272727272727,
+            "n_aumentos_observados": 121,
+            "cobertura_intervalo_80": 0.8159392789373814
+          },
+          "pandemia_2020_2021": {
+            "n": 1104,
+            "modelo": {
+              "mae": 7.744989166598894,
+              "rmse": 27.387514928550598,
+              "wape": 0.3833431087166635,
+              "sesgo": 1.9484385892287222
+            },
+            "persistencia": {
+              "mae": 6.0978260869565215,
+              "rmse": 23.858618896578527,
+              "wape": 0.3018157363819771,
+              "sesgo": -0.17753623188405798
+            },
+            "media_4_semanas": {
+              "mae": 6.738677536231884,
+              "rmse": 26.088205516849413,
+              "wape": 0.3335350818202197,
+              "sesgo": -0.24033816425120766
+            },
+            "mejora_mae_vs_persistencia_pct": -27.01230005830628,
+            "exactitud_tendencia": 0.6123188405797102,
+            "aumento_precision": 0.1647940074906367,
+            "aumento_recall": 0.2875816993464052,
+            "n_aumentos_observados": 153,
+            "cobertura_intervalo_80": 0.822463768115942
+          }
+        },
+        "3": {
+          "parametros": {
+            "max_iter": 200,
+            "learning_rate": 0.05,
+            "max_depth": 4,
+            "min_samples_leaf": 40
+          },
+          "filas_entrenamiento_final": 4199,
+          "mae_validacion_candidatas": [
+            9.8232,
+            10.011,
+            10.4026
+          ],
+          "intervalo_residual_q10_q90": [
+            -2.186039024871036,
+            2.382587596590643
+          ],
+          "validacion_2019": {
+            "n": 560,
+            "modelo": {
+              "mae": 9.823192184740703,
+              "rmse": 21.601666137137208,
+              "wape": 0.1834947004054436,
+              "sesgo": 1.2162725557500913
+            },
+            "persistencia": {
+              "mae": 13.23392857142857,
+              "rmse": 30.964870648619126,
+              "wape": 0.24720637779779178,
+              "sesgo": -0.19464285714285715
+            },
+            "media_4_semanas": {
+              "mae": 13.53125,
+              "rmse": 34.778625656850856,
+              "wape": 0.2527602655191968,
+              "sesgo": -0.030654761904761876
+            },
+            "mejora_mae_vs_persistencia_pct": 25.77266733970053,
+            "exactitud_tendencia": 0.5125,
+            "aumento_precision": 0.5111111111111111,
+            "aumento_recall": 0.3357664233576642,
+            "n_aumentos_observados": 137,
+            "cobertura_intervalo_80": 0.8
+          },
+          "prueba_2022": {
+            "n": 517,
+            "modelo": {
+              "mae": 11.331611977825407,
+              "rmse": 30.078421302014192,
+              "wape": 0.2458225659842118,
+              "sesgo": 2.6485359168590183
+            },
+            "persistencia": {
+              "mae": 12.752417794970986,
+              "rmse": 34.318764005463095,
+              "wape": 0.2766448472641826,
+              "sesgo": 0.4622823984526112
+            },
+            "media_4_semanas": {
+              "mae": 12.43939393939394,
+              "rmse": 37.159112186995024,
+              "wape": 0.2698542575808437,
+              "sesgo": 0.4065119277885236
+            },
+            "mejora_mae_vs_persistencia_pct": 11.141462270047997,
+            "exactitud_tendencia": 0.49709864603481624,
+            "aumento_precision": 0.37719298245614036,
+            "aumento_recall": 0.34959349593495936,
+            "n_aumentos_observados": 123,
+            "cobertura_intervalo_80": 0.793036750483559
+          },
+          "pandemia_2020_2021": {
+            "n": 1104,
+            "modelo": {
+              "mae": 9.900706982232634,
+              "rmse": 32.43068151661459,
+              "wape": 0.49347090331308474,
+              "sesgo": 3.995497628644727
+            },
+            "persistencia": {
+              "mae": 7.040760869565218,
+              "rmse": 27.56578100850211,
+              "wape": 0.3509255079006772,
+              "sesgo": -0.035326086956521736
+            },
+            "media_4_semanas": {
+              "mae": 7.533967391304348,
+              "rmse": 29.16771262789798,
+              "wape": 0.3755079006772009,
+              "sesgo": -0.09873188405797094
+            },
+            "mejora_mae_vs_persistencia_pct": -40.61984444081857,
+            "exactitud_tendencia": 0.5153985507246377,
+            "aumento_precision": 0.14460784313725492,
+            "aumento_recall": 0.35542168674698793,
+            "n_aumentos_observados": 166,
+            "cobertura_intervalo_80": 0.7355072463768116
+          }
+        }
+      }
+    }
+  },
+  "aporte_variables_climaticas": [
+    {
+      "modelo": "modelo_a",
+      "base": "base_a",
+      "horizonte": 2,
+      "periodo": "validacion_2019",
+      "n": 1882,
+      "mae_con_clima": 4.643559428795716,
+      "mae_base": 4.603728354381694,
+      "rmse_con_clima": 10.555616553958478,
+      "rmse_base": 10.555628187475909,
+      "mejora_mae_pct": -0.8651916739638166
+    },
+    {
+      "modelo": "modelo_a",
+      "base": "base_a",
+      "horizonte": 2,
+      "periodo": "prueba_2022",
+      "n": 1820,
+      "mae_con_clima": 4.758686922866498,
+      "mae_base": 4.750898059548261,
+      "rmse_con_clima": 13.949070663157286,
+      "rmse_base": 13.746584940262546,
+      "mejora_mae_pct": -0.16394507355472765
+    },
+    {
+      "modelo": "modelo_a",
+      "base": "base_a",
+      "horizonte": 2,
+      "periodo": "pandemia_2020_2021",
+      "n": 3585,
+      "mae_con_clima": 3.5522124515833884,
+      "mae_base": 3.5690578622986635,
+      "rmse_con_clima": 15.229822780691192,
+      "rmse_base": 15.589296479823453,
+      "mejora_mae_pct": 0.47198480285847166
+    },
+    {
+      "modelo": "modelo_a",
+      "base": "base_a",
+      "horizonte": 3,
+      "periodo": "validacion_2019",
+      "n": 1880,
+      "mae_con_clima": 5.0332542601753145,
+      "mae_base": 4.9656048335448775,
+      "rmse_con_clima": 11.969473611396467,
+      "rmse_base": 11.494015126450666,
+      "mejora_mae_pct": -1.362360254151418
+    },
+    {
+      "modelo": "modelo_a",
+      "base": "base_a",
+      "horizonte": 3,
+      "periodo": "prueba_2022",
+      "n": 1786,
+      "mae_con_clima": 5.348461166988357,
+      "mae_base": 5.193090878087974,
+      "rmse_con_clima": 16.424109648920545,
+      "rmse_base": 15.590177456964277,
+      "mejora_mae_pct": -2.9918653947683005
+    },
+    {
+      "modelo": "modelo_a",
+      "base": "base_a",
+      "horizonte": 3,
+      "periodo": "pandemia_2020_2021",
+      "n": 3577,
+      "mae_con_clima": 4.246651798424533,
+      "mae_base": 4.184355020699502,
+      "rmse_con_clima": 18.65786239551726,
+      "rmse_base": 19.190458076480805,
+      "mejora_mae_pct": -1.4888023940812012
+    },
+    {
+      "modelo": "modelo_b",
+      "base": "base_b",
+      "horizonte": 2,
+      "periodo": "validacion_2019",
+      "n": 559,
+      "mae_con_clima": 9.29506508761139,
+      "mae_base": 8.757046704442413,
+      "rmse_con_clima": 19.680406543931753,
+      "rmse_base": 20.082602044495292,
+      "mejora_mae_pct": -6.143833661364884
+    },
+    {
+      "modelo": "modelo_b",
+      "base": "base_b",
+      "horizonte": 2,
+      "periodo": "prueba_2022",
+      "n": 527,
+      "mae_con_clima": 9.872609690536864,
+      "mae_base": 10.20048967462625,
+      "rmse_con_clima": 25.627574445975686,
+      "rmse_base": 26.213249144709764,
+      "mejora_mae_pct": 3.2143553353618737
+    },
+    {
+      "modelo": "modelo_b",
+      "base": "base_b",
+      "horizonte": 2,
+      "periodo": "pandemia_2020_2021",
+      "n": 1104,
+      "mae_con_clima": 7.744989166598894,
+      "mae_base": 7.840367262320359,
+      "rmse_con_clima": 27.387514928550598,
+      "rmse_base": 28.086623832820905,
+      "mejora_mae_pct": 1.2165003568115673
+    },
+    {
+      "modelo": "modelo_b",
+      "base": "base_b",
+      "horizonte": 3,
+      "periodo": "validacion_2019",
+      "n": 560,
+      "mae_con_clima": 9.823192184740703,
+      "mae_base": 9.530255471144523,
+      "rmse_con_clima": 21.601666137137208,
+      "rmse_base": 20.43368770094366,
+      "mejora_mae_pct": -3.073755100092823
+    },
+    {
+      "modelo": "modelo_b",
+      "base": "base_b",
+      "horizonte": 3,
+      "periodo": "prueba_2022",
+      "n": 517,
+      "mae_con_clima": 11.331611977825407,
+      "mae_base": 11.236425807487755,
+      "rmse_con_clima": 30.078421302014192,
+      "rmse_base": 29.613578927944506,
+      "mejora_mae_pct": -0.847121424271946
+    },
+    {
+      "modelo": "modelo_b",
+      "base": "base_b",
+      "horizonte": 3,
+      "periodo": "pandemia_2020_2021",
+      "n": 1104,
+      "mae_con_clima": 9.900706982232634,
+      "mae_base": 9.075224036055936,
+      "rmse_con_clima": 32.43068151661459,
+      "rmse_base": 32.833587296934645,
+      "mejora_mae_pct": -9.096006257223488
+    }
+  ],
+  "senal_aumento": {
+    "definicion": "aumento = predicción >=20% y >=2 atenciones sobre el promedio de las últimas 4 semanas",
+    "variables": [
+      "ira_0_4",
+      "ira_lag1",
+      "ira_lag2",
+      "ira_lag3",
+      "ira_lag4",
+      "ira_media_4s",
+      "ira_media_8s",
+      "ira_cambio_vs_lag1",
+      "ira_52s_atras",
+      "semana_sin",
+      "semana_cos",
+      "mes_aprox",
+      "cons",
+      "cons_lag1",
+      "cons_media_4s",
+      "proporcion_ira_sobre_consultas",
+      "proporcion_ira_lag1",
+      "prop_media_4s"
+    ],
+    "horizontes": {
+      "2": {
+        "parametros": {
+          "max_iter": 200,
+          "learning_rate": 0.05,
+          "max_depth": 4,
+          "min_samples_leaf": 40
+        },
+        "umbral_medio": 0.21791842888591434,
+        "umbral_alto": 0.3283482657532477,
+        "auc_validacion_candidatas": [
+          0.6877,
+          0.6869,
+          0.6859
+        ],
+        "validacion_2019": {
+          "n": 3173,
+          "prevalencia_aumento": 0.2139930664985818,
+          "auc": 0.6876816583659398,
+          "precision_promedio": 0.398578163366292,
+          "brier": 0.15461092888977324,
+          "alerta_alta": {
+            "precision": 0.3917525773195876,
+            "recall": 0.3917525773195876
+          },
+          "por_nivel": {
+            "baja": {
+              "n": 1586,
+              "proporcion_semanas": 0.49984242042231325,
+              "tasa_aumento_observada": 0.12610340479192939
+            },
+            "media": {
+              "n": 908,
+              "proporcion_semanas": 0.28616451307910495,
+              "tasa_aumento_observada": 0.23458149779735682
+            },
+            "alta": {
+              "n": 679,
+              "proporcion_semanas": 0.2139930664985818,
+              "tasa_aumento_observada": 0.3917525773195876
+            }
+          }
+        },
+        "prueba_2022": {
+          "n": 3075,
+          "prevalencia_aumento": 0.20780487804878048,
+          "auc": 0.6799317617068952,
+          "precision_promedio": 0.3644525785519569,
+          "brier": 0.1527934899937759,
+          "alerta_alta": {
+            "precision": 0.44385026737967914,
+            "recall": 0.2597809076682316
+          },
+          "por_nivel": {
+            "baja": {
+              "n": 1766,
+              "proporcion_semanas": 0.5743089430894309,
+              "tasa_aumento_observada": 0.13590033975084936
+            },
+            "media": {
+              "n": 935,
+              "proporcion_semanas": 0.3040650406504065,
+              "tasa_aumento_observada": 0.24919786096256685
+            },
+            "alta": {
+              "n": 374,
+              "proporcion_semanas": 0.1216260162601626,
+              "tasa_aumento_observada": 0.44385026737967914
+            }
+          }
+        },
+        "pandemia_2020_2021": {
+          "n": 6127,
+          "prevalencia_aumento": 0.13301779010935205,
+          "auc": 0.6964034435287161,
+          "precision_promedio": 0.28682001645259364,
+          "brier": 0.11290294332004067,
+          "alerta_alta": {
+            "precision": 0.30344827586206896,
+            "recall": 0.3239263803680982
+          },
+          "por_nivel": {
+            "baja": {
+              "n": 4099,
+              "proporcion_semanas": 0.669006038844459,
+              "tasa_aumento_observada": 0.08611856550378141
+            },
+            "media": {
+              "n": 1158,
+              "proporcion_semanas": 0.18899951036396279,
+              "tasa_aumento_observada": 0.17098445595854922
+            },
+            "alta": {
+              "n": 870,
+              "proporcion_semanas": 0.14199445079157827,
+              "tasa_aumento_observada": 0.30344827586206896
+            }
+          }
+        }
+      },
+      "3": {
+        "parametros": {
+          "max_iter": 400,
+          "learning_rate": 0.03,
+          "max_depth": 6,
+          "min_samples_leaf": 20,
+          "l2_regularization": 1.0
+        },
+        "umbral_medio": 0.21376668042201558,
+        "umbral_alto": 0.33599097154760144,
+        "auc_validacion_candidatas": [
+          0.6993,
+          0.6958,
+          0.7033
+        ],
+        "validacion_2019": {
+          "n": 3168,
+          "prevalencia_aumento": 0.2288510101010101,
+          "auc": 0.7033466484113654,
+          "precision_promedio": 0.4458175683893588,
+          "brier": 0.15801636002511663,
+          "alerta_alta": {
+            "precision": 0.43448275862068964,
+            "recall": 0.43448275862068964
+          },
+          "por_nivel": {
+            "baja": {
+              "n": 1584,
+              "proporcion_semanas": 0.5,
+              "tasa_aumento_observada": 0.12626262626262627
+            },
+            "media": {
+              "n": 859,
+              "proporcion_semanas": 0.2711489898989899,
+              "tasa_aumento_observada": 0.24447031431897556
+            },
+            "alta": {
+              "n": 725,
+              "proporcion_semanas": 0.2288510101010101,
+              "tasa_aumento_observada": 0.43448275862068964
+            }
+          }
+        },
+        "prueba_2022": {
+          "n": 3016,
+          "prevalencia_aumento": 0.21087533156498675,
+          "auc": 0.6884744463823266,
+          "precision_promedio": 0.37333040180728455,
+          "brier": 0.1537312728413316,
+          "alerta_alta": {
+            "precision": 0.41404358353510895,
+            "recall": 0.2688679245283019
+          },
+          "por_nivel": {
+            "baja": {
+              "n": 1699,
+              "proporcion_semanas": 0.5633289124668435,
+              "tasa_aumento_observada": 0.12713360800470866
+            },
+            "media": {
+              "n": 904,
+              "proporcion_semanas": 0.29973474801061006,
+              "tasa_aumento_observada": 0.2754424778761062
+            },
+            "alta": {
+              "n": 413,
+              "proporcion_semanas": 0.1369363395225464,
+              "tasa_aumento_observada": 0.41404358353510895
+            }
+          }
+        },
+        "pandemia_2020_2021": {
+          "n": 6120,
+          "prevalencia_aumento": 0.13790849673202615,
+          "auc": 0.6804389410690994,
+          "precision_promedio": 0.29640331700116856,
+          "brier": 0.11968876977165713,
+          "alerta_alta": {
+            "precision": 0.27562189054726366,
+            "recall": 0.3281990521327014
+          },
+          "por_nivel": {
+            "baja": {
+              "n": 3942,
+              "proporcion_semanas": 0.6441176470588236,
+              "tasa_aumento_observada": 0.09233891425672247
+            },
+            "media": {
+              "n": 1173,
+              "proporcion_semanas": 0.19166666666666668,
+              "tasa_aumento_observada": 0.17306052855924978
+            },
+            "alta": {
+              "n": 1005,
+              "proporcion_semanas": 0.1642156862745098,
+              "tasa_aumento_observada": 0.27562189054726366
+            }
+          }
+        }
+      }
+    }
+  },
+  "canal_endemico": {
+    "definicion": "supera el percentil 75 / 90 del canal endémico de la semana objetivo (años anteriores, sin 2020-2021)",
+    "variables": [
+      "ira_0_4",
+      "ira_lag1",
+      "ira_lag2",
+      "ira_lag3",
+      "ira_lag4",
+      "ira_media_4s",
+      "ira_media_8s",
+      "ira_cambio_vs_lag1",
+      "ira_52s_atras",
+      "semana_sin",
+      "semana_cos",
+      "mes_aprox",
+      "cons",
+      "cons_lag1",
+      "cons_media_4s",
+      "proporcion_ira_sobre_consultas",
+      "proporcion_ira_lag1",
+      "prop_media_4s",
+      "p50_t",
+      "p75_t",
+      "p90_t",
+      "ref_vs_p75",
+      "ira_vs_p50",
+      "spread",
+      "pos_act"
+    ],
+    "horizontes": {
+      "2": {
+        "p75": {
+          "parametros": {
+            "max_iter": 200,
+            "learning_rate": 0.05,
+            "max_depth": 4,
+            "min_samples_leaf": 40
+          },
+          "umbral_medio": 0.07697362091567196,
+          "umbral_alto": 0.3591399876783595,
+          "validacion_2019": {
+            "n": 3172,
+            "prevalencia_aumento": 0.13366960907944514,
+            "auc": 0.8280396034165499,
+            "precision_promedio": 0.42946301006981796,
+            "brier": 0.09484047966732255,
+            "alerta_alta": {
+              "precision": 0.4410377358490566,
+              "recall": 0.4410377358490566
+            },
+            "por_nivel": {
+              "baja": {
+                "n": 1586,
+                "proporcion_semanas": 0.5,
+                "tasa_aumento_observada": 0.02648171500630517
+              },
+              "media": {
+                "n": 1162,
+                "proporcion_semanas": 0.36633039092055486,
+                "tasa_aumento_observada": 0.16781411359724613
+              },
+              "alta": {
+                "n": 424,
+                "proporcion_semanas": 0.13366960907944514,
+                "tasa_aumento_observada": 0.4410377358490566
+              }
+            }
+          },
+          "prueba_2022": {
+            "n": 3073,
+            "prevalencia_aumento": 0.12137975919297103,
+            "auc": 0.8800278026015292,
+            "precision_promedio": 0.5401509211530043,
+            "brier": 0.07567185656993547,
+            "alerta_alta": {
+              "precision": 0.5349544072948328,
+              "recall": 0.4718498659517426
+            },
+            "por_nivel": {
+              "baja": {
+                "n": 1848,
+                "proporcion_semanas": 0.6013667425968109,
+                "tasa_aumento_observada": 0.02002164502164502
+              },
+              "media": {
+                "n": 896,
+                "proporcion_semanas": 0.29157175398633256,
+                "tasa_aumento_observada": 0.17857142857142858
+              },
+              "alta": {
+                "n": 329,
+                "proporcion_semanas": 0.1070615034168565,
+                "tasa_aumento_observada": 0.5349544072948328
+              }
+            },
+            "auc_regla_simple": 0.8500814219044783
+          },
+          "pandemia_2020_2021": {
+            "n": 6059,
+            "prevalencia_aumento": 0.05462947681135501,
+            "auc": 0.9223140896892774,
+            "precision_promedio": 0.5410332474067483,
+            "brier": 0.03509025479338039,
+            "alerta_alta": {
+              "precision": 0.547945205479452,
+              "recall": 0.48338368580060426
+            },
+            "por_nivel": {
+              "baja": {
+                "n": 4970,
+                "proporcion_semanas": 0.8202673708532762,
+                "tasa_aumento_observada": 0.010865191146881288
+              },
+              "media": {
+                "n": 797,
+                "proporcion_semanas": 0.13153985806238652,
+                "tasa_aumento_observada": 0.1468005018820577
+              },
+              "alta": {
+                "n": 292,
+                "proporcion_semanas": 0.04819277108433735,
+                "tasa_aumento_observada": 0.547945205479452
+              }
+            },
+            "auc_regla_simple": 0.9120499396614289
+          }
+        },
+        "p90": {
+          "parametros": {
+            "max_iter": 300,
+            "learning_rate": 0.03,
+            "max_depth": 3,
+            "min_samples_leaf": 60,
+            "l2_regularization": 1.0
+          },
+          "umbral_medio": 0.03670254141039213,
+          "umbral_alto": 0.3167852016115751,
+          "validacion_2019": {
+            "n": 3172,
+            "prevalencia_aumento": 0.07093316519546028,
+            "auc": 0.8551053802360216,
+            "precision_promedio": 0.34293311825551687,
+            "brier": 0.05594217535425368,
+            "alerta_alta": {
+              "precision": 0.38222222222222224,
+              "recall": 0.38222222222222224
+            },
+            "por_nivel": {
+              "baja": {
+                "n": 1586,
+                "proporcion_semanas": 0.5,
+                "tasa_aumento_observada": 0.010718789407313998
+              },
+              "media": {
+                "n": 1361,
+                "proporcion_semanas": 0.4290668348045397,
+                "tasa_aumento_observada": 0.0896399706098457
+              },
+              "alta": {
+                "n": 225,
+                "proporcion_semanas": 0.07093316519546028,
+                "tasa_aumento_observada": 0.38222222222222224
+              }
+            }
+          },
+          "prueba_2022": {
+            "n": 3073,
+            "prevalencia_aumento": 0.06085258704848682,
+            "auc": 0.8917677447089212,
+            "precision_promedio": 0.41044526586781105,
+            "brier": 0.044488296477024146,
+            "alerta_alta": {
+              "precision": 0.44508670520231214,
+              "recall": 0.4117647058823529
+            },
+            "por_nivel": {
+              "baja": {
+                "n": 1875,
+                "proporcion_semanas": 0.6101529450048813,
+                "tasa_aumento_observada": 0.006933333333333333
+              },
+              "media": {
+                "n": 1025,
+                "proporcion_semanas": 0.3335502766026684,
+                "tasa_aumento_observada": 0.09463414634146342
+              },
+              "alta": {
+                "n": 173,
+                "proporcion_semanas": 0.056296778392450376,
+                "tasa_aumento_observada": 0.44508670520231214
+              }
+            },
+            "auc_regla_simple": 0.8672551613728086
+          },
+          "pandemia_2020_2021": {
+            "n": 6059,
+            "prevalencia_aumento": 0.03119326621554712,
+            "auc": 0.9321191963440686,
+            "precision_promedio": 0.49517501415649506,
+            "brier": 0.021248024045840898,
+            "alerta_alta": {
+              "precision": 0.5,
+              "recall": 0.43386243386243384
+            },
+            "por_nivel": {
+              "baja": {
+                "n": 4929,
+                "proporcion_semanas": 0.813500577653078,
+                "tasa_aumento_observada": 0.0044633799959423815
+              },
+              "media": {
+                "n": 966,
+                "proporcion_semanas": 0.15943224954612972,
+                "tasa_aumento_observada": 0.08799171842650104
+              },
+              "alta": {
+                "n": 164,
+                "proporcion_semanas": 0.02706717280079221,
+                "tasa_aumento_observada": 0.5
+              }
+            },
+            "auc_regla_simple": 0.928390705136872
+          }
+        }
+      },
+      "3": {
+        "p75": {
+          "parametros": {
+            "max_iter": 200,
+            "learning_rate": 0.05,
+            "max_depth": 4,
+            "min_samples_leaf": 40
+          },
+          "umbral_medio": 0.08411729928062926,
+          "umbral_alto": 0.35800230305084346,
+          "validacion_2019": {
+            "n": 3167,
+            "prevalencia_aumento": 0.1376697189769498,
+            "auc": 0.806565125521115,
+            "precision_promedio": 0.3894944206503425,
+            "brier": 0.1014962539384364,
+            "alerta_alta": {
+              "precision": 0.42660550458715596,
+              "recall": 0.42660550458715596
+            },
+            "por_nivel": {
+              "baja": {
+                "n": 1583,
+                "proporcion_semanas": 0.4998421218819072,
+                "tasa_aumento_observada": 0.033480732785849655
+              },
+              "media": {
+                "n": 1148,
+                "proporcion_semanas": 0.362488159141143,
+                "tasa_aumento_observada": 0.171602787456446
+              },
+              "alta": {
+                "n": 436,
+                "proporcion_semanas": 0.1376697189769498,
+                "tasa_aumento_observada": 0.42660550458715596
+              }
+            }
+          },
+          "prueba_2022": {
+            "n": 3014,
+            "prevalencia_aumento": 0.12110152621101526,
+            "auc": 0.8718451522156203,
+            "precision_promedio": 0.5354325442087781,
+            "brier": 0.07680344923384883,
+            "alerta_alta": {
+              "precision": 0.5179640718562875,
+              "recall": 0.473972602739726
+            },
+            "por_nivel": {
+              "baja": {
+                "n": 1811,
+                "proporcion_semanas": 0.6008626410086264,
+                "tasa_aumento_observada": 0.022087244616234125
+              },
+              "media": {
+                "n": 869,
+                "proporcion_semanas": 0.28832116788321166,
+                "tasa_aumento_observada": 0.17491369390103567
+              },
+              "alta": {
+                "n": 334,
+                "proporcion_semanas": 0.1108161911081619,
+                "tasa_aumento_observada": 0.5179640718562875
+              }
+            },
+            "auc_regla_simple": 0.8390579024392766
+          },
+          "pandemia_2020_2021": {
+            "n": 6053,
+            "prevalencia_aumento": 0.05270113993061292,
+            "auc": 0.9242739507945239,
+            "precision_promedio": 0.5386028520101726,
+            "brier": 0.03425180259819916,
+            "alerta_alta": {
+              "precision": 0.5464285714285714,
+              "recall": 0.47962382445141066
+            },
+            "por_nivel": {
+              "baja": {
+                "n": 4942,
+                "proporcion_semanas": 0.816454650586486,
+                "tasa_aumento_observada": 0.010117361392148928
+              },
+              "media": {
+                "n": 831,
+                "proporcion_semanas": 0.13728729555592267,
+                "tasa_aumento_observada": 0.13959085439229843
+              },
+              "alta": {
+                "n": 280,
+                "proporcion_semanas": 0.046258053857591276,
+                "tasa_aumento_observada": 0.5464285714285714
+              }
+            },
+            "auc_regla_simple": 0.9099126040239544
+          }
+        },
+        "p90": {
+          "parametros": {
+            "max_iter": 200,
+            "learning_rate": 0.05,
+            "max_depth": 4,
+            "min_samples_leaf": 40
+          },
+          "umbral_medio": 0.03710674625479627,
+          "umbral_alto": 0.3175314449434498,
+          "validacion_2019": {
+            "n": 3167,
+            "prevalencia_aumento": 0.07199242185033154,
+            "auc": 0.839868256896068,
+            "precision_promedio": 0.32918892037155445,
+            "brier": 0.05805754982318271,
+            "alerta_alta": {
+              "precision": 0.35964912280701755,
+              "recall": 0.35964912280701755
+            },
+            "por_nivel": {
+              "baja": {
+                "n": 1583,
+                "proporcion_semanas": 0.4998421218819072,
+                "tasa_aumento_observada": 0.011370814908401769
+              },
+              "media": {
+                "n": 1356,
+                "proporcion_semanas": 0.4281654562677613,
+                "tasa_aumento_observada": 0.0943952802359882
+              },
+              "alta": {
+                "n": 228,
+                "proporcion_semanas": 0.07199242185033154,
+                "tasa_aumento_observada": 0.35964912280701755
+              }
+            }
+          },
+          "prueba_2022": {
+            "n": 3014,
+            "prevalencia_aumento": 0.061380225613802256,
+            "auc": 0.8775882987972066,
+            "precision_promedio": 0.4289283835098746,
+            "brier": 0.045280491015727974,
+            "alerta_alta": {
+              "precision": 0.43373493975903615,
+              "recall": 0.3891891891891892
+            },
+            "por_nivel": {
+              "baja": {
+                "n": 1844,
+                "proporcion_semanas": 0.6118115461181155,
+                "tasa_aumento_observada": 0.009219088937093275
+              },
+              "media": {
+                "n": 1004,
+                "proporcion_semanas": 0.33311214333112144,
+                "tasa_aumento_observada": 0.09561752988047809
+              },
+              "alta": {
+                "n": 166,
+                "proporcion_semanas": 0.055076310550763105,
+                "tasa_aumento_observada": 0.43373493975903615
+              }
+            },
+            "auc_regla_simple": 0.8553514277798477
+          },
+          "pandemia_2020_2021": {
+            "n": 6053,
+            "prevalencia_aumento": 0.02957211300181728,
+            "auc": 0.9258640006239027,
+            "precision_promedio": 0.4400292444962445,
+            "brier": 0.021332978286749012,
+            "alerta_alta": {
+              "precision": 0.47368421052631576,
+              "recall": 0.4022346368715084
+            },
+            "por_nivel": {
+              "baja": {
+                "n": 4869,
+                "proporcion_semanas": 0.8043945151164712,
+                "tasa_aumento_observada": 0.004518381597864038
+              },
+              "media": {
+                "n": 1032,
+                "proporcion_semanas": 0.17049396993226498,
+                "tasa_aumento_observada": 0.08236434108527131
+              },
+              "alta": {
+                "n": 152,
+                "proporcion_semanas": 0.025111514951263837,
+                "tasa_aumento_observada": 0.47368421052631576
+              }
+            },
+            "auc_regla_simple": 0.9226256032169031
+          }
+        }
+      }
+    }
+  }
+}

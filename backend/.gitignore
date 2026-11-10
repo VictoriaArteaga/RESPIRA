@@ -8,5 +8,5 @@ __pycache__/
 htmlcov/
 *.db
 
-# Modelos entrenados de la IA (se regeneran con scripts/train_forecast.py)
-ml_artifacts/
+# Modelos entrenados de la IA (se versionan para el despliegue; se regeneran con scripts/train_forecast.py)
+# ml_artifacts/ se versiona: Render lo necesita para servir la IA

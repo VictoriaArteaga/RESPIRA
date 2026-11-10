@@ -1,0 +1,649 @@
+﻿modelo,horizonte,periodo,codigo_divipola,municipio,n,promedio_observado,mae_modelo,mae_persistencia
+base_global,2,validacion_2019,52001,PASTO,52,391.71,35.53,51.0
+base_global,2,validacion_2019,52019,ALBÁN,50,2.24,1.368,1.64
+base_global,2,validacion_2019,52022,ALDANA,52,4.08,2.625,3.0
+base_global,2,validacion_2019,52036,ANCUYA,48,4.33,1.801,2.104
+base_global,2,validacion_2019,52051,ARBOLEDA,47,0.15,0.851,0.191
+base_global,2,validacion_2019,52079,BARBACOAS,49,26.0,13.856,17.551
+base_global,2,validacion_2019,52083,BELÉN,52,2.25,1.86,1.962
+base_global,2,validacion_2019,52110,BUESACO,52,3.38,1.669,1.885
+base_global,2,validacion_2019,52203,COLÓN,52,1.42,1.38,1.75
+base_global,2,validacion_2019,52207,CONSACÁ,52,5.69,2.371,2.827
+base_global,2,validacion_2019,52210,CONTADERO,50,4.12,2.094,2.14
+base_global,2,validacion_2019,52215,CÓRDOBA,52,14.0,4.104,6.192
+base_global,2,validacion_2019,52224,CUASPUD CARLOSAMA,52,11.08,3.101,4.577
+base_global,2,validacion_2019,52227,CUMBAL,52,23.37,6.704,8.288
+base_global,2,validacion_2019,52233,CUMBITARA,46,1.3,1.341,1.587
+base_global,2,validacion_2019,52240,CHACHAGÜÍ,52,14.25,6.545,7.385
+base_global,2,validacion_2019,52250,EL CHARCO,43,8.72,4.075,4.186
+base_global,2,validacion_2019,52254,EL PEÑOL,52,3.38,2.029,2.404
+base_global,2,validacion_2019,52256,EL ROSARIO,50,1.16,1.238,1.38
+base_global,2,validacion_2019,52258,EL TABLÓN DE GÓMEZ,52,5.71,2.347,2.692
+base_global,2,validacion_2019,52260,EL TAMBO,48,5.62,2.483,3.167
+base_global,2,validacion_2019,52287,FUNES,52,1.85,1.197,1.365
+base_global,2,validacion_2019,52317,GUACHUCAL,52,8.38,2.713,3.385
+base_global,2,validacion_2019,52320,GUAITARILLA,50,1.78,1.592,1.34
+base_global,2,validacion_2019,52323,GUALMATÁN,49,2.8,1.929,2.143
+base_global,2,validacion_2019,52352,ILES,52,2.9,2.806,3.346
+base_global,2,validacion_2019,52354,IMUÉS,52,1.6,1.142,1.5
+base_global,2,validacion_2019,52356,IPIALES,52,170.21,29.588,36.654
+base_global,2,validacion_2019,52378,LA CRUZ,51,4.67,2.281,2.588
+base_global,2,validacion_2019,52381,LA FLORIDA,50,0.7,1.343,0.9
+base_global,2,validacion_2019,52385,LA LLANADA,45,2.11,1.671,1.6
+base_global,2,validacion_2019,52390,LA TOLA,37,2.43,3.693,3.189
+base_global,2,validacion_2019,52399,LA UNIÓN,52,42.94,7.823,8.615
+base_global,2,validacion_2019,52405,LEIVA,50,4.72,3.056,3.42
+base_global,2,validacion_2019,52411,LINARES,50,2.68,1.915,1.92
+base_global,2,validacion_2019,52418,LOS ANDES,52,3.15,1.599,1.923
+base_global,2,validacion_2019,52427,MAGÜÍ,36,0.0,1.752,0.0
+base_global,2,validacion_2019,52435,MALLAMA,50,4.82,2.577,3.18
+base_global,2,validacion_2019,52473,MOSQUERA,39,5.46,1.86,2.0
+base_global,2,validacion_2019,52480,NARIÑO,49,1.51,1.154,1.204
+base_global,2,validacion_2019,52490,OLAYA HERRERA,52,17.31,10.38,12.577
+base_global,2,validacion_2019,52506,OSPINA,51,2.06,1.766,2.196
+base_global,2,validacion_2019,52520,FRANCISCO PIZARRO,47,0.0,0.914,0.0
+base_global,2,validacion_2019,52540,POLICARPA,50,0.22,0.738,0.24
+base_global,2,validacion_2019,52560,POTOSÍ,52,4.08,2.193,2.423
+base_global,2,validacion_2019,52565,PROVIDENCIA,48,2.81,1.607,1.875
+base_global,2,validacion_2019,52573,PUERRES,50,6.22,2.647,3.1
+base_global,2,validacion_2019,52585,PUPIALES,52,17.13,4.046,4.654
+base_global,2,validacion_2019,52612,RICAURTE,50,0.78,2.203,0.78
+base_global,2,validacion_2019,52621,ROBERTO PAYÁN,43,5.14,4.731,3.86
+base_global,2,validacion_2019,52678,SAMANIEGO,52,12.02,5.369,5.519
+base_global,2,validacion_2019,52683,SANDONÁ,50,15.68,5.804,7.38
+base_global,2,validacion_2019,52685,SAN BERNARDO,48,0.98,1.112,1.042
+base_global,2,validacion_2019,52687,SAN LORENZO,50,9.6,3.881,4.96
+base_global,2,validacion_2019,52693,SAN PABLO,46,11.04,5.826,6.37
+base_global,2,validacion_2019,52694,SAN PEDRO DE CARTAGO,50,3.16,1.84,2.3
+base_global,2,validacion_2019,52696,SANTA BÁRBARA,50,15.02,9.497,11.02
+base_global,2,validacion_2019,52699,SANTACRUZ,52,2.96,1.998,2.442
+base_global,2,validacion_2019,52720,SAPUYES,52,0.92,0.983,1.0
+base_global,2,validacion_2019,52786,TAMINANGO,47,10.09,5.972,5.681
+base_global,2,validacion_2019,52788,TANGUA,50,2.3,1.785,2.54
+base_global,2,validacion_2019,52835,SAN ANDRÉS DE TUMACO,52,106.98,20.969,26.269
+base_global,2,validacion_2019,52838,TÚQUERRES,52,9.92,4.82,6.712
+base_global,2,validacion_2019,52885,YACUANQUER,52,7.54,3.346,3.596
+base_global,2,prueba_2022,52001,PASTO,50,334.52,54.094,65.44
+base_global,2,prueba_2022,52019,ALBÁN,50,4.34,2.617,3.14
+base_global,2,prueba_2022,52022,ALDANA,50,4.82,2.178,2.8
+base_global,2,prueba_2022,52036,ANCUYA,48,4.4,2.337,2.292
+base_global,2,prueba_2022,52051,ARBOLEDA,48,4.48,2.638,3.271
+base_global,2,prueba_2022,52079,BARBACOAS,50,23.8,8.317,10.34
+base_global,2,prueba_2022,52083,BELÉN,46,1.54,1.154,1.283
+base_global,2,prueba_2022,52110,BUESACO,50,2.2,1.7,1.74
+base_global,2,prueba_2022,52203,COLÓN,50,2.2,1.43,1.62
+base_global,2,prueba_2022,52207,CONSACÁ,48,3.94,2.341,2.896
+base_global,2,prueba_2022,52210,CONTADERO,44,2.43,1.761,2.068
+base_global,2,prueba_2022,52215,CÓRDOBA,50,4.02,2.019,2.54
+base_global,2,prueba_2022,52224,CUASPUD CARLOSAMA,50,7.34,3.434,3.92
+base_global,2,prueba_2022,52227,CUMBAL,50,17.86,6.323,8.7
+base_global,2,prueba_2022,52233,CUMBITARA,50,0.92,1.012,0.96
+base_global,2,prueba_2022,52240,CHACHAGÜÍ,50,7.22,2.575,3.08
+base_global,2,prueba_2022,52250,EL CHARCO,46,5.93,3.42,3.696
+base_global,2,prueba_2022,52254,EL PEÑOL,50,1.14,1.414,1.1
+base_global,2,prueba_2022,52256,EL ROSARIO,50,1.08,1.021,1.2
+base_global,2,prueba_2022,52258,EL TABLÓN DE GÓMEZ,50,5.08,2.399,2.76
+base_global,2,prueba_2022,52260,EL TAMBO,50,7.04,3.957,4.48
+base_global,2,prueba_2022,52287,FUNES,50,1.18,1.29,1.08
+base_global,2,prueba_2022,52317,GUACHUCAL,50,5.8,2.85,3.98
+base_global,2,prueba_2022,52320,GUAITARILLA,50,3.94,1.975,2.52
+base_global,2,prueba_2022,52323,GUALMATÁN,50,0.58,0.905,0.98
+base_global,2,prueba_2022,52352,ILES,41,2.54,1.96,2.293
+base_global,2,prueba_2022,52354,IMUÉS,50,2.6,1.551,1.96
+base_global,2,prueba_2022,52356,IPIALES,50,150.36,30.091,35.46
+base_global,2,prueba_2022,52378,LA CRUZ,50,8.22,3.337,3.64
+base_global,2,prueba_2022,52381,LA FLORIDA,50,2.24,1.345,1.5
+base_global,2,prueba_2022,52385,LA LLANADA,50,2.3,1.55,1.78
+base_global,2,prueba_2022,52390,LA TOLA,40,0.0,0.865,0.25
+base_global,2,prueba_2022,52399,LA UNIÓN,50,44.44,8.126,11.24
+base_global,2,prueba_2022,52405,LEIVA,48,1.69,1.384,2.125
+base_global,2,prueba_2022,52411,LINARES,50,8.38,5.976,6.64
+base_global,2,prueba_2022,52418,LOS ANDES,50,0.84,1.035,1.02
+base_global,2,prueba_2022,52427,MAGÜÍ,48,8.9,2.153,2.042
+base_global,2,prueba_2022,52435,MALLAMA,50,4.7,1.974,2.58
+base_global,2,prueba_2022,52473,MOSQUERA,50,4.2,2.654,2.9
+base_global,2,prueba_2022,52480,NARIÑO,48,1.62,1.545,1.729
+base_global,2,prueba_2022,52490,OLAYA HERRERA,50,17.22,5.918,7.5
+base_global,2,prueba_2022,52506,OSPINA,50,1.04,0.974,0.9
+base_global,2,prueba_2022,52520,FRANCISCO PIZARRO,15,2.0,2.482,2.467
+base_global,2,prueba_2022,52540,POLICARPA,42,0.43,0.943,0.476
+base_global,2,prueba_2022,52560,POTOSÍ,50,3.96,2.294,2.48
+base_global,2,prueba_2022,52565,PROVIDENCIA,48,3.12,2.196,2.875
+base_global,2,prueba_2022,52573,PUERRES,48,2.65,1.601,2.042
+base_global,2,prueba_2022,52585,PUPIALES,35,4.83,1.997,2.486
+base_global,2,prueba_2022,52612,RICAURTE,50,14.32,5.068,6.16
+base_global,2,prueba_2022,52621,ROBERTO PAYÁN,49,5.37,2.475,3.0
+base_global,2,prueba_2022,52678,SAMANIEGO,50,7.66,3.228,4.3
+base_global,2,prueba_2022,52683,SANDONÁ,50,8.74,4.904,6.22
+base_global,2,prueba_2022,52685,SAN BERNARDO,48,2.06,1.553,1.646
+base_global,2,prueba_2022,52687,SAN LORENZO,50,0.0,0.577,0.0
+base_global,2,prueba_2022,52693,SAN PABLO,50,4.42,2.948,3.22
+base_global,2,prueba_2022,52694,SAN PEDRO DE CARTAGO,50,1.92,1.351,1.8
+base_global,2,prueba_2022,52696,SANTA BÁRBARA,43,24.93,8.823,11.512
+base_global,2,prueba_2022,52699,SANTACRUZ,50,1.98,1.201,1.5
+base_global,2,prueba_2022,52720,SAPUYES,50,0.4,0.728,0.44
+base_global,2,prueba_2022,52786,TAMINANGO,46,8.78,3.644,4.478
+base_global,2,prueba_2022,52788,TANGUA,50,2.84,1.849,2.2
+base_global,2,prueba_2022,52835,SAN ANDRÉS DE TUMACO,50,110.9,23.33,24.28
+base_global,2,prueba_2022,52838,TÚQUERRES,50,5.52,2.971,3.12
+base_global,2,prueba_2022,52885,YACUANQUER,46,4.78,3.401,3.674
+base_global,3,validacion_2019,52001,PASTO,52,393.37,34.498,71.846
+base_global,3,validacion_2019,52019,ALBÁN,51,2.18,1.545,1.51
+base_global,3,validacion_2019,52022,ALDANA,52,4.02,2.746,2.981
+base_global,3,validacion_2019,52036,ANCUYA,48,4.33,2.196,2.833
+base_global,3,validacion_2019,52051,ARBOLEDA,47,0.17,1.018,0.213
+base_global,3,validacion_2019,52079,BARBACOAS,48,26.56,14.619,18.625
+base_global,3,validacion_2019,52083,BELÉN,52,2.31,1.921,2.25
+base_global,3,validacion_2019,52110,BUESACO,52,3.5,1.774,2.346
+base_global,3,validacion_2019,52203,COLÓN,52,1.46,1.358,1.712
+base_global,3,validacion_2019,52207,CONSACÁ,52,5.67,2.275,2.885
+base_global,3,validacion_2019,52210,CONTADERO,50,4.08,2.221,2.62
+base_global,3,validacion_2019,52215,CÓRDOBA,52,14.02,4.086,5.788
+base_global,3,validacion_2019,52224,CUASPUD CARLOSAMA,52,11.04,3.281,4.269
+base_global,3,validacion_2019,52227,CUMBAL,52,23.38,7.237,8.0
+base_global,3,validacion_2019,52233,CUMBITARA,46,1.33,1.369,1.457
+base_global,3,validacion_2019,52240,CHACHAGÜÍ,52,14.52,7.087,8.077
+base_global,3,validacion_2019,52250,EL CHARCO,43,8.23,4.735,4.349
+base_global,3,validacion_2019,52254,EL PEÑOL,52,3.4,2.089,2.423
+base_global,3,validacion_2019,52256,EL ROSARIO,50,1.16,1.29,1.32
+base_global,3,validacion_2019,52258,EL TABLÓN DE GÓMEZ,52,5.88,2.747,3.212
+base_global,3,validacion_2019,52260,EL TAMBO,48,5.65,2.357,2.917
+base_global,3,validacion_2019,52287,FUNES,52,1.81,1.188,1.481
+base_global,3,validacion_2019,52317,GUACHUCAL,52,8.35,3.059,3.615
+base_global,3,validacion_2019,52320,GUAITARILLA,50,1.84,1.638,2.1
+base_global,3,validacion_2019,52323,GUALMATÁN,49,2.86,1.941,2.102
+base_global,3,validacion_2019,52352,ILES,52,2.83,2.605,3.269
+base_global,3,validacion_2019,52354,IMUÉS,52,1.67,1.183,1.346
+base_global,3,validacion_2019,52356,IPIALES,52,170.65,29.958,39.327
+base_global,3,validacion_2019,52378,LA CRUZ,51,4.73,2.525,2.882
+base_global,3,validacion_2019,52381,LA FLORIDA,50,0.78,1.434,1.02
+base_global,3,validacion_2019,52385,LA LLANADA,46,2.26,1.735,2.0
+base_global,3,validacion_2019,52390,LA TOLA,35,2.34,4.62,3.571
+base_global,3,validacion_2019,52399,LA UNIÓN,52,43.5,8.815,10.904
+base_global,3,validacion_2019,52405,LEIVA,50,4.86,3.477,3.98
+base_global,3,validacion_2019,52411,LINARES,50,2.7,1.988,2.14
+base_global,3,validacion_2019,52418,LOS ANDES,52,3.12,1.512,1.615
+base_global,3,validacion_2019,52427,MAGÜÍ,35,0.06,2.269,0.057
+base_global,3,validacion_2019,52435,MALLAMA,50,4.86,2.539,3.42
+base_global,3,validacion_2019,52473,MOSQUERA,38,5.47,2.065,2.316
+base_global,3,validacion_2019,52480,NARIÑO,49,1.53,1.306,1.367
+base_global,3,validacion_2019,52490,OLAYA HERRERA,52,17.31,10.134,12.346
+base_global,3,validacion_2019,52506,OSPINA,51,2.02,1.79,2.157
+base_global,3,validacion_2019,52520,FRANCISCO PIZARRO,46,0.0,0.73,0.0
+base_global,3,validacion_2019,52540,POLICARPA,50,0.26,0.768,0.28
+base_global,3,validacion_2019,52560,POTOSÍ,52,4.23,2.372,2.654
+base_global,3,validacion_2019,52565,PROVIDENCIA,47,2.87,1.576,1.851
+base_global,3,validacion_2019,52573,PUERRES,50,6.28,2.608,3.38
+base_global,3,validacion_2019,52585,PUPIALES,52,17.25,3.989,5.192
+base_global,3,validacion_2019,52612,RICAURTE,50,1.06,3.27,1.06
+base_global,3,validacion_2019,52621,ROBERTO PAYÁN,43,4.91,6.807,5.023
+base_global,3,validacion_2019,52678,SAMANIEGO,52,12.29,5.866,6.827
+base_global,3,validacion_2019,52683,SANDONÁ,50,15.7,5.825,7.76
+base_global,3,validacion_2019,52685,SAN BERNARDO,48,1.06,1.305,1.125
+base_global,3,validacion_2019,52687,SAN LORENZO,50,9.66,4.024,5.48
+base_global,3,validacion_2019,52693,SAN PABLO,46,12.11,5.956,7.478
+base_global,3,validacion_2019,52694,SAN PEDRO DE CARTAGO,50,3.1,1.893,2.48
+base_global,3,validacion_2019,52696,SANTA BÁRBARA,49,15.33,10.183,11.245
+base_global,3,validacion_2019,52699,SANTACRUZ,52,3.0,1.995,2.404
+base_global,3,validacion_2019,52720,SAPUYES,52,0.96,0.988,1.154
+base_global,3,validacion_2019,52786,TAMINANGO,48,9.56,7.03,6.458
+base_global,3,validacion_2019,52788,TANGUA,50,2.3,1.819,2.2
+base_global,3,validacion_2019,52835,SAN ANDRÉS DE TUMACO,52,109.21,24.443,30.962
+base_global,3,validacion_2019,52838,TÚQUERRES,52,10.02,4.427,5.769
+base_global,3,validacion_2019,52885,YACUANQUER,52,7.56,3.403,3.923
+base_global,3,prueba_2022,52001,PASTO,49,335.29,67.875,83.184
+base_global,3,prueba_2022,52019,ALBÁN,49,4.39,2.771,3.612
+base_global,3,prueba_2022,52022,ALDANA,49,4.88,2.212,2.857
+base_global,3,prueba_2022,52036,ANCUYA,47,4.36,2.769,2.362
+base_global,3,prueba_2022,52051,ARBOLEDA,48,4.4,2.595,3.354
+base_global,3,prueba_2022,52079,BARBACOAS,49,23.94,8.401,10.429
+base_global,3,prueba_2022,52083,BELÉN,45,1.47,1.188,1.2
+base_global,3,prueba_2022,52110,BUESACO,49,2.18,1.737,1.918
+base_global,3,prueba_2022,52203,COLÓN,49,2.18,1.448,1.714
+base_global,3,prueba_2022,52207,CONSACÁ,47,3.91,2.399,3.043
+base_global,3,prueba_2022,52210,CONTADERO,43,2.51,1.911,2.279
+base_global,3,prueba_2022,52215,CÓRDOBA,49,3.98,2.113,2.735
+base_global,3,prueba_2022,52224,CUASPUD CARLOSAMA,49,7.43,3.665,4.204
+base_global,3,prueba_2022,52227,CUMBAL,49,17.98,6.1,6.388
+base_global,3,prueba_2022,52233,CUMBITARA,49,0.94,0.983,1.102
+base_global,3,prueba_2022,52240,CHACHAGÜÍ,49,7.24,2.597,3.122
+base_global,3,prueba_2022,52250,EL CHARCO,45,5.98,3.749,3.733
+base_global,3,prueba_2022,52254,EL PEÑOL,49,1.12,1.333,1.347
+base_global,3,prueba_2022,52256,EL ROSARIO,49,1.1,1.196,1.184
+base_global,3,prueba_2022,52258,EL TABLÓN DE GÓMEZ,49,5.04,2.379,3.041
+base_global,3,prueba_2022,52260,EL TAMBO,49,6.98,4.278,4.898
+base_global,3,prueba_2022,52287,FUNES,49,1.18,1.321,1.245
+base_global,3,prueba_2022,52317,GUACHUCAL,49,5.8,2.834,3.367
+base_global,3,prueba_2022,52320,GUAITARILLA,49,3.96,2.233,2.653
+base_global,3,prueba_2022,52323,GUALMATÁN,49,0.59,0.914,0.878
+base_global,3,prueba_2022,52352,ILES,40,2.58,1.938,2.225
+base_global,3,prueba_2022,52354,IMUÉS,49,2.63,1.461,2.082
+base_global,3,prueba_2022,52356,IPIALES,49,150.06,33.717,37.531
+base_global,3,prueba_2022,52378,LA CRUZ,49,8.24,3.654,4.265
+base_global,3,prueba_2022,52381,LA FLORIDA,49,2.22,1.415,1.653
+base_global,3,prueba_2022,52385,LA LLANADA,49,2.29,1.618,1.898
+base_global,3,prueba_2022,52390,LA TOLA,40,0.07,0.564,0.325
+base_global,3,prueba_2022,52399,LA UNIÓN,49,44.41,8.869,12.388
+base_global,3,prueba_2022,52405,LEIVA,47,1.68,1.393,1.638
+base_global,3,prueba_2022,52411,LINARES,49,8.47,5.927,6.51
+base_global,3,prueba_2022,52418,LOS ANDES,49,0.86,1.028,1.143
+base_global,3,prueba_2022,52427,MAGÜÍ,47,8.98,2.321,2.064
+base_global,3,prueba_2022,52435,MALLAMA,49,4.65,2.034,2.755
+base_global,3,prueba_2022,52473,MOSQUERA,49,4.29,2.778,3.408
+base_global,3,prueba_2022,52480,NARIÑO,47,1.64,1.526,1.617
+base_global,3,prueba_2022,52490,OLAYA HERRERA,49,17.33,5.379,7.755
+base_global,3,prueba_2022,52506,OSPINA,49,1.06,0.931,1.122
+base_global,3,prueba_2022,52520,FRANCISCO PIZARRO,16,2.62,2.165,2.375
+base_global,3,prueba_2022,52540,POLICARPA,41,0.49,1.283,0.61
+base_global,3,prueba_2022,52560,POTOSÍ,49,4.0,2.431,2.959
+base_global,3,prueba_2022,52565,PROVIDENCIA,47,3.26,2.223,2.872
+base_global,3,prueba_2022,52573,PUERRES,47,2.68,1.589,2.043
+base_global,3,prueba_2022,52585,PUPIALES,35,4.91,2.176,2.543
+base_global,3,prueba_2022,52612,RICAURTE,49,14.31,5.088,6.755
+base_global,3,prueba_2022,52621,ROBERTO PAYÁN,48,5.42,2.528,3.021
+base_global,3,prueba_2022,52678,SAMANIEGO,49,7.59,3.377,4.041
+base_global,3,prueba_2022,52683,SANDONÁ,49,8.8,4.809,5.918
+base_global,3,prueba_2022,52685,SAN BERNARDO,47,2.11,1.52,1.979
+base_global,3,prueba_2022,52687,SAN LORENZO,49,0.0,0.518,0.0
+base_global,3,prueba_2022,52693,SAN PABLO,49,4.33,3.487,3.245
+base_global,3,prueba_2022,52694,SAN PEDRO DE CARTAGO,49,1.9,1.408,1.551
+base_global,3,prueba_2022,52696,SANTA BÁRBARA,42,25.07,8.404,11.81
+base_global,3,prueba_2022,52699,SANTACRUZ,49,2.0,1.258,1.592
+base_global,3,prueba_2022,52720,SAPUYES,49,0.41,0.711,0.653
+base_global,3,prueba_2022,52786,TAMINANGO,45,8.82,3.568,5.0
+base_global,3,prueba_2022,52788,TANGUA,49,2.84,1.766,2.041
+base_global,3,prueba_2022,52835,SAN ANDRÉS DE TUMACO,49,110.49,27.299,26.857
+base_global,3,prueba_2022,52838,TÚQUERRES,49,5.53,3.026,3.796
+base_global,3,prueba_2022,52885,YACUANQUER,45,4.91,3.638,4.289
+base_a,2,validacion_2019,52001,PASTO,52,391.71,37.798,51.0
+base_a,2,validacion_2019,52022,ALDANA,52,4.08,2.497,3.0
+base_a,2,validacion_2019,52051,ARBOLEDA,47,0.15,0.892,0.191
+base_a,2,validacion_2019,52079,BARBACOAS,49,26.0,13.52,17.551
+base_a,2,validacion_2019,52110,BUESACO,52,3.38,1.635,1.885
+base_a,2,validacion_2019,52203,COLÓN,52,1.42,1.393,1.75
+base_a,2,validacion_2019,52207,CONSACÁ,52,5.69,2.342,2.827
+base_a,2,validacion_2019,52227,CUMBAL,52,23.37,6.764,8.288
+base_a,2,validacion_2019,52233,CUMBITARA,46,1.3,1.711,1.587
+base_a,2,validacion_2019,52240,CHACHAGÜÍ,52,14.25,7.054,7.385
+base_a,2,validacion_2019,52250,EL CHARCO,43,8.72,4.053,4.186
+base_a,2,validacion_2019,52254,EL PEÑOL,52,3.38,2.035,2.404
+base_a,2,validacion_2019,52256,EL ROSARIO,50,1.16,1.201,1.38
+base_a,2,validacion_2019,52258,EL TABLÓN DE GÓMEZ,52,5.71,2.353,2.692
+base_a,2,validacion_2019,52287,FUNES,52,1.85,1.24,1.365
+base_a,2,validacion_2019,52323,GUALMATÁN,49,2.8,2.007,2.143
+base_a,2,validacion_2019,52354,IMUÉS,52,1.6,1.181,1.5
+base_a,2,validacion_2019,52378,LA CRUZ,51,4.67,2.136,2.588
+base_a,2,validacion_2019,52385,LA LLANADA,45,2.11,1.73,1.6
+base_a,2,validacion_2019,52399,LA UNIÓN,52,42.94,8.514,8.615
+base_a,2,validacion_2019,52405,LEIVA,50,4.72,2.943,3.42
+base_a,2,validacion_2019,52411,LINARES,50,2.68,2.028,1.92
+base_a,2,validacion_2019,52427,MAGÜÍ,36,0.0,2.42,0.0
+base_a,2,validacion_2019,52473,MOSQUERA,39,5.46,1.9,2.0
+base_a,2,validacion_2019,52480,NARIÑO,49,1.51,1.273,1.204
+base_a,2,validacion_2019,52520,FRANCISCO PIZARRO,47,0.0,0.952,0.0
+base_a,2,validacion_2019,52540,POLICARPA,50,0.22,0.868,0.24
+base_a,2,validacion_2019,52560,POTOSÍ,52,4.08,2.167,2.423
+base_a,2,validacion_2019,52573,PUERRES,50,6.22,2.601,3.1
+base_a,2,validacion_2019,52585,PUPIALES,52,17.13,4.256,4.654
+base_a,2,validacion_2019,52678,SAMANIEGO,52,12.02,5.526,5.519
+base_a,2,validacion_2019,52683,SANDONÁ,50,15.68,6.015,7.38
+base_a,2,validacion_2019,52685,SAN BERNARDO,48,0.98,1.203,1.042
+base_a,2,validacion_2019,52699,SANTACRUZ,52,2.96,2.106,2.442
+base_a,2,validacion_2019,52786,TAMINANGO,47,10.09,6.395,5.681
+base_a,2,validacion_2019,52788,TANGUA,50,2.3,1.839,2.54
+base_a,2,validacion_2019,52835,SAN ANDRÉS DE TUMACO,52,106.98,20.187,26.269
+base_a,2,validacion_2019,52838,TÚQUERRES,52,9.92,4.804,6.712
+base_a,2,prueba_2022,52001,PASTO,50,334.52,57.833,65.44
+base_a,2,prueba_2022,52022,ALDANA,50,4.82,2.225,2.8
+base_a,2,prueba_2022,52051,ARBOLEDA,48,4.48,2.918,3.271
+base_a,2,prueba_2022,52079,BARBACOAS,50,23.8,8.441,10.34
+base_a,2,prueba_2022,52110,BUESACO,50,2.2,1.805,1.74
+base_a,2,prueba_2022,52203,COLÓN,50,2.2,1.415,1.62
+base_a,2,prueba_2022,52207,CONSACÁ,48,3.94,2.413,2.896
+base_a,2,prueba_2022,52227,CUMBAL,50,17.86,6.41,8.7
+base_a,2,prueba_2022,52233,CUMBITARA,50,0.92,1.171,0.96
+base_a,2,prueba_2022,52240,CHACHAGÜÍ,50,7.22,2.681,3.08
+base_a,2,prueba_2022,52250,EL CHARCO,46,5.93,3.52,3.696
+base_a,2,prueba_2022,52254,EL PEÑOL,50,1.14,1.574,1.1
+base_a,2,prueba_2022,52256,EL ROSARIO,50,1.08,0.992,1.2
+base_a,2,prueba_2022,52258,EL TABLÓN DE GÓMEZ,50,5.08,2.426,2.76
+base_a,2,prueba_2022,52287,FUNES,50,1.18,1.347,1.08
+base_a,2,prueba_2022,52323,GUALMATÁN,50,0.58,0.94,0.98
+base_a,2,prueba_2022,52354,IMUÉS,50,2.6,1.529,1.96
+base_a,2,prueba_2022,52378,LA CRUZ,50,8.22,3.242,3.64
+base_a,2,prueba_2022,52385,LA LLANADA,50,2.3,1.632,1.78
+base_a,2,prueba_2022,52399,LA UNIÓN,50,44.44,8.088,11.24
+base_a,2,prueba_2022,52405,LEIVA,48,1.69,1.411,2.125
+base_a,2,prueba_2022,52411,LINARES,50,8.38,5.838,6.64
+base_a,2,prueba_2022,52427,MAGÜÍ,48,8.9,2.337,2.042
+base_a,2,prueba_2022,52473,MOSQUERA,50,4.2,2.681,2.9
+base_a,2,prueba_2022,52480,NARIÑO,48,1.62,1.546,1.729
+base_a,2,prueba_2022,52520,FRANCISCO PIZARRO,15,2.0,2.039,2.467
+base_a,2,prueba_2022,52540,POLICARPA,42,0.43,1.048,0.476
+base_a,2,prueba_2022,52560,POTOSÍ,50,3.96,2.274,2.48
+base_a,2,prueba_2022,52573,PUERRES,48,2.65,1.587,2.042
+base_a,2,prueba_2022,52585,PUPIALES,35,4.83,2.09,2.486
+base_a,2,prueba_2022,52678,SAMANIEGO,50,7.66,3.206,4.3
+base_a,2,prueba_2022,52683,SANDONÁ,50,8.74,4.954,6.22
+base_a,2,prueba_2022,52685,SAN BERNARDO,48,2.06,1.548,1.646
+base_a,2,prueba_2022,52699,SANTACRUZ,50,1.98,1.225,1.5
+base_a,2,prueba_2022,52786,TAMINANGO,46,8.78,3.697,4.478
+base_a,2,prueba_2022,52788,TANGUA,50,2.84,1.88,2.2
+base_a,2,prueba_2022,52835,SAN ANDRÉS DE TUMACO,50,110.9,21.318,24.28
+base_a,2,prueba_2022,52838,TÚQUERRES,50,5.52,3.0,3.12
+base_a,3,validacion_2019,52001,PASTO,52,393.37,36.843,71.846
+base_a,3,validacion_2019,52022,ALDANA,52,4.02,2.664,2.981
+base_a,3,validacion_2019,52051,ARBOLEDA,47,0.17,0.871,0.213
+base_a,3,validacion_2019,52079,BARBACOAS,48,26.56,14.931,18.625
+base_a,3,validacion_2019,52110,BUESACO,52,3.5,1.799,2.346
+base_a,3,validacion_2019,52203,COLÓN,52,1.46,1.396,1.712
+base_a,3,validacion_2019,52207,CONSACÁ,52,5.67,2.299,2.885
+base_a,3,validacion_2019,52227,CUMBAL,52,23.38,7.399,8.0
+base_a,3,validacion_2019,52233,CUMBITARA,46,1.33,1.925,1.457
+base_a,3,validacion_2019,52240,CHACHAGÜÍ,52,14.52,7.209,8.077
+base_a,3,validacion_2019,52250,EL CHARCO,43,8.23,5.207,4.349
+base_a,3,validacion_2019,52254,EL PEÑOL,52,3.4,2.133,2.423
+base_a,3,validacion_2019,52256,EL ROSARIO,50,1.16,1.37,1.32
+base_a,3,validacion_2019,52258,EL TABLÓN DE GÓMEZ,52,5.88,2.63,3.212
+base_a,3,validacion_2019,52287,FUNES,52,1.81,1.308,1.481
+base_a,3,validacion_2019,52323,GUALMATÁN,49,2.86,2.033,2.102
+base_a,3,validacion_2019,52354,IMUÉS,52,1.67,1.121,1.346
+base_a,3,validacion_2019,52378,LA CRUZ,51,4.73,2.298,2.882
+base_a,3,validacion_2019,52385,LA LLANADA,46,2.26,1.652,2.0
+base_a,3,validacion_2019,52399,LA UNIÓN,52,43.5,8.885,10.904
+base_a,3,validacion_2019,52405,LEIVA,50,4.86,3.515,3.98
+base_a,3,validacion_2019,52411,LINARES,50,2.7,2.332,2.14
+base_a,3,validacion_2019,52427,MAGÜÍ,35,0.06,3.322,0.057
+base_a,3,validacion_2019,52473,MOSQUERA,38,5.47,1.999,2.316
+base_a,3,validacion_2019,52480,NARIÑO,49,1.53,1.413,1.367
+base_a,3,validacion_2019,52520,FRANCISCO PIZARRO,46,0.0,0.702,0.0
+base_a,3,validacion_2019,52540,POLICARPA,50,0.26,0.717,0.28
+base_a,3,validacion_2019,52560,POTOSÍ,52,4.23,2.446,2.654
+base_a,3,validacion_2019,52573,PUERRES,50,6.28,2.598,3.38
+base_a,3,validacion_2019,52585,PUPIALES,52,17.25,4.117,5.192
+base_a,3,validacion_2019,52678,SAMANIEGO,52,12.29,6.175,6.827
+base_a,3,validacion_2019,52683,SANDONÁ,50,15.7,6.325,7.76
+base_a,3,validacion_2019,52685,SAN BERNARDO,48,1.06,1.374,1.125
+base_a,3,validacion_2019,52699,SANTACRUZ,52,3.0,2.159,2.404
+base_a,3,validacion_2019,52786,TAMINANGO,48,9.56,7.395,6.458
+base_a,3,validacion_2019,52788,TANGUA,50,2.3,2.176,2.2
+base_a,3,validacion_2019,52835,SAN ANDRÉS DE TUMACO,52,109.21,26.093,30.962
+base_a,3,validacion_2019,52838,TÚQUERRES,52,10.02,4.598,5.769
+base_a,3,prueba_2022,52001,PASTO,49,335.29,66.077,83.184
+base_a,3,prueba_2022,52022,ALDANA,49,4.88,2.256,2.857
+base_a,3,prueba_2022,52051,ARBOLEDA,48,4.4,2.731,3.354
+base_a,3,prueba_2022,52079,BARBACOAS,49,23.94,8.55,10.429
+base_a,3,prueba_2022,52110,BUESACO,49,2.18,1.759,1.918
+base_a,3,prueba_2022,52203,COLÓN,49,2.18,1.441,1.714
+base_a,3,prueba_2022,52207,CONSACÁ,47,3.91,2.626,3.043
+base_a,3,prueba_2022,52227,CUMBAL,49,17.98,5.901,6.388
+base_a,3,prueba_2022,52233,CUMBITARA,49,0.94,1.041,1.102
+base_a,3,prueba_2022,52240,CHACHAGÜÍ,49,7.24,2.732,3.122
+base_a,3,prueba_2022,52250,EL CHARCO,45,5.98,4.018,3.733
+base_a,3,prueba_2022,52254,EL PEÑOL,49,1.12,1.531,1.347
+base_a,3,prueba_2022,52256,EL ROSARIO,49,1.1,1.263,1.184
+base_a,3,prueba_2022,52258,EL TABLÓN DE GÓMEZ,49,5.04,2.505,3.041
+base_a,3,prueba_2022,52287,FUNES,49,1.18,1.578,1.245
+base_a,3,prueba_2022,52323,GUALMATÁN,49,0.59,1.027,0.878
+base_a,3,prueba_2022,52354,IMUÉS,49,2.63,1.547,2.082
+base_a,3,prueba_2022,52378,LA CRUZ,49,8.24,3.741,4.265
+base_a,3,prueba_2022,52385,LA LLANADA,49,2.29,1.699,1.898
+base_a,3,prueba_2022,52399,LA UNIÓN,49,44.41,8.643,12.388
+base_a,3,prueba_2022,52405,LEIVA,47,1.68,1.497,1.638
+base_a,3,prueba_2022,52411,LINARES,49,8.47,6.114,6.51
+base_a,3,prueba_2022,52427,MAGÜÍ,47,8.98,2.382,2.064
+base_a,3,prueba_2022,52473,MOSQUERA,49,4.29,2.93,3.408
+base_a,3,prueba_2022,52480,NARIÑO,47,1.64,2.228,1.617
+base_a,3,prueba_2022,52520,FRANCISCO PIZARRO,16,2.62,2.475,2.375
+base_a,3,prueba_2022,52540,POLICARPA,41,0.49,1.694,0.61
+base_a,3,prueba_2022,52560,POTOSÍ,49,4.0,2.368,2.959
+base_a,3,prueba_2022,52573,PUERRES,47,2.68,1.659,2.043
+base_a,3,prueba_2022,52585,PUPIALES,35,4.91,2.283,2.543
+base_a,3,prueba_2022,52678,SAMANIEGO,49,7.59,3.262,4.041
+base_a,3,prueba_2022,52683,SANDONÁ,49,8.8,4.771,5.918
+base_a,3,prueba_2022,52685,SAN BERNARDO,47,2.11,1.661,1.979
+base_a,3,prueba_2022,52699,SANTACRUZ,49,2.0,1.325,1.592
+base_a,3,prueba_2022,52786,TAMINANGO,45,8.82,3.801,5.0
+base_a,3,prueba_2022,52788,TANGUA,49,2.84,1.834,2.041
+base_a,3,prueba_2022,52835,SAN ANDRÉS DE TUMACO,49,110.49,25.148,26.857
+base_a,3,prueba_2022,52838,TÚQUERRES,49,5.53,2.966,3.796
+modelo_a,2,validacion_2019,52001,PASTO,52,391.71,39.129,51.0
+modelo_a,2,validacion_2019,52022,ALDANA,52,4.08,2.633,3.0
+modelo_a,2,validacion_2019,52051,ARBOLEDA,47,0.15,0.924,0.191
+modelo_a,2,validacion_2019,52079,BARBACOAS,49,26.0,13.7,17.551
+modelo_a,2,validacion_2019,52110,BUESACO,52,3.38,1.653,1.885
+modelo_a,2,validacion_2019,52203,COLÓN,52,1.42,1.445,1.75
+modelo_a,2,validacion_2019,52207,CONSACÁ,52,5.69,2.421,2.827
+modelo_a,2,validacion_2019,52227,CUMBAL,52,23.37,6.941,8.288
+modelo_a,2,validacion_2019,52233,CUMBITARA,46,1.3,1.528,1.587
+modelo_a,2,validacion_2019,52240,CHACHAGÜÍ,52,14.25,6.957,7.385
+modelo_a,2,validacion_2019,52250,EL CHARCO,43,8.72,4.078,4.186
+modelo_a,2,validacion_2019,52254,EL PEÑOL,52,3.38,2.061,2.404
+modelo_a,2,validacion_2019,52256,EL ROSARIO,50,1.16,1.344,1.38
+modelo_a,2,validacion_2019,52258,EL TABLÓN DE GÓMEZ,52,5.71,2.396,2.692
+modelo_a,2,validacion_2019,52287,FUNES,52,1.85,1.255,1.365
+modelo_a,2,validacion_2019,52323,GUALMATÁN,49,2.8,2.076,2.143
+modelo_a,2,validacion_2019,52354,IMUÉS,52,1.6,1.079,1.5
+modelo_a,2,validacion_2019,52378,LA CRUZ,51,4.67,2.19,2.588
+modelo_a,2,validacion_2019,52385,LA LLANADA,45,2.11,1.746,1.6
+modelo_a,2,validacion_2019,52399,LA UNIÓN,52,42.94,8.411,8.615
+modelo_a,2,validacion_2019,52405,LEIVA,50,4.72,3.176,3.42
+modelo_a,2,validacion_2019,52411,LINARES,50,2.68,1.958,1.92
+modelo_a,2,validacion_2019,52427,MAGÜÍ,36,0.0,1.552,0.0
+modelo_a,2,validacion_2019,52473,MOSQUERA,39,5.46,1.902,2.0
+modelo_a,2,validacion_2019,52480,NARIÑO,49,1.51,1.182,1.204
+modelo_a,2,validacion_2019,52520,FRANCISCO PIZARRO,47,0.0,0.969,0.0
+modelo_a,2,validacion_2019,52540,POLICARPA,50,0.22,0.828,0.24
+modelo_a,2,validacion_2019,52560,POTOSÍ,52,4.08,2.116,2.423
+modelo_a,2,validacion_2019,52573,PUERRES,50,6.22,2.61,3.1
+modelo_a,2,validacion_2019,52585,PUPIALES,52,17.13,4.272,4.654
+modelo_a,2,validacion_2019,52678,SAMANIEGO,52,12.02,5.358,5.519
+modelo_a,2,validacion_2019,52683,SANDONÁ,50,15.68,5.966,7.38
+modelo_a,2,validacion_2019,52685,SAN BERNARDO,48,0.98,1.181,1.042
+modelo_a,2,validacion_2019,52699,SANTACRUZ,52,2.96,2.128,2.442
+modelo_a,2,validacion_2019,52786,TAMINANGO,47,10.09,6.463,5.681
+modelo_a,2,validacion_2019,52788,TANGUA,50,2.3,1.869,2.54
+modelo_a,2,validacion_2019,52835,SAN ANDRÉS DE TUMACO,52,106.98,20.324,26.269
+modelo_a,2,validacion_2019,52838,TÚQUERRES,52,9.92,4.908,6.712
+modelo_a,2,prueba_2022,52001,PASTO,50,334.52,58.044,65.44
+modelo_a,2,prueba_2022,52022,ALDANA,50,4.82,2.155,2.8
+modelo_a,2,prueba_2022,52051,ARBOLEDA,48,4.48,2.857,3.271
+modelo_a,2,prueba_2022,52079,BARBACOAS,50,23.8,8.776,10.34
+modelo_a,2,prueba_2022,52110,BUESACO,50,2.2,1.719,1.74
+modelo_a,2,prueba_2022,52203,COLÓN,50,2.2,1.409,1.62
+modelo_a,2,prueba_2022,52207,CONSACÁ,48,3.94,2.468,2.896
+modelo_a,2,prueba_2022,52227,CUMBAL,50,17.86,6.399,8.7
+modelo_a,2,prueba_2022,52233,CUMBITARA,50,0.92,1.134,0.96
+modelo_a,2,prueba_2022,52240,CHACHAGÜÍ,50,7.22,2.627,3.08
+modelo_a,2,prueba_2022,52250,EL CHARCO,46,5.93,3.396,3.696
+modelo_a,2,prueba_2022,52254,EL PEÑOL,50,1.14,1.457,1.1
+modelo_a,2,prueba_2022,52256,EL ROSARIO,50,1.08,1.045,1.2
+modelo_a,2,prueba_2022,52258,EL TABLÓN DE GÓMEZ,50,5.08,2.461,2.76
+modelo_a,2,prueba_2022,52287,FUNES,50,1.18,1.264,1.08
+modelo_a,2,prueba_2022,52323,GUALMATÁN,50,0.58,0.962,0.98
+modelo_a,2,prueba_2022,52354,IMUÉS,50,2.6,1.553,1.96
+modelo_a,2,prueba_2022,52378,LA CRUZ,50,8.22,3.19,3.64
+modelo_a,2,prueba_2022,52385,LA LLANADA,50,2.3,1.542,1.78
+modelo_a,2,prueba_2022,52399,LA UNIÓN,50,44.44,8.158,11.24
+modelo_a,2,prueba_2022,52405,LEIVA,48,1.69,1.438,2.125
+modelo_a,2,prueba_2022,52411,LINARES,50,8.38,5.81,6.64
+modelo_a,2,prueba_2022,52427,MAGÜÍ,48,8.9,2.158,2.042
+modelo_a,2,prueba_2022,52473,MOSQUERA,50,4.2,2.713,2.9
+modelo_a,2,prueba_2022,52480,NARIÑO,48,1.62,1.649,1.729
+modelo_a,2,prueba_2022,52520,FRANCISCO PIZARRO,15,2.0,1.947,2.467
+modelo_a,2,prueba_2022,52540,POLICARPA,42,0.43,0.917,0.476
+modelo_a,2,prueba_2022,52560,POTOSÍ,50,3.96,2.331,2.48
+modelo_a,2,prueba_2022,52573,PUERRES,48,2.65,1.592,2.042
+modelo_a,2,prueba_2022,52585,PUPIALES,35,4.83,2.01,2.486
+modelo_a,2,prueba_2022,52678,SAMANIEGO,50,7.66,3.25,4.3
+modelo_a,2,prueba_2022,52683,SANDONÁ,50,8.74,5.079,6.22
+modelo_a,2,prueba_2022,52685,SAN BERNARDO,48,2.06,1.525,1.646
+modelo_a,2,prueba_2022,52699,SANTACRUZ,50,1.98,1.246,1.5
+modelo_a,2,prueba_2022,52786,TAMINANGO,46,8.78,3.687,4.478
+modelo_a,2,prueba_2022,52788,TANGUA,50,2.84,1.907,2.2
+modelo_a,2,prueba_2022,52835,SAN ANDRÉS DE TUMACO,50,110.9,21.503,24.28
+modelo_a,2,prueba_2022,52838,TÚQUERRES,50,5.52,3.066,3.12
+modelo_a,3,validacion_2019,52001,PASTO,52,393.37,38.302,71.846
+modelo_a,3,validacion_2019,52022,ALDANA,52,4.02,2.631,2.981
+modelo_a,3,validacion_2019,52051,ARBOLEDA,47,0.17,0.897,0.213
+modelo_a,3,validacion_2019,52079,BARBACOAS,48,26.56,15.723,18.625
+modelo_a,3,validacion_2019,52110,BUESACO,52,3.5,1.754,2.346
+modelo_a,3,validacion_2019,52203,COLÓN,52,1.46,1.71,1.712
+modelo_a,3,validacion_2019,52207,CONSACÁ,52,5.67,2.374,2.885
+modelo_a,3,validacion_2019,52227,CUMBAL,52,23.38,7.47,8.0
+modelo_a,3,validacion_2019,52233,CUMBITARA,46,1.33,1.949,1.457
+modelo_a,3,validacion_2019,52240,CHACHAGÜÍ,52,14.52,7.246,8.077
+modelo_a,3,validacion_2019,52250,EL CHARCO,43,8.23,5.001,4.349
+modelo_a,3,validacion_2019,52254,EL PEÑOL,52,3.4,2.029,2.423
+modelo_a,3,validacion_2019,52256,EL ROSARIO,50,1.16,1.508,1.32
+modelo_a,3,validacion_2019,52258,EL TABLÓN DE GÓMEZ,52,5.88,2.67,3.212
+modelo_a,3,validacion_2019,52287,FUNES,52,1.81,1.277,1.481
+modelo_a,3,validacion_2019,52323,GUALMATÁN,49,2.86,2.1,2.102
+modelo_a,3,validacion_2019,52354,IMUÉS,52,1.67,1.161,1.346
+modelo_a,3,validacion_2019,52378,LA CRUZ,51,4.73,2.346,2.882
+modelo_a,3,validacion_2019,52385,LA LLANADA,46,2.26,1.589,2.0
+modelo_a,3,validacion_2019,52399,LA UNIÓN,52,43.5,9.079,10.904
+modelo_a,3,validacion_2019,52405,LEIVA,50,4.86,3.501,3.98
+modelo_a,3,validacion_2019,52411,LINARES,50,2.7,2.415,2.14
+modelo_a,3,validacion_2019,52427,MAGÜÍ,35,0.06,3.339,0.057
+modelo_a,3,validacion_2019,52473,MOSQUERA,38,5.47,1.912,2.316
+modelo_a,3,validacion_2019,52480,NARIÑO,49,1.53,1.652,1.367
+modelo_a,3,validacion_2019,52520,FRANCISCO PIZARRO,46,0.0,0.832,0.0
+modelo_a,3,validacion_2019,52540,POLICARPA,50,0.26,0.71,0.28
+modelo_a,3,validacion_2019,52560,POTOSÍ,52,4.23,2.48,2.654
+modelo_a,3,validacion_2019,52573,PUERRES,50,6.28,2.564,3.38
+modelo_a,3,validacion_2019,52585,PUPIALES,52,17.25,4.313,5.192
+modelo_a,3,validacion_2019,52678,SAMANIEGO,52,12.29,6.171,6.827
+modelo_a,3,validacion_2019,52683,SANDONÁ,50,15.7,6.262,7.76
+modelo_a,3,validacion_2019,52685,SAN BERNARDO,48,1.06,1.342,1.125
+modelo_a,3,validacion_2019,52699,SANTACRUZ,52,3.0,2.178,2.404
+modelo_a,3,validacion_2019,52786,TAMINANGO,48,9.56,7.492,6.458
+modelo_a,3,validacion_2019,52788,TANGUA,50,2.3,2.08,2.2
+modelo_a,3,validacion_2019,52835,SAN ANDRÉS DE TUMACO,52,109.21,25.172,30.962
+modelo_a,3,validacion_2019,52838,TÚQUERRES,52,10.02,4.685,5.769
+modelo_a,3,prueba_2022,52001,PASTO,49,335.29,69.686,83.184
+modelo_a,3,prueba_2022,52022,ALDANA,49,4.88,2.303,2.857
+modelo_a,3,prueba_2022,52051,ARBOLEDA,48,4.4,2.721,3.354
+modelo_a,3,prueba_2022,52079,BARBACOAS,49,23.94,9.238,10.429
+modelo_a,3,prueba_2022,52110,BUESACO,49,2.18,1.81,1.918
+modelo_a,3,prueba_2022,52203,COLÓN,49,2.18,1.498,1.714
+modelo_a,3,prueba_2022,52207,CONSACÁ,47,3.91,2.744,3.043
+modelo_a,3,prueba_2022,52227,CUMBAL,49,17.98,5.875,6.388
+modelo_a,3,prueba_2022,52233,CUMBITARA,49,0.94,1.015,1.102
+modelo_a,3,prueba_2022,52240,CHACHAGÜÍ,49,7.24,2.733,3.122
+modelo_a,3,prueba_2022,52250,EL CHARCO,45,5.98,4.054,3.733
+modelo_a,3,prueba_2022,52254,EL PEÑOL,49,1.12,1.477,1.347
+modelo_a,3,prueba_2022,52256,EL ROSARIO,49,1.1,1.213,1.184
+modelo_a,3,prueba_2022,52258,EL TABLÓN DE GÓMEZ,49,5.04,2.52,3.041
+modelo_a,3,prueba_2022,52287,FUNES,49,1.18,1.542,1.245
+modelo_a,3,prueba_2022,52323,GUALMATÁN,49,0.59,1.1,0.878
+modelo_a,3,prueba_2022,52354,IMUÉS,49,2.63,1.548,2.082
+modelo_a,3,prueba_2022,52378,LA CRUZ,49,8.24,3.674,4.265
+modelo_a,3,prueba_2022,52385,LA LLANADA,49,2.29,1.761,1.898
+modelo_a,3,prueba_2022,52399,LA UNIÓN,49,44.41,8.322,12.388
+modelo_a,3,prueba_2022,52405,LEIVA,47,1.68,1.791,1.638
+modelo_a,3,prueba_2022,52411,LINARES,49,8.47,6.36,6.51
+modelo_a,3,prueba_2022,52427,MAGÜÍ,47,8.98,2.47,2.064
+modelo_a,3,prueba_2022,52473,MOSQUERA,49,4.29,3.085,3.408
+modelo_a,3,prueba_2022,52480,NARIÑO,47,1.64,2.229,1.617
+modelo_a,3,prueba_2022,52520,FRANCISCO PIZARRO,16,2.62,2.559,2.375
+modelo_a,3,prueba_2022,52540,POLICARPA,41,0.49,1.916,0.61
+modelo_a,3,prueba_2022,52560,POTOSÍ,49,4.0,2.462,2.959
+modelo_a,3,prueba_2022,52573,PUERRES,47,2.68,1.709,2.043
+modelo_a,3,prueba_2022,52585,PUPIALES,35,4.91,2.249,2.543
+modelo_a,3,prueba_2022,52678,SAMANIEGO,49,7.59,3.253,4.041
+modelo_a,3,prueba_2022,52683,SANDONÁ,49,8.8,4.825,5.918
+modelo_a,3,prueba_2022,52685,SAN BERNARDO,47,2.11,1.713,1.979
+modelo_a,3,prueba_2022,52699,SANTACRUZ,49,2.0,1.42,1.592
+modelo_a,3,prueba_2022,52786,TAMINANGO,45,8.82,3.758,5.0
+modelo_a,3,prueba_2022,52788,TANGUA,49,2.84,2.011,2.041
+modelo_a,3,prueba_2022,52835,SAN ANDRÉS DE TUMACO,49,110.49,25.058,26.857
+modelo_a,3,prueba_2022,52838,TÚQUERRES,49,5.53,3.133,3.796
+base_b,2,validacion_2019,52001,PASTO,52,391.71,40.15,51.0
+base_b,2,validacion_2019,52240,CHACHAGÜÍ,52,14.25,6.96,7.385
+base_b,2,validacion_2019,52287,FUNES,52,1.85,1.723,1.365
+base_b,2,validacion_2019,52573,PUERRES,50,6.22,2.908,3.1
+base_b,2,validacion_2019,52585,PUPIALES,52,17.13,4.07,4.654
+base_b,2,validacion_2019,52678,SAMANIEGO,52,12.02,5.648,5.519
+base_b,2,validacion_2019,52685,SAN BERNARDO,48,0.98,1.221,1.042
+base_b,2,validacion_2019,52786,TAMINANGO,47,10.09,5.952,5.681
+base_b,2,validacion_2019,52788,TANGUA,50,2.3,2.57,2.54
+base_b,2,validacion_2019,52835,SAN ANDRÉS DE TUMACO,52,106.98,18.775,26.269
+base_b,2,validacion_2019,52838,TÚQUERRES,52,9.92,5.039,6.712
+base_b,2,prueba_2022,52001,PASTO,50,334.52,63.046,65.44
+base_b,2,prueba_2022,52240,CHACHAGÜÍ,50,7.22,2.78,3.08
+base_b,2,prueba_2022,52287,FUNES,50,1.18,1.364,1.08
+base_b,2,prueba_2022,52573,PUERRES,48,2.65,1.789,2.042
+base_b,2,prueba_2022,52585,PUPIALES,35,4.83,3.067,2.486
+base_b,2,prueba_2022,52678,SAMANIEGO,50,7.66,3.779,4.3
+base_b,2,prueba_2022,52685,SAN BERNARDO,48,2.06,1.768,1.646
+base_b,2,prueba_2022,52786,TAMINANGO,46,8.78,4.043,4.478
+base_b,2,prueba_2022,52788,TANGUA,50,2.84,2.243,2.2
+base_b,2,prueba_2022,52835,SAN ANDRÉS DE TUMACO,50,110.9,21.637,24.28
+base_b,2,prueba_2022,52838,TÚQUERRES,50,5.52,3.384,3.12
+base_b,3,validacion_2019,52001,PASTO,52,393.37,37.755,71.846
+base_b,3,validacion_2019,52240,CHACHAGÜÍ,52,14.52,7.441,8.077
+base_b,3,validacion_2019,52287,FUNES,52,1.81,2.303,1.481
+base_b,3,validacion_2019,52573,PUERRES,50,6.28,2.958,3.38
+base_b,3,validacion_2019,52585,PUPIALES,52,17.25,3.824,5.192
+base_b,3,validacion_2019,52678,SAMANIEGO,52,12.29,6.296,6.827
+base_b,3,validacion_2019,52685,SAN BERNARDO,48,1.06,2.524,1.125
+base_b,3,validacion_2019,52786,TAMINANGO,48,9.56,6.742,6.458
+base_b,3,validacion_2019,52788,TANGUA,50,2.3,2.934,2.2
+base_b,3,validacion_2019,52835,SAN ANDRÉS DE TUMACO,52,109.21,25.968,30.962
+base_b,3,validacion_2019,52838,TÚQUERRES,52,10.02,4.827,5.769
+base_b,3,prueba_2022,52001,PASTO,49,335.29,69.221,83.184
+base_b,3,prueba_2022,52240,CHACHAGÜÍ,49,7.24,2.868,3.122
+base_b,3,prueba_2022,52287,FUNES,49,1.18,2.068,1.245
+base_b,3,prueba_2022,52573,PUERRES,47,2.68,2.275,2.043
+base_b,3,prueba_2022,52585,PUPIALES,35,4.91,3.509,2.543
+base_b,3,prueba_2022,52678,SAMANIEGO,49,7.59,4.053,4.041
+base_b,3,prueba_2022,52685,SAN BERNARDO,47,2.11,2.067,1.979
+base_b,3,prueba_2022,52786,TAMINANGO,45,8.82,4.577,5.0
+base_b,3,prueba_2022,52788,TANGUA,49,2.84,2.55,2.041
+base_b,3,prueba_2022,52835,SAN ANDRÉS DE TUMACO,49,110.49,23.155,26.857
+base_b,3,prueba_2022,52838,TÚQUERRES,49,5.53,3.766,3.796
+modelo_b,2,validacion_2019,52001,PASTO,52,391.71,45.762,51.0
+modelo_b,2,validacion_2019,52240,CHACHAGÜÍ,52,14.25,6.725,7.385
+modelo_b,2,validacion_2019,52287,FUNES,52,1.85,1.596,1.365
+modelo_b,2,validacion_2019,52573,PUERRES,50,6.22,2.717,3.1
+modelo_b,2,validacion_2019,52585,PUPIALES,52,17.13,4.077,4.654
+modelo_b,2,validacion_2019,52678,SAMANIEGO,52,12.02,5.44,5.519
+modelo_b,2,validacion_2019,52685,SAN BERNARDO,48,0.98,1.395,1.042
+modelo_b,2,validacion_2019,52786,TAMINANGO,47,10.09,6.094,5.681
+modelo_b,2,validacion_2019,52788,TANGUA,50,2.3,2.215,2.54
+modelo_b,2,validacion_2019,52835,SAN ANDRÉS DE TUMACO,52,106.98,20.022,26.269
+modelo_b,2,validacion_2019,52838,TÚQUERRES,52,9.92,4.76,6.712
+modelo_b,2,prueba_2022,52001,PASTO,50,334.52,58.833,65.44
+modelo_b,2,prueba_2022,52240,CHACHAGÜÍ,50,7.22,2.571,3.08
+modelo_b,2,prueba_2022,52287,FUNES,50,1.18,1.311,1.08
+modelo_b,2,prueba_2022,52573,PUERRES,48,2.65,1.881,2.042
+modelo_b,2,prueba_2022,52585,PUPIALES,35,4.83,3.563,2.486
+modelo_b,2,prueba_2022,52678,SAMANIEGO,50,7.66,3.409,4.3
+modelo_b,2,prueba_2022,52685,SAN BERNARDO,48,2.06,1.816,1.646
+modelo_b,2,prueba_2022,52786,TAMINANGO,46,8.78,3.993,4.478
+modelo_b,2,prueba_2022,52788,TANGUA,50,2.84,2.154,2.2
+modelo_b,2,prueba_2022,52835,SAN ANDRÉS DE TUMACO,50,110.9,22.867,24.28
+modelo_b,2,prueba_2022,52838,TÚQUERRES,50,5.52,3.195,3.12
+modelo_b,3,validacion_2019,52001,PASTO,52,393.37,43.768,71.846
+modelo_b,3,validacion_2019,52240,CHACHAGÜÍ,52,14.52,7.463,8.077
+modelo_b,3,validacion_2019,52287,FUNES,52,1.81,1.701,1.481
+modelo_b,3,validacion_2019,52573,PUERRES,50,6.28,2.593,3.38
+modelo_b,3,validacion_2019,52585,PUPIALES,52,17.25,3.786,5.192
+modelo_b,3,validacion_2019,52678,SAMANIEGO,52,12.29,6.118,6.827
+modelo_b,3,validacion_2019,52685,SAN BERNARDO,48,1.06,1.48,1.125
+modelo_b,3,validacion_2019,52786,TAMINANGO,48,9.56,6.944,6.458
+modelo_b,3,validacion_2019,52788,TANGUA,50,2.3,2.557,2.2
+modelo_b,3,validacion_2019,52835,SAN ANDRÉS DE TUMACO,52,109.21,25.919,30.962
+modelo_b,3,validacion_2019,52838,TÚQUERRES,52,10.02,4.304,5.769
+modelo_b,3,prueba_2022,52001,PASTO,49,335.29,70.519,83.184
+modelo_b,3,prueba_2022,52240,CHACHAGÜÍ,49,7.24,2.793,3.122
+modelo_b,3,prueba_2022,52287,FUNES,49,1.18,1.417,1.245
+modelo_b,3,prueba_2022,52573,PUERRES,47,2.68,2.005,2.043
+modelo_b,3,prueba_2022,52585,PUPIALES,35,4.91,4.133,2.543
+modelo_b,3,prueba_2022,52678,SAMANIEGO,49,7.59,3.582,4.041
+modelo_b,3,prueba_2022,52685,SAN BERNARDO,47,2.11,2.098,1.979
+modelo_b,3,prueba_2022,52786,TAMINANGO,45,8.82,4.055,5.0
+modelo_b,3,prueba_2022,52788,TANGUA,49,2.84,2.903,2.041
+modelo_b,3,prueba_2022,52835,SAN ANDRÉS DE TUMACO,49,110.49,23.637,26.857
+modelo_b,3,prueba_2022,52838,TÚQUERRES,49,5.53,4.098,3.796

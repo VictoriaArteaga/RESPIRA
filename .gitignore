@@ -29,3 +29,7 @@ Thumbs.db
 !/data/scripts/
 !/data/reports/
 !/data/processed/
+!/data/respira_v2/
+/data/respira_v2/*
+!/data/respira_v2/dataset_entrenamiento.csv
+!/data/respira_v2/extension_2023_2025_manifest.json

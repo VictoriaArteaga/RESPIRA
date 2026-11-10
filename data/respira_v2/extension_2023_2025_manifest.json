@@ -1,0 +1,202 @@
+{
+  "generado_utc": "2026-11-10T04:42:39+00:00",
+  "alcance": "extensión 2023-2025 solo con fuentes públicas; IRA (SIVIGILA 995) no disponible públicamente",
+  "calendario": {
+    "anclas_ins_verificadas": [
+      "SE15 2024: 2024-04-07 a 2024-04-13",
+      "SE1 2025: 2024-12-29 a 2025-01-04",
+      "SE6 2025: 2025-02-02 a 2025-02-08",
+      "SE48 2025: 2025-11-23 a 2025-11-29"
+    ],
+    "semanas": {
+      "2023": 52,
+      "2024": 52,
+      "2025": 53
+    }
+  },
+  "poblacion": {
+    "anios": "2012-2025",
+    "total_0_4_nariño": {
+      "2022": 129879,
+      "2023": 129212,
+      "2024": 127947,
+      "2025": 126507
+    }
+  },
+  "clima_publico": {
+    "temp_min": {
+      "municipios_con_estacion_publica": 14,
+      "de_ellos_con_estacion_historica_de_respira": 5,
+      "municipios_con_>=50%_semanas_validas_2023_2025": 2,
+      "semanas_validas_total": 555
+    },
+    "temp_max": {
+      "municipios_con_estacion_publica": 14,
+      "de_ellos_con_estacion_historica_de_respira": 5,
+      "municipios_con_>=50%_semanas_validas_2023_2025": 2,
+      "semanas_validas_total": 555
+    },
+    "temp_media": {
+      "municipios_con_estacion_publica": 14,
+      "de_ellos_con_estacion_historica_de_respira": 5,
+      "municipios_con_>=50%_semanas_validas_2023_2025": 2,
+      "semanas_validas_total": 555
+    },
+    "humedad_relativa": {
+      "municipios_con_estacion_publica": 14,
+      "de_ellos_con_estacion_historica_de_respira": 6,
+      "municipios_con_>=50%_semanas_validas_2023_2025": 2,
+      "semanas_validas_total": 550
+    },
+    "precipitacion": {
+      "municipios_con_estacion_publica": 19,
+      "de_ellos_con_estacion_historica_de_respira": 8,
+      "municipios_con_>=50%_semanas_validas_2023_2025": 4,
+      "semanas_validas_total": 789
+    }
+  },
+  "empalme_2022": [
+    {
+      "codigo_estacion": 52055210,
+      "variable": "precipitacion",
+      "codigo_divipola": "52001",
+      "semanas_comparables_2022": 9,
+      "diferencia_media_pub_menos_hist": -3.444,
+      "mae": 3.778,
+      "correlacion": 0.992,
+      "media_hist": 24.29
+    },
+    {
+      "codigo_estacion": 52055230,
+      "variable": "humedad_relativa",
+      "codigo_divipola": "52022",
+      "semanas_comparables_2022": 7,
+      "diferencia_media_pub_menos_hist": -49.463,
+      "mae": 49.463,
+      "correlacion": NaN,
+      "media_hist": 76.46
+    },
+    {
+      "codigo_estacion": 52040050,
+      "variable": "precipitacion",
+      "codigo_divipola": "52258",
+      "semanas_comparables_2022": 9,
+      "diferencia_media_pub_menos_hist": -0.367,
+      "mae": 7.033,
+      "correlacion": 0.96,
+      "media_hist": 45.01
+    },
+    {
+      "codigo_estacion": 52050090,
+      "variable": "precipitacion",
+      "codigo_divipola": "52354",
+      "semanas_comparables_2022": 10,
+      "diferencia_media_pub_menos_hist": 2.23,
+      "mae": 6.57,
+      "correlacion": 0.966,
+      "media_hist": 31.23
+    },
+    {
+      "codigo_estacion": 52055090,
+      "variable": "temp_min",
+      "codigo_divipola": "52788",
+      "semanas_comparables_2022": 27,
+      "diferencia_media_pub_menos_hist": -1.4,
+      "mae": 1.422,
+      "correlacion": 0.029,
+      "media_hist": 9.93
+    },
+    {
+      "codigo_estacion": 52055090,
+      "variable": "temp_max",
+      "codigo_divipola": "52788",
+      "semanas_comparables_2022": 27,
+      "diferencia_media_pub_menos_hist": 0.089,
+      "mae": 0.815,
+      "correlacion": 0.497,
+      "media_hist": 18.31
+    },
+    {
+      "codigo_estacion": 52055090,
+      "variable": "temp_media",
+      "codigo_divipola": "52788",
+      "semanas_comparables_2022": 27,
+      "diferencia_media_pub_menos_hist": -0.176,
+      "mae": 0.2,
+      "correlacion": 0.92,
+      "media_hist": 12.8
+    },
+    {
+      "codigo_estacion": 52055090,
+      "variable": "humedad_relativa",
+      "codigo_divipola": "52788",
+      "semanas_comparables_2022": 19,
+      "diferencia_media_pub_menos_hist": 3.228,
+      "mae": 3.301,
+      "correlacion": 0.89,
+      "media_hist": 80.13
+    },
+    {
+      "codigo_estacion": 52050080,
+      "variable": "precipitacion",
+      "codigo_divipola": "52788",
+      "semanas_comparables_2022": 18,
+      "diferencia_media_pub_menos_hist": 0.806,
+      "mae": 3.183,
+      "correlacion": 0.972,
+      "media_hist": 29.76
+    },
+    {
+      "codigo_estacion": 51025090,
+      "variable": "temp_min",
+      "codigo_divipola": "52835",
+      "semanas_comparables_2022": 7,
+      "diferencia_media_pub_menos_hist": 2.843,
+      "mae": 2.843,
+      "correlacion": 0.821,
+      "media_hist": 23.14
+    },
+    {
+      "codigo_estacion": 51025090,
+      "variable": "temp_max",
+      "codigo_divipola": "52835",
+      "semanas_comparables_2022": 7,
+      "diferencia_media_pub_menos_hist": 6.357,
+      "mae": 6.357,
+      "correlacion": 0.771,
+      "media_hist": 30.61
+    },
+    {
+      "codigo_estacion": 51025090,
+      "variable": "temp_media",
+      "codigo_divipola": "52835",
+      "semanas_comparables_2022": 7,
+      "diferencia_media_pub_menos_hist": 3.1,
+      "mae": 3.1,
+      "correlacion": 0.742,
+      "media_hist": 26.49
+    },
+    {
+      "codigo_estacion": 51025090,
+      "variable": "humedad_relativa",
+      "codigo_divipola": "52835",
+      "semanas_comparables_2022": 7,
+      "diferencia_media_pub_menos_hist": 3.806,
+      "mae": 3.806,
+      "correlacion": 0.893,
+      "media_hist": 86.01
+    },
+    {
+      "codigo_estacion": 52055220,
+      "variable": "precipitacion",
+      "codigo_divipola": "52838",
+      "semanas_comparables_2022": 12,
+      "diferencia_media_pub_menos_hist": -9.833,
+      "mae": 10.867,
+      "correlacion": 0.745,
+      "media_hist": 28.12
+    }
+  ],
+  "filas_contexto": 10048,
+  "ira_disponible_2023_2025": false
+}
