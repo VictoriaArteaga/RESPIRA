@@ -43,6 +43,8 @@ def run_migrations_offline() -> None:
 
     """
     url = settings.database_url.render_as_string(hide_password=False)
+    # La contraseña se enmascara: el modo offline solo necesita el dialecto y el SQL generado no la usa.
+    url = settings.database_url.render_as_string(hide_password=True)
     context.configure(
         url=url,
         target_metadata=target_metadata,
