@@ -112,3 +112,15 @@ class ForecastService:
                 "low_volume": bool(median is not None and median < LOW_VOLUME_MEDIAN),
             })
         return sorted(rows, key=lambda r: r["name"])
+
+    def _signal_block(self, h: int) -> dict | None:
+        rep = self.metrics.get("senal_aumento", {}).get("horizontes", {}).get(str(h))
+        if not rep:
+            return None
+        def pack(key):
+            r = rep[key]
+            return {"n": r["n"], "increase_prevalence": r["prevalencia_aumento"], "auc": r["auc"], "average_precision": r["precision_promedio"],
+                    "high_precision": r["alerta_alta"]["precision"], "high_recall": r["alerta_alta"]["recall"],
+                    "rate_by_level": {k: v["tasa_aumento_observada"] for k, v in r["por_nivel"].items()},
+                    "share_by_level": {k: v["proporcion_semanas"] for k, v in r["por_nivel"].items()}}
+        return {"validation_2019": pack("validacion_2019"), "test_2022": pack("prueba_2022"), "pandemic_2020_2021": pack("pandemia_2020_2021")}
