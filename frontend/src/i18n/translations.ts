@@ -486,6 +486,11 @@ export const es = {
   'fc.chExceed90': 'Entrar en zona de alerta (P90): señal {level}. En 2022, con ese nivel ocurrió en el {rate}% de las semanas (en general: {base}%).',
   'fc.chUnavailable': 'No hay canal endémico para esa semana: se necesitan al menos 3 años anteriores con dato.',
   'fc.chCaveat': 'Limitación: en 2022 el modelo ordena las semanas con AUC {auc}, pero la regla simple (promedio reciente frente al canal) ya llega a {simple}. Gran parte de la señal viene de que una semana sobre el canal tiende a seguir sobre él.',
+  'fc.extTitle': 'Datos públicos adjuntos 2023–2025',
+  'fc.extIntro': 'Se adjuntaron al conjunto de datos, pero no se usan para entrenar: la IRA de 2023–2025 (evento 995 de SIVIGILA) no es pública, así que los modelos se entrenan y evalúan hasta la semana 52 de 2022.',
+  'fc.extPopulation': 'Población DANE de menores de 5 años hasta {year}.',
+  'fc.extCalendar': 'Calendario epidemiológico derivado hasta 2025 (2025 tiene {weeks} semanas), reproduciendo {anchors} semanas confirmadas por boletines del INS.',
+  'fc.extClimate': 'Clima público de IDEAM (estaciones automáticas, cobertura parcial): temperatura en {temp} municipios, humedad en {hum} y precipitación en {prec}.',
 } as const
 
 export type TranslationKey = keyof typeof es
@@ -960,4 +965,9 @@ export const en: Record<TranslationKey, string> = {
   'fc.chExceed90': 'Entering the alert zone (P90): {level} signal. In 2022, at that level it happened in {rate}% of weeks (overall: {base}%).',
   'fc.chUnavailable': 'There is no endemic channel for that week: at least 3 previous years with data are needed.',
   'fc.chCaveat': 'Limitation: in 2022 the model ranks weeks with AUC {auc}, but the simple rule (recent average vs. channel) already reaches {simple}. Much of the signal comes from a week above the channel tending to stay above it.',
+  'fc.extTitle': 'Public data attached for 2023–2025',
+  'fc.extIntro': 'It was attached to the dataset but is not used for training: 2023–2025 ARI data (SIVIGILA event 995) is not public, so models are trained and evaluated through week 52 of 2022.',
+  'fc.extPopulation': 'DANE population of children under 5 through {year}.',
+  'fc.extCalendar': 'Epidemiological calendar derived through 2025 (2025 has {weeks} weeks), reproducing {anchors} weeks confirmed by INS bulletins.',
+  'fc.extClimate': 'Public IDEAM climate (automatic stations, partial coverage): temperature in {temp} municipalities, humidity in {hum} and precipitation in {prec}.',
 }
