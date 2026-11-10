@@ -29,3 +29,9 @@ TEMP_FEATURES = ["temp_media", "temp_min", "temp_max", "temp_media_lag1", "temp_
 CONSULT_FEATURES = ["cons", "cons_lag1", "cons_media_4s", "proporcion_ira_sobre_consultas", "proporcion_ira_lag1", "prop_media_4s"]
 SIGNAL_FEATURES = BASE_FEATURES + CONSULT_FEATURES
 SIGNAL_FILE = "senal_aumento_h{h}.joblib"
+
+# Canal endémico: misma semana de años anteriores (sin pandemia), como el canal de la app (P25/P50/P75/P90).
+PANDEMIC_YEARS = {2020, 2021}
+CHANNEL_MIN_YEARS = 3
+CHANNEL_FEATURES = ["p50_t", "p75_t", "p90_t", "ref_vs_p75", "ira_vs_p50", "spread", "pos_act"]
+CHANNEL_FILE = "canal_{kind}_h{h}.joblib"   # kind: p75 | p90
