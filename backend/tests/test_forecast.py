@@ -32,3 +32,10 @@ def client() -> Iterator[TestClient]:
 def test_forecast_requires_authentication() -> None:
     with TestClient(app) as anonymous:
         assert anonymous.get("/api/forecast/models").status_code in (401, 403)
+
+
+def test_epi_week_rule_matches_verified_anchors() -> None:
+    assert epi_week_of(date(2016, 12, 31)) == (2016, 52)
+    assert epi_week_of(date(2022, 12, 31)) == (2022, 52)
+    assert epi_week_of(date(2023, 1, 14)) == (2023, 2)
+    assert epi_week_of(date(2020, 12, 31)) == (2020, 53)
