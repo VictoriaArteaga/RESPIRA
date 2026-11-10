@@ -29,11 +29,20 @@ class RiskService:
     def available_years(self) -> list[int]:
         return sorted({row.year for row in self.cases.list_filtered()}, reverse=True)
 
+    @staticmethod
+    def _default_year(rows: list) -> int:
+        """Último año con cobertura amplia: evita abrir por defecto un año con pocos municipios (p. ej. solo simulados)."""
+        coverage: dict[int, set[int]] = {}
+        for row in rows:
+            coverage.setdefault(row.year, set()).add(row.municipality_id)
+        widest = max(len(ids) for ids in coverage.values())
+        return max(year for year, ids in coverage.items() if len(ids) * 2 >= widest)
+
     def risk_map(self, year: int | None = None, week: int | None = None) -> dict:
         rows = self.cases.list_filtered(year=year)
         if not rows:
             return {"year": year, "week": week, "available_years": self.available_years(), "municipalities": []}
-        chosen_year = year if year is not None else max(row.year for row in rows)
+        chosen_year = year if year is not None else self._default_year(rows)
         current_year = [row for row in rows if row.year == chosen_year]
         if not current_year:
             return {"year": chosen_year, "week": week, "available_years": self.available_years(), "municipalities": []}
