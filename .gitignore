@@ -21,3 +21,11 @@ dist/
 *.sqlite3
 .DS_Store
 Thumbs.db
+
+# Datos fuente originales (SIVIGILA, IDEAM, DANE): pesados y de uso restringido; nunca se versionan ni se modifican.
+# Solo se versionan scripts, informes de auditoría y derivados documentados; la procedencia se registra con SHA-256.
+/data/*
+!/data/README.md
+!/data/scripts/
+!/data/reports/
+!/data/processed/
