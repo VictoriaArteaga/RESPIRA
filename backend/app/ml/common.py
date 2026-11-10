@@ -140,3 +140,20 @@ def add_channel_features(df: pd.DataFrame, table: ChannelTable, h: int) -> pd.Da
     out["ira_vs_p50"] = out["ira_0_4"] / (out["p50_t"] + 1)
     out["spread"] = out["p90_t"] / (out["p50_t"] + 1)
     return out
+
+
+def load_dataset(path: Path | None = None) -> pd.DataFrame:
+    path = path or DATASET_PATH
+    if not path.exists():
+        raise FileNotFoundError(f"No se encontró el dataset de entrenamiento: {path}")
+    df = pd.read_csv(path, dtype={"codigo_divipola": str}, parse_dates=["semana_inicio", "semana_fin"])
+    return add_signal_features(df.sort_values(["codigo_divipola", "anio", "semana_epidemiologica"]).reset_index(drop=True))
+
+
+def municipality_sets(df: pd.DataFrame) -> dict[str, set[str]]:
+    """Municipios con la variable climática apta (el dataset deja NA en los demás; no se imputa)."""
+    return {
+        "todos": set(df["codigo_divipola"]),
+        "precipitacion": set(df.loc[df["precipitacion"].notna(), "codigo_divipola"]),
+        "temperatura": set(df.loc[df["temp_media"].notna(), "codigo_divipola"]),
+    }
