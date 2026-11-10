@@ -24,3 +24,9 @@ def forecast_status() -> dict:
     except FileNotFoundError as error:
         return {"available": False, "reason": str(error)}
     return {"available": True, "municipalities": len(service.names), "trained_at": service.metrics["generado_utc"]}
+
+
+@router.get("/models")
+def forecast_models() -> dict:
+    """Modelos servidos, variables y resultados reales de evaluación (validación 2019, prueba 2022, pandemia aparte)."""
+    return _service().models_summary()
