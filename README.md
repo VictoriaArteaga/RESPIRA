@@ -12,4 +12,4 @@ El mapa presenta ubicaciones municipales; el dataset no contiene polígonos de l
 
 Consulta [backend/README.md](backend/README.md) y [frontend/README.md](frontend/README.md) para instalación y ejecución.
 
-El backend usa PostgreSQL (Supabase) configurado mediante variables `DB_*` en `backend/.env`. Las alertas actuales usan reglas deterministas. La integración oficial SIVIGILA y cualquier IA están pendientes y no se simulan. Consulta [docs/architecture.md](docs/architecture.md) para los límites de arquitectura y fases futuras.
+El backend usa PostgreSQL (Supabase) configurado mediante variables `DB_*` en `backend/.env`. Las alertas actuales usan reglas deterministas. La infraestructura para integrar datos oficiales (SIVIGILA, IDEAM, DANE) está preparada pero **no se ha importado ningún dato oficial**; el diseño está en [docs/data-integration](docs/data-integration/README.md). La IA está pendiente y no se simula. Consulta [docs/architecture.md](docs/architecture.md) para los límites de arquitectura y fases futuras.
