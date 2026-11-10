@@ -14,3 +14,13 @@ def _service():
         return get_forecast_service()
     except FileNotFoundError as error:
         raise HTTPException(status_code=503, detail=f"Modelos o dataset no disponibles: {error}") from error
+
+
+@router.get("/status")
+def forecast_status() -> dict:
+    """Indica si la IA está lista (modelos entrenados y dataset presente)."""
+    try:
+        service = get_forecast_service()
+    except FileNotFoundError as error:
+        return {"available": False, "reason": str(error)}
+    return {"available": True, "municipalities": len(service.names), "trained_at": service.metrics["generado_utc"]}
