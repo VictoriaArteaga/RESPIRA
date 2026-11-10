@@ -4,9 +4,9 @@ export interface IraCase {
   epidemiological_week: number
   year: number
   cases: number
-  temperature: number
-  precipitation: number
-  humidity: number
+  temperature: number | null
+  precipitation: number | null
+  humidity: number | null
 }
 
 export interface CaseFilters {
