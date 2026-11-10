@@ -99,4 +99,53 @@ describe('ForecastPage', () => {
 
     expect(await screen.findByRole('alert')).toHaveTextContent('La IA aún no está disponible')
   })
+
+  it('el botón de recarga vuelve a consultar el análisis', async () => {
+    render(<ForecastPage />)
+    await screen.findByText('Dentro de 2 semanas')
+    expect(forecastService.fetchForecast).toHaveBeenCalledTimes(1)
+
+    await userEvent.click(screen.getByRole('button', { name: 'Recargar análisis' }))
+
+    await waitFor(() => expect(forecastService.fetchForecast).toHaveBeenCalledTimes(2))
+    expect(forecastService.fetchForecastMunicipalities).toHaveBeenCalledTimes(2)
+    expect(await screen.findByText('Dentro de 2 semanas')).toBeInTheDocument()
+  })
+
+  it('mantiene el análisis fijo mientras se actualiza, sin reemplazarlo por la carga', async () => {
+    render(<ForecastPage />)
+    await screen.findByText('Dentro de 2 semanas')
+
+    // La segunda consulta queda pendiente: el análisis anterior debe seguir visible y marcado como "actualizando".
+    vi.mocked(forecastService.fetchForecast).mockReturnValue(new Promise(() => undefined))
+    await userEvent.click(screen.getByRole('button', { name: 'Recargar análisis' }))
+
+    expect(await screen.findByRole('status')).toHaveTextContent('Actualizando el análisis')
+    expect(screen.getByText('Dentro de 2 semanas')).toBeInTheDocument()
+    expect(screen.queryByText('Obteniendo información...')).not.toBeInTheDocument()
+  })
+
+  it('si el análisis no responde, deja de cargar, avisa y permite reintentar', async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true })
+    try {
+      vi.mocked(forecastService.fetchForecast).mockReturnValue(new Promise(() => undefined))
+      render(<ForecastPage />)
+
+      await vi.advanceTimersByTimeAsync(30_000)
+
+      expect(await screen.findByRole('alert')).toHaveTextContent('tardó demasiado en responder')
+      expect(screen.getByRole('button', { name: 'Reintentar' })).toBeInTheDocument()
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
+  it('sin municipios no se queda cargando', async () => {
+    vi.mocked(forecastService.fetchForecastMunicipalities).mockResolvedValue([])
+
+    render(<ForecastPage />)
+
+    expect(await screen.findByText('No hay datos disponibles.')).toBeInTheDocument()
+    expect(screen.queryByText('Obteniendo información...')).not.toBeInTheDocument()
+  })
 })

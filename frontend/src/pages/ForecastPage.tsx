@@ -11,6 +11,7 @@ import {
   History,
   Info,
   Minus,
+  RefreshCw,
   ShieldAlert,
   ShieldCheck,
   Sparkles,
@@ -23,6 +24,7 @@ import {
 } from 'lucide-react'
 import { useEffect, useId, useMemo, useState } from 'react'
 import { ForecastChart } from '../components/forecast/ForecastChart'
+import { Button } from '../components/common/Button'
 import { Card } from '../components/common/Card'
 import { EmptyState, ErrorState } from '../components/common/Feedback'
 import { FilterBar, FilterField } from '../components/common/Filters'
@@ -373,6 +375,19 @@ function DataExtension({ summary }: { summary: ForecastModelsSummary }) {
   )
 }
 
+// Tiempo máximo de espera del análisis. En Electron la consulta pasa por el proceso principal y no se puede
+// cancelar con AbortController, así que sin este límite una respuesta que nunca llega dejaba la pantalla cargando.
+const LOAD_TIMEOUT_MS = 30_000
+
+class LoadTimeoutError extends Error {}
+
+function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const timer = window.setTimeout(() => reject(new LoadTimeoutError('timeout')), ms)
+    promise.then(resolve, reject).finally(() => window.clearTimeout(timer))
+  })
+}
+
 export function ForecastPage() {
   const { t, locale } = useI18n()
   const detailsId = useId()
@@ -386,32 +401,56 @@ export function ForecastPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [showDetails, setShowDetails] = useState(false)
+  // Cambia cada vez que se pide recargar; las consultas dependen de este valor y se repiten.
+  const [reloadKey, setReloadKey] = useState(0)
+
+  const reload = () => {
+    setError(null)
+    setLoading(true)
+    setReloadKey((current) => current + 1)
+  }
+
+  const failure = (reason: unknown, notFoundKey: TranslationKey = 'fc.loadError') =>
+    reason instanceof LoadTimeoutError
+      ? t('fc.timeout')
+      : reason instanceof ApiError && reason.status === 503
+        ? t('fc.notReady')
+        : reason instanceof ApiError && (reason.status === 404 || reason.status === 422)
+          ? t(notFoundKey)
+          : t('fc.loadError')
 
   useEffect(() => {
     const controller = new AbortController()
-    Promise.all([fetchForecastMunicipalities(controller.signal), fetchForecastModels(controller.signal)])
+    withTimeout(
+      Promise.all([fetchForecastMunicipalities(controller.signal), fetchForecastModels(controller.signal)]),
+      LOAD_TIMEOUT_MS,
+    )
       .then(([list, models]) => {
+        if (controller.signal.aborted) return
         setMunicipalities(list)
         setSummary(models)
-        const pasto = list.find((item) => item.divipola_code === '52001') ?? list[0]
-        setCode((current) => current || pasto?.divipola_code || '')
+        const first = (list.find((item) => item.divipola_code === '52001') ?? list[0])?.divipola_code ?? ''
+        setCode((current) => current || first)
+        // Sin municipios no habrá segunda consulta: se quita la carga para que no quede esperando para siempre.
+        if (!first) setLoading(false)
       })
       .catch((reason: unknown) => {
         if (controller.signal.aborted) return
-        setError(reason instanceof ApiError && reason.status === 503 ? t('fc.notReady') : t('fc.loadError'))
+        setError(failure(reason))
         setLoading(false)
       })
     return () => controller.abort()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [reloadKey])
 
   useEffect(() => {
     if (!code) return
     const controller = new AbortController()
     setLoading(true)
     setError(null)
-    fetchForecast(code, { ...origin, model }, controller.signal)
+    withTimeout(fetchForecast(code, { ...origin, model }, controller.signal), LOAD_TIMEOUT_MS)
       .then((result) => {
+        if (controller.signal.aborted) return
         setData(result)
         if (result.origin.is_latest_available) {
           setOriginOptions(
@@ -425,14 +464,14 @@ export function ForecastPage() {
       .catch((reason: unknown) => {
         if (controller.signal.aborted) return
         setData(null)
-        setError(reason instanceof ApiError && (reason.status === 404 || reason.status === 422) ? t('fc.originError') : t('fc.loadError'))
+        setError(failure(reason, 'fc.originError'))
       })
       .finally(() => {
         if (!controller.signal.aborted) setLoading(false)
       })
     return () => controller.abort()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [code, origin, model])
+  }, [code, origin, model, reloadKey])
 
   const selected = useMemo(() => municipalities.find((item) => item.divipola_code === code), [municipalities, code])
   const modelLabel = (id: ForecastModelId) =>
@@ -441,6 +480,8 @@ export function ForecastPage() {
     value === null || value === undefined ? '—' : value.toLocaleString(locale, { maximumFractionDigits: 1 })
 
   const headlineTrend: Trend = data?.predictions[0]?.trend ?? 'sin_referencia'
+  // El análisis ya mostrado se queda fijo en pantalla mientras se actualiza (atenuado), en lugar de desaparecer.
+  const refreshing = loading && data !== null
 
   const steps: Array<{ icon: LucideIcon; title: TranslationKey; text: TranslationKey }> = [
     { icon: History, title: 'fc.how1Title', text: 'fc.how1Text' },
@@ -455,6 +496,19 @@ export function ForecastPage() {
         title={t('fc.title')}
         icon={Sparkles}
         description={t('fc.description')}
+        actions={
+          <>
+            {refreshing && (
+              <span className="text-sm text-respira-muted" role="status">
+                {t('fc.reloading')}
+              </span>
+            )}
+            <Button type="button" variant="secondary" onClick={reload} aria-busy={loading} className="min-h-11">
+              <RefreshCw size={17} className={loading ? 'animate-spin' : ''} aria-hidden="true" />
+              {t('fc.reload')}
+            </Button>
+          </>
+        }
       />
       <div
         className="flex gap-3 rounded-2xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-950"
@@ -504,20 +558,29 @@ export function ForecastPage() {
         </FilterField>
       </FilterBar>
 
-      {loading ? (
+      {loading && !data ? (
         <Card>
           <Loading />
         </Card>
       ) : error ? (
         <Card>
           <ErrorState message={error} />
+          <div className="flex justify-center pb-6">
+            <Button type="button" onClick={reload}>
+              <RefreshCw size={16} aria-hidden="true" />
+              {t('fc.retry')}
+            </Button>
+          </div>
         </Card>
       ) : !data ? (
         <Card>
           <EmptyState>{t('common.noData')}</EmptyState>
         </Card>
       ) : (
-        <>
+        <div
+          aria-busy={refreshing}
+          className={`space-y-6 transition-opacity ${refreshing ? 'pointer-events-none opacity-60' : ''}`}
+        >
           <Card className="relative flex items-center gap-4 overflow-hidden p-5 sm:px-6">
             <span className="absolute inset-x-0 top-0 h-1 bg-respira-blue" aria-hidden="true" />
             <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-sky-100 text-sky-800">
@@ -695,7 +758,7 @@ export function ForecastPage() {
               </div>
             )}
           </Card>
-        </>
+        </div>
       )}
     </div>
   )
