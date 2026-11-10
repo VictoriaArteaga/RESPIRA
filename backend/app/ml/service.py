@@ -137,3 +137,40 @@ class ForecastService:
                     "rate_by_level": {k: v["tasa_aumento_observada"] for k, v in r["por_nivel"].items()}}
         return {kind: {"validation_2019": pack(kind, "validacion_2019"), "test_2022": pack(kind, "prueba_2022"),
                        "pandemic_2020_2021": pack(kind, "pandemia_2020_2021")} for kind in ("p75", "p90")}
+
+    @staticmethod
+    def _zone(cases: float | None, p75: float, p90: float) -> str | None:
+        if cases is None:
+            return None
+        return "alerta" if cases > p90 else "sobre" if cases > p75 else "dentro"
+
+    def _channel_outlook(self, row: pd.Series, predictions: list[dict]) -> list[dict]:
+        """Zona esperada del canal endémico de la semana objetivo: posición del conteo predicho y probabilidad de superar P75 / P90."""
+        out = []
+        frame_src = row.to_frame().T.infer_objects()
+        for pred in predictions:
+            h = pred["horizon_weeks"]
+            f = add_channel_features(frame_src, self.channels, h)
+            r = f.iloc[0]
+            item = {"horizon_weeks": h, "target_year": pred["target_year"], "target_week": pred["target_week"]}
+            if pd.isna(r["p75_t"]):
+                item.update({"available": False, "reason": "Menos de 3 años anteriores con dato para esa semana: no hay canal endémico."})
+                out.append(item)
+                continue
+            p75, p90 = float(r["p75_t"]), float(r["p90_t"])
+            item.update({"available": True, "channel": {"p25": round(float(r["p25_t"]), 1), "p50": round(float(r["p50_t"]), 1),
+                                                        "p75": round(p75, 1), "p90": round(p90, 1)},
+                         "predicted_zone": self._zone(pred["predicted_cases"], p75, p90),
+                         "observed_zone": self._zone(pred["observed_cases"], p75, p90)})
+            for kind in ("p75", "p90"):
+                art = self.channel_models.get((kind, h))
+                if art is None:
+                    continue
+                X = f[art["features"]].astype(float)
+                prob = float(art["model"].predict_proba(X)[:1][0, 1])
+                level = "alta" if prob >= art["umbral_alto"] else "media" if prob >= art["umbral_medio"] else "baja"
+                item[f"exceed_{kind}"] = {"probability": round(prob, 3), "level": level,
+                                          "historical_rate_for_level": art["tasas_prueba_2022"][level],
+                                          "base_rate": art["prevalencia_prueba_2022"]}
+            out.append(item)
+        return out
