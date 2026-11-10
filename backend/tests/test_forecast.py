@@ -144,3 +144,13 @@ def test_municipality_without_climate_coverage_rejects_climate_model_but_serves_
     assert all(v["available_for_municipality"] is False for v in ok.json()["variables"] if v["key"] != "ira_history")
     refused = client.get(f"/api/forecast/municipalities/{ALBAN}?model=modelo_a")
     assert refused.status_code == 422 and "cobertura climática" in refused.json()["detail"]
+
+
+def test_origin_without_data_is_not_forecast_as_zero(client: TestClient) -> None:
+    # Se busca una semana sin fila en la fuente (SIN_FILA) y se exige un rechazo explícito.
+    import pandas as pd
+    from app.ml.common import load_dataset
+    df = load_dataset()
+    row = df[(df["estado_dato_ira"] == "SIN_FILA") & (df["anio"] == 2022)].iloc[0]
+    response = client.get(f"/api/forecast/municipalities/{row['codigo_divipola']}?year=2022&week={int(row['semana_epidemiologica'])}")
+    assert response.status_code == 404 and "no se asume cero" in response.json()["detail"]
