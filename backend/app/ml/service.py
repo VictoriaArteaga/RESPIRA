@@ -256,3 +256,52 @@ class ForecastService:
                 "reference_cases": None if reference is None else round(reference, 1), "change_vs_reference_pct": change,
                 "trend": trend, "observed_cases": observed,
                 "absolute_error": None if observed is None else round(abs(point - observed), 1)}
+
+    def forecast(self, code: str, year: int | None = None, week: int | None = None, model_id: str | None = None) -> dict:
+        g = self._by_mun.get(code)
+        if g is None:
+            raise ForecastUnavailable("unknown_municipality", f"Código DIVIPOLA desconocido: {code}.")
+        avail = self.available_models(code)
+        chosen = model_id or DEFAULT_MODEL
+        if chosen not in SERVED_MODELS:
+            raise ForecastUnavailable("unknown_model", f"Modelo desconocido: {chosen}.", 422)
+        if chosen not in avail:
+            raise ForecastUnavailable("model_not_available", f"{MODEL_SPECS[chosen]['etiqueta']} no está disponible para "
+                                      f"{self.names[code]} (sin cobertura climática suficiente). Disponibles: {', '.join(avail)}.", 422)
+        row = self._origin_row(g, year, week)
+        idx = g.index[(g["anio"] == row["anio"]) & (g["semana_epidemiologica"] == row["semana_epidemiologica"])][0]
+        spec = MODEL_SPECS[chosen]
+        warnings = self._warnings(code, g, idx, row, chosen)
+        history = self._history(g, idx)
+        last52 = g.loc[max(0, idx - 51): idx, "ira_0_4"]
+        predictions = [self._predict_one(chosen, row, h) for h in HORIZONS]
+        comparison = []
+        for other in avail:
+            if other != chosen:
+                comparison.append({"model": other, "label": MODEL_SPECS[other]["etiqueta"],
+                                   "predictions": [self._predict_one(other, row, h) for h in HORIZONS]})
+        return {
+            "municipality": {"divipola_code": code, "name": self.names[code]},
+            "origin": {"year": int(row["anio"]), "week": int(row["semana_epidemiologica"]),
+                       "week_start": row["semana_inicio"].date().isoformat(), "week_end": row["semana_fin"].date().isoformat(),
+                       "observed_cases": _num(row["ira_0_4"]), "is_latest_available": bool(idx == self._last_observed(g).name),
+                       "is_backtest": bool(any(p["observed_cases"] is not None for p in predictions))},
+            "model": {"id": chosen, "label": spec["etiqueta"], "is_default": chosen == DEFAULT_MODEL, "available_models": avail,
+                      "algorithm": self.metrics["entorno"]["algoritmo"], "trained_through": "2019-12 (evaluado con prueba 2022)"},
+            "predictions": predictions,
+            "comparison": comparison,
+            "increase_signal": [x for x in (self._signal_for(row, h, predictions[0]["reference_cases"]) for h in HORIZONS) if x],
+            "signal_evaluation": {str(h): self._signal_block(h) for h in HORIZONS} if self.signal else None,
+            "channel_outlook": self._channel_outlook(row, predictions) if self.channel_models else [],
+            "channel_evaluation": {str(h): self._channel_block(h) for h in HORIZONS} if self.channel_models else None,
+            "reference": {"description": "Media de atenciones por IRA de las últimas 4 semanas hasta la semana de referencia",
+                          "value": predictions[0]["reference_cases"]},
+            "history": history,
+            "variables": self._variables(code, g, idx, row, spec),
+            "coverage": {"observed_weeks_last_52_pct": round(100 * float(last52.notna().mean()), 1),
+                         "observed_weeks_total_pct": round(100 * float(g["ira_0_4"].notna().mean()), 1),
+                         "missing_prior_weeks_of_4": int(row[["ira_lag1", "ira_lag2", "ira_lag3", "ira_lag4"]].isna().sum())},
+            "evaluation": {str(h): self._eval_block(chosen, h) for h in HORIZONS},
+            "warnings": warnings,
+            "disclaimer": DISCLAIMER,
+        }
