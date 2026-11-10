@@ -17,6 +17,9 @@ interface Problem {
   message: TranslationKey
 }
 
+// Máximos de cada campo; los mismos que acepta el servidor.
+const LIMITS: Record<Field, number> = { email: 254, password: 64, confirmation: 64 }
+
 // Misma política que el servidor (12–64 caracteres, al menos una letra y un número); el servidor valida de nuevo.
 function validate(mode: Mode, email: string, password: string, confirmation: string): Problem | null {
   if (!email.trim()) return { field: 'email', message: 'auth.errEmailEmpty' }
@@ -56,8 +59,20 @@ export function AuthPage({ mode }: { mode: Mode }) {
   const passwordType = showPassword ? 'text' : 'password'
   const EyeIcon = showPassword ? EyeOff : Eye
 
+  const values: Record<Field, string> = { email, password, confirmation }
+  // Al llegar al máximo el campo se pone en rojo y debajo se avisa con palabras sencillas.
+  const atLimit = (field: Field) => values[field].length >= LIMITS[field]
+  const isRed = (field: Field) => invalidField === field || atLimit(field)
+
   const fieldClassFor = (field: Field, padding: string) =>
-    `${fieldClass} ${padding} ${invalidField === field ? 'border-rose-500 bg-rose-50/60' : ''}`
+    `${fieldClass} ${padding} ${isRed(field) ? 'border-rose-500 bg-rose-50/60 focus-within:border-rose-600 focus-within:outline-rose-600' : ''}`
+
+  const limitNotice = (field: Field) =>
+    atLimit(field) ? (
+      <span id={`${field}-limit`} role="status" className="text-xs font-semibold text-rose-700">
+        {t('auth.limitReached', { max: LIMITS[field] })}
+      </span>
+    ) : null
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -162,7 +177,8 @@ export function AuthPage({ mode }: { mode: Mode }) {
                   <input
                     id="email"
 
-                    aria-invalid={invalidField === 'email'}
+                    aria-invalid={isRed('email')}
+                    aria-describedby={atLimit('email') ? 'email-limit' : undefined}
                     className={inputClass}
                     type="email"
                     autoComplete="email"
@@ -173,6 +189,7 @@ export function AuthPage({ mode }: { mode: Mode }) {
                     required
                   />
                 </div>
+                {limitNotice('email')}
               </div>
 
               <div className="flex flex-col gap-1.5">
@@ -184,7 +201,8 @@ export function AuthPage({ mode }: { mode: Mode }) {
                   <input
                     id="password"
 
-                    aria-invalid={invalidField === 'password'}
+                    aria-invalid={isRed('password')}
+                    aria-describedby={atLimit('password') ? 'password-limit' : undefined}
                     className={inputClass}
                     type={passwordType}
                     autoComplete="current-password"
@@ -196,6 +214,7 @@ export function AuthPage({ mode }: { mode: Mode }) {
                   />
                   {visibilityToggle}
                 </div>
+                {limitNotice('password')}
               </div>
 
               {feedback}
@@ -247,7 +266,8 @@ export function AuthPage({ mode }: { mode: Mode }) {
                 <input
                   id="email"
 
-                  aria-invalid={invalidField === 'email'}
+                  aria-invalid={isRed('email')}
+                    aria-describedby={atLimit('email') ? 'email-limit' : undefined}
                   className={inputClass}
                   type="email"
                   autoComplete="email"
@@ -258,6 +278,7 @@ export function AuthPage({ mode }: { mode: Mode }) {
                   required
                 />
               </div>
+              {limitNotice('email')}
               <span className={helpClass}>{t('auth.emailHelp')}</span>
             </div>
 
@@ -271,7 +292,8 @@ export function AuthPage({ mode }: { mode: Mode }) {
                   <input
                     id="password"
 
-                    aria-invalid={invalidField === 'password'}
+                    aria-invalid={isRed('password')}
+                    aria-describedby={atLimit('password') ? 'password-limit' : undefined}
                     className={inputClass}
                     type={passwordType}
                     autoComplete="new-password"
@@ -283,6 +305,7 @@ export function AuthPage({ mode }: { mode: Mode }) {
                   />
                   {visibilityToggle}
                 </div>
+                {limitNotice('password')}
                 <span className={helpClass}>{t('auth.passwordHelp')}</span>
               </div>
 
@@ -295,7 +318,8 @@ export function AuthPage({ mode }: { mode: Mode }) {
                   <input
                     id="confirmation"
 
-                    aria-invalid={invalidField === 'confirmation'}
+                    aria-invalid={isRed('confirmation')}
+                    aria-describedby={atLimit('confirmation') ? 'confirmation-limit' : undefined}
                     className={inputClass}
                     type={passwordType}
                     autoComplete="new-password"
@@ -307,6 +331,7 @@ export function AuthPage({ mode }: { mode: Mode }) {
                   />
                   {visibilityToggle}
                 </div>
+                {limitNotice('confirmation')}
                 <span className={helpClass}>{t('auth.confirmHelp')}</span>
               </div>
             </div>
