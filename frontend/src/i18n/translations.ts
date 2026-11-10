@@ -551,6 +551,10 @@ export const es = {
   'fc.range2y': '2 años',
   'fc.range1y': '1 año',
   'fc.range26w': '26 semanas',
+  'fc.overviewLabel': 'Todo el historial (el recuadro marca lo que se ve arriba)',
+  'fc.overviewAria': 'Resumen de todo el historial semanal de atenciones por IRA',
+  'fc.stretchNote': 'La zona de estimación se dibuja ampliada para que se lea mejor: sus semanas no están a la misma escala que las anteriores.',
+  'fc.zoomHint': 'En esta vista la estimación es muy pequeña. Elige "26 semanas" o "1 año" para verla de cerca.',
 } as const
 
 export type TranslationKey = keyof typeof es
@@ -1090,4 +1094,8 @@ export const en: Record<TranslationKey, string> = {
   'fc.range2y': '2 years',
   'fc.range1y': '1 year',
   'fc.range26w': '26 weeks',
+  'fc.overviewLabel': 'Full history (the box marks what is shown above)',
+  'fc.overviewAria': 'Overview of the full weekly history of ARI visits',
+  'fc.stretchNote': 'The estimate area is drawn enlarged so it is easier to read: its weeks are not on the same scale as the earlier ones.',
+  'fc.zoomHint': 'In this view the estimate is very small. Choose "26 weeks" or "1 year" to see it up close.',
 }
