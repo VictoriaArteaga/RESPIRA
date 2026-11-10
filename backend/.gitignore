@@ -7,3 +7,6 @@ __pycache__/
 .coverage
 htmlcov/
 *.db
+
+# Modelos entrenados de la IA (se regeneran con scripts/train_forecast.py)
+ml_artifacts/
