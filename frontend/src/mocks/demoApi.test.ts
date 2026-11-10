@@ -89,7 +89,21 @@ describe('datos de demostración: los reales (2012-2022) y los simulados convive
   it('el resumen general cuenta los 64 municipios de Nariño una sola vez y el promedio es coherente', () => {
     const summary = resolveDemo('/api/dashboard') as DashboardSummary
     expect(summary.total_municipalities).toBe(64)
-    expect(summary.total_records).toBeGreaterThan(34396 + 2600 - 1)
     expect(summary.average_cases).toBeCloseTo(summary.total_cases / 64, 1)
+  })
+
+  it('los indicadores del resumen usan solo datos reales: los simulados no suman', () => {
+    const summary = resolveDemo('/api/dashboard') as DashboardSummary
+    const sum = (records: IraCase[]) => records.reduce((total, item) => total + item.cases, 0)
+    const realRecords = real.flatMap((item) => casesOf(item.id))
+    const simulatedRecords = simulated.flatMap((item) => casesOf(item.id))
+    expect(simulatedRecords.length).toBeGreaterThan(0)
+    expect(summary.total_records).toBe(realRecords.length)
+    expect(summary.total_records).toBe(34396)
+    expect(summary.total_cases).toBe(sum(realRecords))
+    expect(summary.total_cases).not.toBe(sum(realRecords) + sum(simulatedRecords))
+    expect(summary.municipality_with_most_cases).not.toBeNull()
+    expect(summary.municipality_with_most_cases).not.toContain('simulado')
+    expect(summary.last_epidemiological_week).toBe(52)
   })
 })
