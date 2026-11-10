@@ -221,9 +221,20 @@ function riskMap(params: URLSearchParams): RiskMap {
   }
 }
 
+// Las alertas se calculan solo con los datos REALES (64 municipios, SIVIGILA). Por defecto, la última semana con datos
+// reales (semana 52 de 2022) y solo se ofrecen los años que tienen datos reales; la regla de riesgo es la misma de siempre.
+const REAL_LATEST = real.semanas[real.semanas.length - 1]
+const REAL_YEARS_DESC = [...REAL_YEARS].sort((a, b) => b - a)
+
+function realPeriod(params: URLSearchParams): { year: number; week: number } {
+  const year = Number(params.get('year')) || REAL_LATEST[0]
+  const week = Number(params.get('week')) || (year === REAL_LATEST[0] ? REAL_LATEST[1] : WEEKS_PER_YEAR)
+  return { year, week }
+}
+
 function alerts(params: URLSearchParams): AlertResponse {
-  const { year, week } = period(params)
-  const list: EpidemiologicalAlert[] = municipalities
+  const { year, week } = realPeriod(params)
+  const list: EpidemiologicalAlert[] = realMunicipalities
     .map((municipality) => riskFor(municipality, year, week))
     .filter((risk) => risk.risk_level === 'moderate' || risk.risk_level === 'high')
     .map((risk) => ({
@@ -238,7 +249,7 @@ function alerts(params: URLSearchParams): AlertResponse {
       reason: `Los casos de la semana ${week} superan en ${risk.variation_percent}% el promedio histórico de la misma semana en años anteriores.`,
     }))
     .sort((left, right) => right.variation_percent - left.variation_percent)
-  return { year, week, available_years: AVAILABLE_YEARS, alerts: list }
+  return { year, week, available_years: REAL_YEARS_DESC, alerts: list }
 }
 
 function endemicChannel(municipality: Municipality, params: URLSearchParams): EndemicChannel {
