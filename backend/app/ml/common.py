@@ -89,3 +89,15 @@ def epi_week_of(day: date) -> tuple[int, int]:
         if _start_se1(year) <= day < _start_se1(year + 1):
             return year, (day - _start_se1(year)).days // 7 + 1
     raise ValueError(day)
+
+
+def add_signal_features(df: pd.DataFrame) -> pd.DataFrame:
+    """Agrega variables de consultas totales (solo pasado y presente) para la señal de aumento. df debe venir ordenado."""
+    out = df.copy()
+    g = out.groupby("codigo_divipola", sort=False)
+    out["cons"] = out["consultas_0_4_totales_ultimo_reporte"]
+    out["cons_lag1"] = g["cons"].shift(1)
+    out["cons_media_4s"] = out.groupby("codigo_divipola", sort=False)["cons"].transform(lambda x: x.rolling(4, min_periods=3).mean())
+    out["prop_media_4s"] = out.groupby("codigo_divipola", sort=False)["proporcion_ira_sobre_consultas"].transform(
+        lambda x: x.rolling(4, min_periods=3).mean())
+    return out
