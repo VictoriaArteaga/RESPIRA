@@ -1,0 +1,17 @@
+columna,descripcion
+codigo_municipio,Llave
+municipio,Nombre
+anio,Año epidemiológico de t
+semana_epidemiologica,Semana de t
+posicion_secuencial,Posición 0..573 en la malla; usada para desplazar
+interpretacion_reportes,SUMA o ULTIMO_REPORTE (escenario alternativo)
+horizonte_semanas,2 o 3
+ira_t,Indicador en t
+ira_lag1..ira_lag4,Indicador en t-1..t-4 (NULL si fuente ausente/parcial o si cruza transición de año no validada)
+target_ira_t_plus_2 / target_ira_t_plus_3,Indicador en t+h (solo futuro)
+anio_objetivo/semana_objetivo,Semana objetivo
+motivo_rezagos_nulos / motivo_target_nulo,"FUERA_DE_RANGO, TRANSICION_ANIO_NO_VALIDADA, FUENTE_AUSENTE, FUENTE_PARCIAL_VACIOS, FUENTE_NO_DETERMINABLE"
+fila_completa_ira,"t, lags 1-4 y objetivo no nulos"
+habilitado_entrenamiento,Siempre FALSE en esta etapa
+motivo_no_habilitado,Pendientes que lo impiden
+"temperatura_*_semanal_t, temperatura_media_lagK, temperatura_disponible_t",Solo en tablas V2: temperatura de t y media en t-1..t-4 (solo años con calendario verificado)

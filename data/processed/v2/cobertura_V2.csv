@@ -1,0 +1,65 @@
+codigo_municipio,municipio,estaciones_candidatas,codigo_estacion_temperatura,cobertura_semanas_verificadas_pct,estado_calidad_temperatura,detalle,semanas_temperatura_valida,semanas_ira_completa_y_temperatura_valida,semanas_temperatura_valida_2016,semanas_temperatura_valida_2022
+52001,Pasto,47015100;52045010;52055110;52055210,52055210,100,ESTACION_VALIDADA,Estación del mismo municipio (catálogo) con cobertura suficiente.,104,104,52,52
+52019,Albán,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52022,Aldana,52055230,52055230,100,SERIE_NO_CONFIABLE,Estación 52055230 excluida (mín/máx/media): 4016 de 4016 días con mín=máx y 4016 con media>máx.,0,0,0,0
+52036,Ancuya,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52051,Arboleda,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52079,Barbacoas,51025080;52065020,51025080,0,ESTACION_COBERTURA_INSUFICIENTE,Cobertura 0.0% < 80.0% de semanas verificadas con >=6/7 días en las 3 variables.,0,0,0,0
+52083,Belén,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52110,Buesaco,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52203,Colón,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52207,Consacá,52055030,52055030,67.31,ESTACION_COBERTURA_INSUFICIENTE,Cobertura 67.31% < 80.0% de semanas verificadas con >=6/7 días en las 3 variables.,0,0,0,0
+52210,Contadero,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52215,Córdoba,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52224,Cuaspud Carlosama,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52227,Cumbal,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52233,Cumbitara,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52240,Chachagüí,52045020,52045020,100,SIN_ESTACION_VALIDADA,"Catálogo IDEAM: 'AEROPUERTO ANTONIO NARIÑO', municipio 'Chachaguí', lat 1,394083, lon -77,290861, 1.796 m. No hay límites municipales ni dato oficial adicional que demuestre que está dentro de Chachagüí: asociación excluida de V2.",0,0,0,0
+52250,El Charco,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52254,El Peñol,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52256,El Rosario,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52258,El Tablón de Gómez,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52260,El Tambo,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52287,Funes,52055200,52055200,98.08,ESTACION_VALIDADA,Estación del mismo municipio (catálogo) con cobertura suficiente.,102,100,52,50
+52317,Guachucal,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52320,Guaitarilla,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52323,Gualmatán,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52352,Iles,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52354,Imués,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52356,Ipiales,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52378,La Cruz,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52381,La Florida,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52385,La Llanada,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52390,La Tola,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52399,La Unión,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52405,Leiva,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52411,Linares,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52418,Los Andes,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52427,Magüí,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52435,Mallama,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52473,Mosquera,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52480,Nariño,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52490,Olaya Herrera,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52506,Ospina,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52520,Francisco Pizarro,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52540,Policarpa,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52560,Potosí,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52565,Providencia,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52573,Puerres,47015080,47015080,95.19,ESTACION_VALIDADA,Estación del mismo municipio (catálogo) con cobertura suficiente.,99,97,52,47
+52585,Pupiales,52045090,52045090,90.38,ESTACION_VALIDADA,Estación del mismo municipio (catálogo) con cobertura suficiente.,94,87,47,47
+52612,Ricaurte,51025020,51025020,0,ESTACION_COBERTURA_INSUFICIENTE,Cobertura 0.0% < 80.0% de semanas verificadas con >=6/7 días en las 3 variables.,0,0,0,0
+52621,Roberto Payán,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52678,Samaniego,52055060,52055060,100,ESTACION_VALIDADA,Estación del mismo municipio (catálogo) con cobertura suficiente.,104,104,52,52
+52683,Sandoná,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52685,San Bernardo,52045030,52045030,100,ESTACION_VALIDADA,Estación del mismo municipio (catálogo) con cobertura suficiente.,104,103,52,52
+52687,San Lorenzo,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52693,San Pablo,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52694,San Pedro de Cartago,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52696,Santa Bárbara,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52699,Santacruz,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0
+52720,Sapuyes,52055100,52055100,0,ESTACION_COBERTURA_INSUFICIENTE,Cobertura 0.0% < 80.0% de semanas verificadas con >=6/7 días en las 3 variables.,0,0,0,0
+52786,Taminango,52045040,52045040,97.12,ESTACION_VALIDADA,Estación del mismo municipio (catálogo) con cobertura suficiente.,101,96,50,51
+52788,Tangua,52055090,52055090,85.58,ESTACION_VALIDADA,Estación del mismo municipio (catálogo) con cobertura suficiente.,89,88,39,50
+52835,San Andrés de Tumaco,51025090;51035010;51035020,51025090,100,ESTACION_VALIDADA,Estación del mismo municipio (catálogo) con cobertura suficiente.,104,104,52,52
+52838,Túquerres,52055220,52055220,97.12,ESTACION_VALIDADA,Estación del mismo municipio (catálogo) con cobertura suficiente.,101,101,50,51
+52885,Yacuanquer,,,,SIN_ESTACION,No hay estación del catálogo con temperatura (mín/máx/media) en el mismo municipio.,0,0,0,0

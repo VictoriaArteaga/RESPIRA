@@ -1,0 +1,51 @@
+columna,tipo,descripcion
+codigo_municipio,str,"Código DIVIPOLA de 5 dígitos (texto), tal como figura en SIVIGILA/DANE; no se corrige."
+municipio,str,Nombre del municipio según DANE.
+departamento,str,Departamento (Nariño).
+anio,int64,Año epidemiológico reportado por SIVIGILA (coincide con el año del libro).
+semana_epidemiologica,int64,Semana epidemiológica reportada por SIVIGILA (53 solo en 2014 y 2020).
+regimen,str,"PRE_PANDEMIA (<=2019), PANDEMIA (2020-2021), POST_PANDEMIA (2022)."
+calendar_verificado,str,SI solo para 2016 y 2022 (boletines INS SE52); NO para los demás años.
+calendar_version,str,Versión de la tabla de calendario.
+semana_inicio,str,Inicio (domingo) de la semana; NULL si el calendario no está verificado.
+semana_fin,str,Fin (sábado) de la semana; NULL si el calendario no está verificado.
+iracext_0_4_notificado_suma,float64,iracext_1+iracext_2+iracext_3 sumado sobre TODOS los registros del municipio-semana (interpretación SUMA). Conteo notificado; NO es incidencia ni pacientes únicos. NULL si ausente o con vacíos.
+iracext_0_4_notificado_ultimo_reporte,float64,"Igual, pero en cada grupo repetido solo el registro de mayor NUM_CON (interpretación ULTIMO_REPORTE). NULL si ausente, con vacíos u orden no determinable. Ninguna interpretación es la oficial."
+numero_reportes,int64,Número de registros (filas) SIVIGILA del municipio-semana. 0 = sin registros (AUSENTE); no es el indicador.
+numero_grupos_reporte,int64,Grupos distintos UPGD+sede dentro del municipio-semana.
+tiene_reportes_repetidos,bool,TRUE si algún grupo UPGD+sede tiene más de un registro en la misma semana.
+numero_grupos_repetidos,int64,Cantidad de grupos con repetición.
+ids_grupos_repetidos,str,Identificadores de los grupos repetidos (detalle en v1/reportes_repetidos_detalle.csv).
+n_filas_en_grupos_repetidos,int64,Registros que pertenecen a grupos repetidos.
+n_grupos_orden_no_determinable,float64,Grupos repetidos sin NUM_CON único máximo (último reporte no verificable).
+estado_orden_ultimo_reporte,str,NO_APLICA / DETERMINADO / NO_DETERMINABLE / AUSENTE. Criterio: mayor NUM_CON; empate o NUM_CON nulo => NO_DETERMINABLE.
+estado_dato_ira,str,Estado del dato bajo SUMA: COMPLETO / PARCIAL_VACIOS / AUSENTE.
+estado_dato_ira_ultimo_reporte,str,Estado bajo ULTIMO_REPORTE: COMPLETO / PARCIAL_VACIOS / NO_DETERMINABLE / AUSENTE.
+completitud_no_verificada,bool,TRUE para 2021 (conteo oficial INS pendiente).
+totcext_0_4_experimental_suma,float64,EXPERIMENTAL: totcext_1+2+3 (SUMA). Significado pendiente de confirmación del INS.
+totcext_0_4_experimental_ultimo_reporte,float64,EXPERIMENTAL: totcext_1+2+3 (ULTIMO_REPORTE).
+proporcion_ira_sobre_consultas_experimental_suma,float64,EXPERIMENTAL: ira/totcext (SUMA); NULL si denominador nulo o cero. No es tasa ni incidencia.
+proporcion_ira_sobre_consultas_experimental_ultimo_reporte,float64,EXPERIMENTAL: ira/totcext (ULTIMO_REPORTE).
+n_registros_territorio_incongruente,int64,Registros del municipio-semana con código/departamento incongruente (no corregidos).
+tiene_codigo_territorial_incongruente,bool,TRUE si n_registros_territorio_incongruente>0.
+n_registros_con_ajuste,int64,Registros con campo ajuste > 0.
+poblacion_menor_5,int64,"Población DANE 0-4 años (suma Total_0..4, área Total), valor original sin reescalar."
+dane_libro,str,Libro DANE de origen (DANE_2005_2017 / DANE_2018_2042). Hay un salto de serie 2017->2018 sin ajustar.
+poblacion_fila_origen,int64,Fila Excel del libro DANE.
+semana_ausente,bool,TRUE si no hay registros SIVIGILA.
+codigo_calidad,str,Q0_COMPLETO / Q1_COMPLETO_CON_ALERTAS / Q2_PARCIAL_VACIOS / Q3_AUSENTE (según SUMA).
+fuente_archivo,str,Libro SIVIGILA de origen.
+fuente_hoja,str,Hoja del libro usada.
+identificador_origen,str,Filas Excel (rN) de los registros originales que dan origen al resultado.
+observaciones_calidad,str,Lista de alertas separadas por ';'.
+codigo_estacion_precipitacion,Int64,Estación candidata del mismo municipio.
+nombre_estacion_precipitacion,str,Nombre en el catálogo.
+altitud_estacion_precipitacion,float64,Altitud (catálogo).
+estado_estacion_precipitacion_catalogo,str,Estado en el catálogo.
+n_dias_precipitacion_candidata,float64,Días con valor original PTPM_CON_INTER en la semana (solo calendario verificado).
+cumple_7_de_7_dias,object,TRUE si la semana tiene 7/7 días con valor.
+precipitacion_valor_original_suma_semanal,float64,Suma de valores originales. NULL: la acumulación no está justificada mientras IDEAM no confirme semántica/unidad.
+unidad_reportada_precipitacion,str,Unidad reportada en los metadatos locales; no confirmada.
+estado_validacion_semantica_precipitacion,str,SEMANTICA_PENDIENTE_CONFIRMACION.
+estado_calidad_precipitacion,str,CANDIDATA_7DE7_SEMANTICA_PENDIENTE / INSUFICIENTE_DIAS / CALENDARIO_NO_VERIFICADO / SIN_ESTACION / ESTACION_COBERTURA_INSUFICIENTE.
+habilitado_como_predictor_validado,bool,Siempre FALSE: no usar como característica climática confirmada.
