@@ -83,3 +83,32 @@ class ForecastService:
                 "used_for_training": False,
                 "note": "El evento 995 de SIVIGILA de 2023-2025 no es público: los modelos se entrenan y evalúan hasta 2022. "
                         "El clima, la población y el calendario de 2023-2025 quedan adjuntos para cuando se obtenga la IRA."}
+
+    # ------------------------------------------------------------------ catálogo
+    def available_models(self, code: str) -> list[str]:
+        out = ["base_global"]
+        if code in self.sets["precipitacion"]:
+            out.append("modelo_a")
+        if code in self.sets["temperatura"]:
+            out.append("modelo_b")
+        return out
+
+    def _last_observed(self, g: pd.DataFrame) -> pd.Series | None:
+        seen = g[g["ira_0_4"].notna()]
+        return seen.iloc[-1] if len(seen) else None
+
+    def list_municipalities(self) -> list[dict]:
+        rows = []
+        for code, g in self._by_mun.items():
+            last = self._last_observed(g)
+            median = _num(self._median.get(code))
+            rows.append({
+                "divipola_code": code, "name": self.names[code],
+                "available_models": self.available_models(code), "default_model": DEFAULT_MODEL,
+                "has_precipitation": code in self.sets["precipitacion"], "has_temperature": code in self.sets["temperatura"],
+                "observed_weeks_pct": round(100 * float(g["ira_0_4"].notna().mean()), 1),
+                "last_observed": None if last is None else {"year": int(last["anio"]), "week": int(last["semana_epidemiologica"])},
+                "median_weekly_cases_2012_2019": median,
+                "low_volume": bool(median is not None and median < LOW_VOLUME_MEDIAN),
+            })
+        return sorted(rows, key=lambda r: r["name"])
