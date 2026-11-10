@@ -145,3 +145,7 @@ Predice las atenciones por IRA notificadas (<5 años) por municipio a 2 y 3 sema
 
 - **Entrenar y evaluar** (≈2 min, determinista): `python scripts/train_forecast.py`. Escribe en `backend/ml_artifacts/` los modelos `*.joblib`, `metrics.json` y `metrics_by_municipality.csv`. Requiere `scikit-learn` y `joblib` (en `requirements.txt`).
 - **Modelos:** `base_global` (solo historial de IRA, 64 municipios), `modelo_a` (+ precipitación, 38) y `modelo_b` (+ temperatura, 11). Algoritmo: `HistGradientBoostingRegressor`, que admite faltantes (no se imputa). Un modelo por horizonte. Ajuste 2012–2018 → selección en 2019 → reajuste 2012–2019 → prueba 2022; pandemia 2020–2021 se evalúa aparte.
+- **API** (rol analyst/admin, bajo `/api/forecast`): `GET /status`, `GET /models` (variables y métricas reales), `GET /municipalities`, `GET /municipalities/{divipola}?year=&week=&model=` (sin `year/week` predice desde la última semana con dato; con ellos se compara con lo observado después).
+- **Rutas de datos/modelos:** variables de entorno opcionales `RESPIRA_V2_DATA_DIR` y `RESPIRA_ML_DIR`.
+- **Pruebas:** `python -m pytest tests/test_forecast.py` (se omiten si faltan dataset o modelos).
+- **Interfaz:** menú *Predicción IA* (`/forecast`).
