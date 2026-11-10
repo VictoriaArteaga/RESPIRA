@@ -18,3 +18,9 @@ DATASET_PATH = DATA_DIR / "dataset_entrenamiento.csv"
 ARTIFACT_DIR = Path(os.environ.get("RESPIRA_ML_DIR", REPO_ROOT / "backend" / "ml_artifacts"))
 SEED = 0
 HORIZONS = (2, 3)
+
+# ---- variables por grupo (todas calculadas con información disponible hasta la semana t)
+BASE_FEATURES = ["ira_0_4", "ira_lag1", "ira_lag2", "ira_lag3", "ira_lag4", "ira_media_4s", "ira_media_8s",
+                 "ira_cambio_vs_lag1", "ira_52s_atras", "semana_sin", "semana_cos", "mes_aprox"]
+PRECIP_FEATURES = ["precipitacion", "precipitacion_lag1", "precipitacion_lag2", "precipitacion_media_4s"]
+TEMP_FEATURES = ["temp_media", "temp_min", "temp_max", "temp_media_lag1", "temp_media_lag2", "temp_media_media_4s"]
