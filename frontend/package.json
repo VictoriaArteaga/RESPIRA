@@ -10,6 +10,7 @@
     "test": "vitest run",
     "build": "npm run typecheck && electron-vite build",
     "preview": "electron-vite preview",
+    "build:web": "tsc --noEmit && vite build -c vite.web.config.ts",
     "dist:win": "npm run build && electron-builder --win",
     "dist:linux": "npm run build && electron-builder --linux"
   },
