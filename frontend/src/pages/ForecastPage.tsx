@@ -3,20 +3,15 @@ import {
   ArrowUpRight,
   CalendarCheck,
   CalendarDays,
-  ChartColumn,
   ChevronDown,
   CloudRain,
-  FlaskConical,
   Gauge,
   History,
-  Info,
   Minus,
   RefreshCw,
-  ShieldAlert,
   ShieldCheck,
   Sparkles,
   Target,
-  Thermometer,
   TrendingUp,
   TriangleAlert,
   Waves,
@@ -35,7 +30,6 @@ import type { TranslationKey } from '../i18n/translations'
 import { ApiError } from '../services/api'
 import { fetchForecast, fetchForecastModels, fetchForecastMunicipalities } from '../services/forecastService'
 import type {
-  ForecastEvalBlock,
   ForecastModelId,
   ForecastModelsSummary,
   ForecastMunicipality,
@@ -52,28 +46,6 @@ const TREND_STYLE: Record<Trend, { badge: string; icon: typeof Minus; key: Trans
   estable: { badge: 'bg-slate-100 text-slate-700', icon: Minus, key: 'fc.trend.estable' },
   disminucion: { badge: 'bg-emerald-100 text-emerald-900', icon: ArrowDownRight, key: 'fc.trend.disminucion' },
   sin_referencia: { badge: 'bg-slate-100 text-slate-700', icon: Minus, key: 'fc.trend.sin_referencia' },
-}
-
-const WARNING_KEYS: Record<string, TranslationKey> = {
-  missing_lags: 'fc.warn.missing_lags',
-  missing_precipitation: 'fc.warn.missing_precipitation',
-  missing_temperature: 'fc.warn.missing_temperature',
-  missing_consultations: 'fc.warn.missing_consultations',
-  low_volume: 'fc.warn.low_volume',
-  pandemic: 'fc.warn.pandemic',
-  calendar_unverified: 'fc.warn.calendar_unverified',
-  repeated_reports: 'fc.warn.repeated_reports',
-}
-
-// Cada aviso lleva su propio icono para reconocerlo de un vistazo sin leer todo el texto.
-const WARNING_ICONS: Record<string, LucideIcon> = {
-  missing_lags: History,
-  missing_precipitation: CloudRain,
-  missing_temperature: Thermometer,
-  low_volume: ChartColumn,
-  pandemic: ShieldAlert,
-  calendar_unverified: CalendarDays,
-  repeated_reports: TriangleAlert,
 }
 
 // Avisos que restan precisión a la estimación. La confianza nunca se presenta como "alta": la evaluación
@@ -236,7 +208,6 @@ function IncreaseSignalCard({ data }: { data: ForecastResult }) {
   if (!data.increase_signal?.length) return null
   const pct = (value: number | null | undefined) =>
     value === null || value === undefined ? '—' : Math.round(value * 100).toLocaleString(locale)
-  const test = data.signal_evaluation?.['2']?.test_2022
   return (
     <Card className="p-5 sm:p-6">
       <h2 className="font-bold">{t('fc.sigTitle')}</h2>
@@ -265,11 +236,6 @@ function IncreaseSignalCard({ data }: { data: ForecastResult }) {
           </div>
         ))}
       </div>
-      {test && (
-        <p className="mt-4 rounded-xl bg-amber-50 px-3.5 py-2.5 text-xs text-amber-950">
-          {t('fc.sigCaveat', { precision: pct(test.high_precision), recall: pct(test.high_recall) })}
-        </p>
-      )}
     </Card>
   )
 }
@@ -287,7 +253,6 @@ function ChannelOutlookCard({ data }: { data: ForecastResult }) {
     value === null || value === undefined ? '—' : Math.round(value * 100).toLocaleString(locale)
   const n = (value: number) => value.toLocaleString(locale, { maximumFractionDigits: 1 })
   const zoneName = (zone: ChannelZone) => t(`fc.chZone.${zone}` as TranslationKey)
-  const test = data.channel_evaluation?.['2']?.p75.test_2022
   return (
     <Card className="p-5 sm:p-6">
       <h2 className="font-bold">{t('fc.chTitle')}</h2>
@@ -344,41 +309,7 @@ function ChannelOutlookCard({ data }: { data: ForecastResult }) {
           )
         })}
       </div>
-      {test && test.auc_simple_rule !== null && (
-        <p className="mt-4 rounded-xl bg-amber-50 px-3.5 py-2.5 text-xs text-amber-950">
-          {t('fc.chCaveat', {
-            auc: test.auc.toLocaleString(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
-            simple: test.auc_simple_rule.toLocaleString(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
-          })}
-        </p>
-      )}
     </Card>
-  )
-}
-
-function WarningList({ warnings }: { warnings: ForecastWarning[] }) {
-  const { t } = useI18n()
-  return (
-    <ul className="space-y-2.5">
-      {warnings.map((warning) => {
-        const key = WARNING_KEYS[warning.code]
-        const Icon = WARNING_ICONS[warning.code] ?? TriangleAlert
-        return (
-          <li
-            key={warning.code}
-            className="flex gap-2.5 rounded-xl bg-amber-50 px-3.5 py-3 text-sm leading-6 text-amber-950"
-          >
-            <Icon size={18} className="mt-0.5 shrink-0" aria-hidden="true" />
-            <span>{key ? t(key, warning.params) : warning.message}</span>
-          </li>
-        )
-      })}
-      {!warnings.length && <li className="text-sm text-respira-body">{t('fc.noWarnings')}</li>}
-      <li className="flex gap-2.5 rounded-xl bg-sky-50 px-3.5 py-3 text-sm leading-6 text-respira-text">
-        <Info size={18} className="mt-0.5 shrink-0" aria-hidden="true" />
-        <span>{t('fc.notExact')}</span>
-      </li>
-    </ul>
   )
 }
 
@@ -390,7 +321,6 @@ function EvaluationTable({ data }: { data: ForecastResult }) {
     { key: 'test_2022', label: 'fc.period.test' },
     { key: 'pandemic_2020_2021', label: 'fc.period.pandemic' },
   ]
-  const testH2: ForecastEvalBlock | null = data.evaluation['2']?.test_2022 ?? null
   return (
     <Card className="p-5 sm:p-6">
       <h2 className="font-bold">{t('fc.evalTitle')}</h2>
@@ -401,9 +331,9 @@ function EvaluationTable({ data }: { data: ForecastResult }) {
             <tr>
               <th className="py-2 pr-3 font-semibold">{t('fc.evalPeriod')}</th>
               <th className="py-2 pr-3 font-semibold">{t('fc.evalHorizon')}</th>
-              <th className="py-2 pr-3 text-right font-semibold">n</th>
-              <th className="py-2 pr-3 text-right font-semibold">MAE</th>
-              <th className="py-2 pr-3 text-right font-semibold">RMSE</th>
+              <th className="py-2 pr-3 text-right font-semibold">{t('fc.evalWeeks')}</th>
+              <th className="py-2 pr-3 text-right font-semibold">{t('fc.evalError')}</th>
+              <th className="py-2 pr-3 text-right font-semibold">{t('fc.evalBigError')}</th>
               <th className="py-2 pr-3 text-right font-semibold">{t('fc.evalPersistence')}</th>
               <th className="py-2 text-right font-semibold">{t('fc.evalGain')}</th>
             </tr>
@@ -436,14 +366,6 @@ function EvaluationTable({ data }: { data: ForecastResult }) {
           </tbody>
         </table>
       </div>
-      {testH2?.increase_recall !== null && testH2?.increase_recall !== undefined && (
-        <p className="mt-4 rounded-xl bg-amber-50 px-3.5 py-2.5 text-xs text-amber-950">
-          {t('fc.evalCaveat', {
-            recall: Math.round(testH2.increase_recall * 100),
-            accuracy: Math.round(testH2.trend_accuracy * 100),
-          })}
-        </p>
-      )}
     </Card>
   )
 }
@@ -488,26 +410,6 @@ function ClimateContribution({ summary }: { summary: ForecastModelsSummary }) {
   )
 }
 
-
-function DataExtension({ summary }: { summary: ForecastModelsSummary }) {
-  const { t } = useI18n()
-  const ext = summary.data_extension
-  if (!ext) return null
-  const m = (key: string) => ext.climate_public[key]?.municipalities ?? 0
-  return (
-    <Card className="p-5 sm:p-6">
-      <h2 className="font-bold">{t('fc.extTitle')}</h2>
-      <p className="mt-1 text-xs text-respira-muted">{t('fc.extIntro')}</p>
-      <ul className="mt-4 list-disc space-y-1.5 pl-5 text-sm text-respira-body">
-        <li>{t('fc.extPopulation', { year: ext.population_through_year })}</li>
-        <li>{t('fc.extCalendar', { weeks: ext.calendar_weeks['2025'] ?? '—', anchors: ext.calendar_ins_anchors.length })}</li>
-        <li>
-          {t('fc.extClimate', { temp: m('temp_media'), hum: m('humedad_relativa'), prec: m('precipitacion') })}
-        </li>
-      </ul>
-    </Card>
-  )
-}
 
 // Tiempo máximo de espera del análisis. En Electron la consulta pasa por el proceso principal y no se puede
 // cancelar con AbortController, así que sin este límite una respuesta que nunca llega dejaba la pantalla cargando.
@@ -644,14 +546,6 @@ export function ForecastPage() {
           </>
         }
       />
-      <div
-        className="flex gap-3 rounded-2xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-950"
-        role="note"
-      >
-        <FlaskConical size={18} className="mt-1 shrink-0" aria-hidden="true" />
-        <p>{t('fc.disclaimer')}</p>
-      </div>
-
       <FilterBar note={t('fc.filterNote')}>
         <FilterField label={t('fc.askMunicipality')}>
           <select
@@ -774,16 +668,7 @@ export function ForecastPage() {
 
           <ForecastChart data={data} />
 
-          <div className="grid gap-6 xl:grid-cols-2">
-            <ConfidenceCard data={data} />
-            <Card className="p-5 sm:p-6">
-              <h2 className="font-bold">{t('fc.warnTitle')}</h2>
-              <p className="mt-1 text-xs text-respira-muted">{t('fc.warnSubtitle')}</p>
-              <div className="mt-4">
-                <WarningList warnings={data.warnings} />
-              </div>
-            </Card>
-          </div>
+          <ConfidenceCard data={data} />
 
           <Card className="p-5 sm:p-6">
             <h2 className="font-bold">{t('fc.howTitle')}</h2>
@@ -892,7 +777,6 @@ export function ForecastPage() {
 
                 <EvaluationTable data={data} />
                 {summary && <ClimateContribution summary={summary} />}
-          {summary && <DataExtension summary={summary} />}
 
                 <div className="rounded-xl bg-respira-surface-alt px-4 py-3.5 text-sm leading-6 text-respira-body">
                   <p className="font-bold text-respira-text">{t('fc.glossaryTitle')}</p>

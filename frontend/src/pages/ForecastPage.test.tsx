@@ -97,12 +97,12 @@ describe('ForecastPage', () => {
 
     expect(await screen.findByText('Dentro de 2 semanas')).toBeInTheDocument()
     expect(screen.getByText('Dentro de 3 semanas')).toBeInTheDocument()
-    expect(screen.getByText(/No es un diagnóstico/)).toBeInTheDocument()
-    expect(screen.getByText(/no es un diagnóstico/i)).toBeInTheDocument()
+    expect(screen.queryByText(/no es un diagnóstico/i)).not.toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Se espera un nivel parecido al de las últimas semanas' })).toBeInTheDocument()
     expect(screen.getByText('Se mantiene')).toBeInTheDocument()
     expect(screen.getByText('Sube')).toBeInTheDocument()
-    expect(screen.getByText(/Pocas atenciones por semana \(mediana de 6/)).toBeInTheDocument()
+    expect(screen.queryByText(/Antes de usarla, ten en cuenta/)).not.toBeInTheDocument()
+    expect(screen.queryByText(/pocas atenciones por semana/)).not.toBeInTheDocument()
     expect(screen.getByText('Confianza baja')).toBeInTheDocument()
     expect(screen.getByText(/se desvió en promedio unas 4,2 atenciones por semana/)).toBeInTheDocument()
     expect(screen.getByText(/en 6 de cada 10 ocasiones/)).toBeInTheDocument()
@@ -112,16 +112,16 @@ describe('ForecastPage', () => {
   it('oculta los detalles técnicos hasta que se piden', async () => {
     render(<ForecastPage />)
 
-    const toggle = await screen.findByRole('button', { name: /Ver detalles técnicos/ })
+    const toggle = await screen.findByRole('button', { name: /Ver más detalles/ })
     expect(toggle).toHaveAttribute('aria-expanded', 'false')
-    expect(screen.queryByText(/MAE persistencia/)).not.toBeInTheDocument()
+    expect(screen.queryByText(/Error repitiendo la semana anterior/)).not.toBeInTheDocument()
 
     await userEvent.click(toggle)
 
-    expect(screen.getByRole('button', { name: /Ocultar detalles técnicos/ })).toHaveAttribute('aria-expanded', 'true')
-    expect(screen.getByText('Sin cobertura suficiente para este municipio')).toBeInTheDocument()
-    expect(screen.getByText(/identificó solo el 7%/)).toBeInTheDocument()
-    expect(screen.getAllByText('Modelo A · historial + precipitación').length).toBeGreaterThan(1)
+    expect(screen.getByRole('button', { name: /Ocultar detalles/ })).toHaveAttribute('aria-expanded', 'true')
+    expect(screen.getByText('Este municipio no tiene suficientes datos')).toBeInTheDocument()
+    expect(screen.queryByText(/anticipó solo 7 de cada 100 aumentos/)).not.toBeInTheDocument()
+    expect(screen.getAllByText('Historial + lluvia').length).toBeGreaterThan(1)
   })
 
   it('avisa si los modelos no están entrenados', async () => {
@@ -130,7 +130,7 @@ describe('ForecastPage', () => {
 
     render(<ForecastPage />)
 
-    expect(await screen.findByRole('alert')).toHaveTextContent('La IA aún no está disponible')
+    expect(await screen.findByRole('alert')).toHaveTextContent('La predicción todavía no está disponible')
   })
 
   it('el botón de recarga vuelve a consultar el análisis', async () => {
