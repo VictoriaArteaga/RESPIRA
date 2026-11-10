@@ -7,6 +7,7 @@ interface Window {
   respiraDesktop?: {
     platform: string
     getApi: (path: string) => Promise<DesktopApiResponse>
+    quit: () => Promise<DesktopApiResponse>
     auth: {
       register: (credentials: { email: string; password: string }) => Promise<DesktopApiResponse>
       login: (credentials: { email: string; password: string }) => Promise<DesktopApiResponse>

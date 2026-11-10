@@ -31,6 +31,7 @@ interface Credentials {
 contextBridge.exposeInMainWorld('respiraDesktop', {
   platform: process.platform,
   getApi: (path: string) => invoke('respira:api-get', path),
+  quit: () => invoke('respira:app-quit'),
   auth: {
     register: (credentials: Credentials) => invoke('respira:auth-register', credentials),
     login: (credentials: Credentials) => invoke('respira:auth-login', credentials),

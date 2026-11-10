@@ -126,7 +126,12 @@ describe('proceso principal (main.ts)', () => {
 
   it('todos los canales IPC pasan por secureHandle (validación de senderFrame)', () => {
     expect(main.match(/ipcMain\.handle\(/g)).toHaveLength(1) // solo dentro de secureHandle
-    expect(main.match(/secureHandle\('respira:/g)).toHaveLength(7)
+    expect(main.match(/secureHandle\('respira:/g)).toHaveLength(8)
+  })
+
+  it('el botón de salir solo cierra la aplicación, sin recibir datos del renderer', () => {
+    expect(main).toMatch(/secureHandle\('respira:app-quit', \(\): ApiResult => \{/)
+    expect(readFileSync(resolve(__dirname, 'preload.ts'), 'utf-8')).toMatch(/quit: \(\) => invoke\('respira:app-quit'\)/)
   })
 
   it('el token solo se asigna tras un inicio de sesión correcto y se lee de la respuesta del servidor', () => {

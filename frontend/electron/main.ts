@@ -119,6 +119,12 @@ secureHandle('respira:api-get', async (_event, path: unknown) => {
   return apiRequest('GET', path)
 })
 
+// Cierra la aplicación completa (no solo la sesión). Se difiere para que la respuesta llegue antes de salir.
+secureHandle('respira:app-quit', (): ApiResult => {
+  setImmediate(() => app.quit())
+  return { status: 204, body: null }
+})
+
 secureHandle('respira:auth-register', async (_event, value: unknown): Promise<ApiResult> => {
   const credentials = readCredentials(value)
   if (!credentials) return { status: 400, body: { detail: 'Datos de registro no válidos.' } }
