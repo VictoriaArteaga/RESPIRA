@@ -147,7 +147,7 @@ def test_register_duplicate_email_is_indistinguishable_and_creates_no_second_acc
 
 @pytest.mark.parametrize(
     "password",
-    ["corta1", "sololetrassinnumero", "123456789012345", "x" * 129 + "1"],
+    ["corta1", "sololetrassinnumero", "123456789012345", "x" * 64 + "1"],
 )
 def test_register_rejects_invalid_passwords(client: TestClient, password: str) -> None:
     assert register(client, new_email(), password).status_code == 422

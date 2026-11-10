@@ -5,7 +5,7 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator, model_validator
 
 PASSWORD_MIN_LENGTH = 12
-PASSWORD_MAX_LENGTH = 128
+PASSWORD_MAX_LENGTH = 64
 
 
 def _normalize_email(value: str) -> str:
