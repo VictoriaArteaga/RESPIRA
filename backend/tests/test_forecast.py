@@ -56,3 +56,12 @@ def test_status_and_models(client: TestClient) -> None:
     assert {m["id"] for m in body["models"]} == {"base_global", "modelo_a", "modelo_b"}
     assert body["models"][0]["horizons"]["2"]["test_2022"]["n"] > 0
     assert "No es un diagnóstico" in body["disclaimer"] or "no es un diagnóstico" in body["disclaimer"].lower()
+
+
+def test_models_endpoint_reports_attached_public_data_without_using_it_for_training(client: TestClient) -> None:
+    ext = client.get("/api/forecast/models").json().get("data_extension")
+    if ext is None:
+        pytest.skip("Extensión 2023-2025 no generada")
+    assert ext["used_for_training"] is False and ext["ira_public_2023_2025"] is False
+    assert ext["ira_last_week"] == {"year": 2022, "week": 52} and ext["population_through_year"] == 2025
+    assert ext["calendar_weeks"]["2025"] == 53
