@@ -35,3 +35,17 @@ PANDEMIC_YEARS = {2020, 2021}
 CHANNEL_MIN_YEARS = 3
 CHANNEL_FEATURES = ["p50_t", "p75_t", "p90_t", "ref_vs_p75", "ira_vs_p50", "spread", "pos_act"]
 CHANNEL_FILE = "canal_{kind}_h{h}.joblib"   # kind: p75 | p90
+
+# id -> definición. 'municipios' se deriva de los datos (qué municipios tienen la variable climática apta).
+MODEL_SPECS: dict[str, dict] = {
+    "base_global": dict(etiqueta="Base (solo historial de IRA) · todos los municipios", grupo="base", municipios="todos",
+                        features=BASE_FEATURES, referencia=None),
+    "base_a": dict(etiqueta="Base (solo historial de IRA) · municipios con precipitación", grupo="base", municipios="precipitacion",
+                   features=BASE_FEATURES, referencia=None),
+    "modelo_a": dict(etiqueta="Modelo A · historial de IRA + precipitación", grupo="clima", municipios="precipitacion",
+                     features=BASE_FEATURES + PRECIP_FEATURES, referencia="base_a"),
+    "base_b": dict(etiqueta="Base (solo historial de IRA) · municipios con temperatura", grupo="base", municipios="temperatura",
+                   features=BASE_FEATURES, referencia=None),
+    "modelo_b": dict(etiqueta="Modelo B · historial de IRA + precipitación + temperatura", grupo="clima", municipios="temperatura",
+                     features=BASE_FEATURES + PRECIP_FEATURES + TEMP_FEATURES, referencia="base_b"),
+}
