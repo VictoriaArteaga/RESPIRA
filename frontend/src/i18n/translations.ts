@@ -546,6 +546,12 @@ export const es = {
   'fc.chExceed90': 'Entrar en zona de alerta (P90): señal {level}. En 2022, con ese nivel ocurrió en el {rate}% de las semanas (en general: {base}%).',
   'fc.chUnavailable': 'No hay canal endémico para esa semana: se necesitan al menos 3 años anteriores con dato.',
   'fc.chCaveat': 'Limitación: en 2022 el modelo ordena las semanas con AUC {auc}, pero la regla simple (promedio reciente frente al canal) ya llega a {simple}. Gran parte de la señal viene de que una semana sobre el canal tiende a seguir sobre él.',
+  'fc.rangeLabel': 'Periodo',
+  'fc.rangeAll': 'Todo el historial',
+  'fc.range5y': '5 años',
+  'fc.range2y': '2 años',
+  'fc.range1y': '1 año',
+  'fc.range26w': '26 semanas',
 } as const
 
 export type TranslationKey = keyof typeof es
@@ -1080,4 +1086,10 @@ export const en: Record<TranslationKey, string> = {
   'fc.chExceed90': 'Entering the alert zone (P90): {level} signal. In 2022, at that level it happened in {rate}% of weeks (overall: {base}%).',
   'fc.chUnavailable': 'There is no endemic channel for that week: at least 3 previous years with data are needed.',
   'fc.chCaveat': 'Limitation: in 2022 the model ranks weeks with AUC {auc}, but the simple rule (recent average vs. channel) already reaches {simple}. Much of the signal comes from a week above the channel tending to stay above it.',
+  'fc.rangeLabel': 'Period',
+  'fc.rangeAll': 'Full history',
+  'fc.range5y': '5 years',
+  'fc.range2y': '2 years',
+  'fc.range1y': '1 year',
+  'fc.range26w': '26 weeks',
 }
