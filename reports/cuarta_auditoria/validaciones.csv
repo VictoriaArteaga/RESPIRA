@@ -1,0 +1,54 @@
+﻿status,id,area,result,evidence
+PASS,FILE_DOCS_DATA_AUDIT_SEGUNDA_AUDITORIA_README_MD,inventario,Existe,docs/data-audit/segunda-auditoria/README.md
+PASS,FILE_DOCS_DATA_AUDIT_SEGUNDA_AUDITORIA_AUDITORIA_SEGUNDA_FUENTES_MD,inventario,Existe,docs/data-audit/segunda-auditoria/auditoria_segunda_fuentes.md
+PASS,HASH_DOCS_DATA_AUDIT_SEGUNDA_AUDITORIA_AUDITORIA_SEGUNDA_FUENTES_MD,integridad,VERIFIED_MATCH,docs/data-audit/segunda-auditoria/auditoria_segunda_fuentes.md
+PASS,FILE_DOCS_DATA_AUDIT_SEGUNDA_AUDITORIA_RESUMEN_IDEAM_NARINO_ARCHIVOS_CSV,inventario,Existe,docs/data-audit/segunda-auditoria/resumen_ideam_narino_archivos.csv
+PASS,HASH_DOCS_DATA_AUDIT_SEGUNDA_AUDITORIA_RESUMEN_IDEAM_NARINO_ARCHIVOS_CSV,integridad,VERIFIED_MATCH,docs/data-audit/segunda-auditoria/resumen_ideam_narino_archivos.csv
+PASS,FILE_DOCS_DATA_AUDIT_SEGUNDA_AUDITORIA_COBERTURA_IDEAM_NARINO_ESTACION_ANIO_CSV,inventario,Existe,docs/data-audit/segunda-auditoria/cobertura_ideam_narino_estacion_anio.csv
+PASS,HASH_DOCS_DATA_AUDIT_SEGUNDA_AUDITORIA_COBERTURA_IDEAM_NARINO_ESTACION_ANIO_CSV,integridad,VERIFIED_MATCH,docs/data-audit/segunda-auditoria/cobertura_ideam_narino_estacion_anio.csv
+PASS,FILE_DATA_REPORTS_INFORME_AUDITORIA_DATASETS_RESPIRA_20261025_MD,inventario,Existe,data/reports/INFORME_AUDITORIA_DATASETS_RESPIRA_20261025.md
+PASS,FILE_DATA_REPORTS_AUDITORIA_SEGUNDA_FUENTES_MD,inventario,Existe,data/reports/auditoria_segunda_fuentes.md
+PASS,FILE_REPORTS_ESTACIONES_CANDIDATAS_IDEAM_CSV,inventario,Existe,reports/estaciones_candidatas_ideam.csv
+PASS,FILE_REPORTS_METADATOS_VARIABLES_IDEAM_CSV,inventario,Existe,reports/metadatos_variables_ideam.csv
+PASS,FILE_REPORTS_AUDITORIA_SIVIGILA_995_2012_2022_MD,inventario,Existe,reports/auditoria_sivigila_995_2012_2022.md
+PASS,FILE_REPORTS_DICCIONARIO_SIVIGILA_995_CSV,inventario,Existe,reports/diccionario_sivigila_995.csv
+PASS,FILE_DATA_PROCESSED_PILOT_PILOTO_RESPIRA_2016_2022_CSV,inventario,Existe,data/processed/pilot/piloto_respira_2016_2022.csv
+PASS,FILE_DATA_DCD_AREA_SEXO_EDAD_PROYPOBLACION_MUN_2005_2017_VP_XLSX,inventario,Existe,data/DCD-area-sexo-edad-proypoblacion-Mun-2005-2017_VP.xlsx
+PASS,FILE_DATA_PPED_AREASEXOEDADMUN_2018_2042_VP_XLSX,inventario,Existe,data/PPED-AreaSexoEdadMun-2018-2042_VP.xlsx
+PASS,FILE_DATA_CAT_LOGO_NACIONAL_DE_ESTACIONES_DEL_IDEAM_1_CSV,inventario,Existe,data/Cat_logo_Nacional_de_Estaciones_del_IDEAM (1).csv
+PASS,FILE_DATA_SIVIGILA_DATOS_2016_995_XLSX,inventario,Existe,data/SIVIGILA/Datos_2016_995.xlsx
+PASS,FILE_DATA_SIVIGILA_DATOS_2021_995_XLSX,inventario,Existe,data/SIVIGILA/Datos_2021_995.xlsx
+PASS,FILE_DATA_SIVIGILA_DATOS_2022_995_XLSX,inventario,Existe,data/SIVIGILA/Datos_2022_995.xlsx
+PASS,FILE_DATA_TEMPERATURANACIONALDIARIA_TSSM_MN_D_52045020_DATA,inventario,Existe,data/TemperaturaNacionalDiaria/TSSM_MN_D@52045020.data
+PASS,FILE_DATA_TEMPERATURANACIONALDIARIA_TSSM_MX_D_52045020_DATA,inventario,Existe,data/TemperaturaNacionalDiaria/TSSM_MX_D@52045020.data
+PASS,FILE_DATA_TEMPERATURANACIONALDIARIA_TSSM_MEDIA_D_52045020_DATA,inventario,Existe,data/TemperaturaNacionalDiaria/TSSM_MEDIA_D@52045020.data
+PASS,FILE_DATA_TEMPERATURANACIONALDIARIA_TSSM_MN_D_52055200_DATA,inventario,Existe,data/TemperaturaNacionalDiaria/TSSM_MN_D@52055200.data
+PASS,FILE_DATA_TEMPERATURANACIONALDIARIA_TSSM_MX_D_52055200_DATA,inventario,Existe,data/TemperaturaNacionalDiaria/TSSM_MX_D@52055200.data
+PASS,FILE_DATA_TEMPERATURANACIONALDIARIA_TSSM_MEDIA_D_52055200_DATA,inventario,Existe,data/TemperaturaNacionalDiaria/TSSM_MEDIA_D@52055200.data
+PASS,FILE_DATA_TEMPERATURANACIONALDIARIA_TSSM_MN_D_52055060_DATA,inventario,Existe,data/TemperaturaNacionalDiaria/TSSM_MN_D@52055060.data
+PASS,FILE_DATA_TEMPERATURANACIONALDIARIA_TSSM_MX_D_52055060_DATA,inventario,Existe,data/TemperaturaNacionalDiaria/TSSM_MX_D@52055060.data
+PASS,FILE_DATA_TEMPERATURANACIONALDIARIA_TSSM_MEDIA_D_52055060_DATA,inventario,Existe,data/TemperaturaNacionalDiaria/TSSM_MEDIA_D@52055060.data
+PASS,FILE_DATA_PROCESSED_PILOT_PILOTO_RESPIRA_2016_2022_CSV,inventario,Existe,data/processed/pilot/piloto_respira_2016_2022.csv
+PASS,PILOT_SCHEMA,piloto,Columnas esperadas presentes,
+PASS,PILOT_KEYS,piloto,312 filas; 312 claves únicas municipio-año-semana,Esperado 3 × 2 × 52 = 312
+PASS,PILOT_POPULATION,DANE,Población presente y libro por periodo,Códigos DIVIPOLA texto de 5 posiciones; población anual 0–4
+PASS,CALENDAR_MATCH,calendario,Fechas piloto coinciden con calendario semanal anclado por INS,INS: semana domingo–sábado; BES SE52 2016 y 2022 = 25–31 diciembre
+PASS,SIV_SCHEMA_2016,SIVIGILA,"231,882 filas × 84 columnas; campos IRACEXT y claves presentes",Hoja cabecera: Datos_2016_995.xlsx; faltantes=[]
+PASS,SIV_IRACEXT_VALUES_2016,SIVIGILA,celdas vacías/no numéricas seleccionadas=0; conteos negativos=0,Los valores faltantes no se convierten en cero
+WARNING,SIV_WEEKS_2016,SIVIGILA,152 de 156 municipio-semanas con filas; 4 sin filas,"{""Chachagüí"": [44, 52], ""Funes"": [11, 21], ""Samaniego"": []}"
+PASS,SIV_SCHEMA_2022,SIVIGILA,"235,740 filas × 83 columnas; campos IRACEXT y claves presentes",Hoja cabecera: Datos_2022_995.xlsx; faltantes=[]
+PASS,SIV_IRACEXT_VALUES_2022,SIVIGILA,celdas vacías/no numéricas seleccionadas=0; conteos negativos=0,Los valores faltantes no se convierten en cero
+PASS,SIV_WEEKS_2022,SIVIGILA,156 de 156 municipio-semanas con filas; 0 sin filas,"{""Chachagüí"": [], ""Funes"": [], ""Samaniego"": []}"
+WARNING,SIV_SCHEMA_DIFF,SIVIGILA,columnas 2016=84; 2022=83; solo2016=1; solo2022=0,2016-only=['version']; 2022-only=[]
+WARNING,SIV_REPEATED_PROVIDER_WEEK,SIVIGILA,1 grupos con varias filas por municipio-año-semana-UPGD-sede; se conservan,La clave completa incluye NUM_CON; consulte filas_repeticion_sivigila.csv; no llamar duplicado solo por proveedor-semana
+PASS,SIV_FULL_KEY_DUPLICATES,SIVIGILA,0 repeticiones de clave completa incluyendo NUM_CON,INS define NUM_CON como consecutivo por reporte UPGD/semana/evento
+PASS,PILOT_SIV_AGGREGATION,SIVIGILA,Todos los conteos presentes y cantidad de filas coinciden con fuente,Recalculo solo agregado IRACEXT_1+2+3; no se exportan campos personales
+PASS,PILOT_V2_CREATED,piloto,Versión v2 conserva las filas/valores y corrige la etiqueta del grupo repetido,piloto_respira_2016_2022_auditado_v2.csv
+WARNING,SIV_2021_INTEGRITY,SIVIGILA 2021,"1 versión(es) local(es); workbook metadata={""sheets"": [{""name"": ""ACUMULADO"", ""rows"": 1048576, ""cols"": 85, ""header_row"": 2, ""header_fields_n"": 85, ""has_event_week_fields"": true}], ""created"": ""2022-04-27 22:12:33"", ""modified"": ""2022-05-02 21:00:02"", ""creator_metadata_present"": true}",Una hoja alcanza límite XLSX; no se encontró prueba independiente de integridad ni archivo alternativo
+PASS,IDEAM_CATALOG_52045020,IDEAM,"52045020↔Chachagüí, Nariño, convencional/activa coincide","{""Codigo"": ""0052045020"", ""Nombre"": ""AEROPUERTO ANTONIO NARIÑO [52045020]"", ""Municipio"": ""Chachaguí"", ""Departamento"": ""Nariño"", ""Tecnologia"": ""Convencional"", ""Estado"": ""Activa""}"
+PASS,IDEAM_CATALOG_52055200,IDEAM,"52055200↔Funes, Nariño, convencional/activa coincide","{""Codigo"": ""0052055200"", ""Nombre"": ""FUNES [52055200]"", ""Municipio"": ""Funes"", ""Departamento"": ""Nariño"", ""Tecnologia"": ""Convencional"", ""Estado"": ""Activa""}"
+PASS,IDEAM_CATALOG_52055060,IDEAM,"52055060↔Samaniego, Nariño, convencional/activa coincide","{""Codigo"": ""0052055060"", ""Nombre"": ""TANAMA [52055060]"", ""Municipio"": ""Samaniego"", ""Departamento"": ""Nariño"", ""Tecnologia"": ""Convencional"", ""Estado"": ""Activa""}"
+PASS,PILOT_WEATHER_RECALC,IDEAM,Reglas y cobertura semanal recalculadas desde fechas diarias coinciden,[]
+PENDING,IDEAM_PLAUSIBILITY_RANGES,IDEAM,No se aplicó un rango duro de plausibilidad,La documentación consultada no define umbral de plausibilidad por estación aplicable a estas extracciones; los extremos se conservan para revisión y no se eliminan automáticamente
+WARNING,FUNES_2022_LOW_COVERAGE,IDEAM,Semanas de Funes 2022 debajo de 6/7 días identificadas,TSSM_MN_D: 5;52; TSSM_MX_D: 5;52; TSSM_MEDIA_D: 5;52
+PASS,DANE_PROVENANCE,DANE,"6 poblaciones municipio-año, constantes por año y con libro correspondiente","La segunda auditoría ya revisó área Total, edades simples 0–4, claves y coherencia H+M; esta rutina comprueba presencia/procedencia del piloto sin volver a barrer todas las celdas de los dos libros extensos"

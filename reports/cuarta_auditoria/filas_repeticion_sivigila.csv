@@ -1,0 +1,3 @@
+﻿municipality_divipola,municipality_name,year,epi_week,provider_code,provider_subindex,num_con,source_excel_row,IRACEXT_1,IRACEXT_2,IRACEXT_3,row_indicator_sum,same_full_source_row_as_other_in_group,same_provider_week_group_n,num_con_unique_within_group
+52240,Chachagüí,2016,43,5224001399,01,263,204616,4.0,0.0,4.0,8.0,False,2,True
+52240,Chachagüí,2016,43,5224001399,01,264,207474,0.0,0.0,1.0,1.0,False,2,True
