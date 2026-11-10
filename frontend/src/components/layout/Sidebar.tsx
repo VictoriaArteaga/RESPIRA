@@ -8,6 +8,7 @@ import {
   ChartLine,
   CircleUser,
   Settings,
+  Sparkles,
   Users,
 } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
@@ -20,6 +21,7 @@ const navigation: Array<{ labelKey: TranslationKey; path: string; icon: typeof A
   { labelKey: 'nav.municipalities', path: '/municipalities', icon: Activity },
   { labelKey: 'nav.riskMap', path: '/risk-map', icon: Map },
   { labelKey: 'nav.endemic', path: '/endemic', icon: ChartLine },
+  { labelKey: 'nav.forecast', path: '/forecast', icon: Sparkles },
   { labelKey: 'nav.cases', path: '/cases', icon: ClipboardList },
   { labelKey: 'nav.alerts', path: '/alerts', icon: Bell },
   { labelKey: 'nav.profile', path: '/profile', icon: CircleUser },
