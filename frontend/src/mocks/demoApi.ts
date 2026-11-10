@@ -1,5 +1,7 @@
 // Datos de demostración para visualizar la interfaz sin depender del servidor.
-// Se activan con VITE_DEMO_DATA=true (ver .env.example). Son datos sintéticos, no registros oficiales de SIVIGILA.
+// Se activan con VITE_DEMO_DATA=true (ver .env.example). Conviven dos conjuntos: 10 municipios SIMULADOS (2021-2025,
+// sintéticos, marcados "(simulado)") y los 64 municipios REALES de Nariño con las atenciones por IRA de SIVIGILA 2012-2022.
+import realData from './real-data.json'
 import type { DashboardSummary } from '../types/dashboard'
 import type { IraCase } from '../types/case'
 import type { Municipality } from '../types/municipality'
@@ -48,7 +50,7 @@ function mulberry32(seed: number): () => number {
   }
 }
 
-const municipalities: Municipality[] = MUNICIPALITY_SEED.map(([name, latitude, longitude], index) => ({
+const simulatedMunicipalities: Municipality[] = MUNICIPALITY_SEED.map(([name, latitude, longitude], index) => ({
   id: index + 1,
   name,
   department: 'Nariño',
@@ -56,11 +58,11 @@ const municipalities: Municipality[] = MUNICIPALITY_SEED.map(([name, latitude, l
   longitude,
 }))
 
-const cases: IraCase[] = (() => {
+const simulatedCases: IraCase[] = (() => {
   const random = mulberry32(20250518)
   const records: IraCase[] = []
   let id = 1
-  for (const municipality of municipalities) {
+  for (const municipality of simulatedMunicipalities) {
     const base = MUNICIPALITY_SEED[municipality.id - 1][3]
     for (const year of YEARS) {
       for (let week = 1; week <= WEEKS_PER_YEAR; week += 1) {
@@ -88,6 +90,62 @@ const cases: IraCase[] = (() => {
   return records
 })()
 
+// ---- Datos reales: atenciones por IRA notificadas en <5 años (SIVIGILA 995), 64 municipios, 2012-2022 ----
+// Se generan con data/scripts/respira_v2/10_exportar_demo_frontend.py. Las semanas sin reporte vienen como null y no se
+// dibujan: nunca se convierten en cero. No traen clima en la interfaz (la IA lo usa por su lado).
+interface RealData {
+  semanas: Array<[number, number]>
+  municipios: Array<{ c: string; n: string; lat: number; lon: number; v: Array<number | null> }>
+}
+const real = realData as unknown as RealData
+const REAL_YEARS = [...new Set(real.semanas.map(([year]) => year))]
+
+// El id de un municipio real es su código DIVIPOLA (5 dígitos), así nunca choca con los ids 1-10 de los simulados.
+const realMunicipalities: Municipality[] = real.municipios.map((m) => ({
+  id: Number(m.c),
+  name: m.n,
+  department: 'Nariño',
+  latitude: m.lat,
+  longitude: m.lon,
+}))
+
+const realCases: IraCase[] = (() => {
+  const records: IraCase[] = []
+  let id = 100000
+  for (const m of real.municipios) {
+    m.v.forEach((value, index) => {
+      if (value === null) return
+      const [year, week] = real.semanas[index]
+      records.push({
+        id: id++,
+        municipality_id: Number(m.c),
+        epidemiological_week: week,
+        year,
+        cases: value,
+        temperature: null,
+        precipitation: null,
+        humidity: null,
+      })
+    })
+  }
+  return records
+})()
+
+// Los municipios simulados llevan "(simulado)" para distinguirlos de los reales con el mismo nombre (p. ej. Pasto).
+const municipalities: Municipality[] = [
+  ...realMunicipalities,
+  ...simulatedMunicipalities.map((m) => ({ ...m, name: `${m.name} (simulado)` })),
+]
+const cases: IraCase[] = [...realCases, ...simulatedCases]
+const AVAILABLE_YEARS = [...new Set([...REAL_YEARS, ...YEARS])].sort((a, b) => b - a)
+
+const casesByMunicipality = new Map<number, IraCase[]>()
+for (const record of cases) {
+  const list = casesByMunicipality.get(record.municipality_id)
+  if (list) list.push(record)
+  else casesByMunicipality.set(record.municipality_id, [record])
+}
+
 const latestYear = YEARS[YEARS.length - 1]
 const latestWeek = WEEKS_PER_YEAR
 
@@ -108,7 +166,7 @@ function classify(variation: number): RiskLevel {
 }
 
 function casesOf(municipalityId: number): IraCase[] {
-  return cases.filter((record) => record.municipality_id === municipalityId)
+  return casesByMunicipality.get(municipalityId) ?? []
 }
 
 function riskFor(municipality: Municipality, year: number, week: number): MunicipalityRisk {
@@ -155,7 +213,7 @@ function riskMap(params: URLSearchParams): RiskMap {
   return {
     year,
     week,
-    available_years: [...YEARS].reverse(),
+    available_years: AVAILABLE_YEARS,
     municipalities: municipalities.map((municipality) => riskFor(municipality, year, week)),
   }
 }
@@ -177,7 +235,7 @@ function alerts(params: URLSearchParams): AlertResponse {
       reason: `Los casos de la semana ${week} superan en ${risk.variation_percent}% el promedio histórico de la misma semana en años anteriores.`,
     }))
     .sort((left, right) => right.variation_percent - left.variation_percent)
-  return { year, week, available_years: [...YEARS].reverse(), alerts: list }
+  return { year, week, available_years: AVAILABLE_YEARS, alerts: list }
 }
 
 function endemicChannel(municipality: Municipality, params: URLSearchParams): EndemicChannel {
@@ -208,7 +266,7 @@ function endemicChannel(municipality: Municipality, params: URLSearchParams): En
     municipality_id: municipality.id,
     municipality: municipality.name,
     year,
-    available_years: [...YEARS].reverse(),
+    available_years: AVAILABLE_YEARS,
     statistics: values.length
       ? {
           total_cases: total,
