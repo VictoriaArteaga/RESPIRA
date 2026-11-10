@@ -154,3 +154,9 @@ def test_origin_without_data_is_not_forecast_as_zero(client: TestClient) -> None
     row = df[(df["estado_dato_ira"] == "SIN_FILA") & (df["anio"] == 2022)].iloc[0]
     response = client.get(f"/api/forecast/municipalities/{row['codigo_divipola']}?year=2022&week={int(row['semana_epidemiologica'])}")
     assert response.status_code == 404 and "no se asume cero" in response.json()["detail"]
+
+
+def test_invalid_inputs(client: TestClient) -> None:
+    assert client.get("/api/forecast/municipalities/99999").status_code == 404
+    assert client.get(f"/api/forecast/municipalities/{PASTO}?year=2022").status_code == 422
+    assert client.get(f"/api/forecast/municipalities/{PASTO}?model=otro").status_code == 422
