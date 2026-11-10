@@ -1,0 +1,15 @@
+campo_local,significado_operativo,dominio_o_unidad,regla_aplicada,limite_o_cautela,fuente
+cod_eve,Código de evento,995,Mantener filas cuyo código normalizado sea 995,No determina que la fila represente persona; evento de notificación colectiva,Protocolo INS IRA 2024
+cod_mun,Código DIVIPOLA del municipio notificador,Código de 5 dígitos,Normalizar como texto de cinco posiciones,No interpretar como municipio de residencia ni ocurrencia,Diccionario de datos básicos SIVIGILA INS
+nmun_notif,Nombre del municipio notificador,Texto,Usar como control de consistencia junto a cod_mun,No sustituye el código,Formulario colectivo INS 995
+ndep_notif,Departamento notificador,Texto,Control de consistencia (Nariño),No es campo de residencia,Formulario colectivo INS 995
+año,Año epidemiológico,Año calendario reportado,Usar junto con semana del formulario como clave temporal,No derivar desde fec_not,Diccionario de datos básicos SIVIGILA INS
+semana,Semana epidemiológica,1–52 para los años seleccionados,Usar valor reportado; agregar por municipio-año-semana,No reconstruir semana desde fec_not,Diccionario de datos básicos SIVIGILA INS y metodología INS
+fec_not,Fecha de notificación,Fecha,No usada para asignar ocurrencia o semana,Es fecha de notificación; no fecha clínica/ocurrencia,Diccionario de datos básicos SIVIGILA INS
+cod_pre,Código del prestador/UPGD,Código,Usar para contar claves proveedor-semana repetidas,No es identificador de paciente,Diccionario de datos básicos SIVIGILA INS
+cod_sub,Subíndice del prestador/registro,Texto/código,Componente de clave de control junto con cod_pre,No es identificador de paciente,Diccionario de datos básicos SIVIGILA INS
+num_con,Consecutivo del registro,Entero/texto,No se usa para deduplicar,No representa paciente/caso único,Diccionario de datos básicos SIVIGILA INS
+IRACEXT_1,Atenciones por IRA en consulta externa/urgencias en menores de 1 año,Conteo colectivo,Sumar con IRACEXT_2 e IRACEXT_3,No son personas únicas; grupo etario, estructura por versión,Anexo INS estructura registros de notificación 2016
+IRACEXT_2,Atenciones por IRA en consulta externa/urgencias de 1 año,Conteo colectivo,Sumar con IRACEXT_1 e IRACEXT_3,No son personas únicas; grupo etario, estructura por versión,Anexo INS estructura registros de notificación 2016
+IRACEXT_3,Atenciones por IRA en consulta externa/urgencias de 2–4 años,Conteo colectivo,Sumar con IRACEXT_1 e IRACEXT_2,No son personas únicas; grupo etario, estructura por versión,Anexo INS estructura registros de notificación 2016
+ira_under5_reported_consultations,Atenciones notificadas agrupadas 0–4 años,Conteo semanal colectivo,Sum(IRACEXT_1 + IRACEXT_2 + IRACEXT_3) en registros presentes; no completar semanas ausentes con cero,No equivale a incidencia ni casos únicos; duplicados se conservan y se marcan,Protocolo INS IRA 2024 y anexo estructura 2016
