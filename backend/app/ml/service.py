@@ -67,3 +67,19 @@ class ForecastService:
         self.names = self.df.drop_duplicates("codigo_divipola").set_index("codigo_divipola")["municipio"].to_dict()
         self._median = self.df[self.df["anio"] <= 2019].groupby("codigo_divipola")["ira_0_4"].median()
         self._by_mun = {code: g.reset_index(drop=True) for code, g in self.df.groupby("codigo_divipola")}
+
+    @staticmethod
+    def _load_extension() -> dict | None:
+        """Datos públicos 2023-2025 adjuntos al dataset (no se usan para entrenar: falta la IRA de esos años)."""
+        path = DATA_DIR / "extension_2023_2025_manifest.json"
+        if not path.exists():
+            return None
+        m = json.loads(path.read_text(encoding="utf-8"))
+        return {"ira_last_week": {"year": 2022, "week": 52}, "ira_public_2023_2025": bool(m["ira_disponible_2023_2025"]),
+                "population_through_year": 2025, "calendar_weeks": m["calendario"]["semanas"],
+                "calendar_ins_anchors": m["calendario"]["anclas_ins_verificadas"],
+                "climate_public": {k: {"municipalities": v["municipios_con_estacion_publica"], "valid_municipality_weeks": v["semanas_validas_total"]}
+                                   for k, v in m["clima_publico"].items()},
+                "used_for_training": False,
+                "note": "El evento 995 de SIVIGILA de 2023-2025 no es público: los modelos se entrenan y evalúan hasta 2022. "
+                        "El clima, la población y el calendario de 2023-2025 quedan adjuntos para cuando se obtenga la IRA."}
