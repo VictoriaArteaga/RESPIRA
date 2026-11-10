@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import {
+  isAllowedForecastRoute,
   isSafeExternalUrl,
   isTrustedRendererUrl,
   parseSetActiveArgs,
@@ -146,5 +147,26 @@ describe('proceso principal (main.ts)', () => {
   it('el PATCH administrativo solo envía is_active', () => {
     expect(main.match(/apiRequest\('PATCH'/g)).toHaveLength(1)
     expect(main).toContain('{ is_active: args.isActive }')
+  })
+})
+
+describe('isAllowedForecastRoute (rutas de la IA permitidas al renderer)', () => {
+  const ok = (path: string) => isAllowedForecastRoute(new URL(path, 'http://localhost:8000'))
+
+  it('permite listados, estado y predicción por DIVIPOLA con filtros válidos', () => {
+    expect(ok('/api/forecast/models')).toBe(true)
+    expect(ok('/api/forecast/municipalities')).toBe(true)
+    expect(ok('/api/forecast/municipalities/52001')).toBe(true)
+    expect(ok('/api/forecast/municipalities/52001?year=2022&week=30&model=modelo_b')).toBe(true)
+  })
+
+  it('rechaza códigos, filtros y rutas no previstos', () => {
+    expect(ok('/api/forecast/municipalities/5200')).toBe(false)
+    expect(ok('/api/forecast/municipalities/52001/extra')).toBe(false)
+    expect(ok('/api/forecast/municipalities/52001?model=otro')).toBe(false)
+    expect(ok('/api/forecast/municipalities/52001?year=abc')).toBe(false)
+    expect(ok('/api/forecast/municipalities/52001?foo=1')).toBe(false)
+    expect(ok('/api/forecast/models?x=1')).toBe(false)
+    expect(ok('/api/forecast/train')).toBe(false)
   })
 })
