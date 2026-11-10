@@ -35,3 +35,14 @@ PARAM_GRID = [
     dict(max_iter=400, learning_rate=0.03, max_depth=6, min_samples_leaf=20, l2_regularization=1.0),
 ]
 SPLITS = {"validacion_2019": "VALIDACION", "prueba_2022": "TEST", "pandemia_2020_2021": "PANDEMIA_ANALIZAR_APARTE"}
+
+
+def _fit(frame: pd.DataFrame, features: list[str], target: str, params: dict) -> HistGradientBoostingRegressor:
+    model = HistGradientBoostingRegressor(loss="squared_error", early_stopping=False, random_state=SEED, **params)
+    ref = scale_ref(frame)
+    model.fit(frame[features], frame[target] / ref, sample_weight=ref)
+    return model
+
+
+def predict(model, frame: pd.DataFrame, features: list[str]) -> np.ndarray:
+    return np.clip(model.predict(frame[features]) * scale_ref(frame).to_numpy(), 0.0, None)
