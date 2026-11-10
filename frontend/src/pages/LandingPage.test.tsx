@@ -1,5 +1,6 @@
-import { render, screen } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
+import { act, render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { HashRouter, MemoryRouter } from 'react-router-dom'
 import { describe, expect, it, vi } from 'vitest'
 import { AuthProvider } from '../context/AuthContext'
 import { PreferencesProvider } from '../preferences/PreferencesContext'
@@ -40,6 +41,47 @@ describe('pantalla de inicio', () => {
     expect(screen.getByRole('heading', { name: '¿Qué es RESPIRA?' })).toBeInTheDocument()
     expect(screen.getAllByRole('link', { name: 'Iniciar sesión' })[0]).toHaveAttribute('href', '/login')
     expect(screen.getAllByRole('link', { name: 'Solicitar cuenta' })[0]).toHaveAttribute('href', '/register')
+  })
+
+  it('los botones del menú llevan a su apartado de la pantalla de inicio y no al inicio de sesión', async () => {
+    vi.mocked(authService.restoreSession).mockResolvedValue(null)
+    // La aplicación usa HashRouter: un enlace "#apartado" se leería como una ruta y mandaría al inicio de sesión.
+    window.location.hash = '#/'
+    const scrolled: string[] = []
+    Object.defineProperty(Element.prototype, 'scrollIntoView', {
+      configurable: true,
+      value(this: Element) {
+        scrolled.push(this.id)
+      },
+    })
+    render(
+      <HashRouter>
+        <AuthProvider>
+          <PreferencesProvider>
+            <AppRouter />
+          </PreferencesProvider>
+        </AuthProvider>
+      </HashRouter>,
+    )
+    await screen.findByRole('heading', { level: 1, name: /alerta temprana/i })
+
+    for (const [label, section] of [
+      ['¿Qué es?', 'que-es'],
+      ['Funciones', 'funciones'],
+      ['Niveles', 'niveles'],
+    ] as const) {
+      await userEvent.click(screen.getByText(label))
+      await act(async () => {
+        await new Promise((resolve) => setTimeout(resolve, 60)) // da tiempo a que el router reaccione si cambiara la ruta
+      })
+      expect(scrolled.at(-1)).toBe(section)
+      expect(window.location.hash).toBe('#/')
+      expect(screen.getByRole('heading', { level: 1, name: /alerta temprana/i })).toBeInTheDocument()
+      expect(screen.queryByRole('heading', { name: 'Bienvenido' })).not.toBeInTheDocument()
+    }
+    // Los accesos de sesión y registro siguen siendo enlaces a sus páginas.
+    expect(screen.getAllByRole('link', { name: 'Iniciar sesión' })[0]).toHaveAttribute('href', '#/login')
+    expect(screen.getAllByRole('link', { name: 'Solicitar cuenta' })[0]).toHaveAttribute('href', '#/register')
   })
 
   it('con sesión activa redirige a la página de inicio elegida', async () => {
