@@ -285,19 +285,21 @@ function endemicChannel(municipality: Municipality, params: URLSearchParams): En
   }
 }
 
+/** Indicadores del resumen: solo con los datos REALES (SIVIGILA, 64 municipios). Los simulados no suman a estas cifras. */
 function dashboard(): DashboardSummary {
   const totals = new Map<number, number>()
-  for (const record of cases)
+  for (const record of realCases)
     totals.set(record.municipality_id, (totals.get(record.municipality_id) ?? 0) + record.cases)
   const [topId] = [...totals.entries()].sort((a, b) => b[1] - a[1])[0]
-  const totalCases = cases.reduce((sum, record) => sum + record.cases, 0)
+  const totalCases = realCases.reduce((sum, record) => sum + record.cases, 0)
+  const lastRealWeek = real.semanas[real.semanas.length - 1][1]
   return {
     total_municipalities: NARINO_MUNICIPALITIES,
     total_cases: totalCases,
     average_cases: round1(totalCases / NARINO_MUNICIPALITIES),
-    municipality_with_most_cases: municipalities.find((item) => item.id === topId)?.name ?? null,
-    last_epidemiological_week: latestWeek,
-    total_records: cases.length,
+    municipality_with_most_cases: realMunicipalities.find((item) => item.id === topId)?.name ?? null,
+    last_epidemiological_week: lastRealWeek,
+    total_records: realCases.length,
   }
 }
 
