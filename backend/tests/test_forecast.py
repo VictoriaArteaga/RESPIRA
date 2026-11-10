@@ -115,3 +115,9 @@ def test_channel_outlook_gives_zone_probabilities_and_beats_chance(client: TestC
     ev = body["channel_evaluation"]["2"]["p75"]["test_2022"]
     assert ev["auc"] > 0.8 and ev["auc"] > ev["auc_simple_rule"] - 0.001   # honesto: la regla simple ya es fuerte
     assert ev["rate_by_level"]["baja"] < ev["rate_by_level"]["alta"]
+
+
+def test_channel_unavailable_when_week_has_too_few_reference_years(client: TestClient) -> None:
+    # origen 2013 SE10: solo 2012 es año anterior, hay menos de 3 años de referencia y no se inventa un canal
+    body = client.get(f"/api/forecast/municipalities/{PASTO}?year=2013&week=10").json()
+    assert all(o["available"] is False and "reason" in o for o in body["channel_outlook"])
