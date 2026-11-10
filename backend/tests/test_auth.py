@@ -563,7 +563,9 @@ def test_alembic_has_a_single_head_after_user_migration() -> None:
     config = Config(str(Path(__file__).resolve().parents[1] / "alembic.ini"))
     script = ScriptDirectory.from_config(config)
 
-    assert script.get_heads() == ["0002"]
+    # 0003 (integración de datos) extiende la cadena sin ramificarla: la migración de usuarios sigue intacta.
+    assert script.get_heads() == ["0003"]
+    assert script.get_revision("0003").down_revision == "0002"
     assert script.get_revision("0002").down_revision == "0001"
 
 
