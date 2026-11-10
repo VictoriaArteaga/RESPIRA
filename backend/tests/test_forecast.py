@@ -39,3 +39,12 @@ def test_epi_week_rule_matches_verified_anchors() -> None:
     assert epi_week_of(date(2022, 12, 31)) == (2022, 52)
     assert epi_week_of(date(2023, 1, 14)) == (2023, 2)
     assert epi_week_of(date(2020, 12, 31)) == (2020, 53)
+
+
+def test_trend_classification() -> None:
+    assert classify_trend(130, 100) == "aumento"
+    assert classify_trend(70, 100) == "disminucion"
+    assert classify_trend(105, 100) == "estable"
+    assert classify_trend(2.5, 1) == "estable"        # cambio absoluto menor a 2: ruido
+    assert classify_trend(3, 1) == "aumento"          # cambio de 2 atenciones o más y ≥20%
+    assert classify_trend(5, None) == "sin_referencia"
