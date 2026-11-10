@@ -216,3 +216,21 @@ class ForecastService:
                     "trend_accuracy": r["exactitud_tendencia"], "increase_recall": r["aumento_recall"],
                     "interval_coverage_80": r["cobertura_intervalo_80"]}
         return {"validation_2019": pack("validacion_2019"), "test_2022": pack("prueba_2022"), "pandemic_2020_2021": pack("pandemia_2020_2021")}
+
+    # ------------------------------------------------------------------ predicción
+    def _origin_row(self, g: pd.DataFrame, year: int | None, week: int | None) -> pd.Series:
+        if year is None and week is None:
+            row = self._last_observed(g)
+            if row is None:
+                raise ForecastUnavailable("no_history", "El municipio no tiene historial de IRA observado.")
+            return row
+        if year is None or week is None:
+            raise ForecastUnavailable("bad_origin", "Indique año y semana juntos.", 422)
+        hit = g[(g["anio"] == year) & (g["semana_epidemiologica"] == week)]
+        if hit.empty:
+            raise ForecastUnavailable("origin_out_of_range", f"No hay datos para la semana {week} de {year}.", 404)
+        row = hit.iloc[0]
+        if pd.isna(row["ira_0_4"]):
+            raise ForecastUnavailable("origin_without_data", f"El municipio no reportó atenciones por IRA en la semana {week} de {year}; "
+                                      "no se genera predicción desde una semana sin dato (no se asume cero).", 404)
+        return row
