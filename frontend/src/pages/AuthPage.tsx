@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { Activity, Eye, EyeOff, Lock, Mail, UserPlus } from 'lucide-react'
+import { Activity, ArrowLeft, Eye, EyeOff, Lock, Mail, UserPlus } from 'lucide-react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { Button } from '../components/common/Button'
 import { useAuth } from '../context/AuthContext'
@@ -118,11 +118,22 @@ export function AuthPage({ mode }: { mode: Mode }) {
     </>
   )
 
-  const submitClass = 'mt-1.5 h-[50px] w-full rounded-xl text-base font-bold shadow-[0_4px_14px_rgba(49,95,125,0.25)]'
+  const backLink = (
+    <Link
+      to="/"
+      className="absolute left-5 top-5 z-10 inline-flex min-h-11 items-center gap-2 rounded-xl border border-respira-border bg-respira-surface px-4 text-sm font-semibold text-respira-text transition-colors hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-respira-blue-dark"
+    >
+      <ArrowLeft size={18} aria-hidden="true" />
+      {t('auth.backHome')}
+    </Link>
+  )
+
+  const submitClass ='mt-1.5 h-[50px] w-full rounded-xl text-base font-bold shadow-[0_4px_14px_rgba(49,95,125,0.25)]'
 
   if (isLogin) {
     return (
-      <div className="auth-shell flex min-h-screen items-center justify-center px-5 py-8 text-respira-text">
+      <div className="auth-shell flex min-h-screen items-center justify-center px-5 py-8 pt-20 text-respira-text">
+        {backLink}
         <main className="auth-scale w-full max-w-md overflow-hidden rounded-[20px] border border-respira-border bg-respira-surface shadow-[0_12px_36px_rgba(36,59,74,0.10)]">
           <div className="h-[5px] bg-gradient-to-r from-respira-blue to-[#6F9BB5]" />
           <div className="flex flex-col items-center px-10 pb-9 pt-9">
@@ -207,7 +218,8 @@ export function AuthPage({ mode }: { mode: Mode }) {
   }
 
   return (
-    <div className="auth-shell flex min-h-screen items-center justify-center px-5 py-8 text-respira-text">
+    <div className="auth-shell flex min-h-screen items-center justify-center px-5 py-8 pt-20 text-respira-text">
+      {backLink}
       <main className="auth-scale flex w-full max-w-[960px] flex-wrap overflow-hidden rounded-[20px] border border-respira-border bg-respira-surface shadow-[0_12px_36px_rgba(36,59,74,0.10)]">
         <aside className="flex min-w-0 flex-[1_1_340px] flex-col justify-between gap-5 bg-gradient-to-br from-[#315F7D] to-[#234A65] px-10 py-12 text-white">
           <div className="flex flex-col gap-5">
