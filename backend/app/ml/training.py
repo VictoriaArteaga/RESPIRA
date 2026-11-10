@@ -144,3 +144,49 @@ def train_increase_signal(df: pd.DataFrame, artifact_dir, verbose: bool = True) 
             print(f"senal_aumento h{h}: AUC val={val_auc:.3f} prueba={t['auc']:.3f} | alta: precisión={t['alerta_alta']['precision']:.2f} "
                   f"recall={t['alerta_alta']['recall']:.2f} (prevalencia {t['prevalencia_aumento']:.2f})", flush=True)
     return out
+
+
+def train_channel_signals(df: pd.DataFrame, artifact_dir, verbose: bool = True) -> dict:
+    """Probabilidad de que las atenciones de t+h superen el percentil 75 (sobre lo esperado) o el 90 (zona de alerta) del canal
+    endémico de esa semana. Canal = misma semana de años anteriores (sin pandemia). Mismo protocolo temporal."""
+    table = ChannelTable(df)
+    feats = SIGNAL_FEATURES + CHANNEL_FEATURES
+    out: dict = {"definicion": "supera el percentil 75 / 90 del canal endémico de la semana objetivo (años anteriores, sin 2020-2021)",
+                 "variables": feats, "horizontes": {}}
+    for h in HORIZONS:
+        target = f"objetivo_ira_t_mas_{h}"
+        d = add_channel_features(df, table, h)
+        d = d[d["ira_0_4"].notna() & d[target].notna() & d["p75_t"].notna()].copy()
+        out["horizontes"][str(h)] = {}
+        for kind, col in (("p75", "p75_t"), ("p90", "p90_t")):
+            d["y"] = (d[target] > d[col]).astype(int)
+            tr, va = d[d["split_sugerido"] == "TRAIN"], d[d["split_sugerido"] == "VALIDACION"]
+
+            def fit(frame, params):
+                return HistGradientBoostingClassifier(early_stopping=False, random_state=SEED, **params).fit(frame[feats], frame["y"])
+
+            scored = []
+            for params in PARAM_GRID:
+                m = fit(tr, params)
+                scored.append((float(roc_auc_score(va["y"], m.predict_proba(va[feats])[:, 1])), params, m))
+            val_auc, best, m_train = max(scored, key=lambda s: s[0])
+            pv = m_train.predict_proba(va[feats])[:, 1]
+            t_high, t_mid = float(np.quantile(pv, 1 - va["y"].mean())), float(np.quantile(pv, 0.5))
+            final = fit(d[d["split_sugerido"].isin(["TRAIN", "VALIDACION"])], best)
+            rep = {"parametros": best, "umbral_medio": t_mid, "umbral_alto": t_high,
+                   "validacion_2019": _signal_report(va["y"].to_numpy(), pv, t_mid, t_high)}
+            for name, split in (("prueba_2022", "TEST"), ("pandemia_2020_2021", "PANDEMIA_ANALIZAR_APARTE")):
+                part = d[d["split_sugerido"] == split]
+                rep[name] = _signal_report(part["y"].to_numpy(), final.predict_proba(part[feats])[:, 1], t_mid, t_high)
+                simple = (part["ira_media_4s"].fillna(part["ira_0_4"]) / (part[col] + 1)).to_numpy()
+                rep[name]["auc_regla_simple"] = float(roc_auc_score(part["y"], simple))   # promedio reciente / percentil, sin modelo
+            out["horizontes"][str(h)][kind] = rep
+            joblib.dump({"model": final, "features": feats, "horizon": h, "kind": kind, "umbral_medio": t_mid, "umbral_alto": t_high,
+                         "tasas_prueba_2022": {k: v["tasa_aumento_observada"] for k, v in rep["prueba_2022"]["por_nivel"].items()},
+                         "prevalencia_prueba_2022": rep["prueba_2022"]["prevalencia_aumento"], "scikit_learn": sklearn.__version__},
+                        artifact_dir / CHANNEL_FILE.format(kind=kind, h=h), compress=3)
+            if verbose:
+                t = rep["prueba_2022"]
+                print(f"canal_{kind} h{h}: AUC val={val_auc:.3f} prueba={t['auc']:.3f} (regla simple {t['auc_regla_simple']:.3f}) | "
+                      f"alta: precisión={t['alerta_alta']['precision']:.2f} recall={t['alerta_alta']['recall']:.2f} (prevalencia {t['prevalencia_aumento']:.2f})", flush=True)
+    return out
