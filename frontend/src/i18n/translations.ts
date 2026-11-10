@@ -343,6 +343,7 @@ export const es = {
   'settings.resetNote': 'Vuelve al idioma, el tema y los ajustes de lectura predeterminados.',
   'settings.resetButton': 'Restablecer',
   'settings.resetDone': 'Preferencias restablecidas.',
+  'nav.forecast': 'Predicción IA',
 } as const
 
 export type TranslationKey = keyof typeof es
@@ -674,4 +675,5 @@ export const en: Record<TranslationKey, string> = {
   'settings.resetNote': 'Go back to the default language, theme and reading settings.',
   'settings.resetButton': 'Reset',
   'settings.resetDone': 'Preferences reset.',
+  'nav.forecast': 'AI forecast',
 }
