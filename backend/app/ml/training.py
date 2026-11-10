@@ -46,3 +46,9 @@ def _fit(frame: pd.DataFrame, features: list[str], target: str, params: dict) ->
 
 def predict(model, frame: pd.DataFrame, features: list[str]) -> np.ndarray:
     return np.clip(model.predict(frame[features]) * scale_ref(frame).to_numpy(), 0.0, None)
+
+
+def _errors(y: np.ndarray, p: np.ndarray) -> dict:
+    err = p - y
+    return {"mae": float(np.mean(np.abs(err))), "rmse": float(np.sqrt(np.mean(err ** 2))),
+            "wape": float(np.abs(err).sum() / y.sum()) if y.sum() > 0 else None, "sesgo": float(err.mean())}
