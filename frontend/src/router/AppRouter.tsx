@@ -12,6 +12,7 @@ import { ProfilePage } from '../pages/ProfilePage'
 import { SettingsPage } from '../pages/SettingsPage'
 import { RiskMapPage } from '../pages/RiskMapPage'
 import { EndemicPage } from '../pages/EndemicPage'
+import { ForecastPage } from '../pages/ForecastPage'
 import { MunicipalityDetailPage } from '../pages/MunicipalityDetailPage'
 
 export function AppRouter() {
@@ -32,6 +33,7 @@ export function AppRouter() {
                 <Route path="/municipalities/:id" element={<MunicipalityDetailPage />} />
                 <Route path="/risk-map" element={<RiskMapPage />} />
                 <Route path="/endemic" element={<EndemicPage />} />
+                <Route path="/forecast" element={<ForecastPage />} />
                 <Route path="/cases" element={<CasesPage />} />
                 <Route path="/alerts" element={<AlertsPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
