@@ -122,3 +122,21 @@ class ChannelTable:
                 v = t.loc[week, [y for y in t.columns if y < year and y not in PANDEMIC_YEARS]].dropna().to_numpy(dtype=float)
                 self._cache[key] = nan if len(v) < CHANNEL_MIN_YEARS else tuple(float(x) for x in np.percentile(v, [25, 50, 75, 90]))
         return self._cache[key]
+
+
+def add_channel_features(df: pd.DataFrame, table: ChannelTable, h: int) -> pd.DataFrame:
+    """Canal de la semana objetivo (t+h) y posición actual frente al canal. Solo usa información conocida en t."""
+    out = df.copy().reset_index(drop=True)
+    ends = out["semana_fin"] + pd.Timedelta(days=7 * h)
+    mapping = {d: epi_week_of(d.date()) for d in pd.to_datetime(ends.unique())}
+    tgt = ends.map(mapping)
+    out["tgt_year"] = [t[0] for t in tgt]
+    out["tgt_week"] = [t[1] for t in tgt]
+    ch = np.array([table.get(c, y, w) for c, y, w in zip(out["codigo_divipola"], out["tgt_year"], out["tgt_week"])], dtype=float)
+    out["p25_t"], out["p50_t"], out["p75_t"], out["p90_t"] = ch[:, 0], ch[:, 1], ch[:, 2], ch[:, 3]
+    cur = np.array([table.get(c, y, w) for c, y, w in zip(out["codigo_divipola"], out["anio"], out["semana_epidemiologica"])], dtype=float)
+    out["pos_act"] = out["ira_0_4"] / (cur[:, 2] + 1)
+    out["ref_vs_p75"] = out["ira_media_4s"].fillna(out["ira_0_4"]) / (out["p75_t"] + 1)
+    out["ira_vs_p50"] = out["ira_0_4"] / (out["p50_t"] + 1)
+    out["spread"] = out["p90_t"] / (out["p50_t"] + 1)
+    return out
