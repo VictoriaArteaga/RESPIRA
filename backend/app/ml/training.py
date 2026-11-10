@@ -77,3 +77,11 @@ def _split_report(frame: pd.DataFrame, target: str, model_pred: np.ndarray, inte
     hi = model_pred + interval[1] * np.sqrt(model_pred + 1)
     out["cobertura_intervalo_80"] = float(((y >= lo) & (y <= hi)).mean())
     return out
+
+
+def _sha256(path) -> str:
+    h = hashlib.sha256()
+    with open(path, "rb") as fh:
+        for chunk in iter(lambda: fh.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
