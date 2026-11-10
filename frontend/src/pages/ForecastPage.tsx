@@ -649,9 +649,7 @@ export function ForecastPage() {
         role="note"
       >
         <FlaskConical size={18} className="mt-1 shrink-0" aria-hidden="true" />
-        <p>
-          <strong>{t('fc.experimental')}</strong> {t('fc.disclaimer')}
-        </p>
+        <p>{t('fc.disclaimer')}</p>
       </div>
 
       <FilterBar note={t('fc.filterNote')}>

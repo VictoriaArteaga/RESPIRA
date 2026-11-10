@@ -97,7 +97,7 @@ describe('ForecastPage', () => {
 
     expect(await screen.findByText('Dentro de 2 semanas')).toBeInTheDocument()
     expect(screen.getByText('Dentro de 3 semanas')).toBeInTheDocument()
-    expect(screen.getByText(/Es una estimación de prueba/)).toBeInTheDocument()
+    expect(screen.getByText(/No es un diagnóstico/)).toBeInTheDocument()
     expect(screen.getByText(/no es un diagnóstico/i)).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Se espera un nivel parecido al de las últimas semanas' })).toBeInTheDocument()
     expect(screen.getByText('Se mantiene')).toBeInTheDocument()
