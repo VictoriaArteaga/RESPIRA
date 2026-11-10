@@ -36,3 +36,34 @@ class ForecastUnavailable(Exception):
 
 def _num(value) -> float | None:
     return None if value is None or (isinstance(value, float) and not math.isfinite(value)) or pd.isna(value) else float(value)
+
+
+class ForecastService:
+    def __init__(self, artifact_dir=ARTIFACT_DIR) -> None:
+        self.artifact_dir = artifact_dir
+        self.df = load_dataset()
+        self.sets = municipality_sets(self.df)
+        self.metrics: dict = json.loads((artifact_dir / "metrics.json").read_text(encoding="utf-8"))
+        self.models: dict[tuple[str, int], dict] = {}
+        for model_id in SERVED_MODELS:
+            for h in HORIZONS:
+                path = artifact_dir / f"{model_id}_h{h}.joblib"
+                if not path.exists():
+                    raise FileNotFoundError(f"Falta el modelo entrenado {path.name}. Ejecute scripts/train_forecast.py")
+                self.models[(model_id, h)] = joblib.load(path)
+        self.signal: dict[int, dict] = {}
+        for h in HORIZONS:
+            path = artifact_dir / SIGNAL_FILE.format(h=h)
+            if path.exists():
+                self.signal[h] = joblib.load(path)
+        self.channel_models: dict[tuple[str, int], dict] = {}
+        for h in HORIZONS:
+            for kind in ("p75", "p90"):
+                path = artifact_dir / CHANNEL_FILE.format(kind=kind, h=h)
+                if path.exists():
+                    self.channel_models[(kind, h)] = joblib.load(path)
+        self.channels = ChannelTable(self.df)
+        self.extension = self._load_extension()
+        self.names = self.df.drop_duplicates("codigo_divipola").set_index("codigo_divipola")["municipio"].to_dict()
+        self._median = self.df[self.df["anio"] <= 2019].groupby("codigo_divipola")["ira_0_4"].median()
+        self._by_mun = {code: g.reset_index(drop=True) for code, g in self.df.groupby("codigo_divipola")}
