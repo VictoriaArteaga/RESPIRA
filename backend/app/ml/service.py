@@ -352,3 +352,8 @@ class ForecastService:
         if bool(row.get("tiene_reportes_repetidos", False)):
             w.append({"code": "repeated_reports", "params": {}, "message": "Hubo reportes repetidos de una misma institución en esta semana; se usó el último reporte."})
         return w
+
+
+@lru_cache(maxsize=1)
+def get_forecast_service() -> ForecastService:
+    return ForecastService()
