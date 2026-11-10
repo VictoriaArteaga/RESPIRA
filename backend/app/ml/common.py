@@ -101,3 +101,24 @@ def add_signal_features(df: pd.DataFrame) -> pd.DataFrame:
     out["prop_media_4s"] = out.groupby("codigo_divipola", sort=False)["proporcion_ira_sobre_consultas"].transform(
         lambda x: x.rolling(4, min_periods=3).mean())
     return out
+
+
+class ChannelTable:
+    """Percentiles de IRA de la misma semana epidemiológica en años ANTERIORES al año consultado (sin 2020-2021)."""
+
+    def __init__(self, df: pd.DataFrame) -> None:
+        self._piv = {code: g.pivot_table(index="semana_epidemiologica", columns="anio", values="ira_0_4", aggfunc="first")
+                     for code, g in df.groupby("codigo_divipola")}
+        self._cache: dict[tuple, tuple] = {}
+
+    def get(self, code: str, year: int, week: int) -> tuple[float, float, float, float]:
+        key = (code, year, week)
+        if key not in self._cache:
+            t = self._piv.get(code)
+            nan = (np.nan,) * 4
+            if t is None or week not in t.index:
+                self._cache[key] = nan
+            else:
+                v = t.loc[week, [y for y in t.columns if y < year and y not in PANDEMIC_YEARS]].dropna().to_numpy(dtype=float)
+                self._cache[key] = nan if len(v) < CHANNEL_MIN_YEARS else tuple(float(x) for x in np.percentile(v, [25, 50, 75, 90]))
+        return self._cache[key]
