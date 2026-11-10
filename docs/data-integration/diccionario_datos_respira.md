@@ -1,0 +1,69 @@
+# Diccionario de datos RESPIRA
+
+**Versión:** 0.1.0-draft · **Fecha:** 2026-10-26 · **Estado general:** propuesta basada en fuentes locales y evidencia de auditoría; no constituye contrato oficial de los custodios.
+
+Estados usados: **Confirmado documentalmente** = significado respaldado por documentación consultada; **Provisional** = transformación reproducible del piloto, no estándar del custodio; **Pendiente** = evidencia exacta insuficiente; **Excluido temporalmente** = no cargar en una integración aceptada hasta resolver la pendiente.
+
+## Campos originales SIVIGILA evento 995
+
+| Nombre técnico | Nombre funcional | Fuente | Definición documentada | Tipo recomendado | Unidad | Granularidad | Clave geográfica / temporal | Transformación | Ausentes | Estado | Evidencia | Restricciones |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| `COD_EVE` | Evento | INS/SIVIGILA | Código de evento; 995 identifica morbilidad IRA colectiva | `text` | Código | Reporte colectivo | Ninguna | Filtrar/validar código, no deduplicar por él | Error si falta | Confirmado documentalmente | [Protocolo IRA 2024](https://www.ins.gov.co/buscador-eventos/Lineamientos/Pro_IRA%202024.pdf) | No es una fila de paciente |
+| `COD_MUN` / `COD_MUN_` | Municipio notificador | INS/SIVIGILA | DIVIPOLA del municipio que notifica | `char(5)` | Código | Reporte colectivo | Municipio notificador | Conservar ceros iniciales; validar contra DIVIPOLA | Bloqueante si inválido; nunca int | Confirmado documentalmente | [Diccionario INS](https://www.ins.gov.co/BibliotecaDigital/diccionario-datos-basicos-sivigila.pdf) | No inferir residencia ni ocurrencia |
+| `AÑO` | Año epidemiológico | INS/SIVIGILA | Año correspondiente a la semana epidemiológica | `smallint` | Año | Reporte colectivo | Año epi | Conservar valor suministrado | No derivar de `FEC_NOT` | Confirmado documentalmente | Diccionario INS de datos colectivos | Validar contra calendario anual |
+| `SEMANA` | Semana epidemiológica | INS/SIVIGILA | Semana según calendario vigente; rango de esquema 1–53 | `smallint` | Semana | Reporte colectivo | Semana epi | Usar en pareja con `AÑO` y calendario versionado | Semana sin fila es ausencia, no 0 | Confirmado documentalmente | Diccionario INS; calendario anual | No asumir semana ISO ni forzar 52 |
+| `FEC_NOT` | Fecha de notificación | INS/SIVIGILA | Fecha en que se notificó | `date` | Fecha | Reporte colectivo | No reemplaza año/semana | Conservar como fecha de notificación | No reconstruir ocurrencia desde ella | Confirmado documentalmente | Diccionario INS | No reasignar la semana epidemiológica |
+| `COD_PRE` | Código del prestador/UPGD | INS/SIVIGILA | Identifica el prestador de salud | `text` | Código institucional | Reporte colectivo | Junto a `COD_SUB` | Conservar solo en zona restringida si es necesario para trazabilidad | N/A | Confirmado documentalmente | Estructura de registros INS | Identificador institucional; minimizar acceso y no exportar a reportes públicos |
+| `COD_SUB` | Subíndice/sede del prestador | INS/SIVIGILA | Sede o territorio del prestador | `text` | Código | Reporte colectivo | Junto a `COD_PRE` | Conservar para diferenciar sedes | N/A | Confirmado documentalmente | Estructura de registros INS | No es ID de paciente |
+| `NUM_CON` | Consecutivo de reporte | INS/SIVIGILA | Consecutivo asignado a cada reporte de la misma UPGD en semana y evento | `integer` o `text` al importar | Consecutivo | Reporte colectivo | Parte de contexto de reporte | No usar para deduplicar automáticamente | N/A | Confirmado documentalmente; consolidación pendiente | [Estructura colectiva INS](https://www.ins.gov.co/Direcciones/Vigilancia/sivigila/Documents/Anexo%202%20Estructura%20de%20los%20registros%20de%20notificaci%C3%B3n.pdf) | No imponer unicidad por proveedor-semana ni presumir acumulación |
+| `IRACEXT_1` | IRA consulta externa, menores de 1 año | INS/SIVIGILA | Número reportado de pacientes de este grupo en la ficha | `integer` nullable | Conteo colectivo | Reporte semanal UPGD | Municipio notificador + año/semana epi | Mantener separado en tabla fuente | Celda vacía = desconocida, no 0 | Confirmado en estructura 2016; versionado local 2022 pendiente | Estructura INS 2016, evento 995 | No equivale a personas únicas en el tiempo |
+| `IRACEXT_2` | IRA consulta externa, 1 año | INS/SIVIGILA | Número reportado de pacientes de 1 año en ficha | `integer` nullable | Conteo colectivo | Reporte semanal UPGD | Municipio notificador + año/semana epi | Mantener separado en tabla fuente | Celda vacía = desconocida, no 0 | Confirmado en estructura 2016; versionado local 2022 pendiente | Estructura INS 2016, evento 995 | La comparabilidad entre versiones requiere diccionario por año |
+| `IRACEXT_3` | IRA consulta externa, 2–4 años | INS/SIVIGILA | Número reportado de pacientes de 2–4 años en ficha | `integer` nullable | Conteo colectivo | Reporte semanal UPGD | Municipio notificador + año/semana epi | Mantener separado en tabla fuente | Celda vacía = desconocida, no 0 | Confirmado en estructura 2016; versionado local 2022 pendiente | Estructura INS 2016, evento 995 | La suma 1+2+3 describe grupo 0–4 reportado, no incidencia |
+
+El INS describe `IRACEXT` como total IRA de consulta externa y el valor como número de pacientes registrados en la ficha. El indicador derivado debe expresarse como **conteo colectivo semanal de pacientes reportados por consulta externa con IRA en grupos de 0–4 años**. El formulario 2024 integra consulta externa/urgencias; el campo específico local 2016 `IRACEXT` se documenta como consulta externa. No cambiar ese alcance a “urgencias” en el piloto sin una definición que cubra el campo/versiones locales. No es número de pacientes únicos entre sedes/semanas, incidencia ni prevalencia.
+
+## Campos originales IDEAM
+
+| Nombre técnico | Nombre funcional | Fuente | Definición | Tipo recomendado | Unidad | Granularidad | Clave geográfica/temporal | Transformación | Ausentes | Estado | Evidencia / limitación |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| `Fecha` | Marca temporal de observación | IDEAM `.data` | Fecha/hora literal del archivo | `timestamp` preservado + fecha derivada | — | Registro diario observado | Código de estación + fecha | Guardar literal/fecha; zona horaria y convención deben confirmarse | Sin fila no es cero | Formato confirmado localmente | Archivos tienen `Fecha|Valor`; no declaran zona ni calidad |
+| `Valor` | Valor observado | IDEAM `.data` | Medición asociada a la etiqueta de variable | `numeric` nullable | Depende del código | Registro fuente | Estación + etiqueta + fecha | Parseo numérico trazable | Sin fila/valor se mantiene ausente | Formato confirmado localmente; calidad no confirmada | La extracción carece de unidad y bandera por fila |
+| `TSSM_MN_D` | Temperatura mínima diaria derivada | IDEAM | Temperatura mínima diaria derivada según procedimiento IDEAM | `numeric` | °C | Diaria | Estación + fecha | Valor original se conserva; agregado semanal se documenta aparte | No imputar | Semántica/unidad confirmadas; QC individual desconocida | Manual GDI-M005 v2; no prueba aprobación de cada dato |
+| `TSSM_MX_D` | Temperatura máxima diaria derivada | IDEAM | Temperatura máxima diaria derivada | `numeric` | °C | Diaria | Estación + fecha | Valor original se conserva | No imputar | Semántica/unidad confirmadas; QC individual desconocida | Manual GDI-M005 v2 |
+| `TSSM_MEDIA_D` | Temperatura media diaria derivada | IDEAM | Media diaria conforme a la derivación del manual; depende de lecturas fuente | `numeric` | °C | Diaria | Estación + fecha | Valor original se conserva | No imputar | Semántica/unidad confirmadas; QC individual desconocida | Manual GDI-M005 v2; extracción no muestra las lecturas usadas |
+| `PTPM_CON_INTER` | Etiqueta local de precipitación | IDEAM | Significado exacto de sufijo `INTER` no resuelto | `numeric` | Pendiente | Diaria según archivo | Estación + fecha | No mapear a precipitación confirmada | Conservar en raw; no derivar resumen aceptado | Excluido temporalmente | Manual documenta `PTPM_CON`, no prueba equivalencia con `_INTER` |
+| `HR_CAL_MEDIA_D` | Etiqueta local de humedad media | IDEAM | Inferencia por nombre solamente; etiqueta exacta/unidad pendientes | `numeric` | Pendiente | Diaria | Estación + fecha | No integrar | Conservar original | Excluido temporalmente | Respuesta IDEAM consultada no confirma esta serie |
+| `TPR_CAL` | Etiqueta local `TPR_CAL` | IDEAM | Sin mapeo exacto confirmado | `numeric` | Pendiente | Archivo local | Estación + fecha | No inferir | Conservar original | Excluido temporalmente | Manual GDI-M005 no mapea la etiqueta exacta |
+| `TV_CAL` | Etiqueta local `TV_CAL` | IDEAM | Sin mapeo exacto confirmado | `numeric` | Pendiente | Archivo local | Estación + fecha | No inferir | Conservar original | Excluido temporalmente | Manual GDI-M005 no mapea la etiqueta exacta |
+
+La estación se enlaza por el código de archivo/catálogo documentado, no por parecido de nombre o proximidad. Las estaciones del piloto permanecen `candidatas`; identidad catalogal no demuestra representatividad municipal.
+
+## Campos originales DANE
+
+| Nombre técnico | Nombre funcional | Fuente | Definición/tipo | Unidad/granularidad | Clave | Transformación verificada | Ausentes/estado | Evidencia/limitaciones |
+|---|---|---|---|---|---|---|---|---|
+| `MPIO` | Código municipal | DANE | Código municipal; almacenar como `char(5)` | Municipio, anual y área | DIVIPOLA del libro | Validar con catálogo DIVIPOLA y nombre; no int | Ausente bloquea | Auditoría por libro y versión |
+| `DPMP` | Nombre municipal | DANE | Rótulo municipal | Municipio | Comprobación auxiliar del código | Conservar literal para trazabilidad; normalizar solo para presentación | Ausente bloquea | La disposición del libro 2018–2042 difiere; cada libro debe tener su propio mapa de encabezados |
+| `AÑO` | Año de proyección | DANE | Año del registro | Año | `MPIO + AÑO + ÁREA` | No interpolar/extrapolar | Sin dato bloquea | Dos libros no tienen años traslapados en el empalme auditado |
+| `ÁREA GEOGRÁFICA` / `Área` | Ámbito territorial | DANE | Categoría de ámbito en el libro | Municipio-año-área | Parte de clave de origen | Para población municipal total, seleccionar únicamente `Total` | No completar | No sumar `Total` con Cabecera ni Centros Poblados/Rural |
+| `Total_0`…`Total_4` / `Total 0 años`…`Total 4 años` | Población total por edad simple | DANE | Conteos de población total de cada edad | Personas proyectadas, municipio-año | Código+año+área+edad | Sumar edades 0,1,2,3,4 en una sola fila de área Total | Sin dato no inventar | El nombre y ubicación de columnas se resuelven por libro/encabezado, no posición reutilizada |
+
+La población 0–4 resultante es **anual**. No es una medición semanal; no calcular tasas sin método, denominador y aprobación específicos. Las auditorías anteriores reportan disponibilidad para los 64 municipios de Nariño durante 2012–2022 (704 municipio-año) y consistencia de edades 0–4 contra hombres+mujeres. Ese antecedente no elimina la necesidad de registrar la edición del libro en cada lote.
+
+## Variables derivadas y metadatos de trazabilidad
+
+| Nombre propuesto | Definición y tipo | Granularidad/clave | Regla/ausentes | Estado y advertencia |
+|---|---|---|---|---|
+| `ira_u5_reported_patient_count` | Suma propuesta de `IRACEXT_1 + IRACEXT_2 + IRACEXT_3`; `bigint nullable` | Municipio notificador + año/semana epi + corrida | Solo calcular con campos necesarios disponibles y regla de reportes aprobada; si no hay filas, `NULL` con estado `no_source_row`; cero solo si fue reportado | Provisional; mientras la repetición no esté resuelta, marcar `provisional_unresolved_repetition` |
+| `week_start`, `week_end` | Fechas de calendario epi; `date` | Año epi + número semana | Derivar desde calendario verificado por año, no desde ISO ni `FEC_NOT`; semana 53 solo si existe en el calendario oficial anual | Confirmado para 2016/2022 desde ancla INS; otros años pendientes |
+| `weekly_temp_min` | Mínimo de observaciones diarias `TSSM_MN_D`; `numeric nullable` | Estación + año/semana epi | Regla piloto: al menos 6/7 días válidos; por debajo, `NULL` con cobertura | Provisional del piloto, no norma IDEAM |
+| `weekly_temp_max` | Máximo de `TSSM_MX_D`; `numeric nullable` | Estación + año/semana epi | Misma regla piloto 6/7 | Provisional |
+| `weekly_temp_mean` | Media aritmética de `TSSM_MEDIA_D`; `numeric nullable` | Estación + año/semana epi | Misma regla piloto 6/7 | Provisional; no confundir con otra agregación de medias |
+| `days_observed`, `days_expected`, `coverage_fraction` | Días disponibles y cobertura calculada; integer/numeric | Por variable y semana | Conservar numerador/denominador; no sustituye la bandera QC | Derivado de auditoría |
+| `population_u5_annual` | Suma anual DANE de edades 0–4; `integer nullable` | Municipio + año | Área Total y fuente/versión indicada | Proyección anual; no tasa ni valor semanal |
+| `quality_status` | Estado explícito `accepted`, `provisional`, `missing`, `review`, etc. | Registro derivado | No convertir en valor numérico | Especificar vocabulario final en contrato/versionado |
+| `source_batch_id`, `source_file`, `source_sheet`, `source_row_number`, `source_sha256`, `schema_version`, `transform_version` | Procedencia/reproducibilidad | Lote/registro/corrida | Hash nullable si no se recibió/calculó; nunca fabricar | Propuestos |
+
+## Campos excluidos y campos de aplicación existentes
+
+Las etiquetas IDEAM pendientes permanecen fuera de variables aceptadas; su aparición en un archivo raw no las convierte en variables aprobadas. El esquema existente de `IraCase`/frontend es solo compatibilidad para datos sintéticos actuales, no la definición de estas variables oficiales. No mapearlas automáticamente ni reinterpretar `cases` como el indicador de arriba.
