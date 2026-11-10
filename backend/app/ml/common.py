@@ -49,3 +49,6 @@ MODEL_SPECS: dict[str, dict] = {
     "modelo_b": dict(etiqueta="Modelo B · historial de IRA + precipitación + temperatura", grupo="clima", municipios="temperatura",
                      features=BASE_FEATURES + PRECIP_FEATURES + TEMP_FEATURES, referencia="base_b"),
 }
+
+DISCLAIMER = ("Predicción experimental de la demo de RESPIRA. No es un diagnóstico, no confirma un brote y no constituye "
+              "una alerta sanitaria oficial. Estima atenciones por IRA notificadas, no casos ni incidencia.")
