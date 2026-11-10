@@ -52,3 +52,18 @@ MODEL_SPECS: dict[str, dict] = {
 
 DISCLAIMER = ("Predicción experimental de la demo de RESPIRA. No es un diagnóstico, no confirma un brote y no constituye "
               "una alerta sanitaria oficial. Estima atenciones por IRA notificadas, no casos ni incidencia.")
+
+# ---- tendencia respecto al periodo de referencia (heurística de la demo, consistente con el umbral moderado de RiskService)
+TREND_REL = 0.20      # ±20% respecto a la referencia
+TREND_MIN_ABS = 2.0   # cambios menores a 2 atenciones se consideran estables (evita ruido en municipios pequeños)
+
+
+def classify_trend(prediction: float, reference: float | None) -> str:
+    """'aumento' | 'estable' | 'disminucion' | 'sin_referencia' respecto a la referencia (media de las últimas 4 semanas)."""
+    if reference is None or not np.isfinite(reference):
+        return "sin_referencia"
+    diff = prediction - reference
+    if abs(diff) < TREND_MIN_ABS:
+        return "estable"
+    rel = diff / reference if reference > 0 else np.inf
+    return "aumento" if rel >= TREND_REL else "disminucion" if rel <= -TREND_REL else "estable"
