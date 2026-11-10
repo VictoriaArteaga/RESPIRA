@@ -234,3 +234,25 @@ class ForecastService:
             raise ForecastUnavailable("origin_without_data", f"El municipio no reportó atenciones por IRA en la semana {week} de {year}; "
                                       "no se genera predicción desde una semana sin dato (no se asume cero).", 404)
         return row
+
+    def _predict_one(self, model_id: str, row: pd.Series, h: int) -> dict:
+        art = self.models[(model_id, h)]
+        frame = row.to_frame().T.infer_objects()
+        X = frame[art["features"]].astype(float)
+        ref = float(scale_ref(frame.astype({"ira_media_4s": float, "ira_0_4": float})).iloc[0])
+        point = float(max(0.0, art["model"].predict(X)[0] * ref))
+        q_lo, q_hi = art["interval"]
+        scale = math.sqrt(point + 1)
+        low, high = max(0.0, point + q_lo * scale), point + q_hi * scale
+        end = row["semana_fin"] + timedelta(days=7 * h)
+        t_year, t_week = epi_week_of(end.date())
+        reference = _num(reference_level(frame.astype({"ira_media_4s": float, "ira_0_4": float})).iloc[0])
+        observed = _num(row.get(f"objetivo_ira_t_mas_{h}"))
+        trend = classify_trend(point, reference)
+        change = None if reference in (None, 0) else round(100 * (point - reference) / reference, 1)
+        return {"horizon_weeks": h, "target_year": t_year, "target_week": t_week,
+                "target_week_start": (end - timedelta(days=6)).date().isoformat(), "target_week_end": end.date().isoformat(),
+                "predicted_cases": round(point, 1), "interval_low": round(low, 1), "interval_high": round(high, 1),
+                "reference_cases": None if reference is None else round(reference, 1), "change_vs_reference_pct": change,
+                "trend": trend, "observed_cases": observed,
+                "absolute_error": None if observed is None else round(abs(point - observed), 1)}
