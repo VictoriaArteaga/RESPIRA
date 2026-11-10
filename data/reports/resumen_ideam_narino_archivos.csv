@@ -1,0 +1,415 @@
+﻿Carpeta,CodigoEstacion,CodigoEnNombre,Etiqueta,Municipio,Departamento,CategoriaCatalogo,EstadoCatalogo,Registros,FechaMin,FechaMax,FrecuenciaObservada,IntervaloMedianoHoras,MarcasPorDiaMediana,NulosFecha,ValoresVacios,ValoresNoNumericos,DuplicadosExactos,MarcasFechaHoraDuplicadas,FueraDeOrden,Ceros,Negativos,PrecipSobre135mm,TempMenorMenos20,TempMayor60
+PrecipitacionNacionalDiaria,47010040,47010040,PTPM_CON_INTER,Pasto,Nariño,Pluviográfica,Suspendida,6876,1970-05-12,1991-11-30,DIARIA,24.0,1.0,0,0,0,0,0,0,2910,0,0,0,0
+PrecipitacionNacionalDiaria,47010130,47010130,PTPM_CON_INTER,Pasto,Nariño,Pluviométrica,Suspendida,1238,1946-05-15,1949-10-31,DIARIA,24.0,1.0,0,0,0,0,0,0,461,0,0,0,0
+PrecipitacionNacionalDiaria,47010230,47010230,PTPM_CON_INTER,Pasto,Nariño,Pluviométrica,Activa,12282,1989-05-01,2026-08-12,DIARIA,24.0,1.0,0,0,0,0,0,0,2266,0,0,0,0
+PrecipitacionNacionalDiaria,47015080,47015080,PTPM_CON_INTER,Puerres,Nariño,Climatológica Ordinaria,Activa,15282,1983-08-18,2026-04-29,DIARIA,24.0,1.0,0,0,0,0,0,0,2809,0,1,0,0
+PrecipitacionNacionalDiaria,47015100,47015100,PTPM_CON_INTER,Pasto,Nariño,Climatológica Principal,Activa,15117,1984-09-16,2026-08-12,DIARIA,24.0,1,0,0,0,0,0,0,3548,0,0,0,0
+PrecipitacionNacionalDiaria,51020010,51020010,PTPM_CON_INTER,Barbacoas,Nariño,Pluviométrica,Activa,21821,1963-05-01,2026-08-12,DIARIA,24.0,1,0,0,0,0,0,0,984,0,74,0,0
+PrecipitacionNacionalDiaria,51020030,51020030,PTPM_CON_INTER,Ipiales,Nariño,Pluviométrica,Suspendida,1860,1963-04-01,1968-10-31,DIARIA,24.0,1.0,0,0,0,0,0,0,1170,0,0,0,0
+PrecipitacionNacionalDiaria,51020040,51020040,PTPM_CON_INTER,Tumaco,Nariño,Pluviométrica,Activa,13605,1962-03-01,2026-08-12,DIARIA,24.0,1,0,0,0,0,0,0,4648,0,15,0,0
+PrecipitacionNacionalDiaria,51020050,51020050,PTPM_CON_INTER,Tumaco,Nariño,Pluviométrica,Activa,14793,1983-08-24,2025-11-30,DIARIA,24.0,1,0,0,0,0,0,0,3333,0,32,0,0
+PrecipitacionNacionalDiaria,51025020,51025020,PTPM_CON_INTER,Ricaurte,Nariño,Climatológica Principal,Suspendida,8357,1951-09-19,1994-03-31,DIARIA,24.0,1,0,0,0,0,0,0,1471,0,0,0,0
+PrecipitacionNacionalDiaria,51025030,51025030,PTPM_CON_INTER,Tumaco,Nariño,Climatológica Ordinaria,Suspendida,973,1963-01-01,1965-11-30,DIARIA,24.0,1,0,0,0,0,0,0,387,0,0,0,0
+PrecipitacionNacionalDiaria,51025080,51025080,PTPM_CON_INTER,Barbacoas,Nariño,Climatológica Principal,Activa,7559,1993-10-01,2014-07-31,DIARIA,24.0,1,0,0,0,0,0,0,875,0,2,0,0
+PrecipitacionNacionalDiaria,51025090,51025090,PTPM_CON_INTER,Tumaco,Nariño,Climatológica Principal,En Mantenimiento,20533,1968-11-07,2026-04-29,DIARIA,24.0,1,0,0,0,0,0,0,5502,0,20,0,0
+PrecipitacionNacionalDiaria,51030010,51030010,PTPM_CON_INTER,Tumaco,Nariño,Pluviométrica,Suspendida,31,1969-01-01,1969-01-31,DIARIA,24.0,1,0,0,0,0,0,0,24,0,0,0,0
+PrecipitacionNacionalDiaria,51030020,51030020,PTPM_CON_INTER,Tumaco,Nariño,Pluviométrica,Activa,15127,1983-08-26,2025-07-30,DIARIA,24.0,1,0,0,0,0,0,0,8237,0,7,0,0
+PrecipitacionNacionalDiaria,51035010,51035010,PTPM_CON_INTER,Tumaco,Nariño,Sinóptica Secundaria,Suspendida,15025,1948-01-01,1995-10-31,DIARIA,24.0,1,0,0,0,0,0,0,8196,0,9,0,0
+PrecipitacionNacionalDiaria,51035020,51035020,PTPM_CON_INTER,Tumaco,Nariño,Climatológica Principal,Activa,9583,1991-10-01,2020-10-22,DIARIA,24.0,1,0,0,0,0,0,0,3690,0,18,0,0
+PrecipitacionNacionalDiaria,52010030,52010030,PTPM_CON_INTER,El Rosario,Nariño,Pluviométrica,Activa,13181,1990-05-01,2026-08-12,DIARIA,24.0,1,0,0,0,0,0,0,8430,0,0,0,0
+PrecipitacionNacionalDiaria,52010060,52010060,PTPM_CON_INTER,Leiva,Nariño,Pluviométrica,Activa,18776,1972-09-06,2026-07-30,DIARIA,24.0,1.0,0,0,0,0,0,0,13469,0,0,0,0
+PrecipitacionNacionalDiaria,52010140,52010140,PTPM_CON_INTER,Policarpa,Nariño,Pluviométrica,Activa,20966,1957-01-01,2026-08-12,DIARIA,24.0,1.0,0,0,0,0,0,0,16382,0,0,0,0
+PrecipitacionNacionalDiaria,52030010,52030010,PTPM_CON_INTER,Colón (Génova),Nariño,Pluviométrica,Suspendida,6086,1965-01-01,1984-11-23,DIARIA,24.0,1.0,0,0,0,0,0,0,3908,0,0,0,0
+PrecipitacionNacionalDiaria,52030020,52030020,PTPM_CON_INTER,Colón (Génova),Nariño,Pluviométrica,Suspendida,12432,1971-03-10,2006-07-31,DIARIA,24.0,1.0,0,0,0,0,0,0,7841,0,0,0,0
+PrecipitacionNacionalDiaria,52030030,52030030,PTPM_CON_INTER,La Unión,Nariño,Pluviométrica,Activa,21169,1954-02-01,2026-08-12,DIARIA,24.0,1,0,0,0,0,0,0,11658,0,0,0,0
+PrecipitacionNacionalDiaria,52030060,52030060,PTPM_CON_INTER,Colón (Génova),Nariño,Pluviométrica,Activa,23053,1958-01-01,2026-08-12,DIARIA,24.0,1,0,0,0,0,0,0,14260,0,0,0,0
+PrecipitacionNacionalDiaria,52030070,52030070,PTPM_CON_INTER,La Cruz,Nariño,Pluviométrica,Suspendida,3913,1960-03-16,1971-12-31,DIARIA,24.0,1,0,0,0,0,0,0,2222,0,0,0,0
+PrecipitacionNacionalDiaria,52030080,52030080,PTPM_CON_INTER,Taminango,Nariño,Pluviométrica,Suspendida,14497,1965-09-14,2006-03-15,DIARIA,24.0,1,0,0,0,0,0,0,9034,0,0,0,0
+PrecipitacionNacionalDiaria,52030090,52030090,PTPM_CON_INTER,La Cruz,Nariño,Pluviométrica,Activa,21498,1964-01-01,2026-08-12,DIARIA,24.0,1.0,0,0,0,0,0,0,12544,0,0,0,0
+PrecipitacionNacionalDiaria,52030110,52030110,PTPM_CON_INTER,La Unión,Nariño,Pluviométrica,Activa,6365,1951-08-01,1988-12-31,DIARIA,24.0,1,0,0,0,0,0,0,3381,0,0,0,0
+PrecipitacionNacionalDiaria,52035010,52035010,PTPM_CON_INTER,La Unión,Nariño,Meteorológica Especial,Suspendida,1650,1982-01-01,1987-08-30,DIARIA,24.0,1.0,0,0,0,0,0,0,829,0,0,0,0
+PrecipitacionNacionalDiaria,52035030,52035030,PTPM_CON_INTER,La Unión,Nariño,Meteorológica Especial,Activa,1415,1987-01-01,1992-12-31,DIARIA,24.0,1,0,0,0,0,0,0,795,0,0,0,0
+PrecipitacionNacionalDiaria,52035040,52035040,PTPM_CON_INTER,Taminango,Nariño,Climatológica Ordinaria,Activa,14629,1986-04-04,2026-08-12,DIARIA,24.0,1,0,0,0,0,0,0,8438,0,0,0,0
+PrecipitacionNacionalDiaria,52040030,52040030,PTPM_CON_INTER,Chachaguí,Nariño,Pluviométrica,Suspendida,12692,1958-07-01,2002-06-05,DIARIA,24.0,1.0,0,0,0,0,0,0,7733,0,0,0,0
+PrecipitacionNacionalDiaria,52040040,52040040,PTPM_CON_INTER,Buesaco,Nariño,Pluviométrica,Activa,24135,1958-08-01,2026-08-12,DIARIA,24.0,1,0,0,0,0,0,0,17530,0,2,0,0
+PrecipitacionNacionalDiaria,52040050,52040050,PTPM_CON_INTER,El Tablón,Nariño,Climatológica Principal,Activa,19519,1972-08-28,2026-08-12,DIARIA,24.0,1,0,0,0,0,0,0,11046,0,3,0,0
+PrecipitacionNacionalDiaria,52040060,52040060,PTPM_CON_INTER,Buesaco,Nariño,Pluviométrica,Activa,19502,1972-08-01,2026-08-12,DIARIA,24.0,1.0,0,0,0,0,0,0,12749,0,1,0,0
+PrecipitacionNacionalDiaria,52040070,52040070,PTPM_CON_INTER,Nariño,Nariño,Pluviométrica,Activa,23267,1958-07-01,2026-08-12,DIARIA,24.0,1,0,0,0,0,0,0,12961,0,6,0,0
+PrecipitacionNacionalDiaria,52040090,52040090,PTPM_CON_INTER,Buesaco,Nariño,Pluviométrica,Suspendida,1216,1967-01-01,1988-12-31,DIARIA,24.0,1.0,0,0,0,0,0,0,879,0,2,0,0
+PrecipitacionNacionalDiaria,52040100,52040100,PTPM_CON_INTER,Pasto,Nariño,Pluviométrica,Suspendida,2250,1958-01-01,1966-02-28,DIARIA,24.0,1.0,0,0,0,0,0,0,780,0,0,0,0
+PrecipitacionNacionalDiaria,52040110,52040110,PTPM_CON_INTER,Pasto,Nariño,Pluviométrica,Suspendida,3549,1942-06-05,1970-09-30,DIARIA,24.0,1,0,0,0,0,0,0,2138,0,3,0,0
+PrecipitacionNacionalDiaria,52040120,52040120,PTPM_CON_INTER,Pasto,Nariño,Pluviométrica,Suspendida,895,1930-03-28,1949-11-30,DIARIA,24.0,1,0,0,0,0,0,0,629,0,0,0,0
+PrecipitacionNacionalDiaria,52040130,52040130,PTPM_CON_INTER,Pasto,Nariño,Pluviométrica,Suspendida,4549,1941-01-01,1966-05-31,DIARIA,24.0,1,0,0,0,0,0,0,2766,0,0,0,0
+PrecipitacionNacionalDiaria,52040140,52040140,PTPM_CON_INTER,Pasto,Nariño,Pluviométrica,Suspendida,3713,1924-01-01,1941-11-30,DIARIA,24.0,1,0,0,0,0,0,0,2600,0,0,0,0
+PrecipitacionNacionalDiaria,52040150,52040150,PTPM_CON_INTER,Pasto,Nariño,Pluviométrica,Suspendida,1826,1954-01-01,1958-12-31,DIARIA,24.0,1.0,0,0,0,0,0,0,1181,0,0,0,0
+PrecipitacionNacionalDiaria,52040160,52040160,PTPM_CON_INTER,Arboleda (Berruecos),Nariño,Pluviométrica,Activa,16128,1981-01-01,2026-08-12,DIARIA,24.0,1.0,0,0,0,0,0,0,8579,0,0,0,0
+PrecipitacionNacionalDiaria,52045010,52045010,PTPM_CON_INTER,Pasto,Nariño,Agrometeorológica,Activa,23292,1953-05-09,2026-08-11,DIARIA,24.0,1.0,0,0,0,0,0,0,10675,0,0,0,0
+PrecipitacionNacionalDiaria,52045020,52045020,PTPM_CON_INTER,Chachaguí,Nariño,Sinóptica Principal,Activa,24682,1957-01-01,2026-07-23,DIARIA,24.0,1.0,0,0,0,0,0,0,13557,0,0,0,0
+PrecipitacionNacionalDiaria,52045030,52045030,PTPM_CON_INTER,San Bernardo,Nariño,Climatológica Ordinaria,Activa,19277,1972-09-01,2026-08-12,DIARIA,24.0,1,0,0,0,0,0,0,7997,0,0,0,0
+PrecipitacionNacionalDiaria,52045040,52045040,PTPM_CON_INTER,Taminango,Nariño,Climatológica Ordinaria,Activa,19582,1971-07-01,2026-08-12,DIARIA,24.0,1.0,0,0,0,0,0,0,9803,0,0,0,0
+PrecipitacionNacionalDiaria,52045050,52045050,PTPM_CON_INTER,Pasto,Nariño,Climatológica Ordinaria,Suspendida,1036,1956-01-01,1966-11-30,DIARIA,24.0,1.0,0,0,0,0,0,0,727,0,0,0,0
+PrecipitacionNacionalDiaria,52045060,52045060,PTPM_CON_INTER,Pasto,Nariño,Meteorológica Especial,Suspendida,5100,1964-06-01,1997-01-30,DIARIA,24.0,1.0,0,0,0,0,0,0,2896,0,0,0,0
+PrecipitacionNacionalDiaria,52045070,52045070,PTPM_CON_INTER,Pasto,Nariño,Climatológica Ordinaria,Activa,12912,1990-11-01,2026-08-12,DIARIA,24.0,1.0,0,0,0,0,0,0,3601,0,0,0,0
+PrecipitacionNacionalDiaria,52045080,52045080,PTPM_CON_INTER,Pasto,Nariño,Climatológica Ordinaria,Activa,9465,2000-08-01,2026-08-11,DIARIA,24.0,1,0,0,0,0,0,0,4154,0,0,0,0
+PrecipitacionNacionalDiaria,52045090,52045090,PTPM_CON_INTER,Pupiales,Nariño,Climatológica Ordinaria,Activa,6909,2007-04-01,2026-08-11,DIARIA,24.0,1,0,0,0,0,0,0,2047,0,0,0,0
+PrecipitacionNacionalDiaria,52050010,52050010,PTPM_CON_INTER,El Peñol,Nariño,Pluviométrica,Activa,22142,1965-09-09,2026-08-12,DIARIA,24.0,1.0,0,0,0,0,0,0,13830,0,0,0,0
+PrecipitacionNacionalDiaria,52050020,52050020,PTPM_CON_INTER,Samaniego,Nariño,Pluviométrica,Activa,23228,1958-01-01,2026-08-12,DIARIA,24.0,1.0,0,0,0,0,0,0,14243,0,2,0,0
+PrecipitacionNacionalDiaria,52050030,52050030,PTPM_CON_INTER,Samaniego,Nariño,Pluviométrica,Suspendida,4627,1958-01-01,1981-04-30,DIARIA,24.0,1,0,0,0,0,0,0,3238,0,0,0,0
+PrecipitacionNacionalDiaria,52050040,52050040,PTPM_CON_INTER,Sandoná,Nariño,Pluviométrica,Activa,21799,1963-10-01,2026-08-12,DIARIA,24.0,1,0,0,0,0,0,0,12763,0,5,0,0
+PrecipitacionNacionalDiaria,52050050,52050050,PTPM_CON_INTER,Santa Cruz (Guachavés),Nariño,Pluviométrica,Activa,19568,1972-06-18,2026-08-12,DIARIA,24.0,1.0,0,0,0,0,0,0,9569,0,2,0,0
+PrecipitacionNacionalDiaria,52050060,52050060,PTPM_CON_INTER,Pasto,Nariño,Climatológica Principal,Activa,22003,1965-01-01,2026-08-12,DIARIA,24.0,1,0,0,0,0,0,0,12138,0,0,0,0
+PrecipitacionNacionalDiaria,52050070,52050070,PTPM_CON_INTER,Túquerres,Nariño,Pluviométrica,Suspendida,9495,1958-01-01,1986-12-31,DIARIA,24.0,1,0,0,0,0,0,0,5504,0,0,0,0
+PrecipitacionNacionalDiaria,52050080,52050080,PTPM_CON_INTER,Tangua,Nariño,Climatológica Principal,Activa,24822,1957-01-01,2026-08-12,DIARIA,24.0,1.0,0,0,0,0,0,0,15461,0,0,0,0
+PrecipitacionNacionalDiaria,52050090,52050090,PTPM_CON_INTER,Imués,Nariño,Climatológica Principal,Activa,24884,1957-01-01,2026-08-12,DIARIA,24.0,1.0,0,0,0,0,0,0,14642,0,0,0,0
+PrecipitacionNacionalDiaria,52050100,52050100,PTPM_CON_INTER,Gualmatán,Nariño,Pluviométrica,Activa,19371,1972-07-25,2026-08-12,DIARIA,24.0,1,0,0,0,0,0,0,9553,0,0,0,0
+PrecipitacionNacionalDiaria,52050110,52050110,PTPM_CON_INTER,Cumbal,Nariño,Pluviométrica,Activa,23796,1958-01-01,2026-08-12,DIARIA,24.0,1.0,0,0,0,0,0,0,12382,0,0,0,0
+PrecipitacionNacionalDiaria,52050120,52050120,PTPM_CON_INTER,Puerres,Nariño,Pluviométrica,Activa,19562,1972-08-02,2026-08-11,DIARIA,24.0,1.0,0,0,0,0,0,0,10851,0,1,0,0
+PrecipitacionNacionalDiaria,52050130,52050130,PTPM_CON_INTER,Cumbal,Nariño,Pluviométrica,Activa,19348,1972-07-27,2026-08-11,DIARIA,24.0,1.0,0,0,0,0,0,0,11047,0,0,0,0
+PrecipitacionNacionalDiaria,52050140,52050140,PTPM_CON_INTER,Linares,Nariño,Pluviométrica,Activa,16345,1981-01-01,2026-08-12,DIARIA,24.0,1,0,0,0,0,0,0,9690,0,0,0,0
+PrecipitacionNacionalDiaria,52050150,52050150,PTPM_CON_INTER,Túquerres,Nariño,Pluviométrica,Suspendida,1919,1963-04-01,1969-01-31,DIARIA,24.0,1,0,0,0,0,0,0,1327,0,0,0,0
+PrecipitacionNacionalDiaria,52050160,52050160,PTPM_CON_INTER,Imués,Nariño,Pluviométrica,Suspendida,337,1967-03-01,1968-10-31,DIARIA,24.0,1,0,0,0,0,0,0,256,0,0,0,0
+PrecipitacionNacionalDiaria,52050170,52050170,PTPM_CON_INTER,El Tambo,Nariño,Pluviométrica,Suspendida,1251,1966-04-29,1969-09-30,DIARIA,24.0,1,0,0,0,0,0,0,1048,0,0,0,0
+PrecipitacionNacionalDiaria,52050180,52050180,PTPM_CON_INTER,Samaniego,Nariño,Pluviométrica,Activa,107,1982-09-16,1982-12-31,DIARIA,24.0,1,0,0,0,0,0,0,48,0,0,0,0
+PrecipitacionNacionalDiaria,52050190,52050190,PTPM_CON_INTER,Potosí,Nariño,Pluviométrica,Activa,11024,1995-12-01,2026-08-12,DIARIA,24.0,1.0,0,0,0,0,0,0,6297,0,0,0,0
+PrecipitacionNacionalDiaria,52055030,52055030,PTPM_CON_INTER,Consacá,Nariño,Climatológica Ordinaria,En Mantenimiento,20681,1968-08-12,2026-08-12,DIARIA,24.0,1,0,0,0,0,0,0,10251,0,0,0,0
+PrecipitacionNacionalDiaria,52055050,52055050,PTPM_CON_INTER,Pasto,Nariño,Climatológica Ordinaria,Suspendida,759,1964-06-01,1967-10-31,DIARIA,24.0,1,0,0,0,0,0,0,377,0,0,0,0
+PrecipitacionNacionalDiaria,52055060,52055060,PTPM_CON_INTER,Samaniego,Nariño,Climatológica Ordinaria,Activa,19372,1972-06-11,2026-08-11,DIARIA,24.0,1.0,0,0,0,0,0,0,10001,0,0,0,0
+PrecipitacionNacionalDiaria,52055070,52055070,PTPM_CON_INTER,Consacá,Nariño,Climatológica Ordinaria,Activa,13840,1951-09-01,1998-12-31,DIARIA,24.0,1.0,0,0,0,0,0,0,6223,0,0,0,0
+PrecipitacionNacionalDiaria,52055080,52055080,PTPM_CON_INTER,Pasto,Nariño,Meteorológica Especial,Suspendida,984,1986-02-16,1990-08-31,DIARIA,24.0,1.0,0,0,0,0,0,0,269,0,1,0,0
+PrecipitacionNacionalDiaria,52055090,52055090,PTPM_CON_INTER,Tangua,Nariño,Climatológica Principal,Activa,13928,1987-08-13,2026-08-12,DIARIA,24.0,1.0,0,0,0,0,0,0,4806,0,0,0,0
+PrecipitacionNacionalDiaria,52055100,52055100,PTPM_CON_INTER,Sapuyes,Nariño,Climatológica Ordinaria,Suspendida,5756,1990-05-01,2006-05-07,DIARIA,24.0,1.0,0,0,0,0,0,0,2504,0,0,0,0
+PrecipitacionNacionalDiaria,52055110,52055110,PTPM_CON_INTER,Pasto,Nariño,Climatológica Ordinaria,Suspendida,1986,2005-07-01,2014-04-30,DIARIA,24.0,1.0,0,0,0,0,0,0,819,0,0,0,0
+PrecipitacionNacionalDiaria,52055200,52055200,PTPM_CON_INTER,Funes,Nariño,Climatológica Ordinaria,Activa,6110,2009-10-06,2026-08-11,DIARIA,24.0,1.0,0,0,0,0,0,0,2913,0,0,0,0
+PrecipitacionNacionalDiaria,52055210,52055210,PTPM_CON_INTER,Pasto,Nariño,Climatológica Principal,Activa,16565,1979-06-01,2026-08-12,DIARIA,24.0,1,0,0,0,0,0,0,6139,0,0,0,0
+PrecipitacionNacionalDiaria,52055220,52055220,PTPM_CON_INTER,Túquerres,Nariño,Climatológica Principal,Activa,21085,1968-07-01,2026-08-12,DIARIA,24.0,1,0,0,0,0,0,0,9432,0,0,0,0
+PrecipitacionNacionalDiaria,52055230,52055230,PTPM_CON_INTER,Aldana,Nariño,Sinóptica Principal,Activa,24192,1941-07-01,2026-08-12,DIARIA,24.0,1.0,0,0,0,0,0,0,9573,0,0,0,0
+PrecipitacionNacionalDiaria,52060020,52060020,PTPM_CON_INTER,Los Andes (Sotomayor),Nariño,Pluviométrica,Activa,211,1969-01-01,1969-12-30,DIARIA,24.0,1,0,0,0,0,0,0,110,0,0,0,0
+PrecipitacionNacionalDiaria,52060040,52060040,PTPM_CON_INTER,La Llanada,Nariño,Pluviométrica,Activa,15333,1983-09-08,2026-08-11,DIARIA,24.0,1,0,0,0,0,0,0,4150,0,1,0,0
+PrecipitacionNacionalDiaria,52060050,52060050,PTPM_CON_INTER,Santa Cruz (Guachavés),Nariño,Pluviométrica,Activa,14645,1984-09-10,2026-01-31,DIARIA,24.0,1,0,0,0,0,0,0,2077,0,10,0,0
+PrecipitacionNacionalDiaria,52065020,52065020,PTPM_CON_INTER,Barbacoas,Nariño,Climatológica Principal,Activa,22880,1959-06-01,2026-08-11,DIARIA,24.0,1.0,0,0,0,0,0,0,4041,0,113,0,0
+PrecipitacionNacionalDiaria,52070010,52070010,PTPM_CON_INTER,Magüí (Payán),Nariño,Pluviométrica,Activa,14884,1983-09-01,2026-08-12,DIARIA,24.0,1.0,0,0,0,0,0,0,3568,0,20,0,0
+PrecipitacionNacionalDiaria,52070020,52070020,PTPM_CON_INTER,Magüí (Payán),Nariño,Pluviométrica,Suspendida,6833,1983-09-01,2004-08-30,DIARIA,24.0,1,0,0,0,0,0,0,2059,0,4,0,0
+PrecipitacionNacionalDiaria,52070030,52070030,PTPM_CON_INTER,Policarpa,Nariño,Pluviométrica,Activa,14121,1987-11-01,2026-08-12,DIARIA,24.0,1,0,0,0,0,0,0,8701,0,0,0,0
+PrecipitacionNacionalDiaria,52080010,52080010,PTPM_CON_INTER,Cumbitara,Nariño,Pluviométrica,Activa,21756,1966-04-14,2026-08-12,DIARIA,24.0,1.0,0,0,0,0,0,0,12104,0,0,0,0
+PrecipitacionNacionalDiaria,52080020,52080020,PTPM_CON_INTER,El Rosario,Nariño,Pluviométrica,Suspendida,2015,1966-04-26,1971-10-31,DIARIA,24.0,1,0,0,0,0,0,0,1410,0,0,0,0
+PrecipitacionNacionalDiaria,52090010,52090010,PTPM_CON_INTER,Francisco Pizarro (Salahonda),Nariño,Pluviométrica,Activa,15415,1983-09-05,2026-08-12,DIARIA,24.0,1,0,0,0,0,0,0,9231,0,49,0,0
+PrecipitacionNacionalDiaria,52090020,52090020,PTPM_CON_INTER,Roberto Payán (San José),Nariño,Pluviométrica,Activa,13883,1983-09-05,2026-04-30,DIARIA,24.0,1,0,0,0,0,0,0,5894,0,8,0,0
+PrecipitacionNacionalDiaria,53010010,53010010,PTPM_CON_INTER,Mosquera,Nariño,Pluviométrica,Suspendida,122,1963-06-01,1963-09-30,DIARIA,24.0,1.0,0,0,0,0,0,0,109,0,1,0,0
+PrecipitacionNacionalDiaria,53010020,53010020,PTPM_CON_INTER,Mosquera,Nariño,Pluviométrica,Activa,15168,1983-09-01,2026-08-12,DIARIA,24.0,1.0,0,0,0,0,0,0,8987,0,40,0,0
+PrecipitacionNacionalDiaria,53020010,53020010,PTPM_CON_INTER,El Charco,Nariño,Pluviométrica,Activa,14997,1983-09-02,2026-08-12,DIARIA,24.0,1,0,0,0,0,0,0,6836,0,25,0,0
+PrecipitacionNacionalDiaria,53020020,53020020,PTPM_CON_INTER,Magüí (Payán),Nariño,Pluviométrica,Activa,15818,1960-01-01,2026-04-30,DIARIA,24.0,1.0,0,0,0,0,0,0,7557,0,34,0,0
+TemperaturaNacionalDiaria,47015080,47015080,TSSM_CON,Puerres,Nariño,Climatológica Ordinaria,Activa,38020,1983-09-01,2026-04-30,3x/día observada,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,47015100,47015100,TSSM_CON,Pasto,Nariño,Climatológica Principal,Activa,39968,1984-10-01,2026-08-10,3x/día observada,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,51025020,51025020,TSSM_CON,Ricaurte,Nariño,Climatológica Principal,Suspendida,7000,1983-02-01,1991-03-18,3x/día observada,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,51025080,51025080,TSSM_CON,Barbacoas,Nariño,Climatológica Principal,Activa,20478,1994-12-01,2014-07-31,3x/día observada,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,51025090,51025090,TSSM_CON,Tumaco,Nariño,Climatológica Principal,En Mantenimiento,42762,1979-01-01,2026-04-30,3x/día observada,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,51035010,51035010,TSSM_CON,Tumaco,Nariño,Sinóptica Secundaria,Suspendida,5665,1979-02-01,1992-01-31,3x/día observada,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,51035020,51035020,TSSM_CON,Tumaco,Nariño,Climatológica Principal,Activa,24463,1992-02-18,2020-10-16,3x/día observada,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52045010,52045010,TSSM_CON,Pasto,Nariño,Agrometeorológica,Activa,39146,1983-01-01,2026-08-10,3x/día observada,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52045020,52045020,TSSM_CON,Chachaguí,Nariño,Sinóptica Principal,Activa,43134,1983-01-02,2026-06-30,3x/día observada,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52045030,52045030,TSSM_CON,San Bernardo,Nariño,Climatológica Ordinaria,Activa,42528,1983-01-01,2026-08-10,3x/día observada,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52045040,52045040,TSSM_CON,Taminango,Nariño,Climatológica Ordinaria,Activa,43934,1983-01-01,2026-08-10,3x/día observada,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52045090,52045090,TSSM_CON,Pupiales,Nariño,Climatológica Ordinaria,Activa,19968,2007-04-01,2026-08-09,3x/día observada,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055030,52055030,TSSM_CON,Consacá,Nariño,Climatológica Ordinaria,En Mantenimiento,40984,1983-01-01,2026-03-31,3x/día observada,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055060,52055060,TSSM_CON,Samaniego,Nariño,Climatológica Ordinaria,Activa,43984,1983-01-01,2026-08-09,3x/día observada,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055090,52055090,TSSM_CON,Tangua,Nariño,Climatológica Principal,Activa,38782,1988-01-01,2026-08-10,3x/día observada,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055100,52055100,TSSM_CON,Sapuyes,Nariño,Climatológica Ordinaria,Suspendida,14626,1990-05-10,2006-05-07,3x/día observada,6.0,3,0,0,0,0,0,0,0,2,0,0,0
+TemperaturaNacionalDiaria,52055110,52055110,TSSM_CON,Pasto,Nariño,Climatológica Ordinaria,Suspendida,6304,2004-01-01,2015-01-31,3x/día observada,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055200,52055200,TSSM_CON,Funes,Nariño,Climatológica Ordinaria,Activa,18240,2009-10-07,2026-08-10,3x/día observada,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055210,52055210,TSSM_CON,Pasto,Nariño,Climatológica Principal,Activa,40587,1983-01-01,2026-08-10,3x/día observada,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055220,52055220,TSSM_CON,Túquerres,Nariño,Climatológica Principal,Activa,42332,1983-01-01,2026-08-10,3x/día observada,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055230,52055230,TSSM_CON,Aldana,Nariño,Sinóptica Principal,Activa,43910,1982-01-01,2026-06-30,3x/día observada,6.0,3.0,0,0,0,0,0,0,1,0,0,0,0
+TemperaturaNacionalDiaria,52065020,52065020,TSSM_CON,Barbacoas,Nariño,Climatológica Principal,Activa,27281,1983-01-01,2012-09-30,3x/día observada,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,47015080,47015080,TSSM_MEDIA_D,Puerres,Nariño,Climatológica Ordinaria,Activa,12732,1983-09-03,2026-04-29,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,47015100,47015100,TSSM_MEDIA_D,Pasto,Nariño,Climatológica Principal,Activa,12747,1984-10-01,2026-08-09,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,51025020,51025020,TSSM_MEDIA_D,Ricaurte,Nariño,Climatológica Principal,Suspendida,4314,1978-01-01,1991-03-17,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,51025080,51025080,TSSM_MEDIA_D,Barbacoas,Nariño,Climatológica Principal,Activa,6817,1994-07-01,2014-07-31,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,51025090,51025090,TSSM_MEDIA_D,Tumaco,Nariño,Climatológica Principal,En Mantenimiento,16653,1977-03-01,2026-04-29,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,51035010,51035010,TSSM_MEDIA_D,Tumaco,Nariño,Sinóptica Secundaria,Suspendida,1880,1978-11-07,1992-01-01,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,51035020,51035020,TSSM_MEDIA_D,Tumaco,Nariño,Climatológica Principal,Activa,8452,1992-02-20,2020-10-15,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52045010,52045010,TSSM_MEDIA_D,Pasto,Nariño,Agrometeorológica,Activa,15840,1978-01-01,2026-08-09,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52045020,52045020,TSSM_MEDIA_D,Chachaguí,Nariño,Sinóptica Principal,Activa,16570,1976-05-01,2026-06-30,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52045030,52045030,TSSM_MEDIA_D,San Bernardo,Nariño,Climatológica Ordinaria,Activa,15329,1978-01-01,2026-08-09,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52045040,52045040,TSSM_MEDIA_D,Taminango,Nariño,Climatológica Ordinaria,Activa,16110,1978-09-05,2026-08-09,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52045090,52045090,TSSM_MEDIA_D,Pupiales,Nariño,Climatológica Ordinaria,Activa,6352,2007-04-09,2026-08-07,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055030,52055030,TSSM_MEDIA_D,Consacá,Nariño,Climatológica Ordinaria,En Mantenimiento,15193,1978-01-01,2026-03-30,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055060,52055060,TSSM_MEDIA_D,Samaniego,Nariño,Climatológica Ordinaria,Activa,16580,1978-01-01,2026-08-09,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055090,52055090,TSSM_MEDIA_D,Tangua,Nariño,Climatológica Principal,Activa,13682,1987-08-16,2026-08-09,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055100,52055100,TSSM_MEDIA_D,Sapuyes,Nariño,Climatológica Ordinaria,Suspendida,5394,1990-05-11,2006-05-07,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055110,52055110,TSSM_MEDIA_D,Pasto,Nariño,Climatológica Ordinaria,Suspendida,1892,2004-01-05,2015-01-31,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055200,52055200,TSSM_MEDIA_D,Funes,Nariño,Climatológica Ordinaria,Activa,6023,2009-10-07,2026-08-09,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055210,52055210,TSSM_MEDIA_D,Pasto,Nariño,Climatológica Principal,Activa,15410,1979-06-01,2026-08-09,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055220,52055220,TSSM_MEDIA_D,Túquerres,Nariño,Climatológica Principal,Activa,16905,1978-01-01,2026-08-09,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055230,52055230,TSSM_MEDIA_D,Aldana,Nariño,Sinóptica Principal,Activa,16906,1976-06-01,2026-06-30,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52065020,52065020,TSSM_MEDIA_D,Barbacoas,Nariño,Climatológica Principal,Activa,11033,1979-01-01,2012-09-30,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,47015080,47015080,TSSM_MN_D,Puerres,Nariño,Climatológica Ordinaria,Activa,11446,1983-09-03,2026-04-29,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,47015100,47015100,TSSM_MN_D,Pasto,Nariño,Climatológica Principal,Activa,11886,1984-10-01,2026-08-09,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,51025020,51025020,TSSM_MN_D,Ricaurte,Nariño,Climatológica Principal,Suspendida,2139,1983-02-01,1991-03-17,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,51025080,51025080,TSSM_MN_D,Barbacoas,Nariño,Climatológica Principal,Activa,6509,1994-12-02,2014-07-31,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,51025090,51025090,TSSM_MN_D,Tumaco,Nariño,Climatológica Principal,En Mantenimiento,13746,1979-01-01,2026-04-29,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,51035010,51035010,TSSM_MN_D,Tumaco,Nariño,Sinóptica Secundaria,Suspendida,1257,1979-02-01,1992-01-01,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,51035020,51035020,TSSM_MN_D,Tumaco,Nariño,Climatológica Principal,Activa,7645,1992-02-20,2020-10-15,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52045010,52045010,TSSM_MN_D,Pasto,Nariño,Agrometeorológica,Activa,12645,1983-01-01,2026-08-09,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52045020,52045020,TSSM_MN_D,Chachaguí,Nariño,Sinóptica Principal,Activa,14027,1983-01-02,2026-06-30,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52045030,52045030,TSSM_MN_D,San Bernardo,Nariño,Climatológica Ordinaria,Activa,13333,1983-01-01,2026-08-09,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52045040,52045040,TSSM_MN_D,Taminango,Nariño,Climatológica Ordinaria,Activa,14158,1983-01-01,2026-08-09,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52045090,52045090,TSSM_MN_D,Pupiales,Nariño,Climatológica Ordinaria,Activa,6352,2007-04-09,2026-08-07,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055030,52055030,TSSM_MN_D,Consacá,Nariño,Climatológica Ordinaria,En Mantenimiento,12958,1983-01-01,2026-03-30,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055060,52055060,TSSM_MN_D,Samaniego,Nariño,Climatológica Ordinaria,Activa,14419,1983-01-01,2026-08-09,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055090,52055090,TSSM_MN_D,Tangua,Nariño,Climatológica Principal,Activa,12724,1988-01-01,2026-08-09,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055100,52055100,TSSM_MN_D,Sapuyes,Nariño,Climatológica Ordinaria,Suspendida,4852,1990-05-11,2006-05-07,DIARIA,24.0,1.0,0,0,0,0,0,0,0,2,0,0,0
+TemperaturaNacionalDiaria,52055110,52055110,TSSM_MN_D,Pasto,Nariño,Climatológica Ordinaria,Suspendida,1892,2004-01-05,2015-01-31,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055200,52055200,TSSM_MN_D,Funes,Nariño,Climatológica Ordinaria,Activa,6023,2009-10-07,2026-08-09,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055210,52055210,TSSM_MN_D,Pasto,Nariño,Climatológica Principal,Activa,13049,1983-01-03,2026-08-09,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055220,52055220,TSSM_MN_D,Túquerres,Nariño,Climatológica Principal,Activa,13883,1983-01-01,2026-08-09,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055230,52055230,TSSM_MN_D,Aldana,Nariño,Sinóptica Principal,Activa,14550,1982-01-01,2026-06-30,DIARIA,24.0,1.0,0,0,0,0,0,0,1,0,0,0,0
+TemperaturaNacionalDiaria,52065020,52065020,TSSM_MN_D,Barbacoas,Nariño,Climatológica Principal,Activa,8741,1983-01-02,2012-09-30,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,47015080,47015080,TSSM_MX_D,Puerres,Nariño,Climatológica Ordinaria,Activa,11446,1983-09-03,2026-04-29,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,47015100,47015100,TSSM_MX_D,Pasto,Nariño,Climatológica Principal,Activa,11886,1984-10-01,2026-08-09,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,51025020,51025020,TSSM_MX_D,Ricaurte,Nariño,Climatológica Principal,Suspendida,2139,1983-02-01,1991-03-17,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,51025080,51025080,TSSM_MX_D,Barbacoas,Nariño,Climatológica Principal,Activa,6509,1994-12-02,2014-07-31,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,51025090,51025090,TSSM_MX_D,Tumaco,Nariño,Climatológica Principal,En Mantenimiento,13746,1979-01-01,2026-04-29,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,51035010,51035010,TSSM_MX_D,Tumaco,Nariño,Sinóptica Secundaria,Suspendida,1257,1979-02-01,1992-01-01,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,51035020,51035020,TSSM_MX_D,Tumaco,Nariño,Climatológica Principal,Activa,7645,1992-02-20,2020-10-15,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52045010,52045010,TSSM_MX_D,Pasto,Nariño,Agrometeorológica,Activa,12645,1983-01-01,2026-08-09,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52045020,52045020,TSSM_MX_D,Chachaguí,Nariño,Sinóptica Principal,Activa,14027,1983-01-02,2026-06-30,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52045030,52045030,TSSM_MX_D,San Bernardo,Nariño,Climatológica Ordinaria,Activa,13333,1983-01-01,2026-08-09,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52045040,52045040,TSSM_MX_D,Taminango,Nariño,Climatológica Ordinaria,Activa,14158,1983-01-01,2026-08-09,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52045090,52045090,TSSM_MX_D,Pupiales,Nariño,Climatológica Ordinaria,Activa,6352,2007-04-09,2026-08-07,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055030,52055030,TSSM_MX_D,Consacá,Nariño,Climatológica Ordinaria,En Mantenimiento,12958,1983-01-01,2026-03-30,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055060,52055060,TSSM_MX_D,Samaniego,Nariño,Climatológica Ordinaria,Activa,14419,1983-01-01,2026-08-09,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055090,52055090,TSSM_MX_D,Tangua,Nariño,Climatológica Principal,Activa,12724,1988-01-01,2026-08-09,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055100,52055100,TSSM_MX_D,Sapuyes,Nariño,Climatológica Ordinaria,Suspendida,4852,1990-05-11,2006-05-07,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055110,52055110,TSSM_MX_D,Pasto,Nariño,Climatológica Ordinaria,Suspendida,1892,2004-01-05,2015-01-31,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055200,52055200,TSSM_MX_D,Funes,Nariño,Climatológica Ordinaria,Activa,6023,2009-10-07,2026-08-09,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055210,52055210,TSSM_MX_D,Pasto,Nariño,Climatológica Principal,Activa,13049,1983-01-03,2026-08-09,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055220,52055220,TSSM_MX_D,Túquerres,Nariño,Climatológica Principal,Activa,13883,1983-01-01,2026-08-09,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+TemperaturaNacionalDiaria,52055230,52055230,TSSM_MX_D,Aldana,Nariño,Sinóptica Principal,Activa,14550,1982-01-01,2026-06-30,DIARIA,24.0,1.0,0,0,0,0,0,0,1,0,0,0,0
+TemperaturaNacionalDiaria,52065020,52065020,TSSM_MX_D,Barbacoas,Nariño,Climatológica Principal,Activa,8741,1983-01-02,2012-09-30,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,47015080,47015080,BSHG_TT_D,Puerres,Nariño,Climatológica Ordinaria,Activa,12528,1984-09-01,2024-10-31,DIARIA,24.0,1.0,0,0,0,0,0,0,2525,0,0,0,0
+MetereologiaNacionalDiaria,47015100,47015100,BSHG_TT_D,Pasto,Nariño,Climatológica Principal,Activa,13641,1985-06-01,2026-01-31,DIARIA,24.0,1,0,0,0,0,0,0,1291,0,0,0,0
+MetereologiaNacionalDiaria,51025020,51025020,BSHG_TT_D,Ricaurte,Nariño,Climatológica Principal,Suspendida,4576,1978-01-01,1991-07-31,DIARIA,24.0,1.0,0,0,0,0,0,0,557,0,0,0,0
+MetereologiaNacionalDiaria,51025040,51025040,BSHG_TT_D,Tumaco,Nariño,Radio Sonda,Suspendida,1019,1982-01-01,1989-03-31,DIARIA,24.0,1,0,0,0,0,0,0,69,0,0,0,0
+MetereologiaNacionalDiaria,51025080,51025080,BSHG_TT_D,Barbacoas,Nariño,Climatológica Principal,Activa,6835,1994-05-01,2014-12-31,DIARIA,24.0,1,0,0,0,0,0,0,1395,0,0,0,0
+MetereologiaNacionalDiaria,51025090,51025090,BSHG_TT_D,Tumaco,Nariño,Climatológica Principal,En Mantenimiento,14515,1978-03-01,2025-03-31,DIARIA,24.0,1.0,0,0,0,0,0,0,1834,0,0,0,0
+MetereologiaNacionalDiaria,51035010,51035010,BSHG_TT_D,Tumaco,Nariño,Sinóptica Secundaria,Suspendida,1837,1983-09-01,1991-08-27,DIARIA,24.0,1.0,0,0,0,0,0,0,111,0,0,0,0
+MetereologiaNacionalDiaria,51035020,51035020,BSHG_TT_D,Tumaco,Nariño,Climatológica Principal,Activa,8534,1993-03-01,2018-01-31,DIARIA,24.0,1,0,0,0,0,0,0,531,0,0,0,0
+MetereologiaNacionalDiaria,52035030,52035030,BSHG_TT_D,La Unión,Nariño,Meteorológica Especial,Activa,1369,1987-01-01,1992-12-31,DIARIA,24.0,1,0,0,0,0,0,0,46,0,0,0,0
+MetereologiaNacionalDiaria,52045010,52045010,BSHG_TT_D,Pasto,Nariño,Agrometeorológica,Activa,14522,1978-01-02,2025-11-30,DIARIA,24.0,1,0,0,0,0,0,0,524,0,0,0,0
+MetereologiaNacionalDiaria,52045020,52045020,BSHG_TT_D,Chachaguí,Nariño,Sinóptica Principal,Activa,16990,1979-01-02,2026-08-13,DIARIA,24.0,1.0,0,0,0,0,0,0,343,0,0,0,0
+MetereologiaNacionalDiaria,52045030,52045030,BSHG_TT_D,San Bernardo,Nariño,Climatológica Ordinaria,Activa,2747,1986-12-05,2025-09-30,DIARIA,24.0,1,0,0,0,0,0,0,126,0,0,0,0
+MetereologiaNacionalDiaria,52045040,52045040,BSHG_TT_D,Taminango,Nariño,Climatológica Ordinaria,Activa,1768,1996-09-01,2026-01-31,DIARIA,24.0,1.0,0,0,0,0,0,0,88,0,0,0,0
+MetereologiaNacionalDiaria,52055030,52055030,BSHG_TT_D,Consacá,Nariño,Climatológica Ordinaria,En Mantenimiento,3216,1979-06-01,2025-06-30,DIARIA,24.0,1.0,0,0,0,0,0,0,96,0,0,0,0
+MetereologiaNacionalDiaria,52055070,52055070,BSHG_TT_D,Consacá,Nariño,Climatológica Ordinaria,Activa,3261,1984-01-01,1994-12-31,DIARIA,24.0,1,0,0,0,0,0,0,67,0,0,0,0
+MetereologiaNacionalDiaria,52055090,52055090,BSHG_TT_D,Tangua,Nariño,Climatológica Principal,Activa,12427,1987-08-14,2025-05-23,DIARIA,24.0,1.0,0,0,0,0,0,0,545,0,0,0,0
+MetereologiaNacionalDiaria,52055200,52055200,BSHG_TT_D,Funes,Nariño,Climatológica Ordinaria,Activa,5128,2009-10-06,2025-02-28,DIARIA,24.0,1.0,0,0,0,0,0,0,126,0,0,0,0
+MetereologiaNacionalDiaria,52055210,52055210,BSHG_TT_D,Pasto,Nariño,Climatológica Principal,Activa,14432,1979-05-22,2025-02-28,DIARIA,24.0,1.0,0,0,0,0,0,0,702,0,0,0,0
+MetereologiaNacionalDiaria,52055220,52055220,BSHG_TT_D,Túquerres,Nariño,Climatológica Principal,Activa,15480,1978-01-02,2025-11-30,DIARIA,24.0,1,0,0,0,0,0,0,511,0,0,0,0
+MetereologiaNacionalDiaria,52055230,52055230,BSHG_TT_D,Aldana,Nariño,Sinóptica Principal,Activa,17144,1979-01-02,2026-08-13,DIARIA,24.0,1.0,0,0,0,0,0,0,367,0,0,0,0
+MetereologiaNacionalDiaria,52065020,52065020,BSHG_TT_D,Barbacoas,Nariño,Climatológica Principal,Activa,10247,1982-01-01,2012-08-31,DIARIA,24.0,1.0,0,0,0,0,0,0,781,0,0,0,0
+MetereologiaNacionalDiaria,47015100,47015100,DVAG_CON,Pasto,Nariño,Climatológica Principal,Activa,118406,1985-06-28,2012-05-01,SUBDIARIA,1.0,24.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51025020,51025020,DVAG_CON,Ricaurte,Nariño,Climatológica Principal,Suspendida,48462,1974-01-01,1986-04-30,SUBDIARIA,1.0,24.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51025090,51025090,DVAG_CON,Tumaco,Nariño,Climatológica Principal,En Mantenimiento,102827,1979-01-01,2013-11-09,SUBDIARIA,1.0,24.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51035010,51035010,DVAG_CON,Tumaco,Nariño,Sinóptica Secundaria,Suspendida,8322,1976-12-01,1989-03-31,SUBDIARIA,1.0,13.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51035020,51035020,DVAG_CON,Tumaco,Nariño,Climatológica Principal,Activa,7595,1993-04-09,2000-09-18,SUBDIARIA,1.0,24,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045010,52045010,DVAG_CON,Pasto,Nariño,Agrometeorológica,Activa,246360,1974-01-01,2014-07-31,SUBDIARIA,1.0,24.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045020,52045020,DVAG_CON,Chachaguí,Nariño,Sinóptica Principal,Activa,175615,1974-09-01,2022-12-04,SUBDIARIA,1.0,24,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055230,52055230,DVAG_CON,Aldana,Nariño,Sinóptica Principal,Activa,349086,1976-03-01,2026-06-26,SUBDIARIA,1.0,24.0,0,0,0,0,0,0,11,0,0,0,0
+MetereologiaNacionalDiaria,47015080,47015080,EVTE_CON,Puerres,Nariño,Climatológica Ordinaria,Activa,9681,1985-01-01,2024-10-30,DIARIA,24.0,1,0,0,0,0,0,0,25,40,0,0,0
+MetereologiaNacionalDiaria,47015100,47015100,EVTE_CON,Pasto,Nariño,Climatológica Principal,Activa,12501,1984-09-17,2025-03-31,DIARIA,24.0,1,0,0,0,0,0,0,33,0,0,0,0
+MetereologiaNacionalDiaria,51025020,51025020,EVTE_CON,Ricaurte,Nariño,Climatológica Principal,Suspendida,3212,1978-01-01,1991-07-27,DIARIA,24.0,1.0,0,0,0,0,0,0,7,0,0,0,0
+MetereologiaNacionalDiaria,51025080,51025080,EVTE_CON,Barbacoas,Nariño,Climatológica Principal,Activa,3640,2001-05-01,2014-07-31,DIARIA,24.0,1.0,0,0,0,0,0,0,1,0,0,0,0
+MetereologiaNacionalDiaria,51025090,51025090,EVTE_CON,Tumaco,Nariño,Climatológica Principal,En Mantenimiento,13334,1978-01-01,2025-03-31,DIARIA,24.0,1.0,0,0,0,0,0,0,1,0,0,0,0
+MetereologiaNacionalDiaria,51035020,51035020,EVTE_CON,Tumaco,Nariño,Climatológica Principal,Activa,5403,1991-10-01,2017-06-29,DIARIA,24.0,1,0,0,0,0,0,0,2,0,0,0,0
+MetereologiaNacionalDiaria,52035040,52035040,EVTE_CON,Taminango,Nariño,Climatológica Ordinaria,Activa,13350,1986-04-16,2026-03-22,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045010,52045010,EVTE_CON,Pasto,Nariño,Agrometeorológica,Activa,14070,1978-01-01,2025-11-30,DIARIA,24.0,1.0,0,0,0,0,0,0,3,0,0,0,0
+MetereologiaNacionalDiaria,52045020,52045020,EVTE_CON,Chachaguí,Nariño,Sinóptica Principal,Activa,17259,1976-05-01,2026-08-09,DIARIA,24.0,1.0,0,0,0,0,0,0,7,0,0,0,0
+MetereologiaNacionalDiaria,52045030,52045030,EVTE_CON,San Bernardo,Nariño,Climatológica Ordinaria,Activa,13571,1950-01-01,2025-07-29,DIARIA,24.0,1,0,0,0,0,0,0,3,7,0,0,0
+MetereologiaNacionalDiaria,52045040,52045040,EVTE_CON,Taminango,Nariño,Climatológica Ordinaria,Activa,13311,1978-01-02,2026-01-30,DIARIA,24.0,1,0,0,0,0,0,0,7,0,0,0,0
+MetereologiaNacionalDiaria,52045060,52045060,EVTE_CON,Pasto,Nariño,Meteorológica Especial,Suspendida,3228,1985-01-16,1997-01-30,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045070,52045070,EVTE_CON,Pasto,Nariño,Climatológica Ordinaria,Activa,9986,1990-11-01,2025-05-30,DIARIA,24.0,1.0,0,0,0,0,0,0,3,0,0,0,0
+MetereologiaNacionalDiaria,52055030,52055030,EVTE_CON,Consacá,Nariño,Climatológica Ordinaria,En Mantenimiento,15474,1978-01-01,2025-06-30,DIARIA,24.0,1.0,0,0,0,0,0,0,2,0,0,0,0
+MetereologiaNacionalDiaria,52055060,52055060,EVTE_CON,Samaniego,Nariño,Climatológica Ordinaria,Activa,15541,1978-01-01,2026-06-29,DIARIA,24.0,1,0,0,0,0,0,0,4,0,0,0,0
+MetereologiaNacionalDiaria,52055090,52055090,EVTE_CON,Tangua,Nariño,Climatológica Principal,Activa,12549,1987-08-15,2025-08-31,DIARIA,24.0,1,0,0,0,0,0,0,3,0,0,0,0
+MetereologiaNacionalDiaria,52055110,52055110,EVTE_CON,Pasto,Nariño,Climatológica Ordinaria,Suspendida,995,2005-07-02,2013-01-22,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055200,52055200,EVTE_CON,Funes,Nariño,Climatológica Ordinaria,Activa,5040,2009-10-08,2025-02-27,DIARIA,24.0,1.0,0,0,0,0,0,0,1,0,0,0,0
+MetereologiaNacionalDiaria,52055210,52055210,EVTE_CON,Pasto,Nariño,Climatológica Principal,Activa,11582,1983-03-01,2022-09-09,DIARIA,24.0,1.0,0,0,0,0,0,0,4,0,0,0,0
+MetereologiaNacionalDiaria,52055220,52055220,EVTE_CON,Túquerres,Nariño,Climatológica Principal,Activa,15942,1978-01-01,2025-01-30,DIARIA,24.0,1.0,0,0,0,0,0,0,3,0,0,0,0
+MetereologiaNacionalDiaria,52055230,52055230,EVTE_CON,Aldana,Nariño,Sinóptica Principal,Activa,17846,1978-03-01,2026-08-13,DIARIA,24.0,1.0,0,0,0,0,0,0,13,0,0,0,0
+MetereologiaNacionalDiaria,52065020,52065020,EVTE_CON,Barbacoas,Nariño,Climatológica Principal,Activa,8145,1978-06-01,2012-04-30,DIARIA,24.0,1,0,0,0,0,0,0,2,0,0,0,0
+MetereologiaNacionalDiaria,47010230,47010230,FA_CON,Pasto,Nariño,Pluviométrica,Activa,6052,2008-05-14,2026-03-31,SUBDIARIA,18.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,47015080,47015080,FA_CON,Puerres,Nariño,Climatológica Ordinaria,Activa,4769,2005-12-12,2024-10-28,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,47015100,47015100,FA_CON,Pasto,Nariño,Climatológica Principal,Activa,1940,2005-04-12,2025-11-30,IRREGULAR,48.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51020010,51020010,FA_CON,Barbacoas,Nariño,Pluviométrica,Activa,7019,2006-10-02,2026-05-31,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51020040,51020040,FA_CON,Tumaco,Nariño,Pluviométrica,Activa,1423,2009-03-03,2025-10-31,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51020050,51020050,FA_CON,Tumaco,Nariño,Pluviométrica,Activa,5151,2006-09-02,2025-11-28,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51025080,51025080,FA_CON,Barbacoas,Nariño,Climatológica Principal,Activa,2298,2005-03-01,2014-07-29,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51025090,51025090,FA_CON,Tumaco,Nariño,Climatológica Principal,En Mantenimiento,1822,2008-05-02,2025-02-16,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51030020,51030020,FA_CON,Tumaco,Nariño,Pluviométrica,Activa,1071,2006-08-15,2025-07-28,IRREGULAR,36.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51035020,51035020,FA_CON,Tumaco,Nariño,Climatológica Principal,Activa,298,2005-01-29,2020-10-16,IRREGULAR,96.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52010030,52010030,FA_CON,El Rosario,Nariño,Pluviométrica,Activa,3541,2007-03-13,2026-06-27,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52010060,52010060,FA_CON,Leiva,Nariño,Pluviométrica,Activa,1099,2006-09-03,2026-03-12,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52010140,52010140,FA_CON,Policarpa,Nariño,Pluviométrica,Activa,888,2007-04-01,2026-01-24,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52030030,52030030,FA_CON,La Unión,Nariño,Pluviométrica,Activa,3077,2006-09-03,2026-02-28,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52030060,52030060,FA_CON,Colón (Génova),Nariño,Pluviométrica,Activa,4050,2006-09-02,2026-05-27,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52030090,52030090,FA_CON,La Cruz,Nariño,Pluviométrica,Activa,5658,2006-09-03,2026-06-27,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52035040,52035040,FA_CON,Taminango,Nariño,Climatológica Ordinaria,Activa,7947,2008-06-02,2026-05-31,SUBDIARIA,12.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52040040,52040040,FA_CON,Buesaco,Nariño,Pluviométrica,Activa,4259,2006-10-12,2026-06-01,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52040050,52040050,FA_CON,El Tablón,Nariño,Climatológica Principal,Activa,3476,2007-01-22,2026-05-21,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52040060,52040060,FA_CON,Buesaco,Nariño,Pluviométrica,Activa,1643,2006-10-12,2026-03-25,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52040070,52040070,FA_CON,Nariño,Nariño,Pluviométrica,Activa,3908,2006-09-02,2025-04-28,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52040160,52040160,FA_CON,Arboleda (Berruecos),Nariño,Pluviométrica,Activa,3172,2006-09-03,2026-05-27,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045010,52045010,FA_CON,Pasto,Nariño,Agrometeorológica,Activa,2386,1997-01-03,2025-11-30,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045020,52045020,FA_CON,Chachaguí,Nariño,Sinóptica Principal,Activa,12446,2005-08-01,2026-07-24,SUBDIARIA,1.0,1.0,0,0,0,0,0,0,19,0,0,0,0
+MetereologiaNacionalDiaria,52045030,52045030,FA_CON,San Bernardo,Nariño,Climatológica Ordinaria,Activa,4503,2004-07-20,2025-09-30,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045040,52045040,FA_CON,Taminango,Nariño,Climatológica Ordinaria,Activa,8612,2005-06-01,2026-01-31,SUBDIARIA,12.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045070,52045070,FA_CON,Pasto,Nariño,Climatológica Ordinaria,Activa,5422,2005-11-28,2025-05-31,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045080,52045080,FA_CON,Pasto,Nariño,Climatológica Ordinaria,Activa,1474,2008-09-04,2026-06-26,IRREGULAR,42.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045090,52045090,FA_CON,Pupiales,Nariño,Climatológica Ordinaria,Activa,3457,2007-04-28,2025-09-30,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52050010,52050010,FA_CON,El Peñol,Nariño,Pluviométrica,Activa,4731,2006-09-04,2026-04-30,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52050020,52050020,FA_CON,Samaniego,Nariño,Pluviométrica,Activa,3553,2006-09-03,2026-01-31,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52050040,52050040,FA_CON,Sandoná,Nariño,Pluviométrica,Activa,3568,2006-09-15,2026-01-31,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52050050,52050050,FA_CON,Santa Cruz (Guachavés),Nariño,Pluviométrica,Activa,2023,2006-09-17,2026-01-29,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52050060,52050060,FA_CON,Pasto,Nariño,Climatológica Principal,Activa,3567,2006-09-05,2026-07-31,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52050080,52050080,FA_CON,Tangua,Nariño,Climatológica Principal,Activa,2439,2007-02-05,2023-05-26,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52050090,52050090,FA_CON,Imués,Nariño,Climatológica Principal,Activa,3683,2006-08-15,2026-04-28,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52050100,52050100,FA_CON,Gualmatán,Nariño,Pluviométrica,Activa,2979,2007-03-04,2026-01-31,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52050110,52050110,FA_CON,Cumbal,Nariño,Pluviométrica,Activa,7401,2006-09-08,2026-06-28,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52050120,52050120,FA_CON,Puerres,Nariño,Pluviométrica,Activa,6591,2006-09-03,2026-03-31,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52050130,52050130,FA_CON,Cumbal,Nariño,Pluviométrica,Activa,8345,2006-09-01,2026-06-30,SUBDIARIA,18.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52050140,52050140,FA_CON,Linares,Nariño,Pluviométrica,Activa,4881,2006-09-17,2026-01-22,SUBDIARIA,12.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52050190,52050190,FA_CON,Potosí,Nariño,Pluviométrica,Activa,2868,2007-12-14,2026-04-26,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055030,52055030,FA_CON,Consacá,Nariño,Climatológica Ordinaria,En Mantenimiento,2857,2006-10-26,2025-06-24,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055060,52055060,FA_CON,Samaniego,Nariño,Climatológica Ordinaria,Activa,4269,2005-05-03,2026-06-09,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055090,52055090,FA_CON,Tangua,Nariño,Climatológica Principal,Activa,6808,2005-06-01,2025-08-31,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055100,52055100,FA_CON,Sapuyes,Nariño,Climatológica Ordinaria,Suspendida,104,2005-08-16,2006-04-29,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055110,52055110,FA_CON,Pasto,Nariño,Climatológica Ordinaria,Suspendida,593,2005-12-05,2013-10-31,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055200,52055200,FA_CON,Funes,Nariño,Climatológica Ordinaria,Activa,8400,2009-10-07,2025-02-28,SUBDIARIA,12.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055210,52055210,FA_CON,Pasto,Nariño,Climatológica Principal,Activa,1168,2006-10-11,2026-04-27,IRREGULAR,48.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055220,52055220,FA_CON,Túquerres,Nariño,Climatológica Principal,Activa,4409,2006-03-26,2025-01-31,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055230,52055230,FA_CON,Aldana,Nariño,Sinóptica Principal,Activa,16046,1988-01-01,2026-07-04,SUBDIARIA,1.0,1.0,0,0,0,0,0,0,9,0,0,0,0
+MetereologiaNacionalDiaria,52060040,52060040,FA_CON,La Llanada,Nariño,Pluviométrica,Activa,2727,2007-07-02,2026-01-22,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52060050,52060050,FA_CON,Santa Cruz (Guachavés),Nariño,Pluviométrica,Activa,2696,2007-04-22,2026-01-31,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52065020,52065020,FA_CON,Barbacoas,Nariño,Climatológica Principal,Activa,3685,2005-05-02,2026-01-30,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52070010,52070010,FA_CON,Magüí (Payán),Nariño,Pluviométrica,Activa,743,2008-02-05,2022-07-24,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52070030,52070030,FA_CON,Policarpa,Nariño,Pluviométrica,Activa,3384,2007-03-12,2025-10-31,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52080010,52080010,FA_CON,Cumbitara,Nariño,Pluviométrica,Activa,2773,2008-11-01,2026-04-19,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52090010,52090010,FA_CON,Francisco Pizarro (Salahonda),Nariño,Pluviométrica,Activa,505,2008-02-17,2026-04-29,IRREGULAR,72.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52090020,52090020,FA_CON,Roberto Payán (San José),Nariño,Pluviométrica,Activa,927,2006-08-02,2026-04-28,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,53010020,53010020,FA_CON,Mosquera,Nariño,Pluviométrica,Activa,1555,2006-08-08,2026-04-29,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,53020010,53020010,FA_CON,El Charco,Nariño,Pluviométrica,Activa,2180,2006-11-26,2026-04-30,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,53020020,53020020,FA_CON,Magüí (Payán),Nariño,Pluviométrica,Activa,2875,2006-11-25,2026-04-30,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,47015080,47015080,HR_CAL_MEDIA_D,Puerres,Nariño,Climatológica Ordinaria,Activa,11468,1979-11-01,2024-10-31,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,47015100,47015100,HR_CAL_MEDIA_D,Pasto,Nariño,Climatológica Principal,Activa,12061,1984-09-17,2026-01-31,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51025020,51025020,HR_CAL_MEDIA_D,Ricaurte,Nariño,Climatológica Principal,Suspendida,3435,1978-01-01,1991-03-17,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51025080,51025080,HR_CAL_MEDIA_D,Barbacoas,Nariño,Climatológica Principal,Activa,6616,1994-07-01,2014-07-31,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51025090,51025090,HR_CAL_MEDIA_D,Tumaco,Nariño,Climatológica Principal,En Mantenimiento,15052,1977-11-01,2025-03-31,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51035010,51035010,HR_CAL_MEDIA_D,Tumaco,Nariño,Sinóptica Secundaria,Suspendida,1775,1978-11-07,1992-01-01,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51035020,51035020,HR_CAL_MEDIA_D,Tumaco,Nariño,Climatológica Principal,Activa,7662,1992-02-20,2018-01-29,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045010,52045010,HR_CAL_MEDIA_D,Pasto,Nariño,Agrometeorológica,Activa,13915,1978-01-02,2025-11-30,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045020,52045020,HR_CAL_MEDIA_D,Chachaguí,Nariño,Sinóptica Principal,Activa,16348,1976-05-01,2026-07-31,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045030,52045030,HR_CAL_MEDIA_D,San Bernardo,Nariño,Climatológica Ordinaria,Activa,14984,1978-01-01,2025-09-30,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045040,52045040,HR_CAL_MEDIA_D,Taminango,Nariño,Climatológica Ordinaria,Activa,15377,1978-09-06,2026-01-31,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045090,52045090,HR_CAL_MEDIA_D,Pupiales,Nariño,Climatológica Ordinaria,Activa,5349,2007-05-02,2025-05-04,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055030,52055030,HR_CAL_MEDIA_D,Consacá,Nariño,Climatológica Ordinaria,En Mantenimiento,14454,1978-01-01,2025-06-29,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055060,52055060,HR_CAL_MEDIA_D,Samaniego,Nariño,Climatológica Ordinaria,Activa,16384,1978-01-01,2026-06-30,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055070,52055070,HR_CAL_MEDIA_D,Consacá,Nariño,Climatológica Ordinaria,Activa,3287,1984-01-01,1994-12-31,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055090,52055090,HR_CAL_MEDIA_D,Tangua,Nariño,Climatológica Principal,Activa,12409,1987-08-16,2025-08-31,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055100,52055100,HR_CAL_MEDIA_D,Sapuyes,Nariño,Climatológica Ordinaria,Suspendida,5343,1990-05-11,2006-05-07,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055110,52055110,HR_CAL_MEDIA_D,Pasto,Nariño,Climatológica Ordinaria,Suspendida,1752,2004-01-05,2015-01-31,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055200,52055200,HR_CAL_MEDIA_D,Funes,Nariño,Climatológica Ordinaria,Activa,5343,2009-10-07,2025-02-27,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055210,52055210,HR_CAL_MEDIA_D,Pasto,Nariño,Climatológica Principal,Activa,14505,1979-06-01,2026-04-30,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055220,52055220,HR_CAL_MEDIA_D,Túquerres,Nariño,Climatológica Principal,Activa,15776,1978-01-01,2025-01-31,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055230,52055230,HR_CAL_MEDIA_D,Aldana,Nariño,Sinóptica Principal,Activa,17071,1976-06-01,2026-07-31,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52065020,52065020,HR_CAL_MEDIA_D,Barbacoas,Nariño,Climatológica Principal,Activa,10718,1979-01-01,2012-09-30,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,47015080,47015080,NB_CON,Puerres,Nariño,Climatológica Ordinaria,Activa,27343,1995-10-11,2024-10-31,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,47015100,47015100,NB_CON,Pasto,Nariño,Climatológica Principal,Activa,31839,1986-01-01,2026-01-31,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51025080,51025080,NB_CON,Barbacoas,Nariño,Climatológica Principal,Activa,19743,1995-10-01,2014-07-31,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51025090,51025090,NB_CON,Tumaco,Nariño,Climatológica Principal,En Mantenimiento,30723,1995-11-01,2025-03-31,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51035020,51035020,NB_CON,Tumaco,Nariño,Climatológica Principal,Activa,22243,1995-10-01,2018-01-31,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52035040,52035040,NB_CON,Taminango,Nariño,Climatológica Ordinaria,Activa,19599,2008-06-01,2026-05-31,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045010,52045010,NB_CON,Pasto,Nariño,Agrometeorológica,Activa,27909,1995-11-01,2025-11-30,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045020,52045020,NB_CON,Chachaguí,Nariño,Sinóptica Principal,Activa,32066,1995-01-01,2026-07-31,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045030,52045030,NB_CON,San Bernardo,Nariño,Climatológica Ordinaria,Activa,32036,1986-01-01,2025-09-30,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045040,52045040,NB_CON,Taminango,Nariño,Climatológica Ordinaria,Activa,31957,1995-09-01,2026-01-31,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045070,52045070,NB_CON,Pasto,Nariño,Climatológica Ordinaria,Activa,17760,2005-11-16,2025-05-31,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045090,52045090,NB_CON,Pupiales,Nariño,Climatológica Ordinaria,Activa,18728,2007-04-01,2025-10-01,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055030,52055030,NB_CON,Consacá,Nariño,Climatológica Ordinaria,En Mantenimiento,29787,1995-09-01,2025-06-30,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055060,52055060,NB_CON,Samaniego,Nariño,Climatológica Ordinaria,Activa,33915,1986-01-01,2026-06-30,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055090,52055090,NB_CON,Tangua,Nariño,Climatológica Principal,Activa,31648,1995-10-01,2025-08-31,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055100,52055100,NB_CON,Sapuyes,Nariño,Climatológica Ordinaria,Suspendida,11134,1995-09-01,2006-05-08,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055110,52055110,NB_CON,Pasto,Nariño,Climatológica Ordinaria,Suspendida,4909,2005-07-01,2013-11-30,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055200,52055200,NB_CON,Funes,Nariño,Climatológica Ordinaria,Activa,16710,2009-10-07,2025-02-28,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055210,52055210,NB_CON,Pasto,Nariño,Climatológica Principal,Activa,31719,1986-01-01,2026-04-30,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055220,52055220,NB_CON,Túquerres,Nariño,Climatológica Principal,Activa,30668,1995-11-01,2025-01-31,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055230,52055230,NB_CON,Aldana,Nariño,Sinóptica Principal,Activa,31635,1986-11-01,2026-07-05,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52065020,52065020,NB_CON,Barbacoas,Nariño,Climatológica Principal,Activa,16661,1995-10-01,2012-09-30,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,47015080,47015080,RCAM_CON,Puerres,Nariño,Climatológica Ordinaria,Activa,9166,1995-01-01,2024-10-31,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,47015100,47015100,RCAM_CON,Pasto,Nariño,Climatológica Principal,Activa,11424,1985-01-01,2026-01-31,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51025080,51025080,RCAM_CON,Barbacoas,Nariño,Climatológica Principal,Activa,2882,2006-07-21,2014-07-31,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51025090,51025090,RCAM_CON,Tumaco,Nariño,Climatológica Principal,En Mantenimiento,5536,1985-04-02,2010-12-31,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51035020,51035020,RCAM_CON,Tumaco,Nariño,Climatológica Principal,Activa,7561,1995-10-01,2018-01-31,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045010,52045010,RCAM_CON,Pasto,Nariño,Agrometeorológica,Activa,9808,1995-01-01,2025-12-01,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045020,52045020,RCAM_CON,Chachaguí,Nariño,Sinóptica Principal,Activa,10253,1995-01-01,2026-07-31,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045030,52045030,RCAM_CON,San Bernardo,Nariño,Climatológica Ordinaria,Activa,9215,1995-10-01,2022-08-31,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045040,52045040,RCAM_CON,Taminango,Nariño,Climatológica Ordinaria,Activa,10694,1995-09-01,2026-01-31,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055030,52055030,RCAM_CON,Consacá,Nariño,Climatológica Ordinaria,En Mantenimiento,10399,1995-09-01,2025-07-01,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055060,52055060,RCAM_CON,Samaniego,Nariño,Climatológica Ordinaria,Activa,10848,1995-09-01,2026-06-30,DIARIA,24.0,1.0,0,0,0,0,0,0,1,0,0,0,0
+MetereologiaNacionalDiaria,52055090,52055090,RCAM_CON,Tangua,Nariño,Climatológica Principal,Activa,10502,1996-01-01,2025-09-01,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055200,52055200,RCAM_CON,Funes,Nariño,Climatológica Ordinaria,Activa,5491,2009-10-07,2025-02-28,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055210,52055210,RCAM_CON,Pasto,Nariño,Climatológica Principal,Activa,10311,1996-03-01,2026-05-01,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055220,52055220,RCAM_CON,Túquerres,Nariño,Climatológica Principal,Activa,9503,1995-11-01,2025-02-01,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055230,52055230,RCAM_CON,Aldana,Nariño,Sinóptica Principal,Activa,10853,1995-11-01,2026-07-05,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52065020,52065020,RCAM_CON,Barbacoas,Nariño,Climatológica Principal,Activa,1,2010-07-02,2010-07-02,NO ESTIMABLE,,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045010,52045010,RSAG_CON,Pasto,Nariño,Agrometeorológica,Activa,1419,1989-09-01,1993-12-31,DIARIA,24.0,1,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055230,52055230,RSAG_CON,Aldana,Nariño,Sinóptica Principal,Activa,1440,1985-01-06,2003-07-31,DIARIA,24.0,1.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,47015080,47015080,TPR_CAL,Puerres,Nariño,Climatológica Ordinaria,Activa,34671,1983-09-01,2024-10-31,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,47015100,47015100,TPR_CAL,Pasto,Nariño,Climatológica Principal,Activa,38773,1984-10-01,2026-01-31,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,11,0,0,0
+MetereologiaNacionalDiaria,51025020,51025020,TPR_CAL,Ricaurte,Nariño,Climatológica Principal,Suspendida,6585,1983-02-01,1991-03-18,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51025080,51025080,TPR_CAL,Barbacoas,Nariño,Climatológica Principal,Activa,20308,1994-12-01,2014-07-31,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51025090,51025090,TPR_CAL,Tumaco,Nariño,Climatológica Principal,En Mantenimiento,38997,1983-01-01,2025-03-31,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51035010,51035010,TPR_CAL,Tumaco,Nariño,Sinóptica Secundaria,Suspendida,5526,1979-02-01,1992-01-31,SUBDIARIA,6.0,2,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51035020,51035020,TPR_CAL,Tumaco,Nariño,Climatológica Principal,Activa,23264,1992-02-19,2018-01-31,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045010,52045010,TPR_CAL,Pasto,Nariño,Agrometeorológica,Activa,36908,1983-01-01,2025-11-30,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,17,0,0,0
+MetereologiaNacionalDiaria,52045030,52045030,TPR_CAL,San Bernardo,Nariño,Climatológica Ordinaria,Activa,41430,1983-01-01,2025-09-30,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,2,0,0,0
+MetereologiaNacionalDiaria,52045040,52045040,TPR_CAL,Taminango,Nariño,Climatológica Ordinaria,Activa,42324,1983-01-01,2026-01-31,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,1,0,0,0
+MetereologiaNacionalDiaria,52045090,52045090,TPR_CAL,Pupiales,Nariño,Climatológica Ordinaria,Activa,17231,2007-05-01,2025-05-04,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,2,0,0,0
+MetereologiaNacionalDiaria,52055030,52055030,TPR_CAL,Consacá,Nariño,Climatológica Ordinaria,En Mantenimiento,39346,1983-01-01,2025-06-30,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,1,0,0,0
+MetereologiaNacionalDiaria,52055060,52055060,TPR_CAL,Samaniego,Nariño,Climatológica Ordinaria,Activa,43647,1983-01-01,2026-06-30,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055090,52055090,TPR_CAL,Tangua,Nariño,Climatológica Principal,Activa,36780,1988-01-01,2025-08-31,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,19,0,0,0
+MetereologiaNacionalDiaria,52055100,52055100,TPR_CAL,Sapuyes,Nariño,Climatológica Ordinaria,Suspendida,14615,1990-05-10,2006-05-07,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,64,0,0,0
+MetereologiaNacionalDiaria,52055110,52055110,TPR_CAL,Pasto,Nariño,Climatológica Ordinaria,Suspendida,5991,2004-01-01,2015-01-31,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055200,52055200,TPR_CAL,Funes,Nariño,Climatológica Ordinaria,Activa,16492,2009-10-07,2025-02-28,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055210,52055210,TPR_CAL,Pasto,Nariño,Climatológica Principal,Activa,38768,1983-01-01,2026-04-30,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,25,0,0,0
+MetereologiaNacionalDiaria,52055220,52055220,TPR_CAL,Túquerres,Nariño,Climatológica Principal,Activa,39978,1983-01-01,2025-01-31,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,20,0,0,0
+MetereologiaNacionalDiaria,52065020,52065020,TPR_CAL,Barbacoas,Nariño,Climatológica Principal,Activa,26990,1983-01-01,2012-09-30,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,47015080,47015080,TV_CAL,Puerres,Nariño,Climatológica Ordinaria,Activa,34671,1983-09-01,2024-10-31,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,47015100,47015100,TV_CAL,Pasto,Nariño,Climatológica Principal,Activa,38773,1984-10-01,2026-01-31,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51025020,51025020,TV_CAL,Ricaurte,Nariño,Climatológica Principal,Suspendida,6585,1983-02-01,1991-03-18,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51025080,51025080,TV_CAL,Barbacoas,Nariño,Climatológica Principal,Activa,20308,1994-12-01,2014-07-31,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51025090,51025090,TV_CAL,Tumaco,Nariño,Climatológica Principal,En Mantenimiento,38997,1983-01-01,2025-03-31,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51035010,51035010,TV_CAL,Tumaco,Nariño,Sinóptica Secundaria,Suspendida,5526,1979-02-01,1992-01-31,SUBDIARIA,6.0,2,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,51035020,51035020,TV_CAL,Tumaco,Nariño,Climatológica Principal,Activa,23264,1992-02-19,2018-01-31,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045010,52045010,TV_CAL,Pasto,Nariño,Agrometeorológica,Activa,36908,1983-01-01,2025-11-30,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045020,52045020,TV_CAL,Chachaguí,Nariño,Sinóptica Principal,Activa,42846,1983-01-02,2026-07-31,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045030,52045030,TV_CAL,San Bernardo,Nariño,Climatológica Ordinaria,Activa,41430,1983-01-01,2025-09-30,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045040,52045040,TV_CAL,Taminango,Nariño,Climatológica Ordinaria,Activa,42324,1983-01-01,2026-01-31,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52045090,52045090,TV_CAL,Pupiales,Nariño,Climatológica Ordinaria,Activa,17231,2007-05-01,2025-05-04,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055030,52055030,TV_CAL,Consacá,Nariño,Climatológica Ordinaria,En Mantenimiento,39346,1983-01-01,2025-06-30,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055060,52055060,TV_CAL,Samaniego,Nariño,Climatológica Ordinaria,Activa,43647,1983-01-01,2026-06-30,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055090,52055090,TV_CAL,Tangua,Nariño,Climatológica Principal,Activa,36780,1988-01-01,2025-08-31,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055100,52055100,TV_CAL,Sapuyes,Nariño,Climatológica Ordinaria,Suspendida,14615,1990-05-10,2006-05-07,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055110,52055110,TV_CAL,Pasto,Nariño,Climatológica Ordinaria,Suspendida,5991,2004-01-01,2015-01-31,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055200,52055200,TV_CAL,Funes,Nariño,Climatológica Ordinaria,Activa,16492,2009-10-07,2025-02-28,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055210,52055210,TV_CAL,Pasto,Nariño,Climatológica Principal,Activa,38768,1983-01-01,2026-04-30,SUBDIARIA,6.0,3.0,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055220,52055220,TV_CAL,Túquerres,Nariño,Climatológica Principal,Activa,39978,1983-01-01,2025-01-31,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,52055230,52055230,TV_CAL,Aldana,Nariño,Sinóptica Principal,Activa,43901,1982-01-01,2026-07-31,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,2,0,0,0
+MetereologiaNacionalDiaria,52065020,52065020,TV_CAL,Barbacoas,Nariño,Climatológica Principal,Activa,26990,1983-01-01,2012-09-30,SUBDIARIA,6.0,3,0,0,0,0,0,0,0,0,0,0,0
+MetereologiaNacionalDiaria,47015100,47015100,VVAG_CON,Pasto,Nariño,Climatológica Principal,Activa,118406,1985-06-28,2012-05-01,SUBDIARIA,1.0,24.0,0,0,0,0,0,0,5709,0,0,0,0
+MetereologiaNacionalDiaria,51025020,51025020,VVAG_CON,Ricaurte,Nariño,Climatológica Principal,Suspendida,48462,1974-01-01,1986-04-30,SUBDIARIA,1.0,24.0,0,0,0,0,0,0,2918,0,0,0,0
+MetereologiaNacionalDiaria,51025090,51025090,VVAG_CON,Tumaco,Nariño,Climatológica Principal,En Mantenimiento,102827,1979-01-01,2013-11-09,SUBDIARIA,1.0,24.0,0,0,0,0,0,0,24528,0,0,0,0
+MetereologiaNacionalDiaria,51035010,51035010,VVAG_CON,Tumaco,Nariño,Sinóptica Secundaria,Suspendida,8322,1976-12-01,1989-03-31,SUBDIARIA,1.0,13.0,0,0,0,0,0,0,3550,0,0,0,0
+MetereologiaNacionalDiaria,51035020,51035020,VVAG_CON,Tumaco,Nariño,Climatológica Principal,Activa,7595,1993-04-09,2000-09-18,SUBDIARIA,1.0,24,0,0,0,0,0,0,88,0,0,0,0
+MetereologiaNacionalDiaria,52045010,52045010,VVAG_CON,Pasto,Nariño,Agrometeorológica,Activa,246360,1974-01-01,2014-07-31,SUBDIARIA,1.0,24.0,0,0,0,0,0,0,148,0,0,0,0
+MetereologiaNacionalDiaria,52045020,52045020,VVAG_CON,Chachaguí,Nariño,Sinóptica Principal,Activa,175615,1974-09-01,2022-12-04,SUBDIARIA,1.0,24,0,0,0,0,0,0,4684,0,0,0,0
+MetereologiaNacionalDiaria,52055230,52055230,VVAG_CON,Aldana,Nariño,Sinóptica Principal,Activa,349087,1976-03-01,2026-06-26,SUBDIARIA,1.0,24.0,0,0,0,0,0,0,187455,0,0,0,0

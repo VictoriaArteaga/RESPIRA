@@ -1,0 +1,6 @@
+﻿CodigoEstacion,Variable,Parametro,Unidad,FechaMin,FechaMax,Registros,AniosDisponibles,FrecuenciaEstimada,NivelAprobacionPrincipal,EsNariño,Municipio,Departamento
+51035020,TEMPERATURA,Temperatura máxima absoluta anual,degC,2013-01-01,2017-01-01,3,2013;2016;2017,ANUAL (con años faltantes),Preliminar,SI,Tumaco,Nariño
+52045020,TEMPERATURA,Temperatura máxima absoluta anual,degC,2013-01-01,2026-01-01,14,2013;2014;2015;2016;2017;2018;2019;2020;2021;2022;2023;2024;2025;2026,ANUAL,Definitivo,SI,Chachagüí,Nariño
+52055030,TEMPERATURA,Temperatura máxima absoluta anual,degC,2013-01-01,2025-01-01,13,2013;2014;2015;2016;2017;2018;2019;2020;2021;2022;2023;2024;2025,ANUAL,Preliminar,SI,Consacá,Nariño
+52055210,TEMPERATURA,Temperatura máxima absoluta anual,degC,2013-01-01,2026-01-01,14,2013;2014;2015;2016;2017;2018;2019;2020;2021;2022;2023;2024;2025;2026,ANUAL,Preliminar,SI,Pasto,Nariño
+52055230,TEMPERATURA,Temperatura máxima absoluta anual,degC,2013-01-01,2026-01-01,14,2013;2014;2015;2016;2017;2018;2019;2020;2021;2022;2023;2024;2025;2026,ANUAL,Preliminar,SI,Aldana,Nariño
