@@ -86,7 +86,8 @@ def test_forecast_default_returns_both_horizons_from_latest_week(client: TestCli
         assert p["interval_low"] <= p["predicted_cases"] <= p["interval_high"] and p["predicted_cases"] >= 0
         assert p["trend"] in {"aumento", "estable", "disminucion"}
         assert p["observed_cases"] is None          # el futuro no se conoce
-    assert len(body["history"]) == 104 and body["disclaimer"]
+    assert len(body["history"]) == 574 and body["disclaimer"]          # historial completo 2012-2022
+    assert (body["history"][0]["year"], body["history"][0]["week"]) == (2012, 1)
     assert {m["model"] for m in body["comparison"]} == {"modelo_a", "modelo_b"}
 
 

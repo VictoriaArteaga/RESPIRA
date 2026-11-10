@@ -23,7 +23,6 @@ logger = logging.getLogger(__name__)
 DEFAULT_MODEL = "base_global"
 SERVED_MODELS = ["base_global", "modelo_a", "modelo_b"]
 LOW_VOLUME_MEDIAN = 10
-HISTORY_WEEKS = 104
 
 
 class ForecastUnavailable(Exception):
@@ -308,7 +307,7 @@ class ForecastService:
 
     # ------------------------------------------------------------------ piezas
     def _history(self, g: pd.DataFrame, idx: int) -> list[dict]:
-        part = g.loc[max(0, idx - HISTORY_WEEKS + 1): idx]
+        part = g.loc[:idx]          # historial completo hasta la semana de referencia (2012 en adelante)
         return [{"year": int(r.anio), "week": int(r.semana_epidemiologica), "week_end": r.semana_fin.date().isoformat(),
                  "cases": _num(r.ira_0_4), "status": r.estado_dato_ira} for r in part.itertuples()]
 
