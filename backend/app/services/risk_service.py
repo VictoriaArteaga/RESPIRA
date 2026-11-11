@@ -39,20 +39,25 @@ class RiskService:
         return max(year for year, ids in coverage.items() if len(ids) * 2 >= widest)
 
     def risk_map(self, year: int | None = None, week: int | None = None) -> dict:
-        rows = self.cases.list_filtered(year=year)
+        all_rows = self.cases.list_filtered()
+        available = sorted({row.year for row in all_rows}, reverse=True)
+        rows = [row for row in all_rows if year is None or row.year == year]
         if not rows:
-            return {"year": year, "week": week, "available_years": self.available_years(), "municipalities": []}
+            return {"year": year, "week": week, "available_years": available, "municipalities": []}
         chosen_year = year if year is not None else self._default_year(rows)
         current_year = [row for row in rows if row.year == chosen_year]
         if not current_year:
-            return {"year": chosen_year, "week": week, "available_years": self.available_years(), "municipalities": []}
+            return {"year": chosen_year, "week": week, "available_years": available, "municipalities": []}
         chosen_week = week if week is not None else max(row.epidemiological_week for row in current_year)
+        by_municipality: dict[int, list] = {}
+        for row in all_rows:
+            by_municipality.setdefault(row.municipality_id, []).append(row)
         return {
             "year": chosen_year,
             "week": chosen_week,
-            "available_years": self.available_years(),
+            "available_years": available,
             "municipalities": [
-                self._municipality_risk(municipality, chosen_year, chosen_week)
+                self._municipality_risk(municipality, chosen_year, chosen_week, by_municipality.get(municipality.id, []))
                 for municipality in self.municipalities.list_all()
             ],
         }
@@ -79,8 +84,9 @@ class RiskService:
         chosen_week = week if week is not None else max(row.epidemiological_week for row in year_rows)
         return self._municipality_risk(municipality, chosen_year, chosen_week)
 
-    def _municipality_risk(self, municipality: Municipality, year: int, week: int) -> dict:
-        rows = self.cases.list_filtered(municipality_id=municipality.id)
+    def _municipality_risk(self, municipality: Municipality, year: int, week: int, rows: list | None = None) -> dict:
+        if rows is None:
+            rows = self.cases.list_filtered(municipality_id=municipality.id)
         observed = next((row.cases for row in rows if row.year == year and row.epidemiological_week == week), None)
         historical = [row.cases for row in rows if row.year < year and row.epidemiological_week == week]
         baseline = mean(historical) if historical else None
