@@ -15,9 +15,10 @@ import {
 
 const apiBaseUrl = __RESPIRA_API_URL__.replace(/\/+$/, '')
 const municipalityDetailPath = /^\/api\/municipalities\/\d+$/
-const allowedPaths = new Set(['/api/dashboard', '/api/municipalities', '/api/cases', '/api/risk-map'])
+const allowedPaths = new Set(['/api/dashboard', '/api/municipalities', '/api/cases', '/api/risk-map', '/api/alerts'])
 const allowedCaseFilters = new Set(['municipality_id', 'year', 'epidemiological_week'])
 const allowedRiskFilters = new Set(['year', 'week'])
+const allowedAlertFilters = new Set(['year', 'week', 'risk_level'])
 const municipalityAnalysisPath = /^\/api\/municipalities\/\d+\/(?:risk|endemic-channel)$/
 
 function isAllowedApiPath(path: string): boolean {
@@ -32,7 +33,15 @@ function isAllowedApiPath(path: string): boolean {
   if (url.pathname.startsWith('/api/forecast/')) return isAllowedForecastRoute(url)
   if (!allowedPaths.has(url.pathname) && !municipalityDetailPath.test(url.pathname) && !municipalityAnalysisPath.test(url.pathname)) return false
   if (url.pathname === '/api/risk-map') return [...url.searchParams].every(([key, value]) => allowedRiskFilters.has(key) && /^\d+$/.test(value))
-  if (municipalityAnalysisPath.test(url.pathname)) return [...url.searchParams].every(([key, value]) => key === 'year' && /^\d+$/.test(value))
+  if (url.pathname === '/api/alerts') {
+    return [...url.searchParams].every(([key, value]) =>
+      allowedAlertFilters.has(key) && (key === 'risk_level' ? /^(?:moderate|high)$/.test(value) : /^\d+$/.test(value)))
+  }
+  if (municipalityAnalysisPath.test(url.pathname)) {
+    // /risk admite año y semana; /endemic-channel solo el año.
+    const allowed = url.pathname.endsWith('/risk') ? allowedRiskFilters : new Set(['year'])
+    return [...url.searchParams].every(([key, value]) => allowed.has(key) && /^\d+$/.test(value))
+  }
   if (url.pathname !== '/api/cases') return url.search.length === 0
 
   return [...url.searchParams].every(([key, value]) => allowedCaseFilters.has(key) && /^\d+$/.test(value))
