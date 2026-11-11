@@ -213,7 +213,6 @@ export function LandingPage() {
             <div className="flex min-w-0 flex-[999_1_420px] flex-col gap-4 px-10 py-12">
               <p className="text-[15px] leading-[1.7] text-respira-body">{t('landing.whatP1')}</p>
               <p className="text-[15px] leading-[1.7] text-respira-body">{t('landing.whatP2')}</p>
-              <p className="text-[13px] leading-relaxed text-respira-muted">{t('landing.whatP3')}</p>
             </div>
           </div>
         </section>

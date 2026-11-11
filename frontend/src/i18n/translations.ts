@@ -275,8 +275,6 @@ export const es = {
     'RESPIRA reúne los casos por municipio y semana y los compara con la media de la misma semana en años previos. Así, quien consulta ve rápido dónde y cuándo el comportamiento se aleja de lo esperado.',
   'landing.whatP2':
     'Las alertas se generan con reglas deterministas y explicables. La aplicación no usa inteligencia artificial para predecir, y sus niveles son referencias estadísticas de apoyo, no un diagnóstico médico.',
-  'landing.whatP3':
-    'Por ahora los registros son sintéticos de desarrollo; la integración con SIVIGILA, IDEAM y DANE está preparada, pero no se han importado datos oficiales.',
   'landing.stepsTitle': 'Cómo empezar',
   'landing.stepsSubtitle': 'Tres pasos para consultar el monitoreo.',
   'landing.step1Title': 'Solicita tu cuenta',
@@ -816,8 +814,6 @@ export const en: Record<TranslationKey, string> = {
     'RESPIRA gathers cases by municipality and week and compares them with the average for the same week in previous years, so users quickly see where and when behavior departs from what is expected.',
   'landing.whatP2':
     'Alerts are generated with deterministic, explainable rules. The application does not use artificial intelligence to predict, and its levels are statistical references to support monitoring, not a medical diagnosis.',
-  'landing.whatP3':
-    'For now the records are synthetic development data; integration with SIVIGILA, IDEAM and DANE is prepared, but no official data has been imported.',
   'landing.stepsTitle': 'Getting started',
   'landing.stepsSubtitle': 'Three steps to view the monitoring.',
   'landing.step1Title': 'Request your account',
