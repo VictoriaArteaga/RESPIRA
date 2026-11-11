@@ -6,25 +6,25 @@ import { EmptyState, ErrorState } from '../components/common/Feedback'
 import { Loading } from '../components/common/Loading'
 import { PageHeader } from '../components/common/PageHeader'
 import { useI18n } from '../i18n/I18nContext'
-import { fetchCases } from '../services/caseService'
+import { fetchCasesSummary } from '../services/caseService'
 import { fetchMunicipalities } from '../services/municipalityService'
-import type { IraCase } from '../types/case'
+import type { CaseSummary } from '../types/case'
 import type { Municipality } from '../types/municipality'
 
 export function MunicipalitiesPage() {
   const { t, locale } = useI18n()
   const [municipalities, setMunicipalities] = useState<Municipality[]>([])
-  const [cases, setCases] = useState<IraCase[]>([])
+  const [summaries, setSummaries] = useState<CaseSummary[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [query, setQuery] = useState('')
 
   useEffect(() => {
     const controller = new AbortController()
-    Promise.all([fetchMunicipalities(controller.signal), fetchCases({}, controller.signal)])
+    Promise.all([fetchMunicipalities(controller.signal), fetchCasesSummary(controller.signal)])
       .then(([municipalityData, caseData]) => {
         setMunicipalities(municipalityData)
-        setCases(caseData)
+        setSummaries(caseData)
       })
       .catch((reason: unknown) => {
         if (!controller.signal.aborted) {
@@ -38,19 +38,13 @@ export function MunicipalitiesPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const totals = useMemo(() => {
-    const byMunicipality = new Map<number, { cases: number; year: number; week: number }>()
-    for (const record of cases) {
-      const current = byMunicipality.get(record.municipality_id) ?? { cases: 0, year: 0, week: 0 }
-      current.cases += record.cases
-      if (record.year > current.year || (record.year === current.year && record.epidemiological_week > current.week)) {
-        current.year = record.year
-        current.week = record.epidemiological_week
-      }
-      byMunicipality.set(record.municipality_id, current)
-    }
-    return byMunicipality
-  }, [cases])
+  const totals = useMemo(
+    () =>
+      new Map(
+        summaries.map((item) => [item.municipality_id, { cases: item.total_cases, year: item.last_year, week: item.last_week }]),
+      ),
+    [summaries],
+  )
 
   const maximumCases = Math.max(...[...totals.values()].map((item) => item.cases), 1)
   const visible = municipalities.filter((municipality) =>
@@ -98,7 +92,7 @@ export function MunicipalitiesPage() {
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder={t('mun.search')}
-                className="field-control w-full pl-10"
+                className="field-control field-control--icon w-full"
               />
             </label>
           </div>

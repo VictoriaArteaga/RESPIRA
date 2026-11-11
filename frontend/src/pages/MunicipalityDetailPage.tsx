@@ -38,19 +38,17 @@ export function MunicipalityDetailPage() {
     }
     setLoading(true)
     setError(null)
+    // Todo en paralelo: sin año ni semana, el servidor usa el periodo más reciente del municipio.
     Promise.all([
       fetchMunicipality(municipalityId, controller.signal),
       fetchCases({ municipality_id: municipalityId }, controller.signal),
+      fetchMunicipalityRisk(municipalityId, undefined, undefined, controller.signal),
+      fetchEndemicChannel(municipalityId, undefined, controller.signal),
     ])
-      .then(async ([municipalityData, caseData]) => {
+      .then(([municipalityData, caseData, riskData, channelData]) => {
         setMunicipality(municipalityData)
         setCases(caseData)
-        const latest = [...caseData].sort(byLatest)[0]
-        if (latest) {
-          const [riskData, channelData] = await Promise.all([
-            fetchMunicipalityRisk(municipalityId, latest.year, latest.epidemiological_week, controller.signal),
-            fetchEndemicChannel(municipalityId, latest.year, controller.signal),
-          ])
+        if (caseData.length > 0) {
           setRisk(riskData)
           setChannel(channelData)
         }

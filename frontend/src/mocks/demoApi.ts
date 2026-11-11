@@ -321,6 +321,19 @@ export function resolveDemo(path: string): unknown {
 
   if (pathname === '/api/dashboard') return dashboard()
   if (pathname === '/api/municipalities') return municipalities
+  if (pathname === '/api/cases/summary') {
+    const summary = new Map<number, { total_cases: number; last_year: number; last_week: number }>()
+    for (const record of cases) {
+      const current = summary.get(record.municipality_id) ?? { total_cases: 0, last_year: 0, last_week: 0 }
+      current.total_cases += record.cases
+      if (record.year > current.last_year || (record.year === current.last_year && record.epidemiological_week > current.last_week)) {
+        current.last_year = record.year
+        current.last_week = record.epidemiological_week
+      }
+      summary.set(record.municipality_id, current)
+    }
+    return [...summary].map(([municipality_id, value]) => ({ municipality_id, ...value }))
+  }
   if (pathname === '/api/cases') {
     const municipalityId = params.get('municipality_id')
     const year = params.get('year')

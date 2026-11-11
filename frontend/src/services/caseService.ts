@@ -1,5 +1,9 @@
-import type { CaseFilters, IraCase } from '../types/case'
+import type { CaseFilters, CaseSummary, IraCase } from '../types/case'
 import { get } from './api'
+
+export function fetchCasesSummary(signal?: AbortSignal): Promise<CaseSummary[]> {
+  return get<CaseSummary[]>('/api/cases/summary', signal)
+}
 
 export function fetchCases(filters: CaseFilters = {}, signal?: AbortSignal): Promise<IraCase[]> {
   const query = new URLSearchParams()

@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type PropsWithChildren } from 'react'
-import { UNAUTHORIZED_EVENT } from '../services/api'
+import { UNAUTHORIZED_EVENT, clearApiCache } from '../services/api'
 import * as authService from '../services/authService'
 import type { AuthUser, Credentials } from '../types/auth'
 
@@ -49,6 +49,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   const logout = useCallback(async () => {
     await authService.logout()
+    clearApiCache()
     setUser(null)
     setStatus('anonymous')
   }, [])

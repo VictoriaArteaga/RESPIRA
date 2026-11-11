@@ -15,7 +15,7 @@ import {
 
 const apiBaseUrl = __RESPIRA_API_URL__.replace(/\/+$/, '')
 const municipalityDetailPath = /^\/api\/municipalities\/\d+$/
-const allowedPaths = new Set(['/api/dashboard', '/api/municipalities', '/api/cases', '/api/risk-map', '/api/alerts'])
+const allowedPaths = new Set(['/api/dashboard', '/api/municipalities', '/api/cases', '/api/risk-map', '/api/alerts', '/api/cases/summary'])
 const allowedCaseFilters = new Set(['municipality_id', 'year', 'epidemiological_week'])
 const allowedRiskFilters = new Set(['year', 'week'])
 const allowedAlertFilters = new Set(['year', 'week', 'risk_level'])

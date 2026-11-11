@@ -9,6 +9,13 @@ export interface IraCase {
   humidity: number | null
 }
 
+export interface CaseSummary {
+  municipality_id: number
+  total_cases: number
+  last_year: number
+  last_week: number
+}
+
 export interface CaseFilters {
   municipality_id?: number
   year?: number

@@ -22,7 +22,26 @@ export function setBrowserToken(token: string | null): void {
 /** True cuando la interfaz usa datos de demostración locales en lugar del servidor (VITE_DEMO_DATA=true). */
 export const isDemoData = import.meta.env.VITE_DEMO_DATA === 'true'
 
+// Copia en memoria de las consultas de datos: al volver a una pantalla se muestra al instante. Los datos cambian
+// muy rara vez, así que 2 minutos de vida bastan; se vacía al cerrar sesión o si el servidor responde 401.
+const CACHE_TTL_MS = 2 * 60 * 1000
+const CACHEABLE = /^\/api\/(?:dashboard|municipalities|cases|risk-map|alerts|forecast)(?:[/?]|$)/
+const responseCache = new Map<string, { time: number; value: unknown }>()
+window.addEventListener(UNAUTHORIZED_EVENT, () => responseCache.clear())
+
+export function clearApiCache(): void {
+  responseCache.clear()
+}
+
 export async function get<T>(path: string, signal?: AbortSignal): Promise<T> {
+  const cached = responseCache.get(path)
+  if (cached && Date.now() - cached.time < CACHE_TTL_MS) return cached.value as T
+  const value = await request<T>(path, signal)
+  if (CACHEABLE.test(path)) responseCache.set(path, { time: Date.now(), value })
+  return value
+}
+
+async function request<T>(path: string, signal?: AbortSignal): Promise<T> {
   if (isDemoData) {
     const { resolveDemo } = await import('../mocks/demoApi')
     const demo = resolveDemo(path)
