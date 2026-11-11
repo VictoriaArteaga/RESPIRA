@@ -1,8 +1,16 @@
+import threading
+
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from app.models.ira_case import IraCase
 from app.models.municipality import Municipality
+
+
+# Copia en memoria de las columnas que usa el cálculo de riesgo. Se valida con una consulta mínima (cantidad y último id)
+# en cada uso, de modo que una recarga de datos invalida la copia sin esperar a que caduque.
+_RISK_CACHE: dict = {"key": None, "rows": []}
+_RISK_LOCK = threading.Lock()
 
 
 class IraCaseRepository:
@@ -48,3 +56,27 @@ class IraCaseRepository:
             .limit(1)
         )
         return self.db.execute(statement).one_or_none()
+
+    def risk_rows(self) -> list:
+        """Casos mínimos (municipio, año, semana, casos) para el riesgo y el canal endémico, con caché validada."""
+        fingerprint = self.db.execute(select(func.count(IraCase.id), func.max(IraCase.id), func.sum(IraCase.cases))).one()
+        key = tuple(fingerprint)
+        with _RISK_LOCK:
+            if _RISK_CACHE["key"] == key:
+                return _RISK_CACHE["rows"]
+        statement = select(IraCase.municipality_id, IraCase.year, IraCase.epidemiological_week, IraCase.cases).order_by(
+            IraCase.year, IraCase.epidemiological_week, IraCase.municipality_id
+        )
+        rows = list(self.db.execute(statement).all())
+        with _RISK_LOCK:
+            _RISK_CACHE["key"], _RISK_CACHE["rows"] = key, rows
+        return rows
+
+    def summary_by_municipality(self) -> list[tuple[int, int, int, int]]:
+        """(municipio, casos totales, último año, última semana) en una sola consulta agregada."""
+        statement = select(
+            IraCase.municipality_id,
+            func.sum(IraCase.cases),
+            func.max(IraCase.year * 100 + IraCase.epidemiological_week),
+        ).group_by(IraCase.municipality_id)
+        return [(mid, int(total), int(period) // 100, int(period) % 100) for mid, total, period in self.db.execute(statement).all()]

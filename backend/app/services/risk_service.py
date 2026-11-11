@@ -26,8 +26,12 @@ class RiskService:
         self.municipalities = municipalities
         self.cases = cases
 
+    def _rows(self, municipality_id: int, year: int | None = None) -> list:
+        return [row for row in self.cases.risk_rows()
+                if row.municipality_id == municipality_id and (year is None or row.year == year)]
+
     def available_years(self) -> list[int]:
-        return sorted({row.year for row in self.cases.list_filtered()}, reverse=True)
+        return sorted({row.year for row in self.cases.risk_rows()}, reverse=True)
 
     @staticmethod
     def _default_year(rows: list) -> int:
@@ -39,7 +43,7 @@ class RiskService:
         return max(year for year, ids in coverage.items() if len(ids) * 2 >= widest)
 
     def risk_map(self, year: int | None = None, week: int | None = None) -> dict:
-        all_rows = self.cases.list_filtered()
+        all_rows = self.cases.risk_rows()
         available = sorted({row.year for row in all_rows}, reverse=True)
         rows = [row for row in all_rows if year is None or row.year == year]
         if not rows:
@@ -66,7 +70,7 @@ class RiskService:
         municipality = self.municipalities.get_by_id(municipality_id)
         if municipality is None:
             return None
-        rows = self.cases.list_filtered(municipality_id=municipality_id, year=year)
+        rows = self._rows(municipality_id, year)
         if not rows:
             return {"municipality_id": municipality.id, "municipality": municipality.name,
                     "department": municipality.department, "latitude": municipality.latitude,
@@ -86,7 +90,7 @@ class RiskService:
 
     def _municipality_risk(self, municipality: Municipality, year: int, week: int, rows: list | None = None) -> dict:
         if rows is None:
-            rows = self.cases.list_filtered(municipality_id=municipality.id)
+            rows = self._rows(municipality.id)
         observed = next((row.cases for row in rows if row.year == year and row.epidemiological_week == week), None)
         historical = [row.cases for row in rows if row.year < year and row.epidemiological_week == week]
         baseline = mean(historical) if historical else None
@@ -136,7 +140,7 @@ class RiskService:
         municipality = self.municipalities.get_by_id(municipality_id)
         if municipality is None:
             return None
-        rows = self.cases.list_filtered(municipality_id=municipality_id)
+        rows = self._rows(municipality_id)
         if not rows:
             return {"municipality_id": municipality_id, "municipality": municipality.name,
                     "year": year, "available_years": [], "statistics": None, "weeks": []}

@@ -13,6 +13,13 @@ def get_case_service(db: Session = Depends(get_db)) -> CaseService:
     return CaseService(IraCaseRepository(db))
 
 
+@router.get("/summary")
+def cases_summary(db: Session = Depends(get_db)) -> list[dict]:
+    """Totales y último periodo por municipio: evita descargar todos los registros para la lista de municipios."""
+    return [{"municipality_id": mid, "total_cases": total, "last_year": year, "last_week": week}
+            for mid, total, year, week in IraCaseRepository(db).summary_by_municipality()]
+
+
 @router.get("", response_model=list[IraCaseRead])
 def list_cases(
     municipality_id: int | None = Query(default=None, ge=1),

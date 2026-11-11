@@ -216,3 +216,19 @@ def test_alerts_match_risk_classification_for_each_selected_period(
         assert alert["observed_cases"] == risk["current_cases"]
         assert alert["historical_average"] == risk["historical_average"]
         assert alert["variation_percent"] == risk["variation_percent"]
+
+
+def test_cases_summary_matches_the_full_list(client: TestClient) -> None:
+    rows = client.get("/api/cases").json()
+    summary = client.get("/api/cases/summary").json()
+    assert summary
+    for item in summary:
+        own = [row for row in rows if row["municipality_id"] == item["municipality_id"]]
+        assert item["total_cases"] == sum(row["cases"] for row in own)
+        last = max(own, key=lambda row: (row["year"], row["epidemiological_week"]))
+        assert (item["last_year"], item["last_week"]) == (last["year"], last["epidemiological_week"])
+
+
+def test_large_responses_are_compressed(client: TestClient) -> None:
+    response = client.get("/api/cases", headers={"Accept-Encoding": "gzip"})
+    assert response.headers.get("content-encoding") == "gzip"
