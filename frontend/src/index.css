@@ -180,6 +180,11 @@ body {
   color: var(--color-respira-text);
 }
 
+/* Campo con icono a la izquierda: va después de .field-control para que su padding no lo anule. */
+.field-control.field-control--icon {
+  padding-left: 40px;
+}
+
 select.field-control {
   appearance: none;
   padding-right: 36px;

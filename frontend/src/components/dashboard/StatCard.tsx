@@ -25,7 +25,13 @@ export function StatCard({ label, value, supportingText, icon: Icon, tone = 'blu
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
           <p className="text-sm font-medium text-respira-muted">{label}</p>
-          <p className="mt-3 truncate text-3xl font-extrabold tracking-tight text-respira-text">{value}</p>
+          <p
+            className={`mt-3 break-words font-extrabold leading-tight tracking-tight text-respira-text ${
+              value.length > 8 ? 'text-2xl' : 'text-3xl'
+            }`}
+          >
+            {value}
+          </p>
           <p className="mt-2 text-xs text-respira-muted">{supportingText}</p>
         </div>
         <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${tones[tone].icon}`}>
